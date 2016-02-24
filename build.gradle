@@ -1,0 +1,34 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.0'
+
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+configure(allprojects) {
+    /* Android config and dependency versions */
+    ext {
+        androidMinSdkVersion 		        = 14
+        androidTargetSdkVersion             = 23
+        androidCompileSdkVersion            = 23
+        androidBuildToolsVersion            = "23.0.3"
+        androidSupportLibraryVersion        = "23.4.0"
+
+        /* Sample only */
+        butterknifeVersion                  = "7.0.1"
+    }
+
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

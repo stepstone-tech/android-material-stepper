@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/ms_dotted_progress_bar_dot_size"
+    android:layout_height="@dimen/ms_dotted_progress_bar_dot_size"
+    android:background="@drawable/ms_circle" />

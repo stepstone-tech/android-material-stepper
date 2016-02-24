@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- http://stackoverflow.com/questions/9915793/shape-drawable-as-background-a-line-at-the-bottom#20891131 -->
+    <item
+        android:top="-1dp"
+        android:left="-1dp"
+        android:right="-1dp">
+
+        <shape>
+            <solid android:color="@color/ms_white"/>
+
+            <stroke
+                android:color="@color/ms_material_grey_400"
+                android:width="0.5dp"/>
+
+        </shape>
+
+    </item>
+
+</layer-list>
