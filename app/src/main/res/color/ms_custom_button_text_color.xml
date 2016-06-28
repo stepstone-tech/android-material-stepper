@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item app:state_verification_failed="true" android:color="#30BDBDBD"/>
+    <item android:state_pressed="true" android:color="@color/ms_material_grey_400"/>
+    <item android:color="@color/ms_white"/>
+</selector>
