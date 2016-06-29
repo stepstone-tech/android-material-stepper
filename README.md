@@ -12,13 +12,13 @@ compile 'com.stepstone.stepper:material-stepper:1.0.0'
 ```
 
 ## Supported steppers
-  - Mobile stepper with dots
-  - Mobile stepper with progress bar
-  - Horizontal stepper
-
-<img src ="./screenshots/dots.png" width="360" height="640"/>&nbsp;&nbsp;
-<img src ="./screenshots/progress_bar.png" width="360" height="640"/>
-<img src ="./screenshots/tabs.png" width="640" height="360"/>
+  - Mobile stepper with dots <br/>
+<img src ="./gifs/dotted-progress-bar.gif" width="360" height="640"/>&nbsp;&nbsp;<img src ="./gifs/dotted-progress-bar-styled.gif" width="360" height="640"/>
+  - Mobile stepper with progress bar <br/>
+<img src ="./gifs/linear-progress-bar.gif" width="360" height="640"/>&nbsp;&nbsp;<img src ="./gifs/linear-progress-bar-styled.gif" width="360" height="640"/>
+  - Horizontal stepper <br/>
+<img src ="./gifs/tabs.gif" width="640" height="360"/>
+<img src ="./gifs/tabs-styled.gif" width="640" height="360"/>
 
 ## Supported features
   - color customisation of individual widgets inside of the stepper via View attributes
@@ -195,6 +195,7 @@ In order to set that color:
 ### Make an IO operation before going to the next step (optional)
 If the user wants to e.g. save something in the database or make a network call on a separate Thread after clicking on the Next button
 he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step.
+<p><img src ="./gifs/delayed-transition.gif" width="360" height="640"/></p>
 The fragment must implement `BlockingStep` instead of `Step`.
 Also, make sure that `goToNextStep()` gets called on the main thread.
 **Note:** the `onNextClicked(StepperLayout.OnNextClickedCallback)` method gets invoked after step verification.
@@ -221,6 +222,7 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 ### Changing the Next button text per step
 Sometimes you might want to have different labels on the Next button on different steps e.g. use the default label on the first few steps,
 but display 'Summary' just before the last page.
+<p><img src ="./gifs/different-next-buttons.gif" width="360" height="640"/></p>
 In such case you need to override the `getNextButtonText(int)` method in the `AbstractStepAdapter` e.g.
 ```
         @StringRes

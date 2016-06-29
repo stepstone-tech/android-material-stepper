@@ -23,7 +23,7 @@ android {
 
 
 dependencies {
-    compile project(':library')
+    compile project(':material-stepper')
     compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
     compile ("com.jakewharton:butterknife:$butterknifeVersion")
 }
