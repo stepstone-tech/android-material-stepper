@@ -6,7 +6,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 >Steppers display progress through a sequence by breaking it up into multiple logical and numbered steps.
 
-## Download (TO BE UPLOADED to JCENTER)
+## Download (from JCenter)
 ```groovy
 compile 'com.stepstone.stepper:material-stepper:1.0.0'
 ```
