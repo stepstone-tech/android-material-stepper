@@ -44,10 +44,10 @@ compile 'com.stepstone.stepper:material-stepper:1.0.0'
     app:ms_stepperType="progress_bar" />
 ```
 
-For a complete list of StepperLayout attributes see [StepperLayout attributes](#StepperLayout attributes)
+For a complete list of StepperLayout attributes see [StepperLayout attributes](#StepperLayout attributes).
 
 ### Create step Fragment(s)
-Step fragment must extend [android.support.v4.app.Fragment](http://developer.android.com/reference/android/support/v4/app/Fragment.html)
+Step fragments must extend [android.support.v4.app.Fragment](http://developer.android.com/reference/android/support/v4/app/Fragment.html)
 and implement `com.stepstone.stepper.Step`
 
 ```java
@@ -170,30 +170,33 @@ and we want to have them so that we can show an info message for the user.
 In order to set that color:
 
 1. Create a new color selector in `res/color`
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item app:state_verification_failed="true" android:color="#30BDBDBD"/>
-    <item android:color="@color/ms_white"/>
-</selector>
-```
+    
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item app:state_verification_failed="true" android:color="#30BDBDBD"/>
+        <item android:color="@color/ms_white"/>
+    </selector>
+    ```
 2. Change button's (text) color in layout file
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<com.stepstone.stepper.StepperLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/stepperLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:ms_stepperType="dots"
-    app:ms_nextButtonColor="@color/ms_custom_button_text_color"
-    app:ms_completeButtonColor="@color/ms_custom_button_text_color" />
-```
+    
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <com.stepstone.stepper.StepperLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/stepperLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ms_stepperType="dots"
+        app:ms_nextButtonColor="@color/ms_custom_button_text_color"
+        app:ms_completeButtonColor="@color/ms_custom_button_text_color" />
+    ```
 3. Toggle the state in code
-```java
+    
+    ```java
     mStepperLayout.setNextButtonVerificationFailed(!enabled);
     mStepperLayout.setCompleteButtonVerificationFailed(!enabled);
-```
+    ```
 
 ### Make an IO operation before going to the next step (optional)
 If the user wants to e.g. save something in the database or make a network call on a separate Thread after clicking on the Next button
