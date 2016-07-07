@@ -190,7 +190,7 @@ In order to set that color:
     app:ms_completeButtonColor="@color/ms_custom_button_text_color" />
 ```
 3. Toggle the state in code
-```
+```java
     mStepperLayout.setNextButtonVerificationFailed(!enabled);
     mStepperLayout.setCompleteButtonVerificationFailed(!enabled);
 ```
@@ -203,7 +203,7 @@ The fragment must implement `BlockingStep` instead of `Step`.
 Also, make sure that `goToNextStep()` gets called on the main thread.
 **Note:** the `onNextClicked(StepperLayout.OnNextClickedCallback)` method gets invoked after step verification.
 E.g.:
-```
+```java
 public class DelayedTransitionStepFragmentSample extends Fragment implements BlockingStep {
 
     //...
@@ -227,7 +227,7 @@ Sometimes you might want to have different labels on the Next button on differen
 but display 'Summary' just before the last page.
 <p><img src ="./gifs/different-next-buttons.gif" width="360" height="640"/></p>
 In such case you need to override the `getNextButtonText(int)` method in the `AbstractStepAdapter` e.g.
-```
+```java
         @StringRes
         @Override
         public int getNextButtonText(int position) {
