@@ -271,7 +271,6 @@ For other examples, e.g. persisting state on rotation, displaying errors, changi
   - support for non-editable steppers
   - support for Alternative labels in the horizontal stepper
   
-  
 ## License
 Copyright 2016 StepStone Services
     
@@ -286,3 +285,6 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+## Maintained by
+<a href="http://www.stepstone.com"><img src ="./art/stepstone-logo.png" alt="Stepstone" /></a>
