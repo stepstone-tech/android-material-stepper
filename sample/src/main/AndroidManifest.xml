@@ -19,6 +19,7 @@
 
         <activity android:name=".DefaultDotsActivity" />
         <activity android:name=".StyledDotsActivity" />
+        <activity android:name=".ThemedDotsActivity" android:theme="@style/AppTheme.DotStepper" />
 
         <activity android:name=".DefaultProgressBarActivity" />
         <activity android:name=".StyledProgressBarActivity" />

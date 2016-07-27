@@ -73,5 +73,9 @@ limitations under the License.
     <declare-styleable name="RightNavigationButton">
         <attr name="state_verification_failed" format="boolean" />
     </declare-styleable>
+    
+    <declare-styleable name="Theme">
+        <attr name="ms_stepperStyle" format="reference" />
+    </declare-styleable>
 
 </resources>

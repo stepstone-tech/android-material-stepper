@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, StyledDotsActivity.class));
     }
 
+    @OnClick(R.id.themedDots)
+    public void onThemedDots(View view) {
+        startActivity(new Intent(this, ThemedDotsActivity.class));
+    }
+
     @OnClick(R.id.defaultProgressBar)
     public void onDefaultProgressBar(View view) {
         startActivity(new Intent(this, DefaultProgressBarActivity.class));

@@ -6,4 +6,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.DotStepper">
+        <item name="ms_stepperStyle">@style/DotStepperStyle</item>
+    </style>
+
+    <style name="DotStepperStyle">
+        <item name="ms_stepperType">dots</item>
+        <item name="ms_activeStepColor">#FFFFFF</item>
+        <item name="ms_inactiveStepColor">#006867</item>
+        <item name="ms_backButtonColor">@color/ms_custom_button_text_color</item>
+        <item name="ms_nextButtonColor">@color/ms_custom_button_text_color</item>
+        <item name="ms_completeButtonColor">@color/ms_custom_button_text_color</item>
+        <item name="ms_bottomNavigationBackground">?attr/colorAccent</item>
+    </style>
+
 </resources>

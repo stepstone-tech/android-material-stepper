@@ -29,6 +29,12 @@
             android:text="@string/styled_dots" />
 
         <Button
+            android:id="@+id/themedDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/themed_dots" />
+
+        <Button
             android:id="@+id/defaultProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

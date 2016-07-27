@@ -20,10 +20,10 @@ configure(allprojects) {
     /* Android config and dependency versions */
     ext {
         androidMinSdkVersion 		        = 14
-        androidTargetSdkVersion             = 23
-        androidCompileSdkVersion            = 23
-        androidBuildToolsVersion            = "23.0.3"
-        androidSupportLibraryVersion        = "23.4.0"
+        androidTargetSdkVersion             = 24
+        androidCompileSdkVersion            = 24
+        androidBuildToolsVersion            = "24.0.1"
+        androidSupportLibraryVersion        = "24.1.0"
 
         /* Sample only */
         butterknifeVersion                  = "7.0.1"

@@ -199,7 +199,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     public StepperLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, R.attr.ms_stepperStyle);
     }
 
     public StepperLayout(Context context, AttributeSet attrs, int defStyleAttr) {

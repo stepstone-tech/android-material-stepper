@@ -11,7 +11,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:1.0.0'
+compile 'com.stepstone.stepper:material-stepper:1.0.1'
 ```
 
 ## Supported steppers
@@ -24,8 +24,8 @@ compile 'com.stepstone.stepper:material-stepper:1.0.0'
 <img src ="./gifs/tabs-styled.gif" width="640" height="360"/>
 
 ## Supported features
-  - color customisation of individual widgets inside of the stepper via View attributes
-  - custom texts of individual widgets inside of the stepper via View attributes
+  - color customisation of individual widgets inside of the stepper via View attributes or a style from a theme
+  - custom texts of individual widgets inside of the stepper via View attributes or a style from a theme
   - embedding the stepper anywhere in the view hierarchy and changing the stepper type for various device configurations, e.g. phone/tablet, portrait/landscape
   - step validation
   
@@ -243,6 +243,26 @@ In such case you need to override the `getNextButtonText(int)` method in the `Ab
                     throw new IllegalArgumentException("Unsupported position: " + position);
             }
         }
+```
+
+### Using the same stepper styling across the application
+If you have many steppers in your application in different activities/fragments you might want to set a common style in a theme.
+To do so, you need to set the `ms_stepperStyle` attribute in the theme, e.g.
+```xml
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        ...
+        
+        <item name="ms_stepperStyle">@style/DotStepperStyle</item>
+    </style>
+```
+and declare that style in the XML you keep your styles at, e.g.
+```xml
+    <style name="DotStepperStyle">
+        <item name="ms_stepperType">dots</item>
+        <item name="ms_activeStepColor">#FFFFFF</item>
+        <item name="ms_inactiveStepColor">#006867</item>
+        <item name="ms_bottomNavigationBackground">?attr/colorAccent</item>
+    </style>
 ```
 
 ### Advanced usage

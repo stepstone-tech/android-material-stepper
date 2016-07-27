@@ -2,6 +2,7 @@
     <string name="app_name">Stepper Sample</string>
     <string name="default_dots">Default dots</string>
     <string name="styled_dots">Styled dots</string>
+    <string name="themed_dots">Themed dots</string>
     <string name="default_progress_bar">Default progress bar</string>
     <string name="styled_progress_bar">Styled progress bar</string>
     <string name="default_tabs">Default tabs</string>
