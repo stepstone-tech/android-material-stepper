@@ -11,7 +11,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:1.0.1'
+compile 'com.stepstone.stepper:material-stepper:1.0.2'
 ```
 
 ## Supported steppers
