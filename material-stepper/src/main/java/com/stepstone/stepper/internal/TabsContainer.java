@@ -27,6 +27,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.stepstone.stepper.R;
@@ -68,6 +69,10 @@ public class TabsContainer extends FrameLayout {
 
     private int mDividerWidth = StepperLayout.DEFAULT_TAB_DIVIDER_WIDTH;
 
+    private final int mContainerLateralPadding;
+
+    private HorizontalScrollView mTabsScrollView;
+
     private LinearLayout mTabsInnerContainer;
 
     private TabItemListener mListener = TabItemListener.NULL;
@@ -101,8 +106,10 @@ public class TabsContainer extends FrameLayout {
 
             a.recycle();
         }
+        mContainerLateralPadding = context.getResources().getDimensionPixelOffset(R.dimen.ms_tabs_container_lateral_padding);
 
         mTabsInnerContainer = (LinearLayout) findViewById(R.id.ms_stepTabsInnerContainer);
+        mTabsScrollView = (HorizontalScrollView) findViewById(R.id.ms_stepTabsScrollView);
     }
 
     public void setUnselectedColor(@ColorInt int unselectedColor) {
@@ -146,6 +153,9 @@ public class TabsContainer extends FrameLayout {
             boolean done = i < newStepPosition;
             final boolean current = i == newStepPosition;
             childTab.updateState(done, current);
+            if (current) {
+                mTabsScrollView.smoothScrollTo(childTab.getLeft() - mContainerLateralPadding, 0);
+            }
         }
     }
 
