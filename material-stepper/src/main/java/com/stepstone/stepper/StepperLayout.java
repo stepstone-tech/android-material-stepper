@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
@@ -320,9 +321,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mNextNavigationButton.setText(mNextButtonText);
         mCompleteNavigationButton.setText(mCompleteButtonText);
 
-        // FIXME: 16/03/16 this is a workaround for tinting TextView's compound drawables on API 16-17 - when set in XML only the default color is used...
-        Drawable chevronRightDrawable = ResourcesCompat.getDrawable(getContext().getResources(), R.drawable.ic_chevron_right, null);
-        mNextNavigationButton.setCompoundDrawablesWithIntrinsicBounds(null, null, chevronRightDrawable, null);
+        //FIXME: 16/03/16 this is a workaround for tinting TextView's compound drawables on API 16-17 - when set in XML only the default color is used...
+        Drawable chevronEndDrawable = ResourcesCompat.getDrawable(getContext().getResources(), R.drawable.ic_chevron_end, null);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            mNextNavigationButton.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, chevronEndDrawable, null);
+        } else {
+            mNextNavigationButton.setCompoundDrawablesWithIntrinsicBounds(null, null, chevronEndDrawable, null);
+        }
 
         TintUtil.tintTextView(mBackNavigationButton, mBackButtonColor);
         TintUtil.tintTextView(mNextNavigationButton, mNextButtonColor);

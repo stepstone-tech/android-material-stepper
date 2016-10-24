@@ -20,6 +20,7 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -41,13 +42,21 @@ public class TintUtil {
      */
     public static void tintTextView(@NonNull TextView textview, ColorStateList tintColor) {
         textview.setTextColor(tintColor);
-        Drawable[] drawables = textview.getCompoundDrawables();
-
-        textview.setCompoundDrawables(
-                tintDrawable(drawables[0], tintColor),
-                tintDrawable(drawables[1], tintColor),
-                tintDrawable(drawables[2], tintColor),
-                tintDrawable(drawables[3], tintColor));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            Drawable[] drawables = textview.getCompoundDrawablesRelative();
+            textview.setCompoundDrawablesRelative(
+                    tintDrawable(drawables[0], tintColor),
+                    tintDrawable(drawables[1], tintColor),
+                    tintDrawable(drawables[2], tintColor),
+                    tintDrawable(drawables[3], tintColor));
+        } else {
+            Drawable[] drawables = textview.getCompoundDrawables();
+            textview.setCompoundDrawables(
+                    tintDrawable(drawables[0], tintColor),
+                    tintDrawable(drawables[1], tintColor),
+                    tintDrawable(drawables[2], tintColor),
+                    tintDrawable(drawables[3], tintColor));
+        }
     }
 
     /**
