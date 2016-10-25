@@ -84,6 +84,11 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
     }
 
     @Override
+    public void onReturn() {
+        finish();
+    }
+
+    @Override
     public void onChangeEndButtonsEnabled(boolean enabled) {
         mStepperLayout.setNextButtonVerificationFailed(!enabled);
         mStepperLayout.setCompleteButtonVerificationFailed(!enabled);

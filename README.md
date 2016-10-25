@@ -11,7 +11,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:1.0.3'
+compile 'com.stepstone.stepper:material-stepper:1.1.0'
 ```
 
 ## Supported steppers
@@ -158,6 +158,11 @@ public class StepperActivity extends AppCompatActivity implements StepperLayout.
         Toast.makeText(this, "onStepSelected! -> " + newStepPosition, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onReturn() {
+        finish();
+    }
+
 }
 ```
 
@@ -265,6 +270,21 @@ and declare that style in the XML you keep your styles at, e.g.
     </style>
 ```
 
+### Showing a Back button on first step
+By default if the user is on the first step then the Back button in the bottom navigation is hidden. 
+This behaviour can be changed by setting ```ms_showBackButtonOnFirstStep``` to ```true```, e.g.
+```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <com.stepstone.stepper.StepperLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/stepperLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ms_showBackButtonOnFirstStep="true"
+        app:ms_stepperType="dots" />
+```
+To get a callback when this button was pressed you need set a ```StepperListener``` and write your own custom return logic in the ```onReturn()``` method to e.g. close the Activity.
+
 ### Advanced usage
 For other examples, e.g. persisting state on rotation, displaying errors, changing whether the user can go to the next step, etc. check out the sample app.
 
@@ -285,6 +305,7 @@ For other examples, e.g. persisting state on rotation, displaying errors, changi
 | *ms_nextButtonText*             | string or reference                       | NEXT button's text            |
 | *ms_completeButtonText*         | string or reference                       | COMPLETE button's text            |
 | *ms_tabStepDividerWidth*        | dimension or reference                    | The width of the horizontal tab divider used in tabs stepper type            |
+| *ms_showBackButtonOnFirstStep*  | boolean                                   | Flag indicating if the Back (Previous step) button should be shown on the first step. False by default.            |
 
 ## Missing features
   - support for non-linear steppers

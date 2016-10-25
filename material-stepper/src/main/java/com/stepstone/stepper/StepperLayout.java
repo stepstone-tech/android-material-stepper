@@ -85,6 +85,12 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
          */
         void onStepSelected(int newStepPosition);
 
+        /**
+         * Called when the Previous step button was pressed while on the first step
+         * (the button is not present by default on first step).
+         */
+        void onReturn();
+
         StepperListener NULL = new StepperListener() {
             @Override
             public void onCompleted(View completeButton) {
@@ -96,6 +102,10 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
             @Override
             public void onStepSelected(int newStepPosition) {
+            }
+
+            @Override
+            public void onReturn() {
             }
         };
     }
@@ -162,6 +172,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     private String mNextButtonText;
 
     private String mCompleteButtonText;
+
+    private boolean mShowBackButtonOnFirstStep;
 
     private int mTypeIdentifier = AbstractStepperType.PROGRESS_BAR;
 
@@ -413,6 +425,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
                 mTabStepDividerWidth = a.getDimensionPixelOffset(R.styleable.StepperLayout_ms_tabStepDividerWidth, -1);
             }
 
+            mShowBackButtonOnFirstStep = a.getBoolean(R.styleable.StepperLayout_ms_showBackButtonOnFirstStep, false);
+
             if (a.hasValue(R.styleable.StepperLayout_ms_stepperType)) {
                 mTypeIdentifier = a.getInt(R.styleable.StepperLayout_ms_stepperType, DEFAULT_TAB_DIVIDER_WIDTH);
             }
@@ -441,9 +455,12 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     private void onPrevious() {
-        if (mCurrentStepPosition <= 0)
+        if (mCurrentStepPosition <= 0) {
+            if (mShowBackButtonOnFirstStep) {
+                mListener.onReturn();
+            }
             return;
-
+        }
         mCurrentStepPosition--;
         onUpdate(mCurrentStepPosition);
     }
@@ -494,7 +511,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         boolean isFirst = newStepPosition == 0;
         mNextNavigationButton.setVisibility(isLast ? View.GONE : View.VISIBLE);
         mCompleteNavigationButton.setVisibility(!isLast ? View.GONE : View.VISIBLE);
-        mBackNavigationButton.setVisibility(isFirst ? View.GONE : View.VISIBLE);
+        mBackNavigationButton.setVisibility(isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE);
 
         if (!isLast) {
             int nextButtonTextForStep = mStepAdapter.getNextButtonText(newStepPosition);

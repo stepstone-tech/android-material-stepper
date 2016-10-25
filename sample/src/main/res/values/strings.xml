@@ -11,6 +11,7 @@
     <string name="custom_page_transformer">Custom PageTransformer</string>
     <string name="delayed_transition">Delayed transition</string>
     <string name="different_next_buttons">Different next buttons</string>
+    <string name="show_back_button">Show Back button on first step</string>
 
     <string name="tab_title">Tab title</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, sale viris intellegam usu eu, persius patrioque sea at. Ne salutandi repudiandae mei, cu mollis accusam mediocrem mea. Altera dolorem praesent at vis. Torquatos philosophia ad quo. Omnis adipiscing has ea, mel no hinc iudico percipit.</string>

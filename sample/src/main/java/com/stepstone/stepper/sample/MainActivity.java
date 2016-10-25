@@ -88,4 +88,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, DifferentNextButtonStepperActivity.class));
     }
 
+    @OnClick(R.id.showReturnButtonOnFirstStep)
+    public void onShowReturnButton(View view) {
+        startActivity(new Intent(this, ReturnButtonActivity.class));
+    }
+
 }

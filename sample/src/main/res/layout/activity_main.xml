@@ -82,5 +82,11 @@
             android:layout_height="wrap_content"
             android:text="@string/different_next_buttons" />
 
+        <Button
+            android:id="@+id/showReturnButtonOnFirstStep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_back_button" />
+
     </LinearLayout>
 </ScrollView>

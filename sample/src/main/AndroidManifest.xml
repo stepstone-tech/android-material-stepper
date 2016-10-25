@@ -35,6 +35,8 @@
 
         <activity android:name=".DifferentNextButtonStepperActivity" />
 
+        <activity android:name=".ReturnButtonActivity" />
+
     </application>
 
 </manifest>
