@@ -69,18 +69,21 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         /**
          * Called when all of the steps were completed successfully
+         *
          * @param completeButton the complete button that was clicked to complete the flow
          */
         void onCompleted(View completeButton);
 
         /**
          * Called when a verification error occurs for one of the steps
+         *
          * @param verificationError verification error
          */
         void onError(VerificationError verificationError);
 
         /**
          * Called when the current step position changes
+         *
          * @param newStepPosition new step position
          */
         void onStepSelected(int newStepPosition);
@@ -125,6 +128,23 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
 
     }
+
+    public final class OnBackClickedCallback {
+
+        @UiThread
+        public final void goToPrevStep() {
+            if (mCurrentStepPosition <= 0) {
+                if (mShowBackButtonOnFirstStep) {
+                    mListener.onReturn();
+                }
+                return;
+            }
+            mCurrentStepPosition--;
+            onUpdate(mCurrentStepPosition);
+        }
+
+    }
+
     private ViewPager mPager;
 
     private Button mBackNavigationButton;
@@ -143,9 +163,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private ColorStateList mBackButtonColor;
 
-    private ColorStateList  mNextButtonColor;
+    private ColorStateList mNextButtonColor;
 
-    private ColorStateList  mCompleteButtonColor;
+    private ColorStateList mCompleteButtonColor;
 
     @ColorInt
     private int mUnselectedColor;
@@ -226,6 +246,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Sets the new step adapter and updates the stepper layout based on the new adapter.
+     *
      * @param stepAdapter step adapter
      */
     public void setAdapter(@NonNull AbstractStepAdapter stepAdapter) {
@@ -246,7 +267,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Sets the new step adapter and updates the stepper layout based on the new adapter.
-     * @param stepAdapter step adapter
+     *
+     * @param stepAdapter         step adapter
      * @param currentStepPosition the initial step position, must be in the range of the adapter item count
      */
     public void setAdapter(@NonNull AbstractStepAdapter stepAdapter, @IntRange(from = 0) int currentStepPosition) {
@@ -256,6 +278,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Overrides the default page transformer used in the underlying {@link ViewPager}
+     *
      * @param pageTransformer new page transformer
      */
     public void setPageTransformer(@Nullable ViewPager.PageTransformer pageTransformer) {
@@ -277,9 +300,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     @Override
     @UiThread
     public void onTabClicked(int position) {
-        if (position > mCurrentStepPosition){
+        if (position > mCurrentStepPosition) {
             onNext();
-        } else if (position < mCurrentStepPosition){
+        } else if (position < mCurrentStepPosition) {
             setCurrentStepPosition(position);
         }
     }
@@ -455,14 +478,14 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     private void onPrevious() {
-        if (mCurrentStepPosition <= 0) {
-            if (mShowBackButtonOnFirstStep) {
-                mListener.onReturn();
-            }
-            return;
+        Step step = findCurrentStep();
+
+        OnBackClickedCallback onBackClickedCallback = new OnBackClickedCallback();
+        if (step instanceof BlockingStep) {
+            ((BlockingStep) step).onBackClicked(onBackClickedCallback);
+        } else {
+            onBackClickedCallback.goToPrevStep();
         }
-        mCurrentStepPosition--;
-        onUpdate(mCurrentStepPosition);
     }
 
     @UiThread
@@ -474,7 +497,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
         OnNextClickedCallback onNextClickedCallback = new OnNextClickedCallback();
         if (step instanceof BlockingStep) {
-            ((BlockingStep)step).onNextClicked(onNextClickedCallback);
+            ((BlockingStep) step).onNextClicked(onNextClickedCallback);
         } else {
             onNextClickedCallback.goToNextStep();
         }

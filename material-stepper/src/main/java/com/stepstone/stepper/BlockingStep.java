@@ -32,9 +32,20 @@ public interface BlockingStep extends Step {
      * and the user can go to the next step. This is so that the current step might perform
      * some last minute operations e.g. a network call before switching to the next step.
      * {@link StepperLayout.OnNextClickedCallback#goToNextStep()} must be called once these operations finish.
+     *
      * @param callback callback to call once the user wishes to finally switch to the next step
      */
     @UiThread
     void onNextClicked(StepperLayout.OnNextClickedCallback callback);
+
+    /**
+     * Notifies this step that the previous button/tab was clicked. This is so that the current step might perform
+     * some last minute operations e.g. a network call before switching to previous step.
+     * {@link StepperLayout.OnBackClickedCallback#goToPrevStep()} must be called once these operations finish.
+     *
+     * @param callback callback to call once the user wishes to finally switch to the previous step
+     */
+    @UiThread
+    void onBackClicked(StepperLayout.OnBackClickedCallback callback);
 
 }

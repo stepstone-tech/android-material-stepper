@@ -11,7 +11,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:1.1.0'
+compile 'com.stepstone.stepper:material-stepper:1.1.1'
 ```
 
 ## Supported steppers
@@ -206,6 +206,7 @@ In order to set that color:
 ### Make an IO operation before going to the next step (optional)
 If the user wants to e.g. save something in the database or make a network call on a separate Thread after clicking on the Next button
 he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step.
+While operations are performed, and the user would like to go back you can cancel them and then invoke `onBackClicked()` method of the `StepperLayout.OnBackClickedCallback`.
 <p><img src ="./gifs/delayed-transition.gif" width="360" height="640"/></p>
 The fragment must implement `BlockingStep` instead of `Step`.
 Also, make sure that `goToNextStep()` gets called on the main thread.
@@ -226,6 +227,13 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
             }
         }, 2000L);
     }
+
+    @Override
+    @UiThread
+    public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
+        Toast.makeText(this.getContext(), "Your custom back action. Here you should cancel currently running operations", Toast.LENGTH_SHORT).show();
+        callback.goToPrevStep();
+     }
 
 }
 ```
