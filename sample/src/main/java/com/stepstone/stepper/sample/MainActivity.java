@@ -21,6 +21,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.stepstone.stepper.sample.nofrag.NoFragActivity;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -91,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.showReturnButtonOnFirstStep)
     public void onShowReturnButton(View view) {
         startActivity(new Intent(this, ReturnButtonActivity.class));
+    }
+
+    @OnClick(R.id.noFrag)
+    public void onNoFrag(View view){
+        startActivity(new Intent(this, NoFragActivity.class));
     }
 
 }

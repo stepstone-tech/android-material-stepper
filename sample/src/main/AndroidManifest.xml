@@ -7,6 +7,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name=".SampleApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -29,6 +30,7 @@
         <activity android:name=".DelayedTransitionStepperActivity" />
         <activity android:name=".DifferentNextButtonStepperActivity" />
         <activity android:name=".ReturnButtonActivity" />
+        <activity android:name=".nofrag.NoFragActivity"/>
     </application>
 
 </manifest>
