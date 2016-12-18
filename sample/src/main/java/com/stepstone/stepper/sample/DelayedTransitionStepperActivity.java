@@ -22,7 +22,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.adapter.AbstractStepAdapter;
+import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.sample.step.DelayedTransitionStepFragmentSample;
 
 public class DelayedTransitionStepperActivity extends AppCompatActivity {
@@ -39,7 +39,7 @@ public class DelayedTransitionStepperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_default_dots);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new MyStepperAdapter(getSupportFragmentManager()), startingStepPosition);
+        mStepperLayout.setAdapter(new MyStepperAdapterFragment(getSupportFragmentManager()), startingStepPosition);
     }
 
     @Override
@@ -58,9 +58,9 @@ public class DelayedTransitionStepperActivity extends AppCompatActivity {
         }
     }
 
-    private static class MyStepperAdapter extends AbstractStepAdapter {
+    private static class MyStepperAdapterFragment extends AbstractFragmentStepAdapter {
 
-        MyStepperAdapter(FragmentManager fm) {
+        MyStepperAdapterFragment(FragmentManager fm) {
             super(fm);
         }
 

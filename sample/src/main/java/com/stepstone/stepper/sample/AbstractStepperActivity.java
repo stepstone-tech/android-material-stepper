@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
-import com.stepstone.stepper.adapter.AbstractStepAdapter;
+import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.sample.step.StepFragmentSample;
 
 public abstract class AbstractStepperActivity extends AppCompatActivity implements StepperLayout.StepperListener,
@@ -44,7 +44,7 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
         setContentView(getLayoutResId());
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new MyStepperAdapter(getSupportFragmentManager()), startingStepPosition);
+        mStepperLayout.setAdapter(new MyStepperAdapterFragment(getSupportFragmentManager()), startingStepPosition);
 
         mStepperLayout.setListener(this);
     }
@@ -94,9 +94,9 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
         mStepperLayout.setCompleteButtonVerificationFailed(!enabled);
     }
 
-    private static class MyStepperAdapter extends AbstractStepAdapter {
+    private static class MyStepperAdapterFragment extends AbstractFragmentStepAdapter {
 
-        MyStepperAdapter(FragmentManager fm) {
+        MyStepperAdapterFragment(FragmentManager fm) {
             super(fm);
         }
 

@@ -22,7 +22,7 @@ import android.view.View;
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.adapter.AbstractStepAdapter;
+import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.TabsContainer;
 
 import java.util.ArrayList;
@@ -57,11 +57,11 @@ public class TabsStepperType extends AbstractStepperType {
      * {@inheritDoc}
      */
     @Override
-    public void onNewAdapter(@NonNull AbstractStepAdapter<?> stepAdapter) {
+    public void onNewAdapter(@NonNull StepAdapter<?> stepAdapter) {
         List<Integer> titles = new ArrayList<>();
         final int stepCount = stepAdapter.getCount();
         for (int i = 0; i < stepCount; i++) {
-            final Step step = stepAdapter.getItem(i);
+            final Step step = (Step) stepAdapter.createStep(i);
             titles.add(step.getName());
         }
         mTabsContainer.setSteps(titles);

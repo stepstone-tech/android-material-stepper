@@ -21,7 +21,7 @@ import android.view.View;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.adapter.AbstractStepAdapter;
+import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.DottedProgressBar;
 
 /**
@@ -51,7 +51,7 @@ public class DotsStepperType extends AbstractStepperType {
      * {@inheritDoc}
      */
     @Override
-    public void onNewAdapter(@NonNull AbstractStepAdapter stepAdapter) {
+    public void onNewAdapter(@NonNull StepAdapter stepAdapter) {
         final int stepCount = stepAdapter.getCount();
         mDottedProgressBar.setDotCount(stepCount);
         mDottedProgressBar.setVisibility(stepCount > 1 ? View.VISIBLE : View.GONE);
