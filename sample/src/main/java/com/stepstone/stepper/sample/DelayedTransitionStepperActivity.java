@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.sample.step.DelayedTransitionStepFragmentSample;
@@ -65,7 +66,7 @@ public class DelayedTransitionStepperActivity extends AppCompatActivity {
         }
 
         @Override
-        public Fragment createStep(int position) {
+        public Step<Fragment> createStep(int position) {
             switch (position) {
                 case 0:
                     return DelayedTransitionStepFragmentSample.newInstance(R.layout.fragment_step);

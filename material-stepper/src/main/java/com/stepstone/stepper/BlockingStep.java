@@ -25,7 +25,7 @@ import android.support.annotation.UiThread;
  * and perform some operations before switching to the next step.
  */
 
-public interface BlockingStep extends Step {
+public interface BlockingStep<VIEW> extends Step<VIEW> {
 
     /**
      * Notifies this step that the next button/tab was clicked, the step was verified

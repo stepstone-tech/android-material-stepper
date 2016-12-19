@@ -24,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
@@ -101,7 +102,7 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
         }
 
         @Override
-        public Fragment createStep(int position) {
+        public Step<Fragment> createStep(int position) {
             switch (position) {
                 case 0:
                     return StepFragmentSample.newInstance(R.layout.fragment_step);

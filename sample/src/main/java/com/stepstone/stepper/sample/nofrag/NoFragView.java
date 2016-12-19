@@ -21,10 +21,12 @@ import com.stepstone.stepper.sample.R;
  * Created by leonardo on 18/12/16.
  */
 
-public class NoFragView extends FrameLayout implements Step {
+public class NoFragView extends FrameLayout implements Step<View> {
 
     private static final int TAP_THRESHOLD = 2;
+
     private int i = 0;
+
     @Nullable
     private OnNavigationBarListener onNavigationBarListener;
 
@@ -111,5 +113,10 @@ public class NoFragView extends FrameLayout implements Step {
     @Override
     public void onError(@NonNull VerificationError error) {
         button.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake_error));
+    }
+
+    @Override
+    public View getStepView() {
+        return this;
     }
 }

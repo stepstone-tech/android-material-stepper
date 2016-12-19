@@ -40,7 +40,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.ColorableProgressBar;
 import com.stepstone.stepper.internal.DottedProgressBar;
@@ -252,7 +251,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      */
     public void setAdapter(@NonNull StepAdapter stepAdapter) {
         this.mStepAdapter = stepAdapter;
-        mPager.setAdapter(stepAdapter.getAdapter());
+        mPager.setAdapter(stepAdapter.getPagerAdapter());
 
         mStepperType.onNewAdapter(stepAdapter);
 
@@ -539,7 +538,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         if (!isLast) {
             int nextButtonTextForStep = mStepAdapter.getNextButtonText(newStepPosition);
-            if (nextButtonTextForStep == AbstractFragmentStepAdapter.DEFAULT_NEXT_BUTTON_TEXT) {
+            if (nextButtonTextForStep == StepAdapter.DEFAULT_NEXT_BUTTON_TEXT) {
                 mNextNavigationButton.setText(mNextButtonText);
             } else {
                 mNextNavigationButton.setText(nextButtonTextForStep);

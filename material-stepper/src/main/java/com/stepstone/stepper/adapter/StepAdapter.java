@@ -8,14 +8,11 @@ import android.support.v4.view.ViewPager;
 import com.stepstone.stepper.Step;
 
 /**
- * Created by leonardo on 18/12/16.
- */
-
-/**
  * Interface to be used as model to {@link com.stepstone.stepper.StepperLayout}.
- * @param <T> Type to be used inside the {@link ViewPager}. e.g. {@link android.support.v4.app.Fragment or view, on view based applications}.
+ * @param <STEP_VIEW> Type to be used inside the {@link ViewPager}. e.g. {@link android.support.v4.app.Fragment or view, on view based applications}.
  */
-public interface StepAdapter<T> {
+public interface StepAdapter<STEP_VIEW> {
+
     int DEFAULT_NEXT_BUTTON_TEXT = -1;
 
     /**
@@ -23,7 +20,7 @@ public interface StepAdapter<T> {
      * @param position The position of the {@link PagerAdapter} to be used inside the {@link ViewPager}.
      * @return the step to be used inside the {@link com.stepstone.stepper.StepperLayout}.
      */
-    T createStep(int position);
+    Step<STEP_VIEW> createStep(int position);
 
     /**
      * Finds the given step without creating it.
@@ -32,7 +29,7 @@ public interface StepAdapter<T> {
      * @param position step position
      * @return step fragment
      */
-    Step findStep(ViewPager viewPager, int position);
+    Step<STEP_VIEW> findStep(ViewPager viewPager, int position);
 
     /**
      * Allows to override the text on the Next button per step.
@@ -56,5 +53,5 @@ public interface StepAdapter<T> {
      * Method for internal purpose. Should not be inherited.
      * @return the adapter to be used in the {@link ViewPager}.
      */
-    PagerAdapter getAdapter();
+    PagerAdapter getPagerAdapter();
 }

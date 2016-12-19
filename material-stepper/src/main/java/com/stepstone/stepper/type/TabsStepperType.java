@@ -57,7 +57,7 @@ public class TabsStepperType extends AbstractStepperType {
      * {@inheritDoc}
      */
     @Override
-    public void onNewAdapter(@NonNull StepAdapter<?> stepAdapter) {
+    public void onNewAdapter(@NonNull StepAdapter stepAdapter) {
         List<Integer> titles = new ArrayList<>();
         final int stepCount = stepAdapter.getCount();
         for (int i = 0; i < stepCount; i++) {

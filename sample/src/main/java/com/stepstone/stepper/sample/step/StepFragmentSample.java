@@ -35,7 +35,7 @@ import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.sample.OnNavigationBarListener;
 import com.stepstone.stepper.sample.R;
 
-public class StepFragmentSample extends Fragment implements Step {
+public class StepFragmentSample extends Fragment implements Step<Fragment> {
 
     private static final String CLICKS_KEY = "clicks";
 
@@ -111,6 +111,11 @@ public class StepFragmentSample extends Fragment implements Step {
     @Override
     public void onError(@NonNull VerificationError error) {
         button.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.shake_error));
+    }
+
+    @Override
+    public Fragment getStepView() {
+        return this;
     }
 
     private void updateNavigationBar() {

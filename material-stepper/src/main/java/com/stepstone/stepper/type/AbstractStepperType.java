@@ -58,7 +58,7 @@ public abstract class AbstractStepperType {
      * Called when {@link StepperLayout}'s adapter gets changed
      * @param stepAdapter new stepper adapter
      */
-    public abstract void onNewAdapter(@NonNull StepAdapter<?> stepAdapter);
+    public abstract void onNewAdapter(@NonNull StepAdapter stepAdapter);
 
     @ColorInt
     protected int getSelectedColor() {

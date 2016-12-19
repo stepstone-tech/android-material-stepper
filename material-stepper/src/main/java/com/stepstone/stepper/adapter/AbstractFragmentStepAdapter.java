@@ -28,7 +28,9 @@ import com.stepstone.stepper.Step;
 /**
  * A base adapter class which returns step fragments to use inside of the {@link com.stepstone.stepper.StepperLayout}.
  */
-public abstract class AbstractFragmentStepAdapter<T extends Fragment & Step> extends FragmentPagerAdapter implements StepAdapter<T> {
+public abstract class AbstractFragmentStepAdapter
+        extends FragmentPagerAdapter
+        implements StepAdapter<Fragment> {
 
     private final FragmentManager mFragmentManager;
 
@@ -38,14 +40,15 @@ public abstract class AbstractFragmentStepAdapter<T extends Fragment & Step> ext
     }
 
     @Override
-    public final T getItem(int position) {
-        return createStep(position);
+    public final Fragment getItem(int position) {
+        return createStep(position).getStepView();
     }
 
     /** {@inheritDoc} */
-    public Step findStep(ViewPager viewPager, int position) {
+    @SuppressWarnings("unchecked")
+    public Step<Fragment> findStep(ViewPager viewPager, int position) {
         String fragmentTag =  "android:switcher:" + viewPager.getId() + ":" + this.getItemId(position);
-        return (Step) mFragmentManager.findFragmentByTag(fragmentTag);
+        return (Step<Fragment>) mFragmentManager.findFragmentByTag(fragmentTag);
     }
 
     /** {@inheritDoc} */
@@ -56,7 +59,7 @@ public abstract class AbstractFragmentStepAdapter<T extends Fragment & Step> ext
 
     /** {@inheritDoc} */
     @Override
-    public PagerAdapter getAdapter() {
+    public PagerAdapter getPagerAdapter() {
         return this;
     }
 }
