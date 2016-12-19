@@ -22,7 +22,7 @@ import android.support.annotation.StringRes;
 /**
  * A base step interface which all {@link StepperLayout} steps must implement.
  */
-public interface Step<VIEW> {
+public interface Step {
 
     /**
      * Returns a String resource ID for the displayable name of the step.
@@ -49,11 +49,5 @@ public interface Step<VIEW> {
      * @param error the cause of the validation failure
      */
     void onError(@NonNull VerificationError error);
-
-    /**
-     * @return the view used for displaying this step inside of a view pager,
-     * one of {@link android.support.v4.app.Fragment} or {@link android.view.View}
-     */
-    VIEW getStepView();
 
 }

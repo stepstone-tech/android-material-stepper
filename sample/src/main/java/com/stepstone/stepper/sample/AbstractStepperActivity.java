@@ -18,7 +18,6 @@ package com.stepstone.stepper.sample;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -102,7 +101,7 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
         }
 
         @Override
-        public Step<Fragment> createStep(int position) {
+        public Step createStep(int position) {
             switch (position) {
                 case 0:
                     return StepFragmentSample.newInstance(R.layout.fragment_step);

@@ -18,7 +18,6 @@ package com.stepstone.stepper.sample;
 
 import android.os.Bundle;
 import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -68,7 +67,7 @@ public class DifferentNextButtonStepperActivity extends AppCompatActivity {
         }
 
         @Override
-        public Step<Fragment> createStep(int position) {
+        public Step createStep(int position) {
             switch (position) {
                 case 0:
                     return StepFragmentSample.newInstance(R.layout.fragment_step);

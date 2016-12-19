@@ -30,7 +30,7 @@ import com.stepstone.stepper.Step;
  */
 public abstract class AbstractFragmentStepAdapter
         extends FragmentPagerAdapter
-        implements StepAdapter<Fragment> {
+        implements StepAdapter {
 
     private final FragmentManager mFragmentManager;
 
@@ -41,14 +41,14 @@ public abstract class AbstractFragmentStepAdapter
 
     @Override
     public final Fragment getItem(int position) {
-        return createStep(position).getStepView();
+        return (Fragment) createStep(position);
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
-    public Step<Fragment> findStep(ViewPager viewPager, int position) {
+    public Step findStep(ViewPager viewPager, int position) {
         String fragmentTag =  "android:switcher:" + viewPager.getId() + ":" + this.getItemId(position);
-        return (Step<Fragment>) mFragmentManager.findFragmentByTag(fragmentTag);
+        return (Step) mFragmentManager.findFragmentByTag(fragmentTag);
     }
 
     /** {@inheritDoc} */

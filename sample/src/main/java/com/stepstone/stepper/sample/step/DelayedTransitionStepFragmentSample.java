@@ -36,7 +36,7 @@ import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.sample.R;
 
-public class DelayedTransitionStepFragmentSample extends Fragment implements BlockingStep<Fragment> {
+public class DelayedTransitionStepFragmentSample extends Fragment implements BlockingStep {
 
     private static final String CLICKS_KEY = "clicks";
 
@@ -99,11 +99,6 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 
     @Override
     public void onError(@NonNull VerificationError error) {
-    }
-
-    @Override
-    public Fragment getStepView() {
-        return this;
     }
 
     @Override

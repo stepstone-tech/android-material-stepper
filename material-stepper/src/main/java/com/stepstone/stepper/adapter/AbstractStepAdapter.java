@@ -15,21 +15,21 @@ import java.util.List;
  * This class is intended to be inherited if you need to use {@link com.stepstone.stepper.StepperLayout} without fragments.
  * Otherwise, you should use {@link AbstractFragmentStepAdapter}
  */
-public abstract class AbstractStepAdapter extends PagerAdapter implements StepAdapter<View> {
+public abstract class AbstractStepAdapter extends PagerAdapter implements StepAdapter {
 
-    private List<Step<View>> pages = new LinkedList<>();
+    private List<Step> pages = new LinkedList<>();
 
     @Override
-    public Step<View> findStep(ViewPager viewPager, int position) {
+    public Step findStep(ViewPager viewPager, int position) {
         return pages.size() > 0 ? pages.get(position) : null;
     }
 
     @Override
     public final View instantiateItem(ViewGroup container, int position) {
-        Step<View> step = createStep(position);
+        Step step = createStep(position);
         pages.add(step);
 
-        View stepView = step.getStepView();
+        View stepView = (View) step;
         container.addView(stepView);
 
         return stepView;
