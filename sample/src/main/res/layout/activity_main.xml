@@ -17,12 +17,6 @@
         tools:context="com.stepstone.stepper.sample.MainActivity">
 
         <Button
-            android:id="@+id/noFrag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_frags" />
-
-        <Button
             android:id="@+id/defaultDots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,6 +87,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_back_button" />
+
+        <Button
+            android:id="@+id/noFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_frags" />
 
     </LinearLayout>
 </ScrollView>

@@ -26,5 +26,4 @@ dependencies {
     compile project(':material-stepper')
     compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
     compile ("com.jakewharton:butterknife:$butterknifeVersion")
-    compile 'com.facebook.stetho:stetho:1.4.2'
 }

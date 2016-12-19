@@ -30,8 +30,6 @@ import com.stepstone.stepper.Step;
  */
 public abstract class AbstractFragmentStepAdapter<T extends Fragment & Step> extends FragmentPagerAdapter implements StepAdapter<T> {
 
-    public static final int DEFAULT_NEXT_BUTTON_TEXT = -1;
-
     private final FragmentManager mFragmentManager;
 
     public AbstractFragmentStepAdapter(FragmentManager fm) {
@@ -44,35 +42,19 @@ public abstract class AbstractFragmentStepAdapter<T extends Fragment & Step> ext
         return createStep(position);
     }
 
-    public abstract T createStep(int position);
-
-    /**
-     * Finds the given step without creating it.
-     * @see FragmentPagerAdapter#makeFragmentName(int, long)
-     * @param viewPager view pager to use for displaying step fragments
-     * @param position step position
-     * @return step fragment
-     */
+    /** {@inheritDoc} */
     public Step findStep(ViewPager viewPager, int position) {
         String fragmentTag =  "android:switcher:" + viewPager.getId() + ":" + this.getItemId(position);
         return (Step) mFragmentManager.findFragmentByTag(fragmentTag);
     }
 
-    /**
-     * Allows to override the text on the Next button per step.
-     * For a given step position you need to return a String resource ID for the label to be used.
-     * If you wish to change the text for selected steps only (and leave the default for the rest)
-     * then return {@link #DEFAULT_NEXT_BUTTON_TEXT} for the default ones.
-     * By default this method returns {@link #DEFAULT_NEXT_BUTTON_TEXT} for all steps.
-     * This method is not invoked for the last step.
-     * @param position step position
-     * @return a String resource ID to override the default button text or {@link #DEFAULT_NEXT_BUTTON_TEXT} if the default text should be kept
-     */
+    /** {@inheritDoc} */
     @StringRes
     public int getNextButtonText(int position) {
         return DEFAULT_NEXT_BUTTON_TEXT;
     }
 
+    /** {@inheritDoc} */
     @Override
     public PagerAdapter getAdapter() {
         return this;

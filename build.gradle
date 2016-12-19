@@ -22,7 +22,7 @@ configure(allprojects) {
         androidMinSdkVersion 		        = 14
         androidTargetSdkVersion             = 24
         androidCompileSdkVersion            = 24
-        androidBuildToolsVersion            = "25.0.0"
+        androidBuildToolsVersion            = "25.0.2"
         androidSupportLibraryVersion        = "25.0.0"
 
         /* Sample only */

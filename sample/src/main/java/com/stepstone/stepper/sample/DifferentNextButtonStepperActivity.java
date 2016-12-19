@@ -40,7 +40,7 @@ public class DifferentNextButtonStepperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_default_dots);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new MyStepperAdapterFragment(getSupportFragmentManager()), startingStepPosition);
+        mStepperLayout.setAdapter(new MyStepperFragmentAdapter(getSupportFragmentManager()), startingStepPosition);
 
     }
 
@@ -60,9 +60,9 @@ public class DifferentNextButtonStepperActivity extends AppCompatActivity {
         }
     }
 
-    private static class MyStepperAdapterFragment extends AbstractFragmentStepAdapter {
+    private static class MyStepperFragmentAdapter extends AbstractFragmentStepAdapter {
 
-        MyStepperAdapterFragment(FragmentManager fm) {
+        MyStepperFragmentAdapter(FragmentManager fm) {
             super(fm);
         }
 
