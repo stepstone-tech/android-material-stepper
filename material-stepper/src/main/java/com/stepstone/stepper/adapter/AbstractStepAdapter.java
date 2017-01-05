@@ -2,13 +2,11 @@ package com.stepstone.stepper.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.stepstone.stepper.Step;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * A base adapter class which returns step to use inside of the {@link com.stepstone.stepper.StepperLayout}.
@@ -17,7 +15,7 @@ import java.util.List;
  */
 public abstract class AbstractStepAdapter extends PagerAdapter implements StepAdapter {
 
-    private List<Step> pages = new LinkedList<>();
+    private SparseArray<Step> pages = new SparseArray<>();
 
     @Override
     public Step findStep(ViewPager viewPager, int position) {
@@ -25,9 +23,9 @@ public abstract class AbstractStepAdapter extends PagerAdapter implements StepAd
     }
 
     @Override
-    public final View instantiateItem(ViewGroup container, int position) {
+    public View instantiateItem(ViewGroup container, int position) {
         Step step = createStep(position);
-        pages.add(step);
+        pages.put(position, step);
 
         View stepView = (View) step;
         container.addView(stepView);
@@ -38,6 +36,7 @@ public abstract class AbstractStepAdapter extends PagerAdapter implements StepAd
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
+        pages.remove(position);
     }
 
     @Override
@@ -53,7 +52,7 @@ public abstract class AbstractStepAdapter extends PagerAdapter implements StepAd
 
     /** {@inheritDoc} */
     @Override
-    public PagerAdapter getPagerAdapter() {
+    public final PagerAdapter getPagerAdapter() {
         return this;
     }
 }

@@ -59,7 +59,7 @@ public abstract class AbstractFragmentStepAdapter
 
     /** {@inheritDoc} */
     @Override
-    public PagerAdapter getPagerAdapter() {
+    public final PagerAdapter getPagerAdapter() {
         return this;
     }
 }
