@@ -1,4 +1,4 @@
-package com.stepstone.stepper.sample.nofrag;
+package com.stepstone.stepper.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +7,9 @@ import android.widget.Toast;
 
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
-import com.stepstone.stepper.sample.OnNavigationBarListener;
-import com.stepstone.stepper.sample.R;
+import com.stepstone.stepper.sample.adapter.SampleStepAdapter;
 
-public class NoFragActivity extends AppCompatActivity implements StepperLayout.StepperListener, OnNavigationBarListener {
+public class NoFragmentsActivity extends AppCompatActivity implements StepperLayout.StepperListener, OnNavigationBarListener {
 
     private static final String CURRENT_STEP_POSITION_KEY = "position";
 
@@ -22,8 +21,8 @@ public class NoFragActivity extends AppCompatActivity implements StepperLayout.S
         setContentView(R.layout.activity_no_frag);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        NoFragAdapter noFragAdapter = new NoFragAdapter(this);
-        mStepperLayout.setAdapter(noFragAdapter);
+        SampleStepAdapter sampleStepAdapter = new SampleStepAdapter(this);
+        mStepperLayout.setAdapter(sampleStepAdapter, startingStepPosition);
         mStepperLayout.setListener(this);
     }
 
@@ -35,6 +34,12 @@ public class NoFragActivity extends AppCompatActivity implements StepperLayout.S
         } else {
             finish();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(CURRENT_STEP_POSITION_KEY, mStepperLayout.getCurrentStepPosition());
+        super.onSaveInstanceState(outState);
     }
 
     @Override

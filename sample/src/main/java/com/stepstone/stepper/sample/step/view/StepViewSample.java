@@ -1,11 +1,9 @@
-package com.stepstone.stepper.sample.nofrag;
+package com.stepstone.stepper.sample.step.view;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -21,33 +19,19 @@ import com.stepstone.stepper.sample.R;
  * Created by leonardo on 18/12/16.
  */
 
-public class NoFragView extends FrameLayout implements Step {
+public class StepViewSample extends FrameLayout implements Step {
 
     private static final int TAP_THRESHOLD = 2;
+
     private int i = 0;
+
     @Nullable
     private OnNavigationBarListener onNavigationBarListener;
 
     private Button button;
 
-    public NoFragView(Context context) {
+    public StepViewSample(Context context) {
         super(context);
-        init(context);
-    }
-
-    public NoFragView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
-    }
-
-    public NoFragView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context);
-    }
-
-    @TargetApi(21)
-    public NoFragView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
     }
 
@@ -55,7 +39,7 @@ public class NoFragView extends FrameLayout implements Step {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         Context c = getContext();
-        if(c instanceof OnNavigationBarListener){
+        if (c instanceof OnNavigationBarListener) {
             this.onNavigationBarListener = (OnNavigationBarListener) c;
         }
     }
@@ -66,7 +50,7 @@ public class NoFragView extends FrameLayout implements Step {
         this.onNavigationBarListener = null;
     }
 
-    private void init(Context context){
+    private void init(Context context) {
         View v = LayoutInflater.from(context).inflate(R.layout.fragment_step, this, true);
         button = (Button) v.findViewById(R.id.button);
 
@@ -112,4 +96,5 @@ public class NoFragView extends FrameLayout implements Step {
     public void onError(@NonNull VerificationError error) {
         button.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake_error));
     }
+
 }

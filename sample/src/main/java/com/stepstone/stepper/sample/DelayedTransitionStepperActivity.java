@@ -17,13 +17,10 @@ limitations under the License.
 package com.stepstone.stepper.sample;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
-import com.stepstone.stepper.sample.step.DelayedTransitionStepFragmentSample;
+import com.stepstone.stepper.sample.adapter.DelayedTransitionFragmentStepAdapter;
 
 public class DelayedTransitionStepperActivity extends AppCompatActivity {
 
@@ -39,7 +36,7 @@ public class DelayedTransitionStepperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_default_dots);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new MyStepperAdapterFragment(getSupportFragmentManager()), startingStepPosition);
+        mStepperLayout.setAdapter(new DelayedTransitionFragmentStepAdapter(getSupportFragmentManager()), startingStepPosition);
     }
 
     @Override
@@ -55,32 +52,6 @@ public class DelayedTransitionStepperActivity extends AppCompatActivity {
             mStepperLayout.setCurrentStepPosition(currentStepPosition - 1);
         } else {
             finish();
-        }
-    }
-
-    private static class MyStepperAdapterFragment extends AbstractFragmentStepAdapter {
-
-        MyStepperAdapterFragment(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment createStep(int position) {
-            switch (position) {
-                case 0:
-                    return DelayedTransitionStepFragmentSample.newInstance(R.layout.fragment_step);
-                case 1:
-                    return DelayedTransitionStepFragmentSample.newInstance(R.layout.fragment_step2);
-                case 2:
-                    return DelayedTransitionStepFragmentSample.newInstance(R.layout.fragment_step3);
-                default:
-                    throw new IllegalArgumentException("Unsupported position: " + position);
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
         }
     }
 

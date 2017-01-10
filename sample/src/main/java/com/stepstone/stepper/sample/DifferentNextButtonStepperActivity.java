@@ -17,14 +17,10 @@ limitations under the License.
 package com.stepstone.stepper.sample;
 
 import android.os.Bundle;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
-import com.stepstone.stepper.sample.step.StepFragmentSample;
+import com.stepstone.stepper.sample.adapter.NextButtonsSampleFragmentStepAdapter;
 
 public class DifferentNextButtonStepperActivity extends AppCompatActivity {
 
@@ -40,7 +36,7 @@ public class DifferentNextButtonStepperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_default_dots);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new MyStepperFragmentAdapter(getSupportFragmentManager()), startingStepPosition);
+        mStepperLayout.setAdapter(new NextButtonsSampleFragmentStepAdapter(getSupportFragmentManager()), startingStepPosition);
 
     }
 
@@ -60,43 +56,4 @@ public class DifferentNextButtonStepperActivity extends AppCompatActivity {
         }
     }
 
-    private static class MyStepperFragmentAdapter extends AbstractFragmentStepAdapter {
-
-        MyStepperFragmentAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment createStep(int position) {
-            switch (position) {
-                case 0:
-                    return StepFragmentSample.newInstance(R.layout.fragment_step);
-                case 1:
-                    return StepFragmentSample.newInstance(R.layout.fragment_step2);
-                case 2:
-                    return StepFragmentSample.newInstance(R.layout.fragment_step3);
-                default:
-                    throw new IllegalArgumentException("Unsupported position: " + position);
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
-
-        @StringRes
-        @Override
-        public int getNextButtonText(int position) {
-            switch (position) {
-                case 0:
-                    return R.string.ms_next;
-                case 1:
-                    return R.string.go_to_summary;
-                default:
-                    throw new IllegalArgumentException("Unsupported position: " + position);
-            }
-        }
-
-    }
 }

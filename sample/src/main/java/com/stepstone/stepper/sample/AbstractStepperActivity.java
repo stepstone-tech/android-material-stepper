@@ -18,16 +18,13 @@ package com.stepstone.stepper.sample;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
-import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
-import com.stepstone.stepper.sample.step.StepFragmentSample;
+import com.stepstone.stepper.sample.adapter.SampleFragmentStepAdapter;
 
 public abstract class AbstractStepperActivity extends AppCompatActivity implements StepperLayout.StepperListener,
         OnNavigationBarListener {
@@ -44,7 +41,7 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
         setContentView(getLayoutResId());
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new MyStepperAdapterFragment(getSupportFragmentManager()), startingStepPosition);
+        mStepperLayout.setAdapter(new SampleFragmentStepAdapter(getSupportFragmentManager()), startingStepPosition);
 
         mStepperLayout.setListener(this);
     }
@@ -92,32 +89,6 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
     public void onChangeEndButtonsEnabled(boolean enabled) {
         mStepperLayout.setNextButtonVerificationFailed(!enabled);
         mStepperLayout.setCompleteButtonVerificationFailed(!enabled);
-    }
-
-    private static class MyStepperAdapterFragment extends AbstractFragmentStepAdapter {
-
-        MyStepperAdapterFragment(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment createStep(int position) {
-            switch (position) {
-                case 0:
-                    return StepFragmentSample.newInstance(R.layout.fragment_step);
-                case 1:
-                    return StepFragmentSample.newInstance(R.layout.fragment_step2);
-                case 2:
-                    return StepFragmentSample.newInstance(R.layout.fragment_step3);
-                default:
-                    throw new IllegalArgumentException("Unsupported position: " + position);
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
     }
 
 }
