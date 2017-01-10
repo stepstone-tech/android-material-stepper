@@ -29,7 +29,7 @@
         <activity android:name=".DelayedTransitionStepperActivity" />
         <activity android:name=".DifferentNextButtonStepperActivity" />
         <activity android:name=".ReturnButtonActivity" />
-        <activity android:name=".nofrag.NoFragActivity"/>
+        <activity android:name=".NoFragmentsActivity"/>
     </application>
 
 </manifest>
