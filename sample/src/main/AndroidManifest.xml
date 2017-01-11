@@ -24,6 +24,7 @@
         <activity android:name=".StyledProgressBarActivity" />
         <activity android:name=".DefaultTabsActivity" />
         <activity android:name=".StyledTabsActivity" />
+        <activity android:name=".ShowErrorOnBackTabActivity"/>
         <activity android:name=".CombinationActivity" />
         <activity android:name=".CustomPageTransformerActivity" />
         <activity android:name=".DelayedTransitionStepperActivity" />

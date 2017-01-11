@@ -47,6 +47,7 @@ import com.stepstone.stepper.internal.RightNavigationButton;
 import com.stepstone.stepper.internal.TabsContainer;
 import com.stepstone.stepper.type.AbstractStepperType;
 import com.stepstone.stepper.type.StepperTypeFactory;
+import com.stepstone.stepper.type.TabsStepperType;
 import com.stepstone.stepper.util.TintUtil;
 
 /**
@@ -203,6 +204,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private int mCurrentStepPosition;
 
+    private boolean mShowErrorStateOnBack;
+
     @NonNull
     private StepperListener mListener = StepperListener.NULL;
 
@@ -322,6 +325,14 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     public void setCompleteButtonVerificationFailed(boolean verificationFailed) {
         mCompleteNavigationButton.setVerificationFailed(verificationFailed);
+    }
+
+    /**
+     * Set whether when going backwards should clear the error state from the Tab. Default is false
+     * @param mShowErrorStateOnBack
+     */
+    public void setShowErrorStateOnBack(boolean mShowErrorStateOnBack) {
+        this.mShowErrorStateOnBack = mShowErrorStateOnBack;
     }
 
     private void init(AttributeSet attrs, @AttrRes int defStyleAttr) {
@@ -454,6 +465,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
                 mTypeIdentifier = a.getInt(R.styleable.StepperLayout_ms_stepperType, DEFAULT_TAB_DIVIDER_WIDTH);
             }
 
+            mShowErrorStateOnBack = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBack, false);
+
             a.recycle();
         }
     }
@@ -495,6 +508,11 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         if (verifyCurrentStep(step)) {
             return;
         }
+
+        //if moving forward and got no errors, set hasError to false, so we can have the tab with the check mark.
+        if(mStepperType instanceof TabsStepperType)
+            mTabsContainer.setErrorStep(mCurrentStepPosition, false);
+
         OnNextClickedCallback onNextClickedCallback = new OnNextClickedCallback();
         if (step instanceof BlockingStep) {
             ((BlockingStep) step).onNextClicked(onNextClickedCallback);
@@ -516,6 +534,11 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         Step step = findCurrentStep();
         if (step != null) {
             step.onError(verificationError);
+
+            //if moving forward and got errors, set hasError to true, showing the error drawable.
+            if(mStepperType instanceof TabsStepperType)
+                mTabsContainer.setErrorStep(mCurrentStepPosition, true);
+
         }
         mListener.onError(verificationError);
     }
@@ -543,6 +566,11 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             } else {
                 mNextNavigationButton.setText(nextButtonTextForStep);
             }
+        }
+
+        //needs to be here in case user for any reason decide to change whether or not to show errors when going back.
+        if(mStepperType instanceof TabsStepperType) {
+            mTabsContainer.setShowErrorStateOnBack(mShowErrorStateOnBack);
         }
 
         mStepperType.onStepSelected(newStepPosition);
