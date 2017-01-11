@@ -48,6 +48,7 @@ import com.stepstone.stepper.internal.TabsContainer;
 import com.stepstone.stepper.type.AbstractStepperType;
 import com.stepstone.stepper.type.StepperTypeFactory;
 import com.stepstone.stepper.type.TabsStepperType;
+import com.stepstone.stepper.util.AnimationUtil;
 import com.stepstone.stepper.util.TintUtil;
 
 /**
@@ -125,7 +126,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             }
 
             mCurrentStepPosition++;
-            onUpdate(mCurrentStepPosition);
+            onUpdate(mCurrentStepPosition, true);
         }
 
     }
@@ -141,7 +142,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
                 return;
             }
             mCurrentStepPosition--;
-            onUpdate(mCurrentStepPosition);
+            onUpdate(mCurrentStepPosition, true);
         }
 
     }
@@ -262,7 +263,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                onUpdate(mCurrentStepPosition);
+                onUpdate(mCurrentStepPosition, false);
             }
         });
 
@@ -312,7 +313,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     public void setCurrentStepPosition(int currentStepPosition) {
         this.mCurrentStepPosition = currentStepPosition;
-        onUpdate(currentStepPosition);
+        onUpdate(currentStepPosition, true);
     }
 
     public int getCurrentStepPosition() {
@@ -551,13 +552,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mListener.onCompleted(completeButton);
     }
 
-    private void onUpdate(int newStepPosition) {
+    private void onUpdate(int newStepPosition, boolean animate) {
         mPager.setCurrentItem(newStepPosition);
         boolean isLast = isLastPosition(newStepPosition);
         boolean isFirst = newStepPosition == 0;
-        mNextNavigationButton.setVisibility(isLast ? View.GONE : View.VISIBLE);
-        mCompleteNavigationButton.setVisibility(!isLast ? View.GONE : View.VISIBLE);
-        mBackNavigationButton.setVisibility(isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE);
+        AnimationUtil.fadeViewVisibility(mNextNavigationButton, isLast ? View.GONE : View.VISIBLE, animate);
+        AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, !isLast ? View.GONE : View.VISIBLE, animate);
+        AnimationUtil.fadeViewVisibility(mBackNavigationButton, isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE, animate);
 
         if (!isLast) {
             int nextButtonTextForStep = mStepAdapter.getNextButtonText(newStepPosition);
