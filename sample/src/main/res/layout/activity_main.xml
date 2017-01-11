@@ -59,6 +59,12 @@
             android:text="@string/styled_tabs" />
 
         <Button
+            android:id="@+id/errorOnBackTabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_back_tabs" />
+
+        <Button
             android:id="@+id/combination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

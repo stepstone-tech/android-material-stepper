@@ -79,6 +79,8 @@ public class TabsContainer extends FrameLayout {
 
     private List<Integer> mStepTitles;
 
+    private boolean mShowErrorStateOnBack;
+
     public TabsContainer(Context context) {
         this(context, null);
     }
@@ -152,11 +154,27 @@ public class TabsContainer extends FrameLayout {
             StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(i);
             boolean done = i < newStepPosition;
             final boolean current = i == newStepPosition;
-            childTab.updateState(done, current);
+            childTab.updateState(done, mShowErrorStateOnBack, current);
             if (current) {
                 mTabsScrollView.smoothScrollTo(childTab.getLeft() - mContainerLateralPadding, 0);
             }
         }
+    }
+
+    /**
+     * Set whether when going backwards should clear the error state from the Tab. Default is false
+     * @param mShowErrorStateOnBack
+     */
+    public void setShowErrorStateOnBack(boolean mShowErrorStateOnBack) {
+        this.mShowErrorStateOnBack = mShowErrorStateOnBack;
+    }
+
+    public void setErrorStep(int stepPosition, boolean hasError){
+        if(mStepTitles.size() < stepPosition)
+            return;
+
+        StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(stepPosition);
+        childTab.updateErrorState(hasError);
     }
 
     private View createStepTab(final int position, @StringRes int title) {
