@@ -20,7 +20,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.adapter.AbstractStepAdapter;
+import com.stepstone.stepper.adapter.StepAdapter;
 
 /**
  * A base stepper type all stepper types must extend.
@@ -58,7 +58,7 @@ public abstract class AbstractStepperType {
      * Called when {@link StepperLayout}'s adapter gets changed
      * @param stepAdapter new stepper adapter
      */
-    public abstract void onNewAdapter(@NonNull AbstractStepAdapter<?> stepAdapter);
+    public abstract void onNewAdapter(@NonNull StepAdapter stepAdapter);
 
     @ColorInt
     protected int getSelectedColor() {

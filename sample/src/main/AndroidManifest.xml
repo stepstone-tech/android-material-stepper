@@ -8,7 +8,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,27 +15,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".DefaultDotsActivity" />
         <activity android:name=".StyledDotsActivity" />
-        <activity android:name=".ThemedDotsActivity" android:theme="@style/AppTheme.DotStepper" />
-
+        <activity
+            android:name=".ThemedDotsActivity"
+            android:theme="@style/AppTheme.DotStepper" />
         <activity android:name=".DefaultProgressBarActivity" />
         <activity android:name=".StyledProgressBarActivity" />
-
         <activity android:name=".DefaultTabsActivity" />
         <activity android:name=".StyledTabsActivity" />
-
         <activity android:name=".CombinationActivity" />
-        
         <activity android:name=".CustomPageTransformerActivity" />
-
         <activity android:name=".DelayedTransitionStepperActivity" />
-
         <activity android:name=".DifferentNextButtonStepperActivity" />
-
         <activity android:name=".ReturnButtonActivity" />
-
+        <activity android:name=".NoFragmentsActivity"/>
     </application>
 
 </manifest>

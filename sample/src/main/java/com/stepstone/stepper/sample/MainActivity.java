@@ -93,4 +93,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ReturnButtonActivity.class));
     }
 
+    @OnClick(R.id.noFragments)
+    public void onNoFrag(View view){
+        startActivity(new Intent(this, NoFragmentsActivity.class));
+    }
+
 }

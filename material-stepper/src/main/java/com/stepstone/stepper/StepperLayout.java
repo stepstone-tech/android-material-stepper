@@ -40,7 +40,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.stepstone.stepper.adapter.AbstractStepAdapter;
+import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.ColorableProgressBar;
 import com.stepstone.stepper.internal.DottedProgressBar;
 import com.stepstone.stepper.internal.RightNavigationButton;
@@ -198,7 +198,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private int mTypeIdentifier = AbstractStepperType.PROGRESS_BAR;
 
-    private AbstractStepAdapter mStepAdapter;
+    private StepAdapter mStepAdapter;
 
     private AbstractStepperType mStepperType;
 
@@ -250,9 +250,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      *
      * @param stepAdapter step adapter
      */
-    public void setAdapter(@NonNull AbstractStepAdapter stepAdapter) {
+    public void setAdapter(@NonNull StepAdapter stepAdapter) {
         this.mStepAdapter = stepAdapter;
-        mPager.setAdapter(stepAdapter);
+        mPager.setAdapter(stepAdapter.getPagerAdapter());
 
         mStepperType.onNewAdapter(stepAdapter);
 
@@ -272,7 +272,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      * @param stepAdapter         step adapter
      * @param currentStepPosition the initial step position, must be in the range of the adapter item count
      */
-    public void setAdapter(@NonNull AbstractStepAdapter stepAdapter, @IntRange(from = 0) int currentStepPosition) {
+    public void setAdapter(@NonNull StepAdapter stepAdapter, @IntRange(from = 0) int currentStepPosition) {
         this.mCurrentStepPosition = currentStepPosition;
         setAdapter(stepAdapter);
     }
@@ -539,7 +539,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         if (!isLast) {
             int nextButtonTextForStep = mStepAdapter.getNextButtonText(newStepPosition);
-            if (nextButtonTextForStep == AbstractStepAdapter.DEFAULT_NEXT_BUTTON_TEXT) {
+            if (nextButtonTextForStep == StepAdapter.DEFAULT_NEXT_BUTTON_TEXT) {
                 mNextNavigationButton.setText(mNextButtonText);
             } else {
                 mNextNavigationButton.setText(nextButtonTextForStep);

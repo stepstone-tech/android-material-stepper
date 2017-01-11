@@ -14,56 +14,45 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.sample.step;
+package com.stepstone.stepper.sample.step.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.stepstone.stepper.Step;
+import com.stepstone.stepper.BlockingStep;
+import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
-import com.stepstone.stepper.sample.OnNavigationBarListener;
 import com.stepstone.stepper.sample.R;
 
-public class StepFragmentSample extends Fragment implements Step {
+public class DelayedTransitionStepFragmentSample extends Fragment implements BlockingStep {
 
     private static final String CLICKS_KEY = "clicks";
-
-    private static final int TAP_THRESHOLD = 2;
 
     private static final String LAYOUT_RESOURCE_ID_ARG_KEY = "messageResourceId";
 
     private int i = 0;
 
     private Button button;
+    private AlertDialog dialog;
 
-    @Nullable
-    private OnNavigationBarListener onNavigationBarListener;
-
-    public static StepFragmentSample newInstance(@LayoutRes int layoutResId) {
+    public static DelayedTransitionStepFragmentSample newInstance(@LayoutRes int layoutResId) {
         Bundle args = new Bundle();
         args.putInt(LAYOUT_RESOURCE_ID_ARG_KEY, layoutResId);
-        StepFragmentSample fragment = new StepFragmentSample();
+        DelayedTransitionStepFragmentSample fragment = new DelayedTransitionStepFragmentSample();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnNavigationBarListener) {
-            onNavigationBarListener = (OnNavigationBarListener) context;
-        }
     }
 
     @Override
@@ -73,19 +62,24 @@ public class StepFragmentSample extends Fragment implements Step {
             i = savedInstanceState.getInt(CLICKS_KEY);
         }
 
-        updateNavigationBar();
-
         button = (Button) v.findViewById(R.id.button);
         button.setText(Html.fromHtml("Taps: <b>" + i + "</b>"));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 button.setText(Html.fromHtml("Taps: <b>" + (++i) + "</b>"));
-                updateNavigationBar();
             }
         });
 
         return v;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (dialog != null) {
+            dialog.dismiss();
+        }
     }
 
     @Override
@@ -96,27 +90,38 @@ public class StepFragmentSample extends Fragment implements Step {
 
     @Override
     public VerificationError verifyStep() {
-        return isAboveThreshold() ? null : new VerificationError("Click " + (TAP_THRESHOLD - i) + " more times!");
-    }
-
-    private boolean isAboveThreshold() {
-        return i >= TAP_THRESHOLD;
+        return null;
     }
 
     @Override
     public void onSelected() {
-        updateNavigationBar();
     }
 
     @Override
     public void onError(@NonNull VerificationError error) {
-        button.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.shake_error));
     }
 
-    private void updateNavigationBar() {
-        if (onNavigationBarListener != null) {
-            onNavigationBarListener.onChangeEndButtonsEnabled(isAboveThreshold());
-        }
+    @Override
+    @UiThread
+    public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(R.layout.dialog_loader);
+        builder.setCancelable(false);
+        dialog = builder.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+                callback.goToNextStep();
+            }
+        }, 2000L);
+    }
+
+    @Override
+    @UiThread
+    public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
+        Toast.makeText(this.getContext(), "Your custom back action. Here you should cancel currently running operations", Toast.LENGTH_SHORT).show();
+        callback.goToPrevStep();
     }
 
     @Override
