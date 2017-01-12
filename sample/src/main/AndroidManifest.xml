@@ -27,7 +27,7 @@
         <activity android:name=".CombinationActivity" />
         <activity android:name=".CustomPageTransformerActivity" />
         <activity android:name=".DelayedTransitionStepperActivity" />
-        <activity android:name=".DifferentNextButtonStepperActivity" />
+        <activity android:name=".CustomNavigationButtonsStepperActivity" />
         <activity android:name=".ReturnButtonActivity" />
         <activity android:name=".NoFragmentsActivity"/>
     </application>

@@ -77,10 +77,10 @@
             android:text="@string/delayed_transition" />
 
         <Button
-            android:id="@+id/differentNextButtons"
+            android:id="@+id/differentNavigationButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/different_next_buttons" />
+            android:text="@string/different_navigation_buttons" />
 
         <Button
             android:id="@+id/showReturnButtonOnFirstStep"

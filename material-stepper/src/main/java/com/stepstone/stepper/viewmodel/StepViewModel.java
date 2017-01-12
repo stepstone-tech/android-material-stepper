@@ -94,7 +94,7 @@ public class StepViewModel {
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
-        public Builder setTitle(@Nullable String title) {
+        public Builder setTitle(@Nullable CharSequence title) {
             this.title = title;
             return this;
         }
@@ -114,7 +114,7 @@ public class StepViewModel {
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
-        public Builder setNextButtonLabel(@Nullable String nextButtonLabel) {
+        public Builder setNextButtonLabel(@Nullable CharSequence nextButtonLabel) {
             this.nextButtonLabel = nextButtonLabel;
             return this;
         }
@@ -134,7 +134,7 @@ public class StepViewModel {
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
-        public Builder setBackButtonLabel(@Nullable String backButtonLabel) {
+        public Builder setBackButtonLabel(@Nullable CharSequence backButtonLabel) {
             this.backButtonLabel = backButtonLabel;
             return this;
         }

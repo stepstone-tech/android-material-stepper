@@ -11,9 +11,9 @@ import com.stepstone.stepper.sample.R;
 import com.stepstone.stepper.sample.step.fragment.StepFragmentSample;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
-public class NextButtonsSampleFragmentStepAdapter extends AbstractFragmentStepAdapter {
+public class CustomButtonsSampleFragmentStepAdapter extends AbstractFragmentStepAdapter {
 
-    public NextButtonsSampleFragmentStepAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
+    public CustomButtonsSampleFragmentStepAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
         super(fm, context);
     }
 
@@ -43,10 +43,17 @@ public class NextButtonsSampleFragmentStepAdapter extends AbstractFragmentStepAd
                 .setTitle(R.string.tab_title);
         switch (position) {
             case 0:
-                builder.setNextButtonLabel(R.string.ms_next);
+                builder
+                        .setNextButtonLabel("This way")
+                        .setBackButtonLabel("Go to first");
                 break;
             case 1:
-                builder.setNextButtonLabel(R.string.go_to_summary);
+                builder
+                        .setNextButtonLabel(R.string.go_to_summary)
+                        .setBackButtonLabel("Go to first");
+                break;
+            case 2:
+                builder.setBackButtonLabel("Go back");
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported position: " + position);

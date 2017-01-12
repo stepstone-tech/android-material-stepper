@@ -49,6 +49,7 @@ import com.stepstone.stepper.type.AbstractStepperType;
 import com.stepstone.stepper.type.StepperTypeFactory;
 import com.stepstone.stepper.util.AnimationUtil;
 import com.stepstone.stepper.util.TintUtil;
+import com.stepstone.stepper.viewmodel.StepViewModel;
 
 /**
  * Stepper widget implemented according to the <a href="https://www.google.com/design/spec/components/steppers.html">Material documentation</a>.<br>
@@ -531,19 +532,18 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private void onUpdate(int newStepPosition, boolean animate) {
         mPager.setCurrentItem(newStepPosition);
-        boolean isLast = isLastPosition(newStepPosition);
-        boolean isFirst = newStepPosition == 0;
+        final boolean isLast = isLastPosition(newStepPosition);
+        final boolean isFirst = newStepPosition == 0;
         AnimationUtil.fadeViewVisibility(mNextNavigationButton, isLast ? View.GONE : View.VISIBLE, animate);
         AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, !isLast ? View.GONE : View.VISIBLE, animate);
         AnimationUtil.fadeViewVisibility(mBackNavigationButton, isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE, animate);
 
+        final StepViewModel viewModel = mStepAdapter.getViewModel(newStepPosition);
+
+        updateBackButtonText(viewModel);
+
         if (!isLast) {
-            CharSequence nextButtonTextForStep = mStepAdapter.getViewModel(newStepPosition).getNextButtonLabel();
-            if (nextButtonTextForStep == null) {
-                mNextNavigationButton.setText(mNextButtonText);
-            } else {
-                mNextNavigationButton.setText(nextButtonTextForStep);
-            }
+            updateNextButtonText(viewModel);
         }
 
         mStepperType.onStepSelected(newStepPosition);
@@ -551,6 +551,24 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         Step step = mStepAdapter.findStep(mPager, newStepPosition);
         if (step != null) {
             step.onSelected();
+        }
+    }
+
+    private void updateNextButtonText(@NonNull StepViewModel viewModel) {
+        CharSequence nextButtonTextForStep = viewModel.getNextButtonLabel();
+        if (nextButtonTextForStep == null) {
+            mNextNavigationButton.setText(mNextButtonText);
+        } else {
+            mNextNavigationButton.setText(nextButtonTextForStep);
+        }
+    }
+
+    private void updateBackButtonText(@NonNull StepViewModel viewModel) {
+        CharSequence backButtonTextForStep = viewModel.getBackButtonLabel();
+        if (backButtonTextForStep == null) {
+            mBackNavigationButton.setText(mBackButtonText);
+        } else {
+            mBackNavigationButton.setText(backButtonTextForStep);
         }
     }
 }

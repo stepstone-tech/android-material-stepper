@@ -20,9 +20,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.sample.adapter.NextButtonsSampleFragmentStepAdapter;
+import com.stepstone.stepper.sample.adapter.CustomButtonsSampleFragmentStepAdapter;
 
-public class DifferentNextButtonStepperActivity extends AppCompatActivity {
+public class CustomNavigationButtonsStepperActivity extends AppCompatActivity {
 
     private static final String CURRENT_STEP_POSITION_KEY = "position";
 
@@ -36,7 +36,7 @@ public class DifferentNextButtonStepperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_default_dots);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new NextButtonsSampleFragmentStepAdapter(getSupportFragmentManager(), this), startingStepPosition);
+        mStepperLayout.setAdapter(new CustomButtonsSampleFragmentStepAdapter(getSupportFragmentManager(), this), startingStepPosition);
 
     }
 

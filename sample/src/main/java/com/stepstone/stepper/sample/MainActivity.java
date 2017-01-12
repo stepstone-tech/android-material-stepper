@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, DelayedTransitionStepperActivity.class));
     }
 
-    @OnClick(R.id.differentNextButtons)
+    @OnClick(R.id.differentNavigationButtons)
     public void onDifferentNextButtons(View view) {
-        startActivity(new Intent(this, DifferentNextButtonStepperActivity.class));
+        startActivity(new Intent(this, CustomNavigationButtonsStepperActivity.class));
     }
 
     @OnClick(R.id.showReturnButtonOnFirstStep)
