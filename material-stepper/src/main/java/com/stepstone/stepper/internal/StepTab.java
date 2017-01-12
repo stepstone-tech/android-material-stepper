@@ -17,11 +17,14 @@ limitations under the License.
 package com.stepstone.stepper.internal;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +51,9 @@ public class StepTab extends RelativeLayout {
     @ColorInt
     private int mSelectedColor;
 
+    @ColorInt
+    private int mErrorColor;
+
     private final TextView mStepNumber;
 
     private final View mStepDivider;
@@ -56,7 +62,7 @@ public class StepTab extends RelativeLayout {
 
     private final ImageView mStepDoneIndicator;
 
-    private final ImageView mStepErrorIndicator;
+    private final AppCompatImageView mStepErrorIndicator;
 
     private int mDividerWidth = StepperLayout.DEFAULT_TAB_DIVIDER_WIDTH;
 
@@ -76,10 +82,11 @@ public class StepTab extends RelativeLayout {
 
         mSelectedColor = ContextCompat.getColor(context, R.color.ms_selectedColor);
         mUnselectedColor = ContextCompat.getColor(context, R.color.ms_unselectedColor);
+        mErrorColor = ContextCompat.getColor(context, R.color.ms_errorColor);
 
         mStepNumber = (TextView) findViewById(R.id.ms_stepNumber);
         mStepDoneIndicator = (ImageView) findViewById(R.id.ms_stepDoneIndicator);
-        mStepErrorIndicator = (ImageView) findViewById(R.id.ms_stepErrorIndicator);
+        mStepErrorIndicator = (AppCompatImageView) findViewById(R.id.ms_stepErrorIndicator);
         mStepDivider = findViewById(R.id.ms_stepDivider);
         mStepTitle = ((TextView) findViewById(R.id.ms_stepTitle));
     }
@@ -109,6 +116,7 @@ public class StepTab extends RelativeLayout {
 
         this.hasError = false;
 
+        mStepTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.ms_black));
         mStepTitle.setTypeface(current ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
         mStepTitle.setAlpha(done || current ? OPAQUE_ALPHA : INACTIVE_STEP_TITLE_ALPHA);
     }
@@ -122,6 +130,8 @@ public class StepTab extends RelativeLayout {
             mStepDoneIndicator.setVisibility(View.GONE);
             mStepNumber.setVisibility(View.GONE);
             mStepErrorIndicator.setVisibility(VISIBLE);
+            mStepErrorIndicator.setColorFilter(mErrorColor);
+            mStepTitle.setTextColor(mErrorColor);
         }
 
         this.hasError = hasError;
@@ -157,6 +167,10 @@ public class StepTab extends RelativeLayout {
 
     public void setSelectedColor(int selectedColor) {
         this.mSelectedColor = selectedColor;
+    }
+
+    public void setErrorColor(int errorColor) {
+        this.mErrorColor = errorColor;
     }
 
     private void colorViewBackground(View view, boolean selected) {

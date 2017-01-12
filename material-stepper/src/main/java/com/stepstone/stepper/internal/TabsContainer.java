@@ -67,6 +67,9 @@ public class TabsContainer extends FrameLayout {
     @ColorInt
     private int mSelectedColor;
 
+    @ColorInt
+    private int mErrorColor;
+
     private int mDividerWidth = StepperLayout.DEFAULT_TAB_DIVIDER_WIDTH;
 
     private final int mContainerLateralPadding;
@@ -95,6 +98,7 @@ public class TabsContainer extends FrameLayout {
 
         mSelectedColor = ContextCompat.getColor(context, R.color.ms_selectedColor);
         mUnselectedColor = ContextCompat.getColor(context, R.color.ms_unselectedColor);
+        mErrorColor = ContextCompat.getColor(context, R.color.ms_errorColor);
         if (attrs != null) {
             final TypedArray a = getContext().obtainStyledAttributes(
                     attrs, R.styleable.TabsContainer, defStyleAttr, 0);
@@ -104,6 +108,10 @@ public class TabsContainer extends FrameLayout {
             }
             if (a.hasValue(R.styleable.TabsContainer_ms_inactiveTabColor)) {
                 mUnselectedColor = a.getColor(R.styleable.TabsContainer_ms_inactiveTabColor, mUnselectedColor);
+            }
+
+            if (a.hasValue(R.styleable.StepperLayout_ms_errorColor)) {
+                mErrorColor = a.getColor(R.styleable.StepperLayout_ms_errorColor, mErrorColor);
             }
 
             a.recycle();
@@ -120,6 +128,10 @@ public class TabsContainer extends FrameLayout {
 
     public void setSelectedColor(@ColorInt int selectedColor) {
         this.mSelectedColor = selectedColor;
+    }
+
+    public void setErrorColor(@ColorInt int mErrorColor) {
+        this.mErrorColor = mErrorColor;
     }
 
     public void setDividerWidth(int dividerWidth) {
@@ -184,6 +196,7 @@ public class TabsContainer extends FrameLayout {
         view.setStepTitle(title);
         view.setSelectedColor(mSelectedColor);
         view.setUnselectedColor(mUnselectedColor);
+        view.setErrorColor(mErrorColor);
         view.setDividerWidth(mDividerWidth);
 
         view.setOnClickListener(new View.OnClickListener() {
