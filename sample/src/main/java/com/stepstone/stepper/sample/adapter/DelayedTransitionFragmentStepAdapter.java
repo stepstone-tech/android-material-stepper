@@ -1,5 +1,7 @@
 package com.stepstone.stepper.sample.adapter;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
 import com.stepstone.stepper.Step;
@@ -9,8 +11,8 @@ import com.stepstone.stepper.sample.step.fragment.DelayedTransitionStepFragmentS
 
 public class DelayedTransitionFragmentStepAdapter extends AbstractFragmentStepAdapter {
 
-    public DelayedTransitionFragmentStepAdapter(FragmentManager fm) {
-        super(fm);
+    public DelayedTransitionFragmentStepAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
+        super(fm, context);
     }
 
     @Override

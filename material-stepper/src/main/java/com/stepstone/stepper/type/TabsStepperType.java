@@ -20,10 +20,10 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.stepstone.stepper.R;
-import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.TabsContainer;
+import com.stepstone.stepper.viewmodel.StepViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +58,11 @@ public class TabsStepperType extends AbstractStepperType {
      */
     @Override
     public void onNewAdapter(@NonNull StepAdapter stepAdapter) {
-        List<Integer> titles = new ArrayList<>();
+        List<CharSequence> titles = new ArrayList<>();
         final int stepCount = stepAdapter.getCount();
         for (int i = 0; i < stepCount; i++) {
-            final Step step = (Step) stepAdapter.createStep(i);
-            titles.add(step.getName());
+            final StepViewModel stepViewModel = stepAdapter.getViewModel(i);
+            titles.add(stepViewModel.getTitle());
         }
         mTabsContainer.setSteps(titles);
         mTabsContainer.setVisibility(stepCount > 1 ? View.VISIBLE : View.GONE);

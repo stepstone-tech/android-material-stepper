@@ -11,7 +11,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:1.1.1'
+compile 'com.stepstone.stepper:material-stepper:2.0.0'
 ```
 
 ## Supported steppers
@@ -63,13 +63,6 @@ public class StepFragmentSample extends Fragment implements Step {
     }
 
     @Override
-    @StringRes
-    public int getName() {
-        //return string resource ID for the tab title used when StepperLayout is in tabs mode
-        return R.string.tab_title;
-    }
-
-    @Override
     public VerificationError verifyStep() {
         //return null if the user can go to the next step, create a new VerificationError instance otherwise
         return null;
@@ -88,15 +81,15 @@ public class StepFragmentSample extends Fragment implements Step {
 }
 ```
 
-### Extend AbstractStepAdapter
-AbstractStepAdapter extends [FragmentPagerAdapter](http://developer.android.com/reference/android/support/v4/app/FragmentPagerAdapter.html)
+### Extend AbstractFragmentStepAdapter
+AbstractFragmentStepAdapter extends [FragmentPagerAdapter](http://developer.android.com/reference/android/support/v4/app/FragmentPagerAdapter.html)
 but instead of overriding the method `getItem(int)` you must override the `createStep(int)` method.
 
 ```java
-public static class MyStepperAdapter extends AbstractStepAdapter {
+public static class MyStepperAdapter extends AbstractFragmentStepAdapter {
 
-    public MyStepperAdapter(FragmentManager fm) {
-        super(fm);
+    public MyStepperAdapter(FragmentManager fm, Context context) {
+        super(fm, context);
     }
 
     @Override
@@ -128,7 +121,7 @@ public class StepperActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
-        mStepperLayout.setAdapter(new MyStepperAdapter(getSupportFragmentManager()));
+        mStepperLayout.setAdapter(new MyStepperAdapter(getSupportFragmentManager(), this));
     }
 }
 ```
@@ -239,6 +232,7 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 ```
 
 ### Changing the Next button text per step
+<b>TODO update + add tutorial for Back button</b>
 Sometimes you might want to have different labels on the Next button on different steps e.g. use the default label on the first few steps,
 but display 'Summary' just before the last page.
 <p><img src ="./gifs/different-next-buttons.gif" width="360" height="640"/></p>
@@ -292,6 +286,9 @@ This behaviour can be changed by setting ```ms_showBackButtonOnFirstStep``` to `
         app:ms_stepperType="dots" />
 ```
 To get a callback when this button was pressed you need set a ```StepperListener``` and write your own custom return logic in the ```onReturn()``` method to e.g. close the Activity.
+
+### Using with Views instead of Fragments
+<b>TODO: document</b>
 
 ### Advanced usage
 For other examples, e.g. persisting state on rotation, displaying errors, changing whether the user can go to the next step, etc. check out the sample app.

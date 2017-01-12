@@ -20,7 +20,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -77,7 +77,7 @@ public class TabsContainer extends FrameLayout {
 
     private TabItemListener mListener = TabItemListener.NULL;
 
-    private List<Integer> mStepTitles;
+    private List<CharSequence> mStepTitles;
 
     public TabsContainer(Context context) {
         this(context, null);
@@ -132,7 +132,7 @@ public class TabsContainer extends FrameLayout {
      * Sets the steps to display in the {@link TabsContainer}.
      * @param stepTitles a list of tab titles
      */
-    public void setSteps(List<Integer> stepTitles) {
+    public void setSteps(List<CharSequence> stepTitles) {
         this.mStepTitles = stepTitles;
 
         mTabsInnerContainer.removeAllViews();
@@ -159,7 +159,7 @@ public class TabsContainer extends FrameLayout {
         }
     }
 
-    private View createStepTab(final int position, @StringRes int title) {
+    private View createStepTab(final int position, @Nullable CharSequence title) {
         StepTab view = (StepTab) LayoutInflater.from(getContext()).inflate(R.layout.ms_step_tab_container, mTabsInnerContainer, false);
         view.setStepNumber(String.valueOf(position + 1));
         view.toggleDividerVisibility(!isLastPosition(position));

@@ -538,8 +538,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         AnimationUtil.fadeViewVisibility(mBackNavigationButton, isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE, animate);
 
         if (!isLast) {
-            int nextButtonTextForStep = mStepAdapter.getNextButtonText(newStepPosition);
-            if (nextButtonTextForStep == StepAdapter.DEFAULT_NEXT_BUTTON_TEXT) {
+            CharSequence nextButtonTextForStep = mStepAdapter.getViewModel(newStepPosition).getNextButtonLabel();
+            if (nextButtonTextForStep == null) {
                 mNextNavigationButton.setText(mNextButtonText);
             } else {
                 mNextNavigationButton.setText(nextButtonTextForStep);

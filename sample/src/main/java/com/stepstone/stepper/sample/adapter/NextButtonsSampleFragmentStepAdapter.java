@@ -1,17 +1,20 @@
 package com.stepstone.stepper.sample.adapter;
 
-import android.support.annotation.StringRes;
+import android.content.Context;
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.sample.R;
 import com.stepstone.stepper.sample.step.fragment.StepFragmentSample;
+import com.stepstone.stepper.viewmodel.StepViewModel;
 
 public class NextButtonsSampleFragmentStepAdapter extends AbstractFragmentStepAdapter {
 
-    public NextButtonsSampleFragmentStepAdapter(FragmentManager fm) {
-        super(fm);
+    public NextButtonsSampleFragmentStepAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
+        super(fm, context);
     }
 
     @Override
@@ -33,16 +36,21 @@ public class NextButtonsSampleFragmentStepAdapter extends AbstractFragmentStepAd
         return 3;
     }
 
-    @StringRes
+    @NonNull
     @Override
-    public int getNextButtonText(int position) {
+    public StepViewModel getViewModel(@IntRange(from = 0) int position) {
+        StepViewModel.Builder builder = new StepViewModel.Builder(context)
+                .setTitle(R.string.tab_title);
         switch (position) {
             case 0:
-                return R.string.ms_next;
+                builder.setNextButtonLabel(R.string.ms_next);
+                break;
             case 1:
-                return R.string.go_to_summary;
+                builder.setNextButtonLabel(R.string.go_to_summary);
+                break;
             default:
                 throw new IllegalArgumentException("Unsupported position: " + position);
         }
+        return builder.create();
     }
 }

@@ -16,7 +16,9 @@ limitations under the License.
 
 package com.stepstone.stepper.adapter;
 
-import android.support.annotation.StringRes;
+import android.content.Context;
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -24,6 +26,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.stepstone.stepper.Step;
+import com.stepstone.stepper.viewmodel.StepViewModel;
 
 /**
  * A base adapter class which returns step fragments to use inside of the {@link com.stepstone.stepper.StepperLayout}.
@@ -32,29 +35,35 @@ public abstract class AbstractFragmentStepAdapter
         extends FragmentPagerAdapter
         implements StepAdapter {
 
+    @NonNull
     private final FragmentManager mFragmentManager;
 
-    public AbstractFragmentStepAdapter(FragmentManager fm) {
+    @NonNull
+    protected final Context context;
+
+    public AbstractFragmentStepAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
         super(fm);
-        mFragmentManager = fm;
+        this.mFragmentManager = fm;
+        this.context = context;
     }
 
     @Override
-    public final Fragment getItem(int position) {
+    public final Fragment getItem(@IntRange(from = 0) int position) {
         return (Fragment) createStep(position);
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
-    public Step findStep(ViewPager viewPager, int position) {
+    public Step findStep(ViewPager viewPager, @IntRange(from = 0) int position) {
         String fragmentTag =  "android:switcher:" + viewPager.getId() + ":" + this.getItemId(position);
         return (Step) mFragmentManager.findFragmentByTag(fragmentTag);
     }
 
     /** {@inheritDoc} */
-    @StringRes
-    public int getNextButtonText(int position) {
-        return DEFAULT_NEXT_BUTTON_TEXT;
+    @NonNull
+    @Override
+    public StepViewModel getViewModel(@IntRange(from = 0) int position) {
+        return new StepViewModel.Builder(context).create();
     }
 
     /** {@inheritDoc} */

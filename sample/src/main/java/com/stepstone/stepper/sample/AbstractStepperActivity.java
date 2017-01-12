@@ -41,7 +41,7 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
         setContentView(getLayoutResId());
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new SampleFragmentStepAdapter(getSupportFragmentManager()), startingStepPosition);
+        mStepperLayout.setAdapter(new SampleFragmentStepAdapter(getSupportFragmentManager(), this), startingStepPosition);
 
         mStepperLayout.setListener(this);
     }

@@ -17,18 +17,11 @@ limitations under the License.
 package com.stepstone.stepper;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 
 /**
  * A base step interface which all {@link StepperLayout} steps must implement.
  */
 public interface Step {
-
-    /**
-     * Returns a String resource ID for the displayable name of the step.
-     * @return a String resource ID for the displayable name of the step
-     */
-    @StringRes int getName();
 
     /**
      * Checks if the stepper can go to the next step after this step.<br>

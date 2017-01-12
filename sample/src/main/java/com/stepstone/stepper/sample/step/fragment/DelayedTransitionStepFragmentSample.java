@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -80,12 +79,6 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
         if (dialog != null) {
             dialog.dismiss();
         }
-    }
-
-    @Override
-    @StringRes
-    public int getName() {
-        return R.string.tab_title;
     }
 
     @Override
