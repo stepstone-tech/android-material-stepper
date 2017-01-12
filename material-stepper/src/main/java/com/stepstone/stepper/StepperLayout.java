@@ -326,6 +326,18 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mCompleteNavigationButton.setVerificationFailed(verificationFailed);
     }
 
+    /**
+     * Set the number of steps that should be retained to either side of the
+     * current step in the view hierarchy in an idle state. Steps beyond this
+     * limit will be recreated from the adapter when needed.
+     *
+     * @param limit How many steps will be kept offscreen in an idle state.
+     * @see ViewPager#setOffscreenPageLimit(int)
+     */
+    public void setOffscreenPageLimit(int limit) {
+        mPager.setOffscreenPageLimit(limit);
+    }
+
     private void init(AttributeSet attrs, @AttrRes int defStyleAttr) {
         initDefaultValues();
         extractValuesFromAttributes(attrs, defStyleAttr);
