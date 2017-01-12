@@ -105,6 +105,15 @@ public static class MyStepperAdapter extends AbstractFragmentStepAdapter {
     public int getCount() {
         return 3;
     }
+
+    @NonNull
+    @Override
+    public StepViewModel getViewModel(@IntRange(from = 0) int position) {
+        //Override this method to set Step title for the Tabs, not necessary for other stepper types
+        return new StepViewModel.Builder(context)
+                .setTitle(R.string.tab_title) //can be a CharSequence instead
+                .create();
+    }
 }
 
 ```
@@ -231,25 +240,36 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 }
 ```
 
-### Changing the Next button text per step
-<b>TODO update + add tutorial for Back button</b>
-Sometimes you might want to have different labels on the Next button on different steps e.g. use the default label on the first few steps,
+### Changing Back/Next button labels per step
+Sometimes you might want to have different labels on the Next and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
 but display 'Summary' just before the last page.
 <p><img src ="./gifs/different-next-buttons.gif" width="360" height="640"/></p>
-In such case you need to override the `getNextButtonText(int)` method in the `AbstractStepAdapter` e.g.
+In such case you need to override the `getViewModel(int)` method from the `StepAdapter` e.g.
 ```java
-        @StringRes
-        @Override
-        public int getNextButtonText(int position) {
-            switch (position) {
-                case 0:
-                    return R.string.ms_next;
-                case 1:
-                    return R.string.go_to_summary;
-                default:
-                    throw new IllegalArgumentException("Unsupported position: " + position);
-            }
+    @NonNull
+    @Override
+    public StepViewModel getViewModel(@IntRange(from = 0) int position) {
+        StepViewModel.Builder builder = new StepViewModel.Builder(context)
+                .setTitle(R.string.tab_title);
+        switch (position) {
+            case 0:
+                builder
+                        .setNextButtonLabel("This way")
+                        .setBackButtonLabel("Go to first");
+                break;
+            case 1:
+                builder
+                        .setNextButtonLabel(R.string.go_to_summary)
+                        .setBackButtonLabel("Go to first");
+                break;
+            case 2:
+                builder.setBackButtonLabel("Go back");
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported position: " + position);
         }
+        return builder.create();
+    }
 ```
 
 ### Using the same stepper styling across the application
@@ -288,7 +308,9 @@ This behaviour can be changed by setting ```ms_showBackButtonOnFirstStep``` to `
 To get a callback when this button was pressed you need set a ```StepperListener``` and write your own custom return logic in the ```onReturn()``` method to e.g. close the Activity.
 
 ### Using with Views instead of Fragments
-<b>TODO: document</b>
+It is possible to use this library without the need to rely on Fragments.
+To do so you need to use ```AbstractStepAdapter``` instead of ```AbstractFragmentStepAdapter```.
+For an example of how to use it with views please see the sample app.
 
 ### Advanced usage
 For other examples, e.g. persisting state on rotation, displaying errors, changing whether the user can go to the next step, etc. check out the sample app.
