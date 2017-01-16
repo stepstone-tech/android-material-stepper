@@ -82,6 +82,7 @@ public class StepViewModel {
         /**
          * Set the title using the given resource id.
          *
+         * @param titleId string resource ID for the title
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setTitle(@StringRes int titleId) {
@@ -92,6 +93,7 @@ public class StepViewModel {
         /**
          * Set the title using the given characters.
          *
+         * @param title CharSequence to be used as a title
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setTitle(@Nullable CharSequence title) {
@@ -102,6 +104,7 @@ public class StepViewModel {
         /**
          * Set the label of the next button using the given resource id.
          *
+         * @param nextButtonLabelId string resource ID for the Next button
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setNextButtonLabel(@StringRes int nextButtonLabelId) {
@@ -112,6 +115,7 @@ public class StepViewModel {
         /**
          * Set the label of the next button.
          *
+         * @param nextButtonLabel CharSequence to be used as a Next button label
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setNextButtonLabel(@Nullable CharSequence nextButtonLabel) {
@@ -122,6 +126,7 @@ public class StepViewModel {
         /**
          * Set the label of the back button using the given resource id.
          *
+         * @param backButtonLabelId string resource ID for the Back button
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setBackButtonLabel(@StringRes int backButtonLabelId) {
@@ -132,6 +137,7 @@ public class StepViewModel {
         /**
          * Set the label of the back button.
          *
+         * @param backButtonLabel CharSequence to be used as a Back button label
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setBackButtonLabel(@Nullable CharSequence backButtonLabel) {
@@ -142,6 +148,7 @@ public class StepViewModel {
         /**
          * Creates a {@link StepViewModel} with the arguments supplied to this
          * builder.
+         * @return created StepViewModel
          */
         public StepViewModel create() {
             final StepViewModel viewModel = new StepViewModel();
