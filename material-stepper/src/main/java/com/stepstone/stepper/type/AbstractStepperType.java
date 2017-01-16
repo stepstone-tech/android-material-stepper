@@ -55,6 +55,19 @@ public abstract class AbstractStepperType {
     public abstract void onStepSelected(int newStepPosition);
 
     /**
+     * Called to set whether the stepPosition has an error or not, changing it's appearance.
+     * @param stepPosition the step to set the error
+     * @param hasError whether it has error or not
+     */
+    public void setErrorStep(int stepPosition, boolean hasError){ }
+
+    /**
+     * Called to set whether navigating backwards should keep the error state.
+     * @param mShowErrorStateOnBack
+     */
+    public void showErrorStateOnBack(boolean mShowErrorStateOnBack){ }
+
+    /**
      * Called when {@link StepperLayout}'s adapter gets changed
      * @param stepAdapter new stepper adapter
      */

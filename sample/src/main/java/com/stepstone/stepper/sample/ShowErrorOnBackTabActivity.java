@@ -11,6 +11,7 @@ public class ShowErrorOnBackTabActivity extends AbstractStepperActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mStepperLayout.setShowErrorState(true);
         mStepperLayout.setShowErrorStateOnBack(true);
     }
 

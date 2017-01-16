@@ -7,6 +7,8 @@
     <string name="styled_progress_bar">Styled progress bar</string>
     <string name="default_tabs">Default tabs</string>
     <string name="styled_tabs">Styled tabs</string>
+    <string name="error_tabs">Show errors on tabs</string>
+    <string name="error_color_tabs">Custom color error tabs</string>
     <string name="error_back_tabs">Keep error back tabs</string>
     <string name="combination">Dots in portrait, tabs in landscape</string>
     <string name="custom_page_transformer">Custom PageTransformer</string>

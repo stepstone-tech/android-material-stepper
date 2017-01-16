@@ -124,13 +124,19 @@ public class StepTab extends RelativeLayout {
      * Update the error state of this tab. If it has error, show the error drawable.
      * @param hasError whether the tab has errors or not.
      */
-    public void updateErrorState(boolean hasError) {
+    public void updateErrorState(boolean done, boolean hasError) {
         if(hasError) {
             mStepDoneIndicator.setVisibility(View.GONE);
             mStepNumber.setVisibility(View.GONE);
             mStepErrorIndicator.setVisibility(VISIBLE);
             mStepErrorIndicator.setColorFilter(mErrorColor);
             mStepTitle.setTextColor(mErrorColor);
+        } else if(done) {
+            mStepDoneIndicator.setVisibility(View.VISIBLE);
+            mStepErrorIndicator.setVisibility(GONE);
+            colorViewBackground(mStepDoneIndicator, true);
+
+            mStepTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.ms_black));
         }
 
         this.hasError = hasError;

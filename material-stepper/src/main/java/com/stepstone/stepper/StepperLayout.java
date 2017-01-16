@@ -353,8 +353,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      */
     public void setShowErrorState(boolean mShowErrorState) {
         this.mShowErrorState = mShowErrorState;
-      
-     /**
+    }
+
+    /**
      * Set the number of steps that should be retained to either side of the
      * current step in the view hierarchy in an idle state. Steps beyond this
      * limit will be recreated from the adapter when needed.
@@ -546,8 +547,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
 
         //if moving forward and got no errors, set hasError to false, so we can have the tab with the check mark.
-        if(mShowErrorState && mStepperType instanceof TabsStepperType)
-            mTabsContainer.setErrorStep(mCurrentStepPosition, false);
+        if(mShowErrorState)
+            mStepperType.setErrorStep(mCurrentStepPosition, false);
 
         OnNextClickedCallback onNextClickedCallback = new OnNextClickedCallback();
         if (step instanceof BlockingStep) {
@@ -572,8 +573,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             step.onError(verificationError);
 
             //if moving forward and got errors, set hasError to true, showing the error drawable.
-            if(mShowErrorState && mStepperType instanceof TabsStepperType)
-                mTabsContainer.setErrorStep(mCurrentStepPosition, true);
+            if(mShowErrorState)
+                mStepperType.setErrorStep(mCurrentStepPosition, true);
 
         }
         mListener.onError(verificationError);
@@ -584,6 +585,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         if (verifyCurrentStep(step)) {
             return;
         }
+        mStepperType.setErrorStep(mCurrentStepPosition, false);
         mListener.onCompleted(completeButton);
     }
 
@@ -604,10 +606,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
 
         //needs to be here in case user for any reason decide to change whether or not to show errors when going back.
-        if(mStepperType instanceof TabsStepperType) {
-            mTabsContainer.setShowErrorStateOnBack(mShowErrorStateOnBack);
-        }
-
+        mStepperType.showErrorStateOnBack(mShowErrorStateOnBack);
         mStepperType.onStepSelected(newStepPosition);
         mListener.onStepSelected(newStepPosition);
         Step step = mStepAdapter.findStep(mPager, newStepPosition);

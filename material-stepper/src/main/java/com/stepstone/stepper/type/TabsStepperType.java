@@ -58,6 +58,22 @@ public class TabsStepperType extends AbstractStepperType {
      * {@inheritDoc}
      */
     @Override
+    public void setErrorStep(int stepPosition, boolean hasError) {
+        mTabsContainer.setErrorStep(stepPosition, hasError);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showErrorStateOnBack(boolean mShowErrorStateOnBack) {
+        mTabsContainer.setShowErrorStateOnBack(mShowErrorStateOnBack);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void onNewAdapter(@NonNull StepAdapter stepAdapter) {
         List<CharSequence> titles = new ArrayList<>();
         final int stepCount = stepAdapter.getCount();

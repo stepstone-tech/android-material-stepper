@@ -59,6 +59,18 @@
             android:text="@string/styled_tabs" />
 
         <Button
+            android:id="@+id/errorTabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_tabs" />
+
+        <Button
+            android:id="@+id/errorColorTabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_color_tabs" />
+
+        <Button
             android:id="@+id/errorOnBackTabs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

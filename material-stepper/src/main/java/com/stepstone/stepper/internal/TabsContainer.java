@@ -186,7 +186,7 @@ public class TabsContainer extends FrameLayout {
             return;
 
         StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(stepPosition);
-        childTab.updateErrorState(hasError);
+        childTab.updateErrorState(mStepTitles.size() - 1 == stepPosition ,hasError);
     }
   
     private View createStepTab(final int position, @Nullable CharSequence title) {
