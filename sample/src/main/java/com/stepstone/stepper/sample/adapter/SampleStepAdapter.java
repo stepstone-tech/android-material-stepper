@@ -17,12 +17,10 @@ import com.stepstone.stepper.sample.step.view.StepViewSample;
  */
 public class SampleStepAdapter extends AbstractStepAdapter {
 
-    private final Context context;
-
     private final SparseArray<Step> pages = new SparseArray<>();
 
     public SampleStepAdapter(Context context) {
-        this.context = context;
+        super(context);
     }
 
     @Override

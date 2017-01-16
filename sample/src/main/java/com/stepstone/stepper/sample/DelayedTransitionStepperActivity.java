@@ -36,7 +36,7 @@ public class DelayedTransitionStepperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_default_dots);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
-        mStepperLayout.setAdapter(new DelayedTransitionFragmentStepAdapter(getSupportFragmentManager()), startingStepPosition);
+        mStepperLayout.setAdapter(new DelayedTransitionFragmentStepAdapter(getSupportFragmentManager(), this), startingStepPosition);
     }
 
     @Override

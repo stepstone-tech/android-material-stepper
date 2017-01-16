@@ -21,7 +21,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
-import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatImageView;
@@ -142,14 +141,6 @@ public class StepTab extends RelativeLayout {
      * @param title step name
      */
     public void setStepTitle(CharSequence title) {
-        mStepTitle.setText(title);
-    }
-
-    /**
-     * Sets the name of the step
-     * @param title resource ID of the step name
-     */
-    public void setStepTitle(@StringRes int title) {
         mStepTitle.setText(title);
     }
 

@@ -72,11 +72,6 @@ public class StepViewSample extends FrameLayout implements Step {
     }
 
     @Override
-    public int getName() {
-        return R.string.app_name;
-    }
-
-    @Override
     public VerificationError verifyStep() {
         return isAboveThreshold() ? null : new VerificationError("Click " + (TAP_THRESHOLD - i) + " more times!");
     }

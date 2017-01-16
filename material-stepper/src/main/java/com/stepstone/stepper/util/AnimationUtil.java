@@ -29,6 +29,7 @@ public final class AnimationUtil {
      * Animate the View's visibility using a fade animation.
      * @param view The View to be animated
      * @param visibility View visibility constant, can be either View.VISIBLE, View.INVISIBLE or View.GONE
+     * @param animate true if the visibility should be changed with an animation, false if instantaneously
      */
     public static void fadeViewVisibility(@NonNull final View view, @Visibility final int visibility, boolean animate) {
         ViewPropertyAnimator animator = view.animate();
