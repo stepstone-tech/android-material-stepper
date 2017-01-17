@@ -11,7 +11,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:2.0.0'
+compile 'com.stepstone.stepper:material-stepper:2.1.0'
 ```
 
 ## Supported steppers
@@ -28,6 +28,7 @@ compile 'com.stepstone.stepper:material-stepper:2.0.0'
   - custom texts of individual widgets inside of the stepper via View attributes or a style from a theme
   - embedding the stepper anywhere in the view hierarchy and changing the stepper type for various device configurations, e.g. phone/tablet, portrait/landscape
   - step validation
+  - use with Fragments or Views
   
 ## Getting started
 
@@ -333,6 +334,8 @@ For other examples, e.g. persisting state on rotation, displaying errors, changi
 | *ms_completeButtonText*         | string or reference                       | COMPLETE button's text            |
 | *ms_tabStepDividerWidth*        | dimension or reference                    | The width of the horizontal tab divider used in tabs stepper type            |
 | *ms_showBackButtonOnFirstStep*  | boolean                                   | Flag indicating if the Back (Previous step) button should be shown on the first step. False by default.            |
+| *ms_showErrorState*             | boolean                                   | Flag indicating whether to show the error state. Only available with 'tabs' type. False by default. |
+| *ms_showErrorStateOnBack*       | boolean                                   | Flag indicating whether to keep showing the error state when user moves back. Only available with 'tabs' type. False by default. |
 
 ## Missing features
   - support for non-linear steppers

@@ -49,6 +49,7 @@ public class TabsContainer extends FrameLayout {
 
         /**
          * Called when a tab gets clicked
+         *
          * @param position position of the tab/step
          */
         @UiThread
@@ -144,6 +145,7 @@ public class TabsContainer extends FrameLayout {
 
     /**
      * Sets the steps to display in the {@link TabsContainer}.
+     *
      * @param stepTitles a list of tab titles
      */
     public void setSteps(List<CharSequence> stepTitles) {
@@ -158,6 +160,7 @@ public class TabsContainer extends FrameLayout {
 
     /**
      * Changes the position of the current step and updates the UI based on it.
+     *
      * @param newStepPosition new current step
      */
     public void setCurrentStep(int newStepPosition) {
@@ -175,20 +178,22 @@ public class TabsContainer extends FrameLayout {
 
     /**
      * Set whether when going backwards should clear the error state from the Tab. Default is false
-     * @param mShowErrorStateOnBack
+     *
+     * @param mShowErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
      */
     public void setShowErrorStateOnBack(boolean mShowErrorStateOnBack) {
         this.mShowErrorStateOnBack = mShowErrorStateOnBack;
     }
 
-    public void setErrorStep(int stepPosition, boolean hasError){
-        if(mStepTitles.size() < stepPosition)
+    public void setErrorStep(int stepPosition, boolean hasError) {
+        if (mStepTitles.size() < stepPosition) {
             return;
+        }
 
         StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(stepPosition);
-        childTab.updateErrorState(mStepTitles.size() - 1 == stepPosition ,hasError);
+        childTab.updateErrorState(mStepTitles.size() - 1 == stepPosition, hasError);
     }
-  
+
     private View createStepTab(final int position, @Nullable CharSequence title) {
         StepTab view = (StepTab) LayoutInflater.from(getContext()).inflate(R.layout.ms_step_tab_container, mTabsInnerContainer, false);
         view.setStepNumber(String.valueOf(position + 1));

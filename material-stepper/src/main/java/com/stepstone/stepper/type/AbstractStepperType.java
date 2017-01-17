@@ -63,7 +63,7 @@ public abstract class AbstractStepperType {
 
     /**
      * Called to set whether navigating backwards should keep the error state.
-     * @param mShowErrorStateOnBack
+     * @param mShowErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
      */
     public void showErrorStateOnBack(boolean mShowErrorStateOnBack){ }
 

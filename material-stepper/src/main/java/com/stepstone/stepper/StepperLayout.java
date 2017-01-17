@@ -339,17 +339,18 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     /**
-
-     * Set whether when going backwards should clear the error state from the Tab. Default is false.
-     * @param mShowErrorStateOnBack
+     * Set whether when going backwards should clear the error state from the Tab. Default is <code>false</code>.
+     *
+     * @param mShowErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
      */
     public void setShowErrorStateOnBack(boolean mShowErrorStateOnBack) {
         this.mShowErrorStateOnBack = mShowErrorStateOnBack;
     }
 
     /**
-     * Set whether the tab should display error or not. Default false.
-     * @param mShowErrorState
+     * Set whether the errors should be displayed when they occur or not. Default is <code>false</code>.
+     *
+     * @param mShowErrorState true if the errors should be displayed when they occur, false otherwise
      */
     public void setShowErrorState(boolean mShowErrorState) {
         this.mShowErrorState = mShowErrorState;
@@ -547,8 +548,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
 
         //if moving forward and got no errors, set hasError to false, so we can have the tab with the check mark.
-        if(mShowErrorState)
+        if (mShowErrorState) {
             mStepperType.setErrorStep(mCurrentStepPosition, false);
+        }
 
         OnNextClickedCallback onNextClickedCallback = new OnNextClickedCallback();
         if (step instanceof BlockingStep) {
@@ -573,9 +575,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             step.onError(verificationError);
 
             //if moving forward and got errors, set hasError to true, showing the error drawable.
-            if(mShowErrorState)
+            if (mShowErrorState) {
                 mStepperType.setErrorStep(mCurrentStepPosition, true);
-
+            }
         }
         mListener.onError(verificationError);
     }

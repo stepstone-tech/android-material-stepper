@@ -17,12 +17,10 @@ limitations under the License.
 package com.stepstone.stepper.internal;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -92,6 +90,7 @@ public class StepTab extends RelativeLayout {
 
     /**
      * Changes the visibility of the horizontal line in the tab
+     *
      * @param show true if the line should be shown, false otherwise
      */
     public void toggleDividerVisibility(boolean show) {
@@ -100,13 +99,16 @@ public class StepTab extends RelativeLayout {
 
     /**
      * Updates tab's UI
-     * @param done true if the step is done and the step's number should be replaced with a <i>done</i> icon, false otherwise
+     *
+     * @param done    true if the step is done and the step's number should be replaced with a <i>done</i> icon, false otherwise
+     * @param showErrorOnBack true if an error should be shown if verification failed, false otherwise
      * @param current true if the step is the current step, false otherwise
      */
     public void updateState(final boolean done, final boolean showErrorOnBack, final boolean current) {
         //if this tab has errors and the user decide not to clear when going backwards, simply ignore the update
-        if(this.hasError && showErrorOnBack)
+        if (this.hasError && showErrorOnBack) {
             return;
+        }
 
         mStepDoneIndicator.setVisibility(done ? View.VISIBLE : View.GONE);
         mStepNumber.setVisibility(!done ? View.VISIBLE : View.GONE);
@@ -122,16 +124,18 @@ public class StepTab extends RelativeLayout {
 
     /**
      * Update the error state of this tab. If it has error, show the error drawable.
+     *
+     * @param isLastStep whether this is the tab of the last step
      * @param hasError whether the tab has errors or not.
      */
-    public void updateErrorState(boolean done, boolean hasError) {
-        if(hasError) {
+    public void updateErrorState(boolean isLastStep, boolean hasError) {
+        if (hasError) {
             mStepDoneIndicator.setVisibility(View.GONE);
             mStepNumber.setVisibility(View.GONE);
             mStepErrorIndicator.setVisibility(VISIBLE);
             mStepErrorIndicator.setColorFilter(mErrorColor);
             mStepTitle.setTextColor(mErrorColor);
-        } else if(done) {
+        } else if (isLastStep) {
             mStepDoneIndicator.setVisibility(View.VISIBLE);
             mStepErrorIndicator.setVisibility(GONE);
             colorViewBackground(mStepDoneIndicator, true);
@@ -144,6 +148,7 @@ public class StepTab extends RelativeLayout {
 
     /**
      * Sets the name of the step
+     *
      * @param title step name
      */
     public void setStepTitle(CharSequence title) {
@@ -152,6 +157,7 @@ public class StepTab extends RelativeLayout {
 
     /**
      * Sets the position of the step
+     *
      * @param number step position
      */
     public void setStepNumber(CharSequence number) {
