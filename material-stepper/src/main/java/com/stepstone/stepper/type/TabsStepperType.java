@@ -41,6 +41,7 @@ public class TabsStepperType extends AbstractStepperType {
         mTabsContainer.setVisibility(View.VISIBLE);
         mTabsContainer.setSelectedColor(stepperLayout.getSelectedColor());
         mTabsContainer.setUnselectedColor(stepperLayout.getUnselectedColor());
+        mTabsContainer.setErrorColor(stepperLayout.getErrorColor());
         mTabsContainer.setDividerWidth(stepperLayout.getTabStepDividerWidth());
         mTabsContainer.setListener(stepperLayout);
     }
@@ -51,6 +52,22 @@ public class TabsStepperType extends AbstractStepperType {
     @Override
     public void onStepSelected(int newStepPosition) {
         mTabsContainer.setCurrentStep(newStepPosition);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setErrorStep(int stepPosition, boolean hasError) {
+        mTabsContainer.setErrorStep(stepPosition, hasError);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showErrorStateOnBack(boolean mShowErrorStateOnBack) {
+        mTabsContainer.setShowErrorStateOnBack(mShowErrorStateOnBack);
     }
 
     /**

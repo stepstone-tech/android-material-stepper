@@ -16,6 +16,7 @@
         <item name="ms_inactiveStepColor">#006867</item>
         <item name="ms_backButtonColor">@color/ms_custom_button_text_color</item>
         <item name="ms_nextButtonColor">@color/ms_custom_button_text_color</item>
+        <item name="ms_errorColor">@color/ms_errorColor</item>
         <item name="ms_completeButtonColor">@color/ms_custom_button_text_color</item>
         <item name="ms_bottomNavigationBackground">?attr/colorAccent</item>
     </style>

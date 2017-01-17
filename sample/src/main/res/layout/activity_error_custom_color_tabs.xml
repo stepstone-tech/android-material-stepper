@@ -7,4 +7,4 @@
     android:orientation="vertical"
     app:ms_stepperType="tabs"
     app:ms_showErrorState="true"
-    app:ms_showErrorStateOnBack="true"/>
+    app:ms_errorColor="@color/colorButton"/>

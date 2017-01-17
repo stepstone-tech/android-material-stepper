@@ -68,6 +68,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, StyledTabsActivity.class));
     }
 
+    @OnClick(R.id.errorTabs)
+    public void onErrorTabs(View view) {
+        startActivity(new Intent(this, ShowErrorTabActivity.class));
+    }
+
+    @OnClick(R.id.errorColorTabs)
+    public void onCustomColorErrorTabs(View view) {
+        startActivity(new Intent(this, ShowErrorCustomColorTabActivity.class));
+    }
+
+    @OnClick(R.id.errorOnBackTabs)
+    public void onErrorOnBackTabs(View view) {
+        startActivity(new Intent(this, ShowErrorOnBackTabActivity.class));
+    }
+
     @OnClick(R.id.combination)
     public void onCombination(View view) {
         startActivity(new Intent(this, CombinationActivity.class));

@@ -67,6 +67,9 @@ public class TabsContainer extends FrameLayout {
     @ColorInt
     private int mSelectedColor;
 
+    @ColorInt
+    private int mErrorColor;
+
     private int mDividerWidth = StepperLayout.DEFAULT_TAB_DIVIDER_WIDTH;
 
     private final int mContainerLateralPadding;
@@ -78,6 +81,8 @@ public class TabsContainer extends FrameLayout {
     private TabItemListener mListener = TabItemListener.NULL;
 
     private List<CharSequence> mStepTitles;
+
+    private boolean mShowErrorStateOnBack;
 
     public TabsContainer(Context context) {
         this(context, null);
@@ -93,6 +98,7 @@ public class TabsContainer extends FrameLayout {
 
         mSelectedColor = ContextCompat.getColor(context, R.color.ms_selectedColor);
         mUnselectedColor = ContextCompat.getColor(context, R.color.ms_unselectedColor);
+        mErrorColor = ContextCompat.getColor(context, R.color.ms_errorColor);
         if (attrs != null) {
             final TypedArray a = getContext().obtainStyledAttributes(
                     attrs, R.styleable.TabsContainer, defStyleAttr, 0);
@@ -102,6 +108,10 @@ public class TabsContainer extends FrameLayout {
             }
             if (a.hasValue(R.styleable.TabsContainer_ms_inactiveTabColor)) {
                 mUnselectedColor = a.getColor(R.styleable.TabsContainer_ms_inactiveTabColor, mUnselectedColor);
+            }
+
+            if (a.hasValue(R.styleable.StepperLayout_ms_errorColor)) {
+                mErrorColor = a.getColor(R.styleable.StepperLayout_ms_errorColor, mErrorColor);
             }
 
             a.recycle();
@@ -118,6 +128,10 @@ public class TabsContainer extends FrameLayout {
 
     public void setSelectedColor(@ColorInt int selectedColor) {
         this.mSelectedColor = selectedColor;
+    }
+
+    public void setErrorColor(@ColorInt int mErrorColor) {
+        this.mErrorColor = mErrorColor;
     }
 
     public void setDividerWidth(int dividerWidth) {
@@ -152,13 +166,29 @@ public class TabsContainer extends FrameLayout {
             StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(i);
             boolean done = i < newStepPosition;
             final boolean current = i == newStepPosition;
-            childTab.updateState(done, current);
+            childTab.updateState(done, mShowErrorStateOnBack, current);
             if (current) {
                 mTabsScrollView.smoothScrollTo(childTab.getLeft() - mContainerLateralPadding, 0);
             }
         }
     }
 
+    /**
+     * Set whether when going backwards should clear the error state from the Tab. Default is false
+     * @param mShowErrorStateOnBack
+     */
+    public void setShowErrorStateOnBack(boolean mShowErrorStateOnBack) {
+        this.mShowErrorStateOnBack = mShowErrorStateOnBack;
+    }
+
+    public void setErrorStep(int stepPosition, boolean hasError){
+        if(mStepTitles.size() < stepPosition)
+            return;
+
+        StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(stepPosition);
+        childTab.updateErrorState(mStepTitles.size() - 1 == stepPosition ,hasError);
+    }
+  
     private View createStepTab(final int position, @Nullable CharSequence title) {
         StepTab view = (StepTab) LayoutInflater.from(getContext()).inflate(R.layout.ms_step_tab_container, mTabsInnerContainer, false);
         view.setStepNumber(String.valueOf(position + 1));
@@ -166,6 +196,7 @@ public class TabsContainer extends FrameLayout {
         view.setStepTitle(title);
         view.setSelectedColor(mSelectedColor);
         view.setUnselectedColor(mUnselectedColor);
+        view.setErrorColor(mErrorColor);
         view.setDividerWidth(mDividerWidth);
 
         view.setOnClickListener(new View.OnClickListener() {

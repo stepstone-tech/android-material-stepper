@@ -31,7 +31,7 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
 
     private static final String CURRENT_STEP_POSITION_KEY = "position";
 
-    StepperLayout mStepperLayout;
+    protected StepperLayout mStepperLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

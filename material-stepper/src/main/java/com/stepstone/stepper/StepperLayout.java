@@ -47,6 +47,7 @@ import com.stepstone.stepper.internal.RightNavigationButton;
 import com.stepstone.stepper.internal.TabsContainer;
 import com.stepstone.stepper.type.AbstractStepperType;
 import com.stepstone.stepper.type.StepperTypeFactory;
+import com.stepstone.stepper.type.TabsStepperType;
 import com.stepstone.stepper.util.AnimationUtil;
 import com.stepstone.stepper.util.TintUtil;
 import com.stepstone.stepper.viewmodel.StepViewModel;
@@ -175,6 +176,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     @ColorInt
     private int mSelectedColor;
 
+    @ColorInt
+    private int mErrorColor;
+
     @DrawableRes
     private int mBottomNavigationBackground;
 
@@ -204,6 +208,10 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     private AbstractStepperType mStepperType;
 
     private int mCurrentStepPosition;
+
+    private boolean mShowErrorState;
+
+    private boolean mShowErrorStateOnBack;
 
     @NonNull
     private StepperListener mListener = StepperListener.NULL;
@@ -295,6 +303,10 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         return mUnselectedColor;
     }
 
+    public int getErrorColor() {
+        return mErrorColor;
+    }
+
     public int getTabStepDividerWidth() {
         return mTabStepDividerWidth;
     }
@@ -324,6 +336,23 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     public void setCompleteButtonVerificationFailed(boolean verificationFailed) {
         mCompleteNavigationButton.setVerificationFailed(verificationFailed);
+    }
+
+    /**
+
+     * Set whether when going backwards should clear the error state from the Tab. Default is false.
+     * @param mShowErrorStateOnBack
+     */
+    public void setShowErrorStateOnBack(boolean mShowErrorStateOnBack) {
+        this.mShowErrorStateOnBack = mShowErrorStateOnBack;
+    }
+
+    /**
+     * Set whether the tab should display error or not. Default false.
+     * @param mShowErrorState
+     */
+    public void setShowErrorState(boolean mShowErrorState) {
+        this.mShowErrorState = mShowErrorState;
     }
 
     /**
@@ -427,12 +456,14 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             if (a.hasValue(R.styleable.StepperLayout_ms_completeButtonColor)) {
                 mCompleteButtonColor = a.getColorStateList(R.styleable.StepperLayout_ms_completeButtonColor);
             }
-
             if (a.hasValue(R.styleable.StepperLayout_ms_activeStepColor)) {
                 mSelectedColor = a.getColor(R.styleable.StepperLayout_ms_activeStepColor, mSelectedColor);
             }
             if (a.hasValue(R.styleable.StepperLayout_ms_inactiveStepColor)) {
                 mUnselectedColor = a.getColor(R.styleable.StepperLayout_ms_inactiveStepColor, mUnselectedColor);
+            }
+            if (a.hasValue(R.styleable.StepperLayout_ms_errorColor)) {
+                mErrorColor = a.getColor(R.styleable.StepperLayout_ms_errorColor, mErrorColor);
             }
             if (a.hasValue(R.styleable.StepperLayout_ms_bottomNavigationBackground)) {
                 mBottomNavigationBackground = a.getResourceId(R.styleable.StepperLayout_ms_bottomNavigationBackground, mBottomNavigationBackground);
@@ -464,9 +495,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
             mShowBackButtonOnFirstStep = a.getBoolean(R.styleable.StepperLayout_ms_showBackButtonOnFirstStep, false);
 
+            mShowErrorState = a.getBoolean(R.styleable.StepperLayout_ms_showErrorState, false);
+
             if (a.hasValue(R.styleable.StepperLayout_ms_stepperType)) {
                 mTypeIdentifier = a.getInt(R.styleable.StepperLayout_ms_stepperType, DEFAULT_TAB_DIVIDER_WIDTH);
             }
+
+            mShowErrorStateOnBack = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBack, false);
 
             a.recycle();
         }
@@ -477,6 +512,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
                 ContextCompat.getColorStateList(getContext(), R.color.ms_bottomNavigationButtonTextColor);
         mSelectedColor = ContextCompat.getColor(getContext(), R.color.ms_selectedColor);
         mUnselectedColor = ContextCompat.getColor(getContext(), R.color.ms_unselectedColor);
+        mErrorColor = ContextCompat.getColor(getContext(), R.color.ms_errorColor);
         mBottomNavigationBackground = R.color.ms_bottomNavigationBackgroundColor;
         mBackButtonText = getContext().getString(R.string.ms_back);
         mNextButtonText = getContext().getString(R.string.ms_next);
@@ -509,6 +545,11 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         if (verifyCurrentStep(step)) {
             return;
         }
+
+        //if moving forward and got no errors, set hasError to false, so we can have the tab with the check mark.
+        if(mShowErrorState)
+            mStepperType.setErrorStep(mCurrentStepPosition, false);
+
         OnNextClickedCallback onNextClickedCallback = new OnNextClickedCallback();
         if (step instanceof BlockingStep) {
             ((BlockingStep) step).onNextClicked(onNextClickedCallback);
@@ -530,6 +571,11 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         Step step = findCurrentStep();
         if (step != null) {
             step.onError(verificationError);
+
+            //if moving forward and got errors, set hasError to true, showing the error drawable.
+            if(mShowErrorState)
+                mStepperType.setErrorStep(mCurrentStepPosition, true);
+
         }
         mListener.onError(verificationError);
     }
@@ -539,6 +585,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         if (verifyCurrentStep(step)) {
             return;
         }
+        mStepperType.setErrorStep(mCurrentStepPosition, false);
         mListener.onCompleted(completeButton);
     }
 
@@ -558,6 +605,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             updateNextButtonText(viewModel);
         }
 
+        //needs to be here in case user for any reason decide to change whether or not to show errors when going back.
+        mStepperType.showErrorStateOnBack(mShowErrorStateOnBack);
         mStepperType.onStepSelected(newStepPosition);
         mListener.onStepSelected(newStepPosition);
         Step step = mStepAdapter.findStep(mPager, newStepPosition);

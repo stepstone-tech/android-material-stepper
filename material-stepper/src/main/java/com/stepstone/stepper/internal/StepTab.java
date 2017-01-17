@@ -17,10 +17,13 @@ limitations under the License.
 package com.stepstone.stepper.internal;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +50,9 @@ public class StepTab extends RelativeLayout {
     @ColorInt
     private int mSelectedColor;
 
+    @ColorInt
+    private int mErrorColor;
+
     private final TextView mStepNumber;
 
     private final View mStepDivider;
@@ -55,7 +61,11 @@ public class StepTab extends RelativeLayout {
 
     private final ImageView mStepDoneIndicator;
 
+    private final AppCompatImageView mStepErrorIndicator;
+
     private int mDividerWidth = StepperLayout.DEFAULT_TAB_DIVIDER_WIDTH;
+
+    private boolean hasError;
 
     public StepTab(Context context) {
         this(context, null);
@@ -71,9 +81,11 @@ public class StepTab extends RelativeLayout {
 
         mSelectedColor = ContextCompat.getColor(context, R.color.ms_selectedColor);
         mUnselectedColor = ContextCompat.getColor(context, R.color.ms_unselectedColor);
+        mErrorColor = ContextCompat.getColor(context, R.color.ms_errorColor);
 
         mStepNumber = (TextView) findViewById(R.id.ms_stepNumber);
         mStepDoneIndicator = (ImageView) findViewById(R.id.ms_stepDoneIndicator);
+        mStepErrorIndicator = (AppCompatImageView) findViewById(R.id.ms_stepErrorIndicator);
         mStepDivider = findViewById(R.id.ms_stepDivider);
         mStepTitle = ((TextView) findViewById(R.id.ms_stepTitle));
     }
@@ -91,13 +103,43 @@ public class StepTab extends RelativeLayout {
      * @param done true if the step is done and the step's number should be replaced with a <i>done</i> icon, false otherwise
      * @param current true if the step is the current step, false otherwise
      */
-    public void updateState(final boolean done, final boolean current) {
+    public void updateState(final boolean done, final boolean showErrorOnBack, final boolean current) {
+        //if this tab has errors and the user decide not to clear when going backwards, simply ignore the update
+        if(this.hasError && showErrorOnBack)
+            return;
+
         mStepDoneIndicator.setVisibility(done ? View.VISIBLE : View.GONE);
         mStepNumber.setVisibility(!done ? View.VISIBLE : View.GONE);
+        mStepErrorIndicator.setVisibility(GONE);
         colorViewBackground(done ? mStepDoneIndicator : mStepNumber, done || current);
 
+        this.hasError = false;
+
+        mStepTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.ms_black));
         mStepTitle.setTypeface(current ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
         mStepTitle.setAlpha(done || current ? OPAQUE_ALPHA : INACTIVE_STEP_TITLE_ALPHA);
+    }
+
+    /**
+     * Update the error state of this tab. If it has error, show the error drawable.
+     * @param hasError whether the tab has errors or not.
+     */
+    public void updateErrorState(boolean done, boolean hasError) {
+        if(hasError) {
+            mStepDoneIndicator.setVisibility(View.GONE);
+            mStepNumber.setVisibility(View.GONE);
+            mStepErrorIndicator.setVisibility(VISIBLE);
+            mStepErrorIndicator.setColorFilter(mErrorColor);
+            mStepTitle.setTextColor(mErrorColor);
+        } else if(done) {
+            mStepDoneIndicator.setVisibility(View.VISIBLE);
+            mStepErrorIndicator.setVisibility(GONE);
+            colorViewBackground(mStepDoneIndicator, true);
+
+            mStepTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.ms_black));
+        }
+
+        this.hasError = hasError;
     }
 
     /**
@@ -122,6 +164,10 @@ public class StepTab extends RelativeLayout {
 
     public void setSelectedColor(int selectedColor) {
         this.mSelectedColor = selectedColor;
+    }
+
+    public void setErrorColor(int errorColor) {
+        this.mErrorColor = errorColor;
     }
 
     private void colorViewBackground(View view, boolean selected) {
