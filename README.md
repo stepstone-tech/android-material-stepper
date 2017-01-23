@@ -1,7 +1,7 @@
 <p align="center">
   <img src ="./art/material-stepper-logo.png" width="256" height="256"/>
 </p>
-# Android Material Stepper
+# Android Material Stepper [![Build Status](https://travis-ci.org/stepstone-tech/android-material-stepper.svg?branch=master)](https://travis-ci.org/stepstone-tech/android-material-stepper)
 
 This library allows to use Material steppers inside Android applications.
 
