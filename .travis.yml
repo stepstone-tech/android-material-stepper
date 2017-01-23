@@ -1,0 +1,29 @@
+language: android
+jdk: oraclejdk8
+sudo: false
+env:
+  global:
+    - ANDROID_API_LEVEL=25
+    - ANDROID_BUILD_TOOLS_VERSION=25.0.2
+android:
+  components:
+    # use the latest revision of Android SDK Tools
+    - platform-tools
+    - tools
+
+    # The BuildTools version used by your project
+    - build-tools-${ANDROID_BUILD_TOOLS_VERSION}
+
+    - android-${ANDROID_API_LEVEL}
+
+    # Support library
+    - extra-android-support
+    # Latest artifacts in local repository
+    - extra-google-m2repository
+    - extra-android-m2repository
+
+before_script:
+  - printf 'bintray.user=dummy_user\nbintray.apikey=dummy_api_key' > local.properties
+
+script:
+  - ./gradlew assembleDebug
