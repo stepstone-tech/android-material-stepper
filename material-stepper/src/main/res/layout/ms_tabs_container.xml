@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <HorizontalScrollView
         android:id="@+id/ms_stepTabsScrollView"
+        style="?attr/ms_stepTabsScrollViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:scrollbars="none"
         android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/ms_stepTabsInnerContainer"
+            style="?attr/ms_stepTabsInnerContainerStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/ms_tabs_container_lateral_padding"
-            android:paddingRight="@dimen/ms_tabs_container_lateral_padding" />
+            android:orientation="horizontal" />
 
     </HorizontalScrollView>
 

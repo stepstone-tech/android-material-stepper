@@ -6,4 +6,9 @@
 
     <color name="colorButton">#8E24AA</color>
     <color name="colorButtonDark">#6a1b9a</color>
+
+    <color name="darkColorPrimary">#424242</color>
+    <color name="darkColorPrimaryDark">#000000</color>
+
+    <color name="contentTextColor">#DD000000</color>
 </resources>

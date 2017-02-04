@@ -64,6 +64,13 @@ limitations under the License.
             <enum name="progress_bar" value="0x02" />
             <enum name="tabs" value="0x03" />
         </attr>
+
+        <!-- Theme to use for even more custom styling of the stepper layout.
+             It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used.
+             See StepperLayoutTheme below for a list of possible inner view styles to overwrite.
+        -->
+        <attr name="ms_stepperLayoutTheme" format="reference" />
+
     </declare-styleable>
 
     <declare-styleable name="DottedProgressBar">
@@ -87,6 +94,52 @@ limitations under the License.
     
     <declare-styleable name="Theme">
         <attr name="ms_stepperStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="StepperLayoutTheme">
+
+        <!-- Used by ms_bottomNavigation in layout/ms_stepper_layout -->
+        <attr name="ms_bottomNavigationStyle" format="reference" />
+
+        <!-- Used by ms_stepTabsContainer in layout/ms_stepper_layout -->
+        <attr name="ms_tabsContainerStyle" format="reference" />
+
+        <!-- Used by ms_stepPrevButton in layout/ms_stepper_layout -->
+        <attr name="ms_backNavigationButtonStyle" format="reference" />
+
+        <!-- Used by ms_stepNextButton in layout/ms_stepper_layout -->
+        <attr name="ms_nextNavigationButtonStyle" format="reference" />
+
+        <!-- Used by ms_stepCompleteButton in layout/ms_stepper_layout -->
+        <attr name="ms_completeNavigationButtonStyle" format="reference" />
+
+        <!-- Used by ms_stepProgressBar in layout/ms_stepper_layout -->
+        <attr name="ms_colorableProgressBarStyle" format="reference" />
+
+        <!-- Used by ms_stepTabsScrollView in layout/ms_tabs_container -->
+        <attr name="ms_stepTabsScrollViewStyle" format="reference" />
+
+        <!-- Used by ms_stepTabsInnerContainer in layout/ms_tabs_container -->
+        <attr name="ms_stepTabsInnerContainerStyle" format="reference" />
+
+        <!-- Used in layout/ms_step_tab_container -->
+        <attr name="ms_stepTabContainerStyle" format="reference" />
+
+        <!-- Used by ms_stepNumber in layout/ms_step_tab.xml -->
+        <attr name="ms_stepTabNumberStyle" format="reference" />
+
+        <!-- Used by ms_stepDoneIndicator in layout/ms_step_tab.xml -->
+        <attr name="ms_stepTabDoneIndicatorStyle" format="reference" />
+
+        <!-- Used by ms_stepErrorIndicator in layout/ms_step_tab.xml -->
+        <attr name="ms_stepTabErrorIndicatorStyle" format="reference" />
+
+        <!-- Used by ms_stepTitle in layout/ms_step_tab.xml -->
+        <attr name="ms_stepTabTitleStyle" format="reference" />
+
+        <!-- Used by ms_stepDivider in layout/ms_step_tab.xml -->
+        <attr name="ms_stepTabDividerStyle" format="reference" />
+
     </declare-styleable>
 
 </resources>

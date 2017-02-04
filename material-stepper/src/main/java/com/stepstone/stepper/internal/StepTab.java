@@ -51,6 +51,9 @@ public class StepTab extends RelativeLayout {
     @ColorInt
     private int mErrorColor;
 
+    @ColorInt
+    private int mTitleColor;
+
     private final TextView mStepNumber;
 
     private final View mStepDivider;
@@ -86,6 +89,8 @@ public class StepTab extends RelativeLayout {
         mStepErrorIndicator = (AppCompatImageView) findViewById(R.id.ms_stepErrorIndicator);
         mStepDivider = findViewById(R.id.ms_stepDivider);
         mStepTitle = ((TextView) findViewById(R.id.ms_stepTitle));
+
+        mTitleColor = mStepTitle.getCurrentTextColor();
     }
 
     /**
@@ -117,7 +122,7 @@ public class StepTab extends RelativeLayout {
 
         this.hasError = false;
 
-        mStepTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.ms_black));
+        mStepTitle.setTextColor(mTitleColor);
         mStepTitle.setTypeface(current ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
         mStepTitle.setAlpha(done || current ? OPAQUE_ALPHA : INACTIVE_STEP_TITLE_ALPHA);
     }
@@ -140,7 +145,7 @@ public class StepTab extends RelativeLayout {
             mStepErrorIndicator.setVisibility(GONE);
             colorViewBackground(mStepDoneIndicator, true);
 
-            mStepTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.ms_black));
+            mStepTitle.setTextColor(mTitleColor);
         }
 
         this.hasError = hasError;

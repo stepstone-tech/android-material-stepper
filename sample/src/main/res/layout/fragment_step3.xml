@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:text="@string/lorem_ipsum3"/>
+            android:text="@string/lorem_ipsum3"
+            android:textColor="@color/contentTextColor" />
 
         <Button
             android:id="@+id/button"

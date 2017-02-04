@@ -24,7 +24,7 @@
         <activity android:name=".StyledProgressBarActivity" />
         <activity android:name=".DefaultTabsActivity" />
         <activity android:name=".StyledTabsActivity" />
-        <activity android:name=".ShowErrorOnBackTabActivity"/>
+        <activity android:name=".ShowErrorOnBackTabActivity" />
         <activity android:name=".ShowErrorTabActivity" />
         <activity android:name=".ShowErrorCustomColorTabActivity" />
         <activity android:name=".CombinationActivity" />
@@ -32,7 +32,13 @@
         <activity android:name=".DelayedTransitionStepperActivity" />
         <activity android:name=".CustomNavigationButtonsStepperActivity" />
         <activity android:name=".ReturnButtonActivity" />
-        <activity android:name=".NoFragmentsActivity"/>
+        <activity android:name=".NoFragmentsActivity" />
+        <activity
+            android:name=".CustomStepperLayoutThemeProgressBarActivity"
+            android:theme="@style/AppTheme.CustomStepperLayoutThemeProgressBarSample" />
+        <activity
+            android:name=".CustomStepperLayoutThemeTabsActivity"
+            android:theme="@style/AppThemeDark" />
     </application>
 
 </manifest>

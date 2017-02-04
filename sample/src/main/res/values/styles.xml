@@ -10,6 +10,18 @@
         <item name="ms_stepperStyle">@style/DotStepperStyle</item>
     </style>
 
+    <style name="AppTheme.CustomStepperLayoutThemeProgressBarSample">
+        <item name="ms_stepperStyle">@style/CustomStepperLayoutThemeProgressBarSample</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="ms_stepperStyle">@style/CustomStepperLayoutThemeTabsSample</item>
+        <item name="ms_showErrorState">true</item>
+    </style>
+
     <style name="DotStepperStyle">
         <item name="ms_stepperType">dots</item>
         <item name="ms_activeStepColor">#FFFFFF</item>
@@ -19,6 +31,64 @@
         <item name="ms_errorColor">@color/ms_errorColor</item>
         <item name="ms_completeButtonColor">@color/ms_custom_button_text_color</item>
         <item name="ms_bottomNavigationBackground">?attr/colorAccent</item>
+    </style>
+
+    <style name="CustomStepperLayoutThemeTabsSample">
+        <item name="ms_stepperType">tabs</item>
+        <item name="ms_stepperLayoutTheme">@style/DarkCustomStepperLayoutTheme</item>
+        <item name="ms_activeStepColor">#006867</item>
+        <item name="ms_inactiveStepColor">#62807f</item>
+    </style>
+
+    <style name="CustomStepperLayoutThemeProgressBarSample">
+        <item name="ms_stepperType">progress_bar</item>
+        <item name="ms_stepperLayoutTheme">@style/CustomStepperLayoutTheme</item>
+    </style>
+
+    <style name="DarkCustomStepperLayoutTheme" parent="MSDefaultStepperLayoutTheme">
+        <item name="ms_bottomNavigationStyle">@style/DarkBottomNavigationStyle</item>
+        <item name="ms_tabsContainerStyle">@style/DarkStepTabsContainerStyle</item>
+        <item name="ms_stepTabTitleStyle">@style/DarkStepTabTitleStyle</item>
+    </style>
+
+    <style name="CustomStepperLayoutTheme" parent="MSDefaultStepperLayoutTheme">
+        <item name="ms_bottomNavigationStyle">@style/CustomBottomNavigationStyle</item>
+        <item name="ms_backNavigationButtonStyle">@style/CustomBackButtonStyle</item>
+        <item name="ms_nextNavigationButtonStyle">@style/CustomNextButtonStyle</item>
+        <item name="ms_completeNavigationButtonStyle">@style/CustomCompleteButtonStyle</item>
+        <item name="ms_colorableProgressBarStyle">@style/CustomColorableProgressBarStyle</item>
+    </style>
+
+    <style name="CustomBottomNavigationStyle" parent="MSBottomNavigation">
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="CustomBackButtonStyle" parent="MSNavBarButton.Back">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="CustomNextButtonStyle" parent="MSNavBarButton.Next">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="CustomCompleteButtonStyle" parent="MSNavBarButton.Complete">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="CustomColorableProgressBarStyle" parent="MSColorableProgressBar">
+        <item name="android:layout_height">6dp</item>
+    </style>
+
+    <style name="DarkBottomNavigationStyle" parent="MSBottomNavigation">
+        <item name="android:background">@color/darkColorPrimary</item>
+    </style>
+
+    <style name="DarkStepTabsContainerStyle" parent="MSStepTabsContainer">
+        <item name="android:background">@color/darkColorPrimary</item>
+    </style>
+
+    <style name="DarkStepTabTitleStyle" parent="MSStepTabTitle">
+        <item name="android:textColor">@color/ms_white</item>
     </style>
 
 </resources>

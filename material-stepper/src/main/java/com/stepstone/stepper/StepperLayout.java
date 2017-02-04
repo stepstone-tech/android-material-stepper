@@ -28,10 +28,12 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.support.annotation.UiThread;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -47,7 +49,6 @@ import com.stepstone.stepper.internal.RightNavigationButton;
 import com.stepstone.stepper.internal.TabsContainer;
 import com.stepstone.stepper.type.AbstractStepperType;
 import com.stepstone.stepper.type.StepperTypeFactory;
-import com.stepstone.stepper.type.TabsStepperType;
 import com.stepstone.stepper.util.AnimationUtil;
 import com.stepstone.stepper.util.TintUtil;
 import com.stepstone.stepper.viewmodel.StepViewModel;
@@ -213,6 +214,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private boolean mShowErrorStateOnBack;
 
+    @StyleRes
+    private int mStepperLayoutTheme;
+
     @NonNull
     private StepperListener mListener = StepperListener.NULL;
 
@@ -368,13 +372,17 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mPager.setOffscreenPageLimit(limit);
     }
 
+    @SuppressWarnings("RestrictedApi")
     private void init(AttributeSet attrs, @AttrRes int defStyleAttr) {
         initDefaultValues();
         extractValuesFromAttributes(attrs, defStyleAttr);
 
         final Context context = getContext();
-        LayoutInflater.from(context).inflate(R.layout.ms_stepper_layout, this, true);
 
+        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, context.getTheme());
+        contextThemeWrapper.setTheme(mStepperLayoutTheme);
+
+        LayoutInflater.from(contextThemeWrapper).inflate(R.layout.ms_stepper_layout, this, true);
         bindViews();
 
         mPager.setOnTouchListener(new View.OnTouchListener() {
@@ -394,7 +402,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     private void initNavigation() {
-        mStepNavigation.setBackgroundResource(mBottomNavigationBackground);
+        if (mBottomNavigationBackground != 0) {
+            mStepNavigation.setBackgroundResource(mBottomNavigationBackground);
+        }
 
         mBackNavigationButton.setText(mBackButtonText);
         mNextNavigationButton.setText(mNextButtonText);
@@ -434,7 +444,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mNextNavigationButton = (RightNavigationButton) findViewById(R.id.ms_stepNextButton);
         mCompleteNavigationButton = (RightNavigationButton) findViewById(R.id.ms_stepCompleteButton);
 
-        mStepNavigation = (ViewGroup) findViewById(R.id.ms_stepNavigation);
+        mStepNavigation = (ViewGroup) findViewById(R.id.ms_bottomNavigation);
 
         mDottedProgressBar = (DottedProgressBar) findViewById(R.id.ms_stepDottedProgressBar);
 
@@ -467,7 +477,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
                 mErrorColor = a.getColor(R.styleable.StepperLayout_ms_errorColor, mErrorColor);
             }
             if (a.hasValue(R.styleable.StepperLayout_ms_bottomNavigationBackground)) {
-                mBottomNavigationBackground = a.getResourceId(R.styleable.StepperLayout_ms_bottomNavigationBackground, mBottomNavigationBackground);
+                mBottomNavigationBackground = a.getResourceId(R.styleable.StepperLayout_ms_bottomNavigationBackground, 0);
             }
 
             if (a.hasValue(R.styleable.StepperLayout_ms_backButtonBackground)) {
@@ -504,6 +514,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
             mShowErrorStateOnBack = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBack, false);
 
+            mStepperLayoutTheme = a.getResourceId(R.styleable.StepperLayout_ms_stepperLayoutTheme, R.style.MSDefaultStepperLayoutTheme);
+
             a.recycle();
         }
     }
@@ -514,7 +526,6 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mSelectedColor = ContextCompat.getColor(getContext(), R.color.ms_selectedColor);
         mUnselectedColor = ContextCompat.getColor(getContext(), R.color.ms_unselectedColor);
         mErrorColor = ContextCompat.getColor(getContext(), R.color.ms_errorColor);
-        mBottomNavigationBackground = R.color.ms_bottomNavigationBackgroundColor;
         mBackButtonText = getContext().getString(R.string.ms_back);
         mNextButtonText = getContext().getString(R.string.ms_next);
         mCompleteButtonText = getContext().getString(R.string.ms_complete);
