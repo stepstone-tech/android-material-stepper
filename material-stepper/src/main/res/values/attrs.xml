@@ -57,19 +57,19 @@ limitations under the License.
 
         <!-- Flag indicating whether to keep showing the error state when user moves back. Only available with 'tabs' type. False by default. -->
         <attr name="ms_showErrorStateOnBack" format="boolean" />
-        
-        <!-- REQUIRED: Type of the stepper-->
-        <attr name="ms_stepperType">
-            <enum name="dots" value="0x01" />
-            <enum name="progress_bar" value="0x02" />
-            <enum name="tabs" value="0x03" />
-        </attr>
 
         <!-- Theme to use for even more custom styling of the stepper layout.
              It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used.
              See StepperLayoutTheme below for a list of possible inner view styles to overwrite.
         -->
         <attr name="ms_stepperLayoutTheme" format="reference" />
+
+        <!-- REQUIRED: Type of the stepper-->
+        <attr name="ms_stepperType">
+            <enum name="dots" value="0x01" />
+            <enum name="progress_bar" value="0x02" />
+            <enum name="tabs" value="0x03" />
+        </attr>
 
     </declare-styleable>
 

@@ -11,7 +11,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:2.1.0'
+compile 'com.stepstone.stepper:material-stepper:2.2.0'
 ```
 
 ## Supported steppers
@@ -313,6 +313,12 @@ It is possible to use this library without the need to rely on Fragments.
 To do so you need to use ```AbstractStepAdapter``` instead of ```AbstractFragmentStepAdapter```.
 For an example of how to use it with views please see the sample app.
 
+### Custom styling
+Basic styling can be done by choosing the active and inactive step colors. 
+There are some additional properties which can be changed directly from StepperLayout's attributes e.g. the background of bottom navigation buttons (see <a href="#stepperlayout-attributes">StepperLayout attributes</a>)
+For advanced styling you can use `ms_stepperLayoutTheme` StepperLayout's attribute and provide your custom style to be used.
+See 'Custom StepperLayout theme - progress bar' and 'Custom StepperLayout theme - Tabs dark' in the sample app for an example.
+
 ### Advanced usage
 For other examples, e.g. persisting state on rotation, displaying errors, changing whether the user can go to the next step, etc. check out the sample app.
 
@@ -334,8 +340,30 @@ For other examples, e.g. persisting state on rotation, displaying errors, changi
 | *ms_completeButtonText*         | string or reference                       | COMPLETE button's text            |
 | *ms_tabStepDividerWidth*        | dimension or reference                    | The width of the horizontal tab divider used in tabs stepper type            |
 | *ms_showBackButtonOnFirstStep*  | boolean                                   | Flag indicating if the Back (Previous step) button should be shown on the first step. False by default.            |
+| *ms_errorColor*                 | color or reference                        | Error color in Tabs stepper |
 | *ms_showErrorState*             | boolean                                   | Flag indicating whether to show the error state. Only available with 'tabs' type. False by default. |
 | *ms_showErrorStateOnBack*       | boolean                                   | Flag indicating whether to keep showing the error state when user moves back. Only available with 'tabs' type. False by default. |
+| *ms_stepperLayoutTheme*         | reference                                 | Theme to use for even more custom styling of the stepper layout. It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used. |
+
+### StepperLayout style attributes 
+A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperLayout's child views.
+
+| Attribute name                    | Description                                                   |
+| ----------------------------------|---------------------------------------------------------------|
+| *ms_bottomNavigationStyle*        | Used by ms_bottomNavigation in layout/ms_stepper_layout       |
+| *ms_tabsContainerStyle*           | Used by ms_stepTabsContainer in layout/ms_stepper_layout      |
+| *ms_backNavigationButtonStyle*    | Used by ms_stepPrevButton in layout/ms_stepper_layout         |
+| *ms_nextNavigationButtonStyle*    | Used by ms_stepNextButton in layout/ms_stepper_layout         |
+| *ms_completeNavigationButtonStyle*| Used by ms_stepCompleteButton in layout/ms_stepper_layout     |
+| *ms_colorableProgressBarStyle*    | Used by ms_stepProgressBar in layout/ms_stepper_layout        |
+| *ms_stepTabsScrollViewStyle*      | Used by ms_stepTabsScrollView in layout/ms_tabs_container     |
+| *ms_stepTabsInnerContainerStyle*  | Used by ms_stepTabsInnerContainer in layout/ms_tabs_container |
+| *ms_stepTabContainerStyle*        | Used in layout/ms_step_tab_container                          |
+| *ms_stepTabNumberStyle*           | Used by ms_stepNumber in layout/ms_step_tab                   |
+| *ms_stepTabDoneIndicatorStyle*    | Used by ms_stepDoneIndicator in layout/ms_step_tab            |
+| *ms_stepTabErrorIndicatorStyle*   | Used by ms_stepErrorIndicator in layout/ms_step_tab           |
+| *ms_stepTabTitleStyle*            | Used by ms_stepTitle in layout/ms_step_tab                    |
+| *ms_stepTabDividerStyle*          | Used by ms_stepDivider in layout/ms_step_tab                  |
 
 ## Missing features
   - support for non-linear steppers
