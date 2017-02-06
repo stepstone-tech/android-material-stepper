@@ -15,14 +15,11 @@ limitations under the License.
 -->
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Base.MSNavBarButton" parent="Base.Widget.AppCompat.Button.Borderless">
+    <style name="MSNavBarButton" parent="Base.Widget.AppCompat.Button.Borderless">
         <item name="android:padding">@dimen/ms_nav_bar_button_padding</item>
         <item name="android:textSize">@dimen/ms_navigation_button_text_size</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="MSNavBarButton" parent="Base.MSNavBarButton">
         <item name="android:background">@drawable/ms_default_button_background</item>
     </style>
 

@@ -16,8 +16,6 @@ limitations under the License.
 -->
 <resources>
 
-    <style name="MSNavBarButton" parent="Base.MSNavBarButton" />
-
     <style name="MSStepTabsContainer" parent="Base.MSStepTabsContainer">
         <item name="android:background">@color/ms_white</item>
         <item name="android:elevation">2dp</item>

@@ -18,7 +18,14 @@ limitations under the License.
     <dimen name="ms_bottom_navigation_bar_height">48dp</dimen>
     <dimen name="ms_dotted_progress_bar_dot_size">10dp</dimen>
     <dimen name="ms_tabs_container_lateral_padding">24dp</dimen>
+
     <dimen name="ms_nav_bar_button_padding">8dp</dimen>
+    <dimen name="ms_nav_bar_button_margin">8dp</dimen>
+
+    <dimen name="ms_material_button_corner_radius">2dp</dimen>
+    <dimen name="ms_material_button_padding_horizontal">8dp</dimen>
+    <dimen name="ms_material_button_padding_vertical">4dp</dimen>
+
     <dimen name="ms_progress_bar_width">96dp</dimen>
     <dimen name="ms_progress_bar_height">3dp</dimen>
     <dimen name="ms_error_drawable_padding">8dp</dimen>
@@ -33,12 +40,5 @@ limitations under the License.
     <dimen name="ms_step_tab_title_font_size">14sp</dimen>
     <dimen name="ms_step_tab_vertical_padding">24dp</dimen>
     <dimen name="ms_step_tab_text_lateral_padding">8dp</dimen>
-
-    <!-- AppCompat -->
-    <dimen name="ms_button_inset_horizontal">@dimen/abc_button_inset_horizontal_material</dimen>
-    <dimen name="ms_button_inset_vertical">@dimen/abc_button_inset_vertical_material</dimen>
-    <dimen name="ms_button_corner_radius">@dimen/abc_control_corner_material</dimen>
-    <dimen name="ms_button_padding_horizontal">@dimen/abc_button_padding_horizontal_material</dimen>
-    <dimen name="ms_button_padding_vertical">@dimen/abc_button_padding_vertical_material</dimen>
 
 </resources>

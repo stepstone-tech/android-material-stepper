@@ -2,35 +2,23 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_pressed="true">
-        <inset xmlns:android="http://schemas.android.com/apk/res/android"
-            android:insetLeft="@dimen/ms_button_inset_horizontal"
-            android:insetTop="@dimen/ms_button_inset_vertical"
-            android:insetRight="@dimen/ms_button_inset_horizontal"
-            android:insetBottom="@dimen/ms_button_inset_vertical">
+
+        <inset xmlns:android="http://schemas.android.com/apk/res/android" android:insetBottom="@dimen/ms_nav_bar_button_margin" android:insetLeft="@dimen/ms_nav_bar_button_margin" android:insetRight="@dimen/ms_nav_bar_button_margin" android:insetTop="@dimen/ms_nav_bar_button_margin">
             <shape android:shape="rectangle">
-                <corners android:radius="@dimen/ms_button_corner_radius" />
+                <corners android:radius="@dimen/ms_material_button_corner_radius" />
                 <solid android:color="@color/ms_defaultButtonBackgroundColor" />
-                <padding android:left="@dimen/ms_button_padding_horizontal"
-                    android:top="@dimen/ms_button_padding_vertical"
-                    android:right="@dimen/ms_button_padding_horizontal"
-                    android:bottom="@dimen/ms_button_padding_vertical" />
+                <padding android:bottom="@dimen/ms_material_button_padding_vertical" android:left="@dimen/ms_material_button_padding_horizontal" android:right="@dimen/ms_material_button_padding_horizontal" android:top="@dimen/ms_material_button_padding_vertical" />
             </shape>
         </inset>
     </item>
 
     <item>
-        <inset xmlns:android="http://schemas.android.com/apk/res/android"
-            android:insetLeft="@dimen/ms_button_inset_horizontal"
-            android:insetTop="@dimen/ms_button_inset_vertical"
-            android:insetRight="@dimen/ms_button_inset_horizontal"
-            android:insetBottom="@dimen/ms_button_inset_vertical">
+
+        <inset xmlns:android="http://schemas.android.com/apk/res/android" android:insetBottom="@dimen/ms_nav_bar_button_margin" android:insetLeft="@dimen/ms_nav_bar_button_margin" android:insetRight="@dimen/ms_nav_bar_button_margin" android:insetTop="@dimen/ms_nav_bar_button_margin">
             <shape android:shape="rectangle">
-                <corners android:radius="@dimen/ms_button_corner_radius" />
+                <corners android:radius="@dimen/ms_material_button_corner_radius" />
                 <solid android:color="@android:color/transparent" />
-                <padding android:left="@dimen/ms_button_padding_horizontal"
-                    android:top="@dimen/ms_button_padding_vertical"
-                    android:right="@dimen/ms_button_padding_horizontal"
-                    android:bottom="@dimen/ms_button_padding_vertical" />
+                <padding android:bottom="@dimen/ms_material_button_padding_vertical" android:left="@dimen/ms_material_button_padding_horizontal" android:right="@dimen/ms_material_button_padding_horizontal" android:top="@dimen/ms_material_button_padding_vertical" />
             </shape>
         </inset>
     </item>

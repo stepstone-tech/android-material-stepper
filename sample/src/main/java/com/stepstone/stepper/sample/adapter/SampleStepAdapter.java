@@ -1,6 +1,8 @@
 package com.stepstone.stepper.sample.adapter;
 
 import android.content.Context;
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 import android.view.View;
@@ -8,7 +10,9 @@ import android.view.ViewGroup;
 
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractStepAdapter;
+import com.stepstone.stepper.sample.R;
 import com.stepstone.stepper.sample.step.view.StepViewSample;
+import com.stepstone.stepper.viewmodel.StepViewModel;
 
 /**
  * A naive implementation of {@link AbstractStepAdapter}.
@@ -26,6 +30,14 @@ public class SampleStepAdapter extends AbstractStepAdapter {
     @Override
     public StepViewSample createStep(int position) {
         return new StepViewSample(context);
+    }
+
+    @NonNull
+    @Override
+    public StepViewModel getViewModel(@IntRange(from = 0) int position) {
+        return new StepViewModel.Builder(context)
+                .setTitle(R.string.tab_title)
+                .create();
     }
 
     @Override
