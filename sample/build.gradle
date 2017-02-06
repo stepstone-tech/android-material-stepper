@@ -26,4 +26,5 @@ dependencies {
     compile project(':material-stepper')
     compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
     compile ("com.jakewharton:butterknife:$butterknifeVersion")
+    compile ("uk.co.chrisjenx:calligraphy:$calligraphyVersion")
 }

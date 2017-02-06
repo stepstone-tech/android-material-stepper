@@ -66,7 +66,11 @@ public class StepTab extends RelativeLayout {
 
     private int mDividerWidth = StepperLayout.DEFAULT_TAB_DIVIDER_WIDTH;
 
-    private boolean hasError;
+    private boolean mHasError;
+
+    private Typeface mNormalTypeface;
+
+    private Typeface mBoldTypeface;
 
     public StepTab(Context context) {
         this(context, null);
@@ -91,6 +95,10 @@ public class StepTab extends RelativeLayout {
         mStepTitle = ((TextView) findViewById(R.id.ms_stepTitle));
 
         mTitleColor = mStepTitle.getCurrentTextColor();
+
+        Typeface typeface = mStepTitle.getTypeface();
+        mNormalTypeface = Typeface.create(typeface, Typeface.NORMAL);
+        mBoldTypeface = Typeface.create(typeface, Typeface.BOLD);
     }
 
     /**
@@ -111,7 +119,7 @@ public class StepTab extends RelativeLayout {
      */
     public void updateState(final boolean done, final boolean showErrorOnBack, final boolean current) {
         //if this tab has errors and the user decide not to clear when going backwards, simply ignore the update
-        if (this.hasError && showErrorOnBack) {
+        if (this.mHasError && showErrorOnBack) {
             return;
         }
 
@@ -120,10 +128,10 @@ public class StepTab extends RelativeLayout {
         mStepErrorIndicator.setVisibility(GONE);
         colorViewBackground(done ? mStepDoneIndicator : mStepNumber, done || current);
 
-        this.hasError = false;
+        this.mHasError = false;
 
         mStepTitle.setTextColor(mTitleColor);
-        mStepTitle.setTypeface(current ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
+        mStepTitle.setTypeface(current ? mBoldTypeface : mNormalTypeface);
         mStepTitle.setAlpha(done || current ? OPAQUE_ALPHA : INACTIVE_STEP_TITLE_ALPHA);
     }
 
@@ -148,7 +156,7 @@ public class StepTab extends RelativeLayout {
             mStepTitle.setTextColor(mTitleColor);
         }
 
-        this.hasError = hasError;
+        this.mHasError = hasError;
     }
 
     /**

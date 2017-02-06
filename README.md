@@ -317,7 +317,7 @@ For an example of how to use it with views please see the sample app.
 Basic styling can be done by choosing the active and inactive step colors. 
 There are some additional properties which can be changed directly from StepperLayout's attributes e.g. the background of bottom navigation buttons (see <a href="#stepperlayout-attributes">StepperLayout attributes</a>)
 For advanced styling you can use `ms_stepperLayoutTheme` StepperLayout's attribute and provide your custom style to be used.
-See 'Custom StepperLayout theme - progress bar' and 'Custom StepperLayout theme - Tabs dark' in the sample app for an example.
+See 'Custom StepperLayout theme' in the sample app for an example.
 
 ### Advanced usage
 For other examples, e.g. persisting state on rotation, displaying errors, changing whether the user can go to the next step, etc. check out the sample app.

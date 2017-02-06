@@ -16,8 +16,7 @@
     <string name="different_navigation_buttons">Different navigation buttons</string>
     <string name="show_back_button">Show Back button on first step</string>
     <string name="no_fragments">No Fragment Stepper</string>
-    <string name="custom_stepperlayout_theme_progress_bar">Custom StepperLayout theme - progress bar</string>
-    <string name="custom_stepperlayout_theme_tabs">Custom StepperLayout theme - Tabs dark</string>
+    <string name="custom_stepperlayout_theme">Custom StepperLayout theme</string>
 
     <string name="tab_title">Tab title</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, sale viris intellegam usu eu, persius patrioque sea at. Ne salutandi repudiandae mei, cu mollis accusam mediocrem mea. Altera dolorem praesent at vis. Torquatos philosophia ad quo. Omnis adipiscing has ea, mel no hinc iudico percipit.</string>

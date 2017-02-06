@@ -111,18 +111,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_fragments" />
-
         <Button
-            android:id="@+id/customStepperLayoutThemeWithProgressBar"
+            android:id="@+id/customStepperLayoutTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/custom_stepperlayout_theme_progress_bar" />
-
-        <Button
-            android:id="@+id/customStepperLayoutThemeWithTabs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/custom_stepperlayout_theme_tabs" />
+            android:text="@string/custom_stepperlayout_theme" />
 
     </LinearLayout>
 </ScrollView>

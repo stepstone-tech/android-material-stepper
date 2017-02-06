@@ -34,10 +34,7 @@
         <activity android:name=".ReturnButtonActivity" />
         <activity android:name=".NoFragmentsActivity" />
         <activity
-            android:name=".CustomStepperLayoutThemeProgressBarActivity"
-            android:theme="@style/AppTheme.CustomStepperLayoutThemeProgressBarSample" />
-        <activity
-            android:name=".CustomStepperLayoutThemeTabsActivity"
+            android:name=".CustomStepperLayoutThemeActivity"
             android:theme="@style/AppThemeDark" />
     </application>
 

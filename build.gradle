@@ -27,6 +27,7 @@ configure(allprojects) {
 
         /* Sample only */
         butterknifeVersion                  = "7.0.1"
+        calligraphyVersion                  = "2.2.0"
     }
 
 }

@@ -16,11 +16,20 @@ limitations under the License.
 
 package com.stepstone.stepper.sample;
 
-public class CustomStepperLayoutThemeTabsActivity extends AbstractStepperActivity {
+import android.content.Context;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+public class CustomStepperLayoutThemeActivity extends AbstractStepperActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_custom_stepper_layout_theme_tabs;
+        return R.layout.activity_custom_stepper_layout_theme;
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 }
