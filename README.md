@@ -1,7 +1,7 @@
 <p align="center">
   <img src ="./art/material-stepper-logo.png" width="256" height="256"/>
 </p>
-# Android Material Stepper [![Build Status](https://travis-ci.org/stepstone-tech/android-material-stepper.svg?branch=master)](https://travis-ci.org/stepstone-tech/android-material-stepper) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Material%20Stepper-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5138)
+# Android Material Stepper [![Build Status](https://travis-ci.org/stepstone-tech/android-material-stepper.svg?branch=master)](https://travis-ci.org/stepstone-tech/android-material-stepper) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Material%20Stepper-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5138)<a alt="Android Dev Weekly" href="http://androidweekly.net/issues/issue-243"><img src="https://img.shields.io/badge/Android%20Weekly-%23243-brightgreen.svg"/></a>
 
 This library allows to use Material steppers inside Android applications.
 
