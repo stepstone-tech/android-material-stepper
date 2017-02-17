@@ -16,12 +16,14 @@
     <string name="different_navigation_buttons">Different navigation buttons</string>
     <string name="show_back_button">Show Back button on first step</string>
     <string name="no_fragments">No Fragment Stepper</string>
+    <string name="proceed_programmatically">Proceed programmatically</string>
     <string name="custom_stepperlayout_theme">Custom StepperLayout theme</string>
 
     <string name="tab_title">Tab title</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, sale viris intellegam usu eu, persius patrioque sea at. Ne salutandi repudiandae mei, cu mollis accusam mediocrem mea. Altera dolorem praesent at vis. Torquatos philosophia ad quo. Omnis adipiscing has ea, mel no hinc iudico percipit.</string>
     <string name="lorem_ipsum2">Lorem ipsum dolor sit amet, sale viris intellegam usu eu, persius patrioque sea at. Ne salutandi repudiandae mei, cu mollis accusam mediocrem mea. Altera dolorem praesent at vis. Torquatos philosophia ad quo. Omnis adipiscing has ea, mel no hinc iudico percipit.</string>
     <string name="lorem_ipsum3">Antiopam consetetur mel in. Urbanitas constituto persequeris ex ius, sed ei elitr ridens temporibus. Ex probo lorem etiam sea, ut meliore electram scripserit vim. Et dicunt facilisis his, tamquam postulant mei te. Eum ei aperiri labitur eripuit, ut sit autem pertinax.</string>
+    <string name="enter_password">Enter password…</string>
 
     <string name="go_to_summary">Summary</string>
 </resources>

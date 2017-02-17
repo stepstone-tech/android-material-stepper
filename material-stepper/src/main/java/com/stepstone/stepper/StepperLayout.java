@@ -237,7 +237,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     private OnClickListener mOnCompleteClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            onComplete(v);
+            onComplete();
         }
     };
 
@@ -325,6 +325,23 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
     }
 
+    /**
+     * This is an equivalent of clicking the Next/Complete button from the bottom navigation.
+     * Unlike {@link #setCurrentStepPosition(int)} this actually verifies the step.
+     */
+    public void proceed() {
+        if (isLastPosition(mCurrentStepPosition)) {
+            onComplete();
+        } else {
+            onNext();
+        }
+    }
+
+    /**
+     * Sets the current step to the one at the provided index.
+     * This does not verify the current step.
+     * @param currentStepPosition new current step position
+     */
     public void setCurrentStepPosition(int currentStepPosition) {
         this.mCurrentStepPosition = currentStepPosition;
         onUpdate(currentStepPosition, true);
@@ -593,13 +610,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mListener.onError(verificationError);
     }
 
-    private void onComplete(View completeButton) {
+    private void onComplete() {
         Step step = findCurrentStep();
         if (verifyCurrentStep(step)) {
             return;
         }
         mStepperType.setErrorStep(mCurrentStepPosition, false);
-        mListener.onCompleted(completeButton);
+        mListener.onCompleted(mCompleteNavigationButton);
     }
 
     private void onUpdate(int newStepPosition, boolean animate) {

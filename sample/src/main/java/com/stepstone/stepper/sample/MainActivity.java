@@ -113,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, NoFragmentsActivity.class));
     }
 
+    @OnClick(R.id.proceedProgrammatically)
+    public void onProceedProgrammatically(View view){
+        startActivity(new Intent(this, ProceedProgrammaticallyActivity.class));
+    }
+
     @OnClick(R.id.customStepperLayoutTheme)
     public void onCustomStepperLayoutThemeWithTabs(View view){
         startActivity(new Intent(this, CustomStepperLayoutThemeActivity.class));

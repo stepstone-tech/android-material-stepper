@@ -111,6 +111,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_fragments" />
+
+        <Button
+            android:id="@+id/proceedProgrammatically"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/proceed_programmatically" />
+
         <Button
             android:id="@+id/customStepperLayoutTheme"
             android:layout_width="wrap_content"

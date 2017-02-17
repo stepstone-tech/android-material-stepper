@@ -33,6 +33,8 @@
         <activity android:name=".CustomNavigationButtonsStepperActivity" />
         <activity android:name=".ReturnButtonActivity" />
         <activity android:name=".NoFragmentsActivity" />
+        <activity android:name=".ProceedProgrammaticallyActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity
             android:name=".CustomStepperLayoutThemeActivity"
             android:theme="@style/AppThemeDark" />

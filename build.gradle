@@ -23,7 +23,7 @@ configure(allprojects) {
         androidTargetSdkVersion             = 25
         androidCompileSdkVersion            = 25
         androidBuildToolsVersion            = "25.0.2"
-        androidSupportLibraryVersion        = "25.1.0"
+        androidSupportLibraryVersion        = "25.1.1"
 
         /* Sample only */
         butterknifeVersion                  = "7.0.1"
