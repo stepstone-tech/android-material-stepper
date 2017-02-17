@@ -96,7 +96,7 @@ public static class MyStepperAdapter extends AbstractFragmentStepAdapter {
     }
 
     @Override
-    public Fragment createStep(int position) {
+    public Step createStep(int position) {
         final StepFragmentSample step = new StepFragmentSample();
         Bundle b = new Bundle();
         b.putInt(CURRENT_STEP_POSITION_KEY, position);
