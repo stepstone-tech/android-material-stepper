@@ -15,4 +15,5 @@
     app:ms_backButtonText="PREV"
     app:ms_nextButtonText="GO"
     app:ms_completeButtonText="FINISH"
-    app:ms_completeButtonBackground="@drawable/ms_button_background"/>
+    app:ms_completeButtonBackground="@drawable/ms_button_background"
+    app:ms_stepperLayoutTheme="@style/StepperLayoutThemeWithCenteredCompleteButton"/>

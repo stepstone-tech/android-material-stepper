@@ -427,8 +427,27 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mNextNavigationButton.setText(mNextButtonText);
         mCompleteNavigationButton.setText(mCompleteButtonText);
 
-        //FIXME: 16/03/16 this is a workaround for tinting TextView's compound drawables on API 16-17 - when set in XML only the default color is used...
-        Drawable chevronEndDrawable = ResourcesCompat.getDrawable(getContext().getResources(), R.drawable.ic_chevron_end, null);
+        setBackgroundIfPresent(mBackButtonBackground, mBackNavigationButton);
+        setBackgroundIfPresent(mNextButtonBackground, mNextNavigationButton);
+        setBackgroundIfPresent(mCompleteButtonBackground, mCompleteNavigationButton);
+
+        mBackNavigationButton.setOnClickListener(mOnBackClickListener);
+        mNextNavigationButton.setOnClickListener(mOnNextClickListener);
+        mCompleteNavigationButton.setOnClickListener(mOnCompleteClickListener);
+    }
+
+    private void setCompoundDrawablesForNavigationButtons(@DrawableRes int backDrawableResId, @DrawableRes int nextDrawableResId) {
+        Drawable chevronStartDrawable = backDrawableResId != StepViewModel.NULL_DRAWABLE
+                ? ResourcesCompat.getDrawable(getContext().getResources(), backDrawableResId, null)
+                : null;
+        Drawable chevronEndDrawable = nextDrawableResId != StepViewModel.NULL_DRAWABLE
+                ? ResourcesCompat.getDrawable(getContext().getResources(), nextDrawableResId, null)
+                : null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            mBackNavigationButton.setCompoundDrawablesRelativeWithIntrinsicBounds(chevronStartDrawable, null, null, null);
+        } else {
+            mBackNavigationButton.setCompoundDrawablesWithIntrinsicBounds(chevronStartDrawable, null, null, null);
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             mNextNavigationButton.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, chevronEndDrawable, null);
         } else {
@@ -438,14 +457,6 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         TintUtil.tintTextView(mBackNavigationButton, mBackButtonColor);
         TintUtil.tintTextView(mNextNavigationButton, mNextButtonColor);
         TintUtil.tintTextView(mCompleteNavigationButton, mCompleteButtonColor);
-
-        setBackgroundIfPresent(mBackButtonBackground, mBackNavigationButton);
-        setBackgroundIfPresent(mNextButtonBackground, mNextNavigationButton);
-        setBackgroundIfPresent(mCompleteButtonBackground, mCompleteNavigationButton);
-
-        mBackNavigationButton.setOnClickListener(mOnBackClickListener);
-        mNextNavigationButton.setOnClickListener(mOnNextClickListener);
-        mCompleteNavigationButton.setOnClickListener(mOnCompleteClickListener);
     }
 
     private void setBackgroundIfPresent(@DrawableRes int backgroundRes, View view) {
@@ -629,11 +640,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         final StepViewModel viewModel = mStepAdapter.getViewModel(newStepPosition);
 
-        updateBackButtonText(viewModel);
+        updateBackButton(viewModel);
 
         if (!isLast) {
-            updateNextButtonText(viewModel);
+            updateNextButton(viewModel);
         }
+
+        setCompoundDrawablesForNavigationButtons(viewModel.getBackButtonStartDrawableResId(), viewModel.getNextButtonEndDrawableResId());
 
         //needs to be here in case user for any reason decide to change whether or not to show errors when going back.
         mStepperType.showErrorStateOnBack(mShowErrorStateOnBack);
@@ -645,7 +658,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
     }
 
-    private void updateNextButtonText(@NonNull StepViewModel viewModel) {
+    private void updateNextButton(@NonNull StepViewModel viewModel) {
         CharSequence nextButtonTextForStep = viewModel.getNextButtonLabel();
         if (nextButtonTextForStep == null) {
             mNextNavigationButton.setText(mNextButtonText);
@@ -654,7 +667,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
     }
 
-    private void updateBackButtonText(@NonNull StepViewModel viewModel) {
+    private void updateBackButton(@NonNull StepViewModel viewModel) {
         CharSequence backButtonTextForStep = viewModel.getBackButtonLabel();
         if (backButtonTextForStep == null) {
             mBackNavigationButton.setText(mBackButtonText);

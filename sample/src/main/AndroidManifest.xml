@@ -30,7 +30,7 @@
         <activity android:name=".CombinationActivity" />
         <activity android:name=".CustomPageTransformerActivity" />
         <activity android:name=".DelayedTransitionStepperActivity" />
-        <activity android:name=".CustomNavigationButtonsStepperActivity" />
+        <activity android:name=".CustomNavigationButtonsActivity" />
         <activity android:name=".ReturnButtonActivity" />
         <activity android:name=".NoFragmentsActivity" />
         <activity android:name=".ProceedProgrammaticallyActivity"

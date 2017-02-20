@@ -1,9 +1,12 @@
 package com.stepstone.stepper.viewmodel;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+
+import com.stepstone.stepper.R;
 
 /**
  * Contains view information about the step.
@@ -12,13 +15,20 @@ import android.support.annotation.StringRes;
  */
 public class StepViewModel {
 
+    /**
+     * Drawable resource ID to be used for back/next navigation button compound drawables when we do not want to show them.
+     * @see #mNextButtonEndDrawableResId
+     * @see #mBackButtonStartDrawableResId
+     */
+    public static final int NULL_DRAWABLE = -1;
+
     private StepViewModel() {}
 
     /**
      * The displayable name of the step.
      */
     @Nullable
-    private CharSequence title;
+    private CharSequence mTitle;
 
     /**
      * Allows to override the text on the Next button for this step.
@@ -29,7 +39,7 @@ public class StepViewModel {
      * This is not used for the last step.
      */
     @Nullable
-    private CharSequence nextButtonLabel;
+    private CharSequence mNextButtonLabel;
 
     /**
      * Allows to override the text on the Back button for this step.
@@ -39,36 +49,66 @@ public class StepViewModel {
      * By default this is {@code null}.
      */
     @Nullable
-    private CharSequence backButtonLabel;
+    private CharSequence mBackButtonLabel;
+
+    /**
+     * Drawable resource ID to be used for next button's end compound drawable.
+     * {@link com.stepstone.stepper.R.drawable#ic_chevron_end} is the default.
+     */
+    @DrawableRes
+    private int mNextButtonEndDrawableResId;
+
+    /**
+     * Drawable resource ID to be used for back button's start compound drawable.
+     * {@link com.stepstone.stepper.R.drawable#ic_chevron_start} is the default.
+     */
+    @DrawableRes
+    private int mBackButtonStartDrawableResId;
 
     @Nullable
     public CharSequence getTitle() {
-        return title;
+        return mTitle;
     }
 
     @Nullable
     public CharSequence getNextButtonLabel() {
-        return nextButtonLabel;
+        return mNextButtonLabel;
     }
 
     @Nullable
     public CharSequence getBackButtonLabel() {
-        return backButtonLabel;
+        return mBackButtonLabel;
+    }
+
+    @DrawableRes
+    public int getNextButtonEndDrawableResId() {
+        return mNextButtonEndDrawableResId;
+    }
+
+    @DrawableRes
+    public int getBackButtonStartDrawableResId() {
+        return mBackButtonStartDrawableResId;
     }
 
     public static class Builder {
 
         @NonNull
-        private final Context context;
+        private final Context mContext;
 
         @Nullable
-        private CharSequence title;
+        private CharSequence mTitle;
 
         @Nullable
-        private CharSequence nextButtonLabel;
+        private CharSequence mNextButtonLabel;
 
         @Nullable
-        private CharSequence backButtonLabel;
+        private CharSequence mBackButtonLabel;
+
+        @DrawableRes
+        private int mNextButtonEndDrawableResId = R.drawable.ic_chevron_end;
+
+        @DrawableRes
+        private int mBackButtonStartDrawableResId = R.drawable.ic_chevron_start;
 
         /**
          * Creates a builder for the step info.
@@ -76,7 +116,7 @@ public class StepViewModel {
          * @param context the parent context
          */
         public Builder(@NonNull Context context) {
-            this.context = context;
+            this.mContext = context;
         }
 
         /**
@@ -86,7 +126,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setTitle(@StringRes int titleId) {
-            this.title = context.getString(titleId);
+            this.mTitle = mContext.getString(titleId);
             return this;
         }
 
@@ -97,7 +137,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setTitle(@Nullable CharSequence title) {
-            this.title = title;
+            this.mTitle = title;
             return this;
         }
 
@@ -108,7 +148,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setNextButtonLabel(@StringRes int nextButtonLabelId) {
-            this.nextButtonLabel = context.getString(nextButtonLabelId);
+            this.mNextButtonLabel = mContext.getString(nextButtonLabelId);
             return this;
         }
 
@@ -119,7 +159,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setNextButtonLabel(@Nullable CharSequence nextButtonLabel) {
-            this.nextButtonLabel = nextButtonLabel;
+            this.mNextButtonLabel = nextButtonLabel;
             return this;
         }
 
@@ -130,7 +170,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setBackButtonLabel(@StringRes int backButtonLabelId) {
-            this.backButtonLabel = context.getString(backButtonLabelId);
+            this.mBackButtonLabel = mContext.getString(backButtonLabelId);
             return this;
         }
 
@@ -141,7 +181,29 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setBackButtonLabel(@Nullable CharSequence backButtonLabel) {
-            this.backButtonLabel = backButtonLabel;
+            this.mBackButtonLabel = backButtonLabel;
+            return this;
+        }
+
+        /**
+         * Set the drawable resource ID to be used for next button's end compound drawable.
+         *
+         * @param nextButtonEndDrawableResId drawable resource ID to be used for next button's end compound drawable.
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder setNextButtonEndDrawableResId(@DrawableRes int nextButtonEndDrawableResId) {
+            this.mNextButtonEndDrawableResId = nextButtonEndDrawableResId;
+            return this;
+        }
+
+        /**
+         * Set the drawable resource ID to be used for back button's start compound drawable.
+         *
+         * @param backButtonStartDrawableResId drawable resource ID to be used for back button's start compound drawable.
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder setBackButtonStartDrawableResId(@DrawableRes int backButtonStartDrawableResId) {
+            this.mBackButtonStartDrawableResId = backButtonStartDrawableResId;
             return this;
         }
 
@@ -152,9 +214,11 @@ public class StepViewModel {
          */
         public StepViewModel create() {
             final StepViewModel viewModel = new StepViewModel();
-            viewModel.title = this.title;
-            viewModel.backButtonLabel = this.backButtonLabel;
-            viewModel.nextButtonLabel = this.nextButtonLabel;
+            viewModel.mTitle = this.mTitle;
+            viewModel.mBackButtonLabel = this.mBackButtonLabel;
+            viewModel.mNextButtonLabel = this.mNextButtonLabel;
+            viewModel.mNextButtonEndDrawableResId = this.mNextButtonEndDrawableResId;
+            viewModel.mBackButtonStartDrawableResId = this.mBackButtonStartDrawableResId;
             return viewModel;
         }
 

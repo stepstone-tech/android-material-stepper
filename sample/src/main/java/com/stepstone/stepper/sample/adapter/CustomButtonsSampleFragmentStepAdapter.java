@@ -45,12 +45,15 @@ public class CustomButtonsSampleFragmentStepAdapter extends AbstractFragmentStep
             case 0:
                 builder
                         .setNextButtonLabel("This way")
-                        .setBackButtonLabel("Go to first");
+                        .setBackButtonLabel("Cancel")
+                        .setNextButtonEndDrawableResId(R.drawable.ms_forward_arrow)
+                        .setBackButtonStartDrawableResId(StepViewModel.NULL_DRAWABLE);
                 break;
             case 1:
                 builder
                         .setNextButtonLabel(R.string.go_to_summary)
-                        .setBackButtonLabel("Go to first");
+                        .setBackButtonLabel("Go to first")
+                        .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow);
                 break;
             case 2:
                 builder.setBackButtonLabel("Go back");

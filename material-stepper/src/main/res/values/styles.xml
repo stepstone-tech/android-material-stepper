@@ -16,18 +16,23 @@ limitations under the License.
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="MSNavBarButton" parent="Base.Widget.AppCompat.Button.Borderless">
-        <item name="android:padding">@dimen/ms_nav_bar_button_padding</item>
         <item name="android:textSize">@dimen/ms_navigation_button_text_size</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/ms_default_button_background</item>
     </style>
 
-    <style name="MSNavBarButton.Back" />
+    <style name="MSNavBarButton.Back" tools:targetApi="jelly_bean_mr1">
+        <item name="android:gravity">left|start|center_vertical</item>
+    </style>
 
-    <style name="MSNavBarButton.Next" />
+    <style name="MSNavBarButton.Next" tools:targetApi="jelly_bean_mr1">
+        <item name="android:gravity">right|end|center_vertical</item>
+    </style>
 
-    <style name="MSNavBarButton.Complete" />
+    <style name="MSNavBarButton.Complete" tools:targetApi="jelly_bean_mr1">
+        <item name="android:gravity">right|end|center_vertical</item>v
+    </style>
 
     <style name="Base.MSStepTabsContainer" parent="">
         <item name="android:layout_height">wrap_content</item>

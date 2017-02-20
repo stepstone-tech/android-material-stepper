@@ -243,9 +243,10 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 }
 ```
 
-### Changing Back/Next button labels per step
+### Changing Back/Next button labels & compound drawables per step
 Sometimes you might want to have different labels on the Next and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
 but display 'Summary' just before the last page.
+You might also want to use your custom icons instead of the default navigation button compound drawables or not show the compound drawables for some of the buttons.
 <p><img src ="./gifs/different-next-buttons.gif" width="360" height="640"/></p>
 In such case you need to override the `getViewModel(int)` method from the `StepAdapter` e.g.
 ```java
@@ -257,13 +258,16 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
         switch (position) {
             case 0:
                 builder
-                        .setNextButtonLabel("This way")
-                        .setBackButtonLabel("Go to first");
+                    .setNextButtonLabel("This way")
+                    .setBackButtonLabel("Cancel")
+                    .setNextButtonEndDrawableResId(R.drawable.ms_forward_arrow)
+                    .setBackButtonStartDrawableResId(StepViewModel.NULL_DRAWABLE);
                 break;
             case 1:
                 builder
-                        .setNextButtonLabel(R.string.go_to_summary)
-                        .setBackButtonLabel("Go to first");
+                    .setNextButtonLabel(R.string.go_to_summary)
+                    .setBackButtonLabel("Go to first")
+                    .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow);
                 break;
             case 2:
                 builder.setBackButtonLabel("Go back");

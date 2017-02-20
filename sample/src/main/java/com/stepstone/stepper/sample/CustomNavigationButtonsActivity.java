@@ -18,11 +18,18 @@ package com.stepstone.stepper.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.view.View;
 
 import com.stepstone.stepper.StepperLayout;
+import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.sample.adapter.CustomButtonsSampleFragmentStepAdapter;
 
-public class CustomNavigationButtonsStepperActivity extends AppCompatActivity {
+public class CustomNavigationButtonsActivity extends AppCompatActivity implements StepperLayout.StepperListener {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     private static final String CURRENT_STEP_POSITION_KEY = "position";
 
@@ -33,11 +40,11 @@ public class CustomNavigationButtonsStepperActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Stepper sample");
 
-        setContentView(R.layout.activity_default_dots);
+        setContentView(R.layout.activity_custom_navigation_buttons);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
         mStepperLayout.setAdapter(new CustomButtonsSampleFragmentStepAdapter(getSupportFragmentManager(), this), startingStepPosition);
-
+        mStepperLayout.setListener(this);
     }
 
     @Override
@@ -54,6 +61,23 @@ public class CustomNavigationButtonsStepperActivity extends AppCompatActivity {
         } else {
             finish();
         }
+    }
+
+    @Override
+    public void onCompleted(View completeButton) {
+    }
+
+    @Override
+    public void onError(VerificationError verificationError) {
+    }
+
+    @Override
+    public void onStepSelected(int newStepPosition) {
+    }
+
+    @Override
+    public void onReturn() {
+        finish();
     }
 
 }

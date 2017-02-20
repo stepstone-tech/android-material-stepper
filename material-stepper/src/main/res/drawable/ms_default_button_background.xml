@@ -3,7 +3,7 @@
 
     <item android:state_pressed="true">
 
-        <inset xmlns:android="http://schemas.android.com/apk/res/android" android:insetBottom="@dimen/ms_nav_bar_button_margin" android:insetLeft="@dimen/ms_nav_bar_button_margin" android:insetRight="@dimen/ms_nav_bar_button_margin" android:insetTop="@dimen/ms_nav_bar_button_margin">
+        <inset android:insetBottom="@dimen/ms_nav_bar_button_margin" android:insetLeft="@dimen/ms_nav_bar_button_margin" android:insetRight="@dimen/ms_nav_bar_button_margin" android:insetTop="@dimen/ms_nav_bar_button_margin">
             <shape android:shape="rectangle">
                 <corners android:radius="@dimen/ms_material_button_corner_radius" />
                 <solid android:color="@color/ms_defaultButtonBackgroundColor" />
@@ -14,7 +14,7 @@
 
     <item>
 
-        <inset xmlns:android="http://schemas.android.com/apk/res/android" android:insetBottom="@dimen/ms_nav_bar_button_margin" android:insetLeft="@dimen/ms_nav_bar_button_margin" android:insetRight="@dimen/ms_nav_bar_button_margin" android:insetTop="@dimen/ms_nav_bar_button_margin">
+        <inset android:insetBottom="@dimen/ms_nav_bar_button_margin" android:insetLeft="@dimen/ms_nav_bar_button_margin" android:insetRight="@dimen/ms_nav_bar_button_margin" android:insetTop="@dimen/ms_nav_bar_button_margin">
             <shape android:shape="rectangle">
                 <corners android:radius="@dimen/ms_material_button_corner_radius" />
                 <solid android:color="@android:color/transparent" />

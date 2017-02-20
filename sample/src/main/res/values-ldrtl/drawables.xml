@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="ms_forward_arrow">@drawable/abc_ic_ab_back_material</drawable>
+    <drawable name="ms_back_arrow">@drawable/ms_right_arrow</drawable>
+</resources>
