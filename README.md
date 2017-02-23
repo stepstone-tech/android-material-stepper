@@ -217,6 +217,7 @@ The fragment must implement `BlockingStep` instead of `Step`.
 Also, make sure that `goToNextStep()` gets called on the main thread.
 **Note:** the `onNextClicked(StepperLayout.OnNextClickedCallback)` method gets invoked after step verification.
 E.g.:
+
 ```java
 public class DelayedTransitionStepFragmentSample extends Fragment implements BlockingStep {
 
@@ -247,7 +248,7 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 Sometimes you might want to have different labels on the Next and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
 but display 'Summary' just before the last page.
 You might also want to use your custom icons instead of the default navigation button compound drawables or not show the compound drawables for some of the buttons.
-<p><img src ="./gifs/different-next-buttons.gif" width="360" height="640"/></p>
+<p><img src ="./gifs/custom-navigation-buttons.gif" width="360" height="640"/></p>
 In such case you need to override the `getViewModel(int)` method from the `StepAdapter` e.g.
 ```java
     @NonNull
@@ -319,11 +320,18 @@ It is possible to use this library without the need to rely on Fragments.
 To do so you need to use ```AbstractStepAdapter``` instead of ```AbstractFragmentStepAdapter```.
 For an example of how to use it with views please see the sample app.
 
+### Showing an error on tabs if step verification failed
+To show an error in the tabbed stepper if step verification fails you need to set `ms_showErrorState` attribute to `true`.
+<p><img src ="./gifs/error-on-tabs.gif" width="360" height="640"/></p>
+
+If you want to keep the error displayed when going back to the previous step you need to also set `ms_showErrorStateOnBack` to `true`.
+
 ### Custom styling
 Basic styling can be done by choosing the active and inactive step colors. 
 There are some additional properties which can be changed directly from StepperLayout's attributes e.g. the background of bottom navigation buttons (see <a href="#stepperlayout-attributes">StepperLayout attributes</a>)
 For advanced styling you can use `ms_stepperLayoutTheme` StepperLayout's attribute and provide your custom style to be used.
 See 'Custom StepperLayout theme' in the sample app for an example.
+<p><img src ="./gifs/custom-theme.gif" width="360" height="640"/></p>
 
 ### Advanced usage
 For other examples, e.g. persisting state on rotation, displaying errors, changing whether the user can go to the next step, etc. check out the sample app.
