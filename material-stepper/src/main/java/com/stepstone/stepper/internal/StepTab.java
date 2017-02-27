@@ -21,7 +21,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +61,7 @@ public class StepTab extends RelativeLayout {
 
     private final ImageView mStepDoneIndicator;
 
-    private final AppCompatImageView mStepErrorIndicator;
+    private final ImageView mStepErrorIndicator;
 
     private int mDividerWidth = StepperLayout.DEFAULT_TAB_DIVIDER_WIDTH;
 
@@ -90,7 +89,7 @@ public class StepTab extends RelativeLayout {
 
         mStepNumber = (TextView) findViewById(R.id.ms_stepNumber);
         mStepDoneIndicator = (ImageView) findViewById(R.id.ms_stepDoneIndicator);
-        mStepErrorIndicator = (AppCompatImageView) findViewById(R.id.ms_stepErrorIndicator);
+        mStepErrorIndicator = (ImageView) findViewById(R.id.ms_stepErrorIndicator);
         mStepDivider = findViewById(R.id.ms_stepDivider);
         mStepTitle = ((TextView) findViewById(R.id.ms_stepTitle));
 

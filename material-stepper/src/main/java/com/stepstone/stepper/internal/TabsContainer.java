@@ -73,7 +73,7 @@ public class TabsContainer extends FrameLayout {
 
     private int mDividerWidth = StepperLayout.DEFAULT_TAB_DIVIDER_WIDTH;
 
-    private final int mContainerLateralPadding;
+    private int mContainerLateralPadding;
 
     private HorizontalScrollView mTabsScrollView;
 

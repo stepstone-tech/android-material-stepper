@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:layout_height="match_parent"
+    tools:layout_width="match_parent"
+    tools:parentTag="LinearLayout"
+    tools:theme="@style/MSDefaultStepperLayoutTheme">
 
     <com.stepstone.stepper.internal.TabsContainer
         android:id="@+id/ms_stepTabsContainer"
@@ -27,6 +31,7 @@
             android:layout_centerVertical="true"
             android:drawableLeft="@drawable/ic_chevron_start"
             android:drawableStart="@drawable/ic_chevron_start"
+            tools:drawableTint="@color/ms_material_grey_400"
             tools:text="@string/ms_back"
             tools:textColor="@color/ms_bottomNavigationButtonTextColor" />
 
@@ -46,8 +51,8 @@
                 android:id="@+id/ms_stepProgressBar"
                 style="?attr/ms_colorableProgressBarStyle"
                 android:indeterminate="false"
-                android:progress="1"
                 android:visibility="gone"
+                tools:progress="33"
                 tools:visibility="visible" />
 
         </FrameLayout>
@@ -60,9 +65,10 @@
             android:layout_centerVertical="true"
             tools:drawableEnd="@drawable/ic_chevron_end"
             tools:drawableRight="@drawable/ic_chevron_end"
+            tools:drawableTint="@color/ms_material_grey_400"
             tools:text="@string/ms_next"
             tools:textColor="@color/ms_bottomNavigationButtonTextColor"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <com.stepstone.stepper.internal.RightNavigationButton
             android:id="@+id/ms_stepCompleteButton"
@@ -73,8 +79,7 @@
             android:alpha="0"
             android:visibility="gone"
             tools:text="@string/ms_complete"
-            tools:textColor="@color/ms_bottomNavigationButtonTextColor"
-            tools:visibility="visible" />
+            tools:textColor="@color/ms_bottomNavigationButtonTextColor" />
 
     </RelativeLayout>
 

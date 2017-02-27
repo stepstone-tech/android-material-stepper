@@ -246,7 +246,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     public StepperLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.ms_stepperStyle);
+        super(context, attrs);
+        //Fix for issue #60 with AS Preview editor
+        init(attrs, isInEditMode() ? 0 : R.attr.ms_stepperStyle);
     }
 
     public StepperLayout(Context context, AttributeSet attrs, int defStyleAttr) {

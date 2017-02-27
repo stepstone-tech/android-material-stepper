@@ -29,6 +29,8 @@ import com.stepstone.stepper.internal.DottedProgressBar;
  */
 public class DotsStepperType extends AbstractStepperType {
 
+    private static final int EDIT_MODE_DOT_COUNT = 3;
+
     private final DottedProgressBar mDottedProgressBar;
 
     public DotsStepperType(StepperLayout stepperLayout) {
@@ -37,6 +39,11 @@ public class DotsStepperType extends AbstractStepperType {
 
         mDottedProgressBar.setSelectedColor(getSelectedColor());
         mDottedProgressBar.setUnselectedColor(getUnselectedColor());
+
+        if (stepperLayout.isInEditMode()) {
+            mDottedProgressBar.setDotCount(EDIT_MODE_DOT_COUNT);
+            mDottedProgressBar.setVisibility(View.VISIBLE);
+        }
     }
 
     /**

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:layout_height="wrap_content"
+    tools:layout_width="wrap_content"
+    tools:parentTag="RelativeLayout"
+    tools:theme="@style/MSDefaultStepperLayoutTheme">
 
     <FrameLayout
         android:id="@+id/ms_iconContainer"
@@ -12,12 +17,12 @@
             android:id="@+id/ms_stepNumber"
             style="?attr/ms_stepTabNumberStyle" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/ms_stepDoneIndicator"
             style="?attr/ms_stepTabDoneIndicatorStyle"
             android:visibility="gone" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/ms_stepErrorIndicator"
             style="?attr/ms_stepTabErrorIndicatorStyle"
             android:visibility="gone" />

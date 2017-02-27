@@ -26,12 +26,15 @@ import com.stepstone.stepper.internal.TabsContainer;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Stepper type which displays horizontal stepper with tabs.
  */
 public class TabsStepperType extends AbstractStepperType {
+
+    private static final List<CharSequence> EDIT_MODE_STEP_TITLES = Arrays.<CharSequence>asList("Step 1", "Step 2");
 
     private final TabsContainer mTabsContainer;
 
@@ -44,6 +47,11 @@ public class TabsStepperType extends AbstractStepperType {
         mTabsContainer.setErrorColor(stepperLayout.getErrorColor());
         mTabsContainer.setDividerWidth(stepperLayout.getTabStepDividerWidth());
         mTabsContainer.setListener(stepperLayout);
+
+        if (stepperLayout.isInEditMode()) {
+            mTabsContainer.setSteps(EDIT_MODE_STEP_TITLES);
+            mTabsContainer.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
