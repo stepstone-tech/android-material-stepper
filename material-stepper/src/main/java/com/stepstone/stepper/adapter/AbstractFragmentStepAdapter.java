@@ -23,8 +23,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 
+import com.stepstone.stepper.R;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
@@ -54,8 +54,8 @@ public abstract class AbstractFragmentStepAdapter
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
-    public Step findStep(ViewPager viewPager, @IntRange(from = 0) int position) {
-        String fragmentTag =  "android:switcher:" + viewPager.getId() + ":" + this.getItemId(position);
+    public Step findStep(@IntRange(from = 0) int position) {
+        String fragmentTag =  "android:switcher:" + R.id.ms_stepPager + ":" + this.getItemId(position);
         return (Step) mFragmentManager.findFragmentByTag(fragmentTag);
     }
 

@@ -3,7 +3,6 @@ package com.stepstone.stepper.sample.adapter;
 import android.content.Context;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,7 @@ public class SampleStepAdapter extends AbstractStepAdapter {
     }
 
     @Override
-    public Step findStep(ViewPager viewPager, int position) {
+    public Step findStep(int position) {
         return pages.size() > 0 ? pages.get(position) : null;
     }
 

@@ -24,11 +24,10 @@ public interface StepAdapter {
     /**
      * Finds the given step without creating it.
      * @see FragmentPagerAdapter#makeFragmentName(int, long)
-     * @param viewPager view pager to use for displaying step fragments
      * @param position step position
      * @return step fragment
      */
-    Step findStep(ViewPager viewPager, @IntRange(from = 0) int position);
+    Step findStep(@IntRange(from = 0) int position);
 
     /**
      * Returns the view information to be used to display the step.

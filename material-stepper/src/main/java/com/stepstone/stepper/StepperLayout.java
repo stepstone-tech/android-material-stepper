@@ -574,7 +574,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     private Step findCurrentStep() {
-        return mStepAdapter.findStep(mPager, mCurrentStepPosition);
+        return mStepAdapter.findStep(mCurrentStepPosition);
     }
 
     private void onPrevious() {
@@ -662,7 +662,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mStepperType.showErrorStateOnBack(mShowErrorStateOnBack);
         mStepperType.onStepSelected(newStepPosition);
         mListener.onStepSelected(newStepPosition);
-        Step step = mStepAdapter.findStep(mPager, newStepPosition);
+        Step step = mStepAdapter.findStep(newStepPosition);
         if (step != null) {
             step.onSelected();
         }
