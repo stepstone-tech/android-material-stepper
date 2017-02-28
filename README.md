@@ -13,7 +13,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:2.3.1'
+compile 'com.stepstone.stepper:material-stepper:2.3.2'
 ```
 
 ## Supported steppers

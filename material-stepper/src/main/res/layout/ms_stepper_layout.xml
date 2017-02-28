@@ -10,7 +10,8 @@
     <com.stepstone.stepper.internal.TabsContainer
         android:id="@+id/ms_stepTabsContainer"
         style="?attr/ms_tabsContainerStyle"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        tools:style="@style/MSStepTabsContainer" />
 
     <com.stepstone.stepper.internal.NonSwipeableViewPager
         android:id="@+id/ms_stepPager"
@@ -21,7 +22,8 @@
     <RelativeLayout
         android:id="@+id/ms_bottomNavigation"
         style="?attr/ms_bottomNavigationStyle"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        tools:style="@style/MSBottomNavigation">
 
         <Button
             android:id="@+id/ms_stepPrevButton"
@@ -32,6 +34,7 @@
             android:drawableLeft="@drawable/ic_chevron_start"
             android:drawableStart="@drawable/ic_chevron_start"
             tools:drawableTint="@color/ms_material_grey_400"
+            tools:style="@style/MSNavBarButton.Back"
             tools:text="@string/ms_back"
             tools:textColor="@color/ms_bottomNavigationButtonTextColor" />
 
@@ -53,6 +56,7 @@
                 android:indeterminate="false"
                 android:visibility="gone"
                 tools:progress="33"
+                tools:style="@style/MSColorableProgressBar"
                 tools:visibility="visible" />
 
         </FrameLayout>
@@ -66,6 +70,7 @@
             tools:drawableEnd="@drawable/ic_chevron_end"
             tools:drawableRight="@drawable/ic_chevron_end"
             tools:drawableTint="@color/ms_material_grey_400"
+            tools:style="@style/MSNavBarButton.Next"
             tools:text="@string/ms_next"
             tools:textColor="@color/ms_bottomNavigationButtonTextColor"
             tools:visibility="visible" />
@@ -78,6 +83,7 @@
             android:layout_centerVertical="true"
             android:alpha="0"
             android:visibility="gone"
+            tools:style="@style/MSNavBarButton.Complete"
             tools:text="@string/ms_complete"
             tools:textColor="@color/ms_bottomNavigationButtonTextColor" />
 

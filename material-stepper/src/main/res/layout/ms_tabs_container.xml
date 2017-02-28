@@ -11,14 +11,16 @@
         style="?attr/ms_stepTabsScrollViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        tools:style="@style/MSStepTabsScrollView">
 
         <LinearLayout
             android:id="@+id/ms_stepTabsInnerContainer"
             style="?attr/ms_stepTabsInnerContainerStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            tools:style="@style/MSStepTabsInnerContainer" />
 
     </HorizontalScrollView>
 

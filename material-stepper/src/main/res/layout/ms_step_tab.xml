@@ -15,17 +15,20 @@
 
         <TextView
             android:id="@+id/ms_stepNumber"
-            style="?attr/ms_stepTabNumberStyle" />
+            style="?attr/ms_stepTabNumberStyle"
+            tools:style="@style/MSStepTabNumber" />
 
         <ImageView
             android:id="@+id/ms_stepDoneIndicator"
             style="?attr/ms_stepTabDoneIndicatorStyle"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:style="@style/MSStepTabDoneIndicator" />
 
         <ImageView
             android:id="@+id/ms_stepErrorIndicator"
             style="?attr/ms_stepTabErrorIndicatorStyle"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:style="@style/MSStepTabErrorIndicator" />
 
     </FrameLayout>
 
@@ -36,13 +39,15 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/ms_iconContainer"
-        android:layout_toRightOf="@+id/ms_iconContainer" />
+        android:layout_toRightOf="@+id/ms_iconContainer"
+        tools:style="@style/MSStepTabTitle" />
 
     <View
         android:id="@+id/ms_stepDivider"
         style="?attr/ms_stepTabDividerStyle"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/ms_stepTitle"
-        android:layout_toRightOf="@+id/ms_stepTitle" />
+        android:layout_toRightOf="@+id/ms_stepTitle"
+        tools:style="@style/MSStepTabDivider" />
 
 </merge>
