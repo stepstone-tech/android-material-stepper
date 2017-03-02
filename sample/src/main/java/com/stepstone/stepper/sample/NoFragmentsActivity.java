@@ -9,17 +9,21 @@ import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.sample.adapter.SampleStepAdapter;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class NoFragmentsActivity extends AppCompatActivity implements StepperLayout.StepperListener, OnNavigationBarListener {
 
     private static final String CURRENT_STEP_POSITION_KEY = "position";
 
+    @Bind(R.id.stepperLayout)
     StepperLayout mStepperLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_no_frag);
-        mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
+        ButterKnife.bind(this);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
         SampleStepAdapter sampleStepAdapter = new SampleStepAdapter(this);
         mStepperLayout.setAdapter(sampleStepAdapter, startingStepPosition);

@@ -26,4 +26,5 @@
     <string name="enter_password">Enter password…</string>
 
     <string name="go_to_summary">Summary</string>
+    <string name="operation_succeed_switch_message">Should operation succeed?</string>
 </resources>

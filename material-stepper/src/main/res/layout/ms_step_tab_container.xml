@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress XmlUnusedNamespaceDeclaration -->
-<com.stepstone.stepper.internal.StepTab xmlns:android="http://schemas.android.com/apk/res/android"
+<com.stepstone.stepper.internal.widget.StepTab xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="?attr/ms_stepTabContainerStyle"
     tools:layout_height="@dimen/ms_step_tab_height"

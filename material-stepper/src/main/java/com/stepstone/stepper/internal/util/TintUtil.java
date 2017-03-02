@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.util;
+package com.stepstone.stepper.internal.util;
 
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
@@ -24,13 +24,17 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RestrictTo;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.widget.TextView;
 
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+
 /**
  * Utility class for tinting drawables/widgets.
  */
+@RestrictTo(LIBRARY)
 public class TintUtil {
 
     private static final String TAG = TintUtil.class.getSimpleName();

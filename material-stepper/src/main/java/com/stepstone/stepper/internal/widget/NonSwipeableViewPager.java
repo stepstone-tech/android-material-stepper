@@ -14,17 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.internal;
+package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
+import android.support.annotation.RestrictTo;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * A non-swipeable viewpager.<br>
  * <a href="http://stackoverflow.com/questions/9650265/how-do-disable-paging-by-swiping-with-finger-in-viewpager-but-still-be-able-to-s">Source</a>
  */
+@RestrictTo(LIBRARY)
 public class NonSwipeableViewPager extends ViewPager {
 
     public NonSwipeableViewPager(Context context) {

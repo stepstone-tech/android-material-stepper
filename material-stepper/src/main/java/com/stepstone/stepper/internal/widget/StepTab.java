@@ -14,12 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.internal;
+package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.RestrictTo;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -30,11 +31,14 @@ import android.widget.TextView;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.util.TintUtil;
+import com.stepstone.stepper.internal.util.TintUtil;
+
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * A widget for a single tab in the {@link TabsContainer}.
  */
+@RestrictTo(LIBRARY)
 public class StepTab extends RelativeLayout {
 
     private static final float INACTIVE_STEP_TITLE_ALPHA = 0.54f;

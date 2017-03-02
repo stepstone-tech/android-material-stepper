@@ -26,11 +26,15 @@ import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.sample.adapter.SampleFragmentStepAdapter;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public abstract class AbstractStepperActivity extends AppCompatActivity implements StepperLayout.StepperListener,
         OnNavigationBarListener {
 
     private static final String CURRENT_STEP_POSITION_KEY = "position";
 
+    @Bind(R.id.stepperLayout)
     protected StepperLayout mStepperLayout;
 
     @Override
@@ -39,7 +43,8 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
         setTitle("Stepper sample");
 
         setContentView(getLayoutResId());
-        mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
+
+        ButterKnife.bind(this);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
         mStepperLayout.setAdapter(new SampleFragmentStepAdapter(getSupportFragmentManager(), this), startingStepPosition);
 

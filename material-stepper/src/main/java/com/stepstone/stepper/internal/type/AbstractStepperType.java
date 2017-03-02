@@ -14,17 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.type;
+package com.stepstone.stepper.internal.type;
 
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.annotation.RestrictTo;
 
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.adapter.StepAdapter;
 
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+
 /**
  * A base stepper type all stepper types must extend.
  */
+@RestrictTo(LIBRARY)
 public abstract class AbstractStepperType {
 
     /**

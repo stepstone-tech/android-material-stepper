@@ -21,11 +21,8 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
@@ -34,7 +31,9 @@ import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.sample.OnNavigationBarListener;
 import com.stepstone.stepper.sample.R;
 
-public class StepFragmentSample extends Fragment implements Step {
+import butterknife.Bind;
+
+public class StepFragmentSample extends ButterKnifeFragment implements Step {
 
     private static final String CLICKS_KEY = "clicks";
 
@@ -44,7 +43,8 @@ public class StepFragmentSample extends Fragment implements Step {
 
     private int i = 0;
 
-    private Button button;
+    @Bind(R.id.button)
+    Button button;
 
     @Nullable
     private OnNavigationBarListener onNavigationBarListener;
@@ -66,15 +66,14 @@ public class StepFragmentSample extends Fragment implements Step {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(getArguments().getInt(LAYOUT_RESOURCE_ID_ARG_KEY), container, false);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
             i = savedInstanceState.getInt(CLICKS_KEY);
         }
 
         updateNavigationBar();
 
-        button = (Button) v.findViewById(R.id.button);
         button.setText(Html.fromHtml("Taps: <b>" + i + "</b>"));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +82,11 @@ public class StepFragmentSample extends Fragment implements Step {
                 updateNavigationBar();
             }
         });
+    }
 
-        return v;
+    @Override
+    protected int getLayoutResId() {
+        return getArguments().getInt(LAYOUT_RESOURCE_ID_ARG_KEY);
     }
 
     @Override

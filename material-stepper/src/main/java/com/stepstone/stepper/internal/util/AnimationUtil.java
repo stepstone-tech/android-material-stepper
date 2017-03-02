@@ -1,18 +1,21 @@
-package com.stepstone.stepper.util;
+package com.stepstone.stepper.internal.util;
 
 import android.animation.Animator;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.RestrictTo;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 
 import java.lang.annotation.Retention;
 
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
  * Util class containing static methods to simplify animation.
  */
+@RestrictTo(LIBRARY)
 public final class AnimationUtil {
 
     @Retention(SOURCE)

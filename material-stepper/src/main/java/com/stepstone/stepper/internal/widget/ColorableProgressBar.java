@@ -14,23 +14,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.internal;
+package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.RestrictTo;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
 import com.stepstone.stepper.R;
-import com.stepstone.stepper.util.TintUtil;
+import com.stepstone.stepper.internal.util.TintUtil;
+
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * A {@link ProgressBar} which exposes methods for coloring primary progress and progress background colors individually.
  */
+@RestrictTo(LIBRARY)
 public class ColorableProgressBar extends ProgressBar {
 
     @ColorInt

@@ -22,19 +22,23 @@ import android.support.v7.app.AppCompatActivity;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.sample.adapter.DelayedTransitionFragmentStepAdapter;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class DelayedTransitionStepperActivity extends AppCompatActivity {
 
     private static final String CURRENT_STEP_POSITION_KEY = "position";
 
-    private StepperLayout mStepperLayout;
+    @Bind(R.id.stepperLayout)
+    StepperLayout mStepperLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Stepper sample");
 
-        setContentView(R.layout.activity_default_dots);
-        mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
+        setContentView(R.layout.activity_delayed_transition);
+        ButterKnife.bind(this);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
         mStepperLayout.setAdapter(new DelayedTransitionFragmentStepAdapter(getSupportFragmentManager(), this), startingStepPosition);
     }

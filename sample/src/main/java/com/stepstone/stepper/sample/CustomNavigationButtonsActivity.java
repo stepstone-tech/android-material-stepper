@@ -25,6 +25,9 @@ import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.sample.adapter.CustomButtonsSampleFragmentStepAdapter;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class CustomNavigationButtonsActivity extends AppCompatActivity implements StepperLayout.StepperListener {
 
     static {
@@ -33,7 +36,8 @@ public class CustomNavigationButtonsActivity extends AppCompatActivity implement
 
     private static final String CURRENT_STEP_POSITION_KEY = "position";
 
-    private StepperLayout mStepperLayout;
+    @Bind(R.id.stepperLayout)
+    StepperLayout mStepperLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,7 @@ public class CustomNavigationButtonsActivity extends AppCompatActivity implement
         setTitle("Stepper sample");
 
         setContentView(R.layout.activity_custom_navigation_buttons);
-        mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
+        ButterKnife.bind(this);
         int startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
         mStepperLayout.setAdapter(new CustomButtonsSampleFragmentStepAdapter(getSupportFragmentManager(), this), startingStepPosition);
         mStepperLayout.setListener(this);

@@ -16,18 +16,12 @@ limitations under the License.
 
 package com.stepstone.stepper.sample.step.fragment;
 
-import android.os.Bundle;
+import android.app.Activity;
 import android.os.Handler;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.support.v7.widget.SwitchCompat;
 import android.widget.Toast;
 
 import com.stepstone.stepper.BlockingStep;
@@ -35,42 +29,17 @@ import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.sample.R;
 
-public class DelayedTransitionStepFragmentSample extends Fragment implements BlockingStep {
+import butterknife.Bind;
 
-    private static final String CLICKS_KEY = "clicks";
+public class DelayedTransitionStepFragmentSample extends ButterKnifeFragment implements BlockingStep {
 
-    private static final String LAYOUT_RESOURCE_ID_ARG_KEY = "messageResourceId";
+    @Bind(R.id.operationSwitch)
+    SwitchCompat operationSwitch;
 
-    private int i = 0;
-
-    private Button button;
     private AlertDialog dialog;
 
-    public static DelayedTransitionStepFragmentSample newInstance(@LayoutRes int layoutResId) {
-        Bundle args = new Bundle();
-        args.putInt(LAYOUT_RESOURCE_ID_ARG_KEY, layoutResId);
-        DelayedTransitionStepFragmentSample fragment = new DelayedTransitionStepFragmentSample();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(getArguments().getInt(LAYOUT_RESOURCE_ID_ARG_KEY), container, false);
-        if (savedInstanceState != null) {
-            i = savedInstanceState.getInt(CLICKS_KEY);
-        }
-
-        button = (Button) v.findViewById(R.id.button);
-        button.setText(Html.fromHtml("Taps: <b>" + i + "</b>"));
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                button.setText(Html.fromHtml("Taps: <b>" + (++i) + "</b>"));
-            }
-        });
-
-        return v;
+    public static DelayedTransitionStepFragmentSample newInstance() {
+        return new DelayedTransitionStepFragmentSample();
     }
 
     @Override
@@ -105,9 +74,21 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
             @Override
             public void run() {
                 dialog.dismiss();
-                callback.goToNextStep();
+                if (shouldOperationSucceed()) {
+                    callback.goToNextStep();
+                } else {
+                    Activity activity = DelayedTransitionStepFragmentSample.this.getActivity();
+                    if (activity != null && isResumed()) {
+                        Toast.makeText(activity, "Operation failed!", Toast.LENGTH_SHORT).show();
+                    }
+                    callback.getStepperLayout().updateErrorState(true);
+                }
             }
         }, 2000L);
+    }
+
+    private boolean shouldOperationSucceed() {
+        return operationSwitch.isChecked();
     }
 
     @Override
@@ -118,9 +99,7 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(CLICKS_KEY, i);
-        super.onSaveInstanceState(outState);
+    protected int getLayoutResId() {
+        return R.layout.fragment_step_delayed_transition;
     }
-
 }

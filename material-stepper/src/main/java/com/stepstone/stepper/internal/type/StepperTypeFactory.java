@@ -14,15 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.type;
+package com.stepstone.stepper.internal.type;
 
+import android.support.annotation.RestrictTo;
 import android.util.Log;
 
 import com.stepstone.stepper.StepperLayout;
 
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+
 /**
  * Factory class for creating stepper types.
  */
+@RestrictTo(LIBRARY)
 public class StepperTypeFactory {
 
     private static final String TAG = StepperTypeFactory.class.getSimpleName();

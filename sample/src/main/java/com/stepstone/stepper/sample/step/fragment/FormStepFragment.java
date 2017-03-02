@@ -17,15 +17,10 @@ limitations under the License.
 package com.stepstone.stepper.sample.step.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -37,14 +32,12 @@ import com.stepstone.stepper.sample.OnProceedListener;
 import com.stepstone.stepper.sample.R;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnEditorAction;
 
-public class FormStepFragment extends Fragment implements Step {
+public class FormStepFragment extends ButterKnifeFragment implements Step {
 
     public static FormStepFragment newInstance() {
-        FormStepFragment fragment = new FormStepFragment();
-        return fragment;
+        return new FormStepFragment();
     }
 
     @Bind(R.id.editText)
@@ -62,10 +55,8 @@ public class FormStepFragment extends Fragment implements Step {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_form_step, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+    protected int getLayoutResId() {
+        return R.layout.fragment_step_form;
     }
 
     @Override

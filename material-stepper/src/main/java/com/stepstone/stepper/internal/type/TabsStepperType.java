@@ -14,24 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.type;
+package com.stepstone.stepper.internal.type;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.RestrictTo;
 import android.view.View;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.adapter.StepAdapter;
-import com.stepstone.stepper.internal.TabsContainer;
+import com.stepstone.stepper.internal.widget.TabsContainer;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+
 /**
  * Stepper type which displays horizontal stepper with tabs.
  */
+@RestrictTo(LIBRARY)
 public class TabsStepperType extends AbstractStepperType {
 
     private static final List<CharSequence> EDIT_MODE_STEP_TITLES = Arrays.<CharSequence>asList("Step 1", "Step 2");

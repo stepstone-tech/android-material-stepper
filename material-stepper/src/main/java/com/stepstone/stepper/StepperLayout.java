@@ -43,14 +43,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.stepstone.stepper.adapter.StepAdapter;
-import com.stepstone.stepper.internal.ColorableProgressBar;
-import com.stepstone.stepper.internal.DottedProgressBar;
-import com.stepstone.stepper.internal.RightNavigationButton;
-import com.stepstone.stepper.internal.TabsContainer;
-import com.stepstone.stepper.type.AbstractStepperType;
-import com.stepstone.stepper.type.StepperTypeFactory;
-import com.stepstone.stepper.util.AnimationUtil;
-import com.stepstone.stepper.util.TintUtil;
+import com.stepstone.stepper.internal.widget.ColorableProgressBar;
+import com.stepstone.stepper.internal.widget.DottedProgressBar;
+import com.stepstone.stepper.internal.widget.RightNavigationButton;
+import com.stepstone.stepper.internal.widget.TabsContainer;
+import com.stepstone.stepper.internal.type.AbstractStepperType;
+import com.stepstone.stepper.internal.type.StepperTypeFactory;
+import com.stepstone.stepper.internal.util.AnimationUtil;
+import com.stepstone.stepper.internal.util.TintUtil;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
 /**
@@ -117,10 +117,18 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         };
     }
 
-    public final class OnNextClickedCallback {
+    public abstract class AbstractOnButtonClickedCallback {
+
+        public StepperLayout getStepperLayout() {
+            return StepperLayout.this;
+        }
+
+    }
+
+    public class OnNextClickedCallback extends AbstractOnButtonClickedCallback {
 
         @UiThread
-        public final void goToNextStep() {
+        public void goToNextStep() {
             final int totalStepCount = mStepAdapter.getCount();
 
             if (mCurrentStepPosition >= totalStepCount - 1) {
@@ -133,10 +141,10 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     }
 
-    public final class OnBackClickedCallback {
+    public class OnBackClickedCallback extends AbstractOnButtonClickedCallback {
 
         @UiThread
-        public final void goToPrevStep() {
+        public void goToPrevStep() {
             if (mCurrentStepPosition <= 0) {
                 if (mShowBackButtonOnFirstStep) {
                     mListener.onReturn();
@@ -372,19 +380,32 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     /**
      * Set whether when going backwards should clear the error state from the Tab. Default is <code>false</code>.
      *
-     * @param mShowErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
+     * @param showErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
      */
-    public void setShowErrorStateOnBack(boolean mShowErrorStateOnBack) {
-        this.mShowErrorStateOnBack = mShowErrorStateOnBack;
+    public void setShowErrorStateOnBack(boolean showErrorStateOnBack) {
+        this.mShowErrorStateOnBack = showErrorStateOnBack;
     }
 
     /**
      * Set whether the errors should be displayed when they occur or not. Default is <code>false</code>.
      *
-     * @param mShowErrorState true if the errors should be displayed when they occur, false otherwise
+     * @param showErrorState true if the errors should be displayed when they occur, false otherwise
      */
-    public void setShowErrorState(boolean mShowErrorState) {
-        this.mShowErrorState = mShowErrorState;
+    public void setShowErrorState(boolean showErrorState) {
+        this.mShowErrorState = showErrorState;
+    }
+
+    /**
+     * Updates the error state in the UI.
+     * It does nothing if showing error state is disabled.
+     * This is used internally to show the error on tabs.
+     * @param hasError true if error should be shown, false otherwise
+     * @see #setShowErrorState(boolean)
+     */
+    public void updateErrorState(boolean hasError) {
+        if (mShowErrorState) {
+            mStepperType.setErrorStep(mCurrentStepPosition, hasError);
+        }
     }
 
     /**
@@ -597,9 +618,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
 
         //if moving forward and got no errors, set hasError to false, so we can have the tab with the check mark.
-        if (mShowErrorState) {
-            mStepperType.setErrorStep(mCurrentStepPosition, false);
-        }
+        updateErrorState(false);
 
         OnNextClickedCallback onNextClickedCallback = new OnNextClickedCallback();
         if (step instanceof BlockingStep) {
@@ -624,9 +643,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             step.onError(verificationError);
 
             //if moving forward and got errors, set hasError to true, showing the error drawable.
-            if (mShowErrorState) {
-                mStepperType.setErrorStep(mCurrentStepPosition, true);
-            }
+            updateErrorState(true);
+
         }
         mListener.onError(verificationError);
     }
@@ -636,7 +654,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         if (verifyCurrentStep(step)) {
             return;
         }
-        mStepperType.setErrorStep(mCurrentStepPosition, false);
+        updateErrorState(false);
         mListener.onCompleted(mCompleteNavigationButton);
     }
 

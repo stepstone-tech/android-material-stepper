@@ -7,13 +7,13 @@
     tools:parentTag="LinearLayout"
     tools:theme="@style/MSDefaultStepperLayoutTheme">
 
-    <com.stepstone.stepper.internal.TabsContainer
+    <com.stepstone.stepper.internal.widget.TabsContainer
         android:id="@+id/ms_stepTabsContainer"
         style="?attr/ms_tabsContainerStyle"
         android:layout_width="match_parent"
         tools:style="@style/MSStepTabsContainer" />
 
-    <com.stepstone.stepper.internal.NonSwipeableViewPager
+    <com.stepstone.stepper.internal.widget.NonSwipeableViewPager
         android:id="@+id/ms_stepPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -43,14 +43,14 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
 
-            <com.stepstone.stepper.internal.DottedProgressBar
+            <com.stepstone.stepper.internal.widget.DottedProgressBar
                 android:id="@+id/ms_stepDottedProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:visibility="gone" />
 
-            <com.stepstone.stepper.internal.ColorableProgressBar
+            <com.stepstone.stepper.internal.widget.ColorableProgressBar
                 android:id="@+id/ms_stepProgressBar"
                 style="?attr/ms_colorableProgressBarStyle"
                 android:indeterminate="false"
@@ -61,7 +61,7 @@
 
         </FrameLayout>
 
-        <com.stepstone.stepper.internal.RightNavigationButton
+        <com.stepstone.stepper.internal.widget.RightNavigationButton
             android:id="@+id/ms_stepNextButton"
             style="?attr/ms_nextNavigationButtonStyle"
             android:layout_alignParentEnd="true"
@@ -75,7 +75,7 @@
             tools:textColor="@color/ms_bottomNavigationButtonTextColor"
             tools:visibility="visible" />
 
-        <com.stepstone.stepper.internal.RightNavigationButton
+        <com.stepstone.stepper.internal.widget.RightNavigationButton
             android:id="@+id/ms_stepCompleteButton"
             style="?attr/ms_completeNavigationButtonStyle"
             android:layout_alignParentEnd="true"

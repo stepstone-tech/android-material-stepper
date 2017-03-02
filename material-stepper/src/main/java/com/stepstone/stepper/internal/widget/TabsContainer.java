@@ -14,13 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.internal;
+package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RestrictTo;
 import android.support.annotation.UiThread;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -35,11 +36,14 @@ import com.stepstone.stepper.StepperLayout;
 
 import java.util.List;
 
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+
 /**
  * Layout used for displaying tabs from the horizontal stepper.
  * Steps must be added via {@link #setSteps(List)}.<br>
  * <b>NOTE:</b> {@link #setSelectedColor(int)} and {@link #setUnselectedColor(int)} should be set before calling {@link #setSteps(List)}.
  */
+@RestrictTo(LIBRARY)
 public class TabsContainer extends FrameLayout {
 
     /**
@@ -179,10 +183,10 @@ public class TabsContainer extends FrameLayout {
     /**
      * Set whether when going backwards should clear the error state from the Tab. Default is false
      *
-     * @param mShowErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
+     * @param showErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
      */
-    public void setShowErrorStateOnBack(boolean mShowErrorStateOnBack) {
-        this.mShowErrorStateOnBack = mShowErrorStateOnBack;
+    public void setShowErrorStateOnBack(boolean showErrorStateOnBack) {
+        this.mShowErrorStateOnBack = showErrorStateOnBack;
     }
 
     public void setErrorStep(int stepPosition, boolean hasError) {

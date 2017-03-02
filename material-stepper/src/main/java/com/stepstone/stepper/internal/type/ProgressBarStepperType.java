@@ -14,36 +14,33 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.stepper.type;
+package com.stepstone.stepper.internal.type;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.RestrictTo;
 import android.view.View;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.adapter.StepAdapter;
-import com.stepstone.stepper.internal.DottedProgressBar;
+import com.stepstone.stepper.internal.widget.ColorableProgressBar;
+
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
- * Stepper type which displays mobile step dots.
+ * Stepper type which displays a mobile step progress bar.
  */
-public class DotsStepperType extends AbstractStepperType {
+@RestrictTo(LIBRARY)
+public class ProgressBarStepperType extends AbstractStepperType {
 
-    private static final int EDIT_MODE_DOT_COUNT = 3;
+    private final ColorableProgressBar mProgressBar;
 
-    private final DottedProgressBar mDottedProgressBar;
-
-    public DotsStepperType(StepperLayout stepperLayout) {
+    public ProgressBarStepperType(StepperLayout stepperLayout) {
         super(stepperLayout);
-        mDottedProgressBar = (DottedProgressBar) stepperLayout.findViewById(R.id.ms_stepDottedProgressBar);
-
-        mDottedProgressBar.setSelectedColor(getSelectedColor());
-        mDottedProgressBar.setUnselectedColor(getUnselectedColor());
-
-        if (stepperLayout.isInEditMode()) {
-            mDottedProgressBar.setDotCount(EDIT_MODE_DOT_COUNT);
-            mDottedProgressBar.setVisibility(View.VISIBLE);
-        }
+        mProgressBar = (ColorableProgressBar) stepperLayout.findViewById(R.id.ms_stepProgressBar);
+        mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.setProgressColor(getSelectedColor());
+        mProgressBar.setProgressBackgroundColor(getUnselectedColor());
     }
 
     /**
@@ -51,7 +48,7 @@ public class DotsStepperType extends AbstractStepperType {
      */
     @Override
     public void onStepSelected(int newStepPosition) {
-        mDottedProgressBar.setCurrent(newStepPosition, true);
+        mProgressBar.setProgress(newStepPosition + 1);
     }
 
     /**
@@ -60,7 +57,7 @@ public class DotsStepperType extends AbstractStepperType {
     @Override
     public void onNewAdapter(@NonNull StepAdapter stepAdapter) {
         final int stepCount = stepAdapter.getCount();
-        mDottedProgressBar.setDotCount(stepCount);
-        mDottedProgressBar.setVisibility(stepCount > 1 ? View.VISIBLE : View.GONE);
+        mProgressBar.setMax(stepAdapter.getCount());
+        mProgressBar.setVisibility(stepCount > 1 ? View.VISIBLE : View.GONE);
     }
 }
