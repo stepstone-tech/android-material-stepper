@@ -404,7 +404,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      */
     public void updateErrorState(boolean hasError) {
         if (mShowErrorState) {
-            mStepperType.setErrorStep(mCurrentStepPosition, hasError);
+            mStepperType.setErrorState(mCurrentStepPosition, hasError);
         }
     }
 

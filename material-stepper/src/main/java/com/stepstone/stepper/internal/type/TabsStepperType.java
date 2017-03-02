@@ -70,7 +70,7 @@ public class TabsStepperType extends AbstractStepperType {
      * {@inheritDoc}
      */
     @Override
-    public void setErrorStep(int stepPosition, boolean hasError) {
+    public void setErrorState(int stepPosition, boolean hasError) {
         mTabsContainer.setErrorStep(stepPosition, hasError);
     }
 

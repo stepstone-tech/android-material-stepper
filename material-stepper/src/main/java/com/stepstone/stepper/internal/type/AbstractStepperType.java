@@ -63,7 +63,7 @@ public abstract class AbstractStepperType {
      * @param stepPosition the step to set the error
      * @param hasError whether it has error or not
      */
-    public void setErrorStep(int stepPosition, boolean hasError){ }
+    public void setErrorState(int stepPosition, boolean hasError){ }
 
     /**
      * Called to set whether navigating backwards should keep the error state.
