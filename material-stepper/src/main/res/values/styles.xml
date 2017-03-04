@@ -75,7 +75,6 @@ limitations under the License.
     <style name="MSStepTabNumber">
         <item name="android:layout_width">@dimen/ms_step_tab_counter_size</item>
         <item name="android:layout_height">@dimen/ms_step_tab_counter_size</item>
-        <item name="android:background">@drawable/ms_circle</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/ms_white</item>
         <item name="android:textSize">@dimen/ms_step_tab_circle_font_size</item>
@@ -84,17 +83,13 @@ limitations under the License.
     <style name="MSStepTabDoneIndicator">
         <item name="android:layout_width">@dimen/ms_step_tab_counter_size</item>
         <item name="android:layout_height">@dimen/ms_step_tab_counter_size</item>
-        <item name="android:background">@drawable/ms_circle</item>
         <item name="android:scaleType">centerInside</item>
-        <item name="srcCompat">@drawable/ic_check</item>
+        <item name="srcCompat">@drawable/ms_ic_check</item>
     </style>
 
-    <style name="MSStepTabErrorIndicator">
+    <style name="MSStepTabIconBackground">
         <item name="android:layout_width">@dimen/ms_step_tab_counter_size</item>
         <item name="android:layout_height">@dimen/ms_step_tab_counter_size</item>
-        <item name="android:scaleType">centerInside</item>
-        <item name="android:tint">@color/ms_errorColor</item>
-        <item name="srcCompat">@drawable/ic_warning</item>
     </style>
 
     <style name="MSStepTabTitle" tools:ignore="NewApi">
@@ -125,7 +120,7 @@ limitations under the License.
 
         <item name="ms_stepTabNumberStyle">@style/MSStepTabNumber</item>
         <item name="ms_stepTabDoneIndicatorStyle">@style/MSStepTabDoneIndicator</item>
-        <item name="ms_stepTabErrorIndicatorStyle">@style/MSStepTabErrorIndicator</item>
+        <item name="ms_stepTabIconBackgroundStyle">@style/MSStepTabIconBackground</item>
         <item name="ms_stepTabTitleStyle">@style/MSStepTabTitle</item>
         <item name="ms_stepTabDividerStyle">@style/MSStepTabDivider</item>
     </style>

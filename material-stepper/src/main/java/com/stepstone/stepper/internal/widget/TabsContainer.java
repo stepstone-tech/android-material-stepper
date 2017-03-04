@@ -25,6 +25,7 @@ import android.support.annotation.RestrictTo;
 import android.support.annotation.UiThread;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -164,38 +165,22 @@ public class TabsContainer extends FrameLayout {
 
     /**
      * Changes the position of the current step and updates the UI based on it.
-     *
-     * @param newStepPosition new current step
+     * @param currentStepPosition new current step
+     * @param stepErrors map containing error state for step positions
      */
-    public void setCurrentStep(int newStepPosition) {
+    public void updateSteps(int currentStepPosition, SparseBooleanArray stepErrors) {
         int size = mStepTitles.size();
         for (int i = 0; i < size; i++) {
             StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(i);
-            boolean done = i < newStepPosition;
-            final boolean current = i == newStepPosition;
-            childTab.updateState(done, mShowErrorStateOnBack, current);
+            boolean done = i < currentStepPosition;
+            final boolean current = i == currentStepPosition;
+
+            boolean hasError = stepErrors.get(i);
+            childTab.updateState(hasError, done, current);
             if (current) {
                 mTabsScrollView.smoothScrollTo(childTab.getLeft() - mContainerLateralPadding, 0);
             }
         }
-    }
-
-    /**
-     * Set whether when going backwards should clear the error state from the Tab. Default is false
-     *
-     * @param showErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
-     */
-    public void setShowErrorStateOnBack(boolean showErrorStateOnBack) {
-        this.mShowErrorStateOnBack = showErrorStateOnBack;
-    }
-
-    public void setErrorStep(int stepPosition, boolean hasError) {
-        if (mStepTitles.size() < stepPosition) {
-            return;
-        }
-
-        StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(stepPosition);
-        childTab.updateErrorState(mStepTitles.size() - 1 == stepPosition, hasError);
     }
 
     private View createStepTab(final int position, @Nullable CharSequence title) {

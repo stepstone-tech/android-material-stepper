@@ -16,9 +16,11 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.type;
 
+import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
+import android.util.SparseBooleanArray;
 
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.adapter.StepAdapter;
@@ -46,7 +48,9 @@ public abstract class AbstractStepperType {
      */
     public static final int TABS = 0x03;
 
-    protected final StepperLayout stepperLayout;
+    final StepperLayout stepperLayout;
+
+    final SparseBooleanArray mStepErrors = new SparseBooleanArray();
 
     public AbstractStepperType(StepperLayout stepperLayout) {
         this.stepperLayout = stepperLayout;
@@ -63,19 +67,28 @@ public abstract class AbstractStepperType {
      * @param stepPosition the step to set the error
      * @param hasError whether it has error or not
      */
-    public void setErrorState(int stepPosition, boolean hasError){ }
+    public void setErrorFlag(int stepPosition, boolean hasError) {
+        mStepErrors.put(stepPosition, hasError);
+    }
 
     /**
-     * Called to set whether navigating backwards should keep the error state.
-     * @param mShowErrorStateOnBack true if navigating backwards should keep the error state, false otherwise
+     * Checks if there's an error for the step.
+     *
+     * @param stepPosition the step to check for error
+     * @return true if there's an error for this step
      */
-    public void showErrorStateOnBack(boolean mShowErrorStateOnBack){ }
+    public boolean getErrorAtPosition(int stepPosition) {
+        return mStepErrors.get(stepPosition);
+    }
 
     /**
      * Called when {@link StepperLayout}'s adapter gets changed
      * @param stepAdapter new stepper adapter
      */
-    public abstract void onNewAdapter(@NonNull StepAdapter stepAdapter);
+    @CallSuper
+    public void onNewAdapter(@NonNull StepAdapter stepAdapter) {
+        mStepErrors.clear();
+    }
 
     @ColorInt
     protected int getSelectedColor() {

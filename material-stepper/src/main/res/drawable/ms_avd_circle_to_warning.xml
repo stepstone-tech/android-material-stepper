@@ -1,0 +1,25 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:drawable="@drawable/ms_vd_circle">
+
+    <target android:name="circle">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="@integer/ms_default_error_tab_animation_duration"
+                android:propertyName="fillAlpha"
+                android:valueFrom="1"
+                android:valueTo="0" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="warning">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="@integer/ms_default_error_tab_animation_duration"
+                android:propertyName="translateY"
+                android:valueFrom="0"
+                android:valueTo="@integer/ms_warning_translate_y" />
+        </aapt:attr>
+    </target>
+
+</animated-vector>

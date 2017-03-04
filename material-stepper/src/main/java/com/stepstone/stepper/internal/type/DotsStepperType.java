@@ -63,6 +63,7 @@ public class DotsStepperType extends AbstractStepperType {
      */
     @Override
     public void onNewAdapter(@NonNull StepAdapter stepAdapter) {
+        super.onNewAdapter(stepAdapter);
         final int stepCount = stepAdapter.getCount();
         mDottedProgressBar.setDotCount(stepCount);
         mDottedProgressBar.setVisibility(stepCount > 1 ? View.VISIBLE : View.GONE);

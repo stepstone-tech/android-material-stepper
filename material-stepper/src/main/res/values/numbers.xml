@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="ms_default_error_tab_animation_duration">0</integer>
+
+    <integer name="ms_warning_translate_y">2</integer>
+
+</resources>

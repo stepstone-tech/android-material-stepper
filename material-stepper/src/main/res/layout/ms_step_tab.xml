@@ -13,6 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true">
 
+        <ImageView
+            android:id="@+id/ms_stepIconBackground"
+            style="?attr/ms_stepTabIconBackgroundStyle"
+            tools:style="@style/MSStepTabIconBackground" />
+
         <TextView
             android:id="@+id/ms_stepNumber"
             style="?attr/ms_stepTabNumberStyle"
@@ -23,12 +28,6 @@
             style="?attr/ms_stepTabDoneIndicatorStyle"
             android:visibility="gone"
             tools:style="@style/MSStepTabDoneIndicator" />
-
-        <ImageView
-            android:id="@+id/ms_stepErrorIndicator"
-            style="?attr/ms_stepTabErrorIndicatorStyle"
-            android:visibility="gone"
-            tools:style="@style/MSStepTabErrorIndicator" />
 
     </FrameLayout>
 

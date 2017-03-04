@@ -355,8 +355,8 @@ For other examples, e.g. persisting state on rotation, displaying errors, changi
 | *ms_tabStepDividerWidth*        | dimension or reference                    | The width of the horizontal tab divider used in tabs stepper type            |
 | *ms_showBackButtonOnFirstStep*  | boolean                                   | Flag indicating if the Back (Previous step) button should be shown on the first step. False by default.            |
 | *ms_errorColor*                 | color or reference                        | Error color in Tabs stepper |
-| *ms_showErrorState*             | boolean                                   | Flag indicating whether to show the error state. Only available with 'tabs' type. False by default. |
-| *ms_showErrorStateOnBack*       | boolean                                   | Flag indicating whether to keep showing the error state when user moves back. Only available with 'tabs' type. False by default. |
+| *ms_showErrorStateEnabled*      | boolean                                   | Flag indicating whether to show the error state. Only available with 'tabs' type. False by default. |
+| *ms_showErrorStateOnBackEnabled*| boolean                                   | Flag indicating whether to keep showing the error state when user moves back. Only available with 'tabs' type. False by default. |
 | *ms_stepperLayoutTheme*         | reference                                 | Theme to use for even more custom styling of the stepper layout. It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used. |
 
 ### StepperLayout style attributes 
@@ -375,7 +375,7 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 | *ms_stepTabContainerStyle*        | Used in layout/ms_step_tab_container                          |
 | *ms_stepTabNumberStyle*           | Used by ms_stepNumber in layout/ms_step_tab                   |
 | *ms_stepTabDoneIndicatorStyle*    | Used by ms_stepDoneIndicator in layout/ms_step_tab            |
-| *ms_stepTabErrorIndicatorStyle*   | Used by ms_stepErrorIndicator in layout/ms_step_tab           |
+| *ms_stepTabIconBackgroundStyle*   | Used by ms_stepIconBackground in layout/ms_step_tab           |
 | *ms_stepTabTitleStyle*            | Used by ms_stepTitle in layout/ms_step_tab                    |
 | *ms_stepTabDividerStyle*          | Used by ms_stepDivider in layout/ms_step_tab                  |
 

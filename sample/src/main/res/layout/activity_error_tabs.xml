@@ -6,4 +6,4 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:ms_stepperType="tabs"
-    app:ms_showErrorState="true" />
+    app:ms_showErrorStateEnabled="true" />

@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportHeight="24.0"
+    android:viewportWidth="24.0">
+
+    <group
+        android:name="container"
+        android:translateY="@integer/ms_warning_translate_y">
+
+        <path
+            android:name="outer_layer"
+            android:fillColor="#ff000000"
+            android:pathData="@string/ms_warning_outer_layer_collapsed_path" />
+
+        <path
+            android:name="original_warning"
+            android:fillColor="#ff000000"
+            android:pathData="@string/ms_warning_default_path" />
+
+    </group>
+
+</vector>
