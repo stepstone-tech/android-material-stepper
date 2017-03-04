@@ -71,6 +71,9 @@ public class StepTab extends RelativeLayout {
 
     private Typeface mBoldTypeface;
 
+    /**
+     * Current UI state of the tab. See {@link AbstractState} for more details.
+     */
     private AbstractState mCurrentState = new InactiveNumberState();
 
     public StepTab(Context context) {
@@ -113,7 +116,12 @@ public class StepTab extends RelativeLayout {
         mStepDivider.setVisibility(show ? VISIBLE : GONE);
     }
 
-    //// TODO: 04/03/2017 add JavaDoc
+    /**
+     * Updates the UI state of the tab and sets {@link #mCurrentState} based on the arguments.
+     * @param error <code>true</code> if an error/warning should be shown, if <code>true</code> a warning will be shown
+     * @param done true the step was completed, if warning is not shown and this is <code>true</code> a done indicator will be shown
+     * @param current true if this is the currently selected step
+     */
     public void updateState(final boolean error, final boolean done, final boolean current) {
         mStepTitle.setTypeface(current ? mBoldTypeface : mNormalTypeface);
 
@@ -173,8 +181,19 @@ public class StepTab extends RelativeLayout {
         return AnimatedVectorDrawableCompat.create(getContext(), R.drawable.ms_avd_warning_to_circle);
     }
 
-    // TODO: 04/03/2017 Add JavaDoc
     // TODO: 04/03/2017 Add fade in step number/done indicator when changing from warning for a smoother transition
+    /**
+     * <p>Base state class of the tab.
+     * It is used to specify what should happen from the UI perspective
+     * when transitioning to other states, e.g. which views to hide or tint.</p>
+     * <p>Subclasses include:</p>
+     * <ul>
+     *     <li>{@link InactiveNumberState} - for when we show the step number, but this step still hasn't been reached</li>
+     *     <li>{@link ActiveNumberState} - for when we show the step number of the currently active tab</li>
+     *     <li>{@link DoneState} - for when the step has already been completed and the user has moved to the next step</li>
+     *     <li>{@link WarningState} - for when there has been an error on this step (if {@link StepperLayout#setShowErrorStateEnabled(boolean)} or <code>ms_showErrorStateEnabled</code> was set to <i>true</i>)</li>
+     * </ul>
+     */
     private abstract class AbstractState {
 
         protected void changeToInactiveNumber() {
