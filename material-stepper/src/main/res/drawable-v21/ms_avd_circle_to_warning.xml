@@ -6,7 +6,7 @@
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:duration="@integer/ms_default_error_tab_animation_duration"
-                android:interpolator="@android:interpolator/fast_out_slow_in"
+                android:interpolator="@android:anim/accelerate_interpolator"
                 android:propertyName="pathData"
                 android:valueFrom="@string/ms_warning_outer_layer_expanded_path"
                 android:valueTo="@string/ms_warning_outer_layer_collapsed_path"
@@ -18,7 +18,7 @@
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:duration="@integer/ms_default_error_tab_animation_duration"
-                android:interpolator="@android:interpolator/fast_out_slow_in"
+                android:interpolator="@android:anim/accelerate_interpolator"
                 android:propertyName="pathData"
                 android:valueFrom="@string/ms_warning_filled_path"
                 android:valueTo="@string/ms_warning_default_path"
@@ -30,7 +30,7 @@
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:duration="@integer/ms_default_error_tab_animation_duration"
-                android:interpolator="@android:interpolator/fast_out_slow_in"
+                android:interpolator="@android:anim/accelerate_interpolator"
                 android:propertyName="translateY"
                 android:valueFrom="0"
                 android:valueTo="@integer/ms_warning_translate_y" />

@@ -181,7 +181,6 @@ public class StepTab extends RelativeLayout {
         return AnimatedVectorDrawableCompat.create(getContext(), R.drawable.ms_avd_warning_to_circle);
     }
 
-    // TODO: 04/03/2017 Add fade in step number/done indicator when changing from warning for a smoother transition
     /**
      * <p>Base state class of the tab.
      * It is used to specify what should happen from the UI perspective
@@ -196,6 +195,7 @@ public class StepTab extends RelativeLayout {
      */
     private abstract class AbstractState {
 
+        @CallSuper
         protected void changeToInactiveNumber() {
             StepTab.this.mCurrentState = new InactiveNumberState();
         }
@@ -205,10 +205,12 @@ public class StepTab extends RelativeLayout {
             StepTab.this.mCurrentState = new ActiveNumberState();
         }
 
+        @CallSuper
         protected void changeToDone() {
             StepTab.this.mCurrentState = new DoneState();
         }
 
+        @CallSuper
         protected void changeToWarning() {
             mStepDoneIndicator.setVisibility(View.GONE);
             mStepNumber.setVisibility(View.GONE);
@@ -221,6 +223,7 @@ public class StepTab extends RelativeLayout {
     private abstract class AbstractNumberState extends AbstractState {
 
         @Override
+        @CallSuper
         protected void changeToWarning() {
             AnimatedVectorDrawableCompat avd = createCircleToWarningDrawable();
             mStepIconBackground.setImageDrawable(avd);
@@ -229,6 +232,7 @@ public class StepTab extends RelativeLayout {
         }
 
         @Override
+        @CallSuper
         protected void changeToDone() {
             mStepDoneIndicator.setVisibility(VISIBLE);
             mStepNumber.setVisibility(GONE);
@@ -239,10 +243,11 @@ public class StepTab extends RelativeLayout {
 
     private class InactiveNumberState extends AbstractNumberState {
 
-
         @Override
         protected void changeToInactiveNumber() {
             mStepIconBackground.setColorFilter(mUnselectedColor);
+            mStepTitle.setTextColor(mTitleColor);
+            mStepTitle.setAlpha(INACTIVE_STEP_TITLE_ALPHA);
             super.changeToInactiveNumber();
         }
 

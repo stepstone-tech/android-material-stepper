@@ -4,11 +4,20 @@
     android:viewportHeight="24.0"
     android:viewportWidth="24.0">
 
-    <path
-        android:name="circle"
-        android:fillAlpha="0"
-        android:fillColor="#ff000000"
-        android:pathData="@string/ms_circle_path" />
+    <group
+        android:name="circle_group"
+        android:pivotX="12"
+        android:pivotY="12"
+        android:scaleX="0.5"
+        android:scaleY="0.5">
+
+        <path
+            android:name="circle"
+            android:fillAlpha="0"
+            android:fillColor="#ff000000"
+            android:pathData="@string/ms_circle_path" />
+
+    </group>
 
     <group
         android:name="warning"
@@ -16,7 +25,7 @@
 
         <path
             android:fillColor="#ff000000"
-            android:pathData="@string/ms_warning_default_path"/>
+            android:pathData="@string/ms_warning_default_path" />
 
     </group>
 

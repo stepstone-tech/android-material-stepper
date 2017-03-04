@@ -5,10 +5,32 @@
     <target android:name="circle">
         <aapt:attr name="android:animation">
             <objectAnimator
-                android:duration="@integer/ms_default_error_tab_animation_duration"
+                android:duration="1"
+                android:startOffset="299"
                 android:propertyName="fillAlpha"
                 android:valueFrom="1"
                 android:valueTo="0" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="circle_group">
+        <aapt:attr name="android:animation">
+            <set>
+
+                <objectAnimator
+                    android:propertyName="scaleX"
+                    android:valueFrom="1"
+                    android:valueTo="0.5"
+                    android:interpolator="@android:anim/accelerate_interpolator"
+                    android:duration="@integer/ms_default_error_tab_animation_duration" />
+
+                <objectAnimator
+                    android:propertyName="scaleY"
+                    android:valueFrom="1"
+                    android:valueTo="0.5"
+                    android:interpolator="@android:anim/accelerate_interpolator"
+                    android:duration="@integer/ms_default_error_tab_animation_duration" />
+            </set>
         </aapt:attr>
     </target>
 
