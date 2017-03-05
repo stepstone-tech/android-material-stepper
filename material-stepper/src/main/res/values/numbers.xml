@@ -3,6 +3,8 @@
 
     <integer name="ms_default_error_tab_animation_duration">300</integer>
 
-    <integer name="ms_warning_translate_y">2</integer>
+    <integer name="ms_warning_end_translate_y">2</integer>
+
+    <item name="ms_circle_start_scale" type="integer" format="float">0.5</item>
 
 </resources>

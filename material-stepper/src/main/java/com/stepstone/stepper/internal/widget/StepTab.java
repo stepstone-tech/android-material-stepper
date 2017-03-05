@@ -305,12 +305,17 @@ public class StepTab extends RelativeLayout {
 
     private class WarningState extends AbstractState {
 
+        private static final float HALF_SIZE_SCALE = 0.5f;
+        private static final float FULL_SIZE_SCALE = 1.0f;
+
         @Override
         protected void changeToDone() {
             AnimatedVectorDrawableCompat avd = createWarningToCircleDrawable();
             mStepIconBackground.setImageDrawable(avd);
             avd.start();
-            mStepDoneIndicator.setVisibility(View.VISIBLE);
+
+            animateViewIn(mStepDoneIndicator);
+
             mStepIconBackground.setColorFilter(mSelectedColor);
             mStepTitle.setTextColor(mTitleColor);
             super.changeToDone();
@@ -321,7 +326,9 @@ public class StepTab extends RelativeLayout {
             AnimatedVectorDrawableCompat avd = createWarningToCircleDrawable();
             mStepIconBackground.setImageDrawable(avd);
             avd.start();
-            mStepNumber.setVisibility(View.VISIBLE);
+
+            animateViewIn(mStepNumber);
+
             mStepIconBackground.setColorFilter(mUnselectedColor);
             mStepTitle.setTextColor(mTitleColor);
             mStepTitle.setAlpha(INACTIVE_STEP_TITLE_ALPHA);
@@ -334,10 +341,22 @@ public class StepTab extends RelativeLayout {
             AnimatedVectorDrawableCompat avd = createWarningToCircleDrawable();
             mStepIconBackground.setImageDrawable(avd);
             avd.start();
-            mStepNumber.setVisibility(View.VISIBLE);
+
+            animateViewIn(mStepNumber);
+
             mStepIconBackground.setColorFilter(mSelectedColor);
             mStepTitle.setTextColor(mTitleColor);
             super.changeToActiveNumber();
+        }
+
+        private void animateViewIn(final View view) {
+            view.setVisibility(View.VISIBLE);
+            view.setScaleX(HALF_SIZE_SCALE);
+            view.setScaleY(HALF_SIZE_SCALE);
+            view.animate()
+                    .scaleX(FULL_SIZE_SCALE)
+                    .scaleY(FULL_SIZE_SCALE);
+
         }
     }
 

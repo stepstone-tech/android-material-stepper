@@ -6,7 +6,7 @@
 
     <group
         android:name="container"
-        android:translateY="@integer/ms_warning_translate_y">
+        android:translateY="@integer/ms_warning_end_translate_y">
 
         <path
             android:name="outer_layer"

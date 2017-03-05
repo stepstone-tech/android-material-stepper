@@ -33,7 +33,7 @@
                 android:interpolator="@android:anim/accelerate_interpolator"
                 android:propertyName="translateY"
                 android:valueFrom="0"
-                android:valueTo="@integer/ms_warning_translate_y" />
+                android:valueTo="@integer/ms_warning_end_translate_y" />
         </aapt:attr>
     </target>
 

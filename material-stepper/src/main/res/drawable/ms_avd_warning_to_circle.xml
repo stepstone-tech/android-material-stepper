@@ -19,24 +19,24 @@
                 <objectAnimator
                     android:duration="@integer/ms_default_error_tab_animation_duration"
                     android:propertyName="scaleX"
-                    android:valueFrom="0.5"
+                    android:valueFrom="@integer/ms_circle_start_scale"
                     android:valueTo="1" />
 
                 <objectAnimator
                     android:duration="@integer/ms_default_error_tab_animation_duration"
                     android:propertyName="scaleY"
-                    android:valueFrom="0.5"
+                    android:valueFrom="@integer/ms_circle_start_scale"
                     android:valueTo="1" />
             </set>
         </aapt:attr>
     </target>
 
-    <target android:name="warning">
+    <target android:name="container">
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:duration="@integer/ms_default_error_tab_animation_duration"
                 android:propertyName="translateY"
-                android:valueFrom="@integer/ms_warning_translate_y"
+                android:valueFrom="@integer/ms_warning_end_translate_y"
                 android:valueTo="0" />
         </aapt:attr>
     </target>

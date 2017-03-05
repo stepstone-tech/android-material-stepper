@@ -4,6 +4,7 @@
 
     <target android:name="circle">
         <aapt:attr name="android:animation">
+            <!-- This hack is needed since setting duration to 0 and startOffset to 300 does not trigger the animation... -->
             <objectAnimator
                 android:duration="1"
                 android:startOffset="299"
@@ -20,27 +21,27 @@
                 <objectAnimator
                     android:propertyName="scaleX"
                     android:valueFrom="1"
-                    android:valueTo="0.5"
+                    android:valueTo="@integer/ms_circle_start_scale"
                     android:interpolator="@android:anim/accelerate_interpolator"
                     android:duration="@integer/ms_default_error_tab_animation_duration" />
 
                 <objectAnimator
                     android:propertyName="scaleY"
                     android:valueFrom="1"
-                    android:valueTo="0.5"
+                    android:valueTo="@integer/ms_circle_start_scale"
                     android:interpolator="@android:anim/accelerate_interpolator"
                     android:duration="@integer/ms_default_error_tab_animation_duration" />
             </set>
         </aapt:attr>
     </target>
 
-    <target android:name="warning">
+    <target android:name="container">
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:duration="@integer/ms_default_error_tab_animation_duration"
                 android:propertyName="translateY"
                 android:valueFrom="0"
-                android:valueTo="@integer/ms_warning_translate_y" />
+                android:valueTo="@integer/ms_warning_end_translate_y" />
         </aapt:attr>
     </target>
 

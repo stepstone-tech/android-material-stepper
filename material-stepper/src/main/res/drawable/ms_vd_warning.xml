@@ -4,24 +4,24 @@
     android:viewportHeight="24.0"
     android:viewportWidth="24.0">
 
-    <group
-        android:name="circle_group"
-        android:pivotX="12"
-        android:pivotY="12"
-        android:scaleX="0.5"
-        android:scaleY="0.5">
+    <group android:name="container"
+        android:translateY="@integer/ms_warning_end_translate_y">
 
-        <path
-            android:name="circle"
-            android:fillAlpha="0"
-            android:fillColor="#ff000000"
-            android:pathData="@string/ms_circle_path" />
+        <group
+            android:name="circle_group"
+            android:pivotX="12"
+            android:pivotY="12"
+            android:scaleX="@integer/ms_circle_start_scale"
+            android:scaleY="@integer/ms_circle_start_scale">
 
-    </group>
+            <path
+                android:name="circle"
+                android:fillAlpha="0"
+                android:fillColor="#ff000000"
+                android:pathData="@string/ms_circle_path" />
 
-    <group
-        android:name="warning"
-        android:translateY="@integer/ms_warning_translate_y">
+        </group>
+
 
         <path
             android:fillColor="#ff000000"
