@@ -23,7 +23,6 @@
 
         </group>
 
-
         <path
             android:fillColor="#ff000000"
             android:pathData="@string/ms_warning_path" />

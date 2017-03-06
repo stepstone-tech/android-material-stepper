@@ -18,8 +18,12 @@ package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.RestrictTo;
 import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
@@ -47,6 +51,10 @@ public class StepTab extends RelativeLayout {
     private static final float ALPHA_INACTIVE_STEP_TITLE = 0.54f;
 
     private static final float ALPHA_OPAQUE = 1.0f;
+
+    private static final float HALF_SIZE_SCALE = 0.5f;
+
+    private static final float FULL_SIZE_SCALE = 1.0f;
 
     @ColorInt
     private int mUnselectedColor;
@@ -108,7 +116,7 @@ public class StepTab extends RelativeLayout {
         Typeface typeface = mStepTitle.getTypeface();
         mNormalTypeface = Typeface.create(typeface, Typeface.NORMAL);
         mBoldTypeface = Typeface.create(typeface, Typeface.BOLD);
-        AnimatedVectorDrawableCompat avd = createCircleToWarningDrawable();
+        Drawable avd = createCircleToWarningDrawable();
         mStepIconBackground.setImageDrawable(avd);
     }
 
@@ -123,11 +131,13 @@ public class StepTab extends RelativeLayout {
 
     /**
      * Updates the UI state of the tab and sets {@link #mCurrentState} based on the arguments.
-     * @param error <code>true</code> if an error/warning should be shown, if <code>true</code> a warning will be shown
-     * @param done true the step was completed, if warning is not shown and this is <code>true</code> a done indicator will be shown
+     *
+     * @param error   <code>true</code> if an error/warning should be shown, if <code>true</code> a warning will be shown
+     * @param done    true the step was completed, if warning is not shown and this is <code>true</code> a done indicator will be shown
      * @param current true if this is the currently selected step
      */
     public void updateState(final boolean error, final boolean done, final boolean current) {
+        // FIXME: 05/03/2017 stop tabs from changing positions due to changing font type (does not happen e.g. on API 16, investigate further)
         mStepTitle.setTypeface(current ? mBoldTypeface : mNormalTypeface);
 
         if (error) {
@@ -177,13 +187,29 @@ public class StepTab extends RelativeLayout {
                 : getResources().getDimensionPixelOffset(R.dimen.ms_step_tab_divider_length);
     }
 
-    // FIXME: 05/03/2017 stop tabs from changing positions due to changing font type (does not happen e.g. on API 16, investigate further)
-    private AnimatedVectorDrawableCompat createCircleToWarningDrawable() {
-        return AnimatedVectorDrawableCompat.create(getContext(), R.drawable.ms_avd_circle_to_warning);
+    private Drawable createCircleToWarningDrawable() {
+        return createAnimatedVectorDrawable(R.drawable.ms_avd_circle_to_warning);
     }
 
-    private AnimatedVectorDrawableCompat createWarningToCircleDrawable() {
-        return AnimatedVectorDrawableCompat.create(getContext(), R.drawable.ms_avd_warning_to_circle);
+    private Drawable createWarningToCircleDrawable() {
+        return createAnimatedVectorDrawable(R.drawable.ms_avd_warning_to_circle);
+    }
+
+    /**
+     * Inflates an animated vector drawable. On Lollipop+ this uses the native {@link android.graphics.drawable.AnimatedVectorDrawable}
+     * and below it inflates the drawable as a {@link AnimatedVectorDrawableCompat}.
+     *
+     * @param animatedVectorDrawableResId resource ID for the animated vector
+     * @return animated vector drawable
+     */
+    public Drawable createAnimatedVectorDrawable(@DrawableRes int animatedVectorDrawableResId) {
+        Context context = getContext();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Drawable drawable = context.getDrawable(animatedVectorDrawableResId);
+            return drawable.getConstantState().newDrawable(context.getResources());
+        } else {
+            return AnimatedVectorDrawableCompat.create(context, animatedVectorDrawableResId);
+        }
     }
 
     /**
@@ -192,10 +218,10 @@ public class StepTab extends RelativeLayout {
      * when transitioning to other states, e.g. which views to hide or tint.</p>
      * <p>Subclasses include:</p>
      * <ul>
-     *     <li>{@link InactiveNumberState} - for when we show the step number, but this step still hasn't been reached</li>
-     *     <li>{@link ActiveNumberState} - for when we show the step number of the currently active tab</li>
-     *     <li>{@link DoneState} - for when the step has already been completed and the user has moved to the next step</li>
-     *     <li>{@link WarningState} - for when there has been an error on this step (if {@link StepperLayout#setShowErrorStateEnabled(boolean)} or <code>ms_showErrorStateEnabled</code> was set to <i>true</i>)</li>
+     * <li>{@link InactiveNumberState} - for when we show the step number, but this step still hasn't been reached</li>
+     * <li>{@link ActiveNumberState} - for when we show the step number of the currently active tab</li>
+     * <li>{@link DoneState} - for when the step has already been completed and the user has moved to the next step</li>
+     * <li>{@link WarningState} - for when there has been an error on this step (if {@link StepperLayout#setShowErrorStateEnabled(boolean)} or <code>ms_showErrorStateEnabled</code> was set to <i>true</i>)</li>
      * </ul>
      */
     private abstract class AbstractState {
@@ -230,9 +256,9 @@ public class StepTab extends RelativeLayout {
         @Override
         @CallSuper
         protected void changeToWarning() {
-            AnimatedVectorDrawableCompat avd = createCircleToWarningDrawable();
+            Drawable avd = createCircleToWarningDrawable();
             mStepIconBackground.setImageDrawable(avd);
-            avd.start();
+            ((Animatable) avd).start();
             super.changeToWarning();
         }
 
@@ -301,24 +327,17 @@ public class StepTab extends RelativeLayout {
 
         @Override
         protected void changeToWarning() {
-            AnimatedVectorDrawableCompat avd = createCircleToWarningDrawable();
+            Drawable avd = createCircleToWarningDrawable();
             mStepIconBackground.setImageDrawable(avd);
-            avd.start();
+            ((Animatable) avd).start();
             super.changeToWarning();
         }
     }
 
     private class WarningState extends AbstractState {
 
-        private static final float HALF_SIZE_SCALE = 0.5f;
-        private static final float FULL_SIZE_SCALE = 1.0f;
-
         @Override
         protected void changeToDone() {
-            AnimatedVectorDrawableCompat avd = createWarningToCircleDrawable();
-            mStepIconBackground.setImageDrawable(avd);
-            avd.start();
-
             animateViewIn(mStepDoneIndicator);
 
             mStepIconBackground.setColorFilter(mSelectedColor);
@@ -328,10 +347,6 @@ public class StepTab extends RelativeLayout {
 
         @Override
         protected void changeToInactiveNumber() {
-            AnimatedVectorDrawableCompat avd = createWarningToCircleDrawable();
-            mStepIconBackground.setImageDrawable(avd);
-            avd.start();
-
             animateViewIn(mStepNumber);
 
             mStepIconBackground.setColorFilter(mUnselectedColor);
@@ -343,10 +358,6 @@ public class StepTab extends RelativeLayout {
 
         @Override
         protected void changeToActiveNumber() {
-            AnimatedVectorDrawableCompat avd = createWarningToCircleDrawable();
-            mStepIconBackground.setImageDrawable(avd);
-            avd.start();
-
             animateViewIn(mStepNumber);
 
             mStepIconBackground.setColorFilter(mSelectedColor);
@@ -355,6 +366,10 @@ public class StepTab extends RelativeLayout {
         }
 
         private void animateViewIn(final View view) {
+            Drawable avd = createWarningToCircleDrawable();
+            mStepIconBackground.setImageDrawable(avd);
+            ((Animatable) avd).start();
+
             view.setVisibility(View.VISIBLE);
             view.setAlpha(ALPHA_TRANSPARENT);
             view.setScaleX(HALF_SIZE_SCALE);
