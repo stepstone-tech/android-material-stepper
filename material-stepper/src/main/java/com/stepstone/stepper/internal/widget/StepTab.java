@@ -26,6 +26,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,9 +42,11 @@ import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 @RestrictTo(LIBRARY)
 public class StepTab extends RelativeLayout {
 
-    private static final float INACTIVE_STEP_TITLE_ALPHA = 0.54f;
+    private static final float ALPHA_TRANSPARENT = 0.0f;
 
-    private static final int OPAQUE_ALPHA = 1;
+    private static final float ALPHA_INACTIVE_STEP_TITLE = 0.54f;
+
+    private static final float ALPHA_OPAQUE = 1.0f;
 
     @ColorInt
     private int mUnselectedColor;
@@ -75,6 +78,8 @@ public class StepTab extends RelativeLayout {
      * Current UI state of the tab. See {@link AbstractState} for more details.
      */
     private AbstractState mCurrentState = new InactiveNumberState();
+
+    private AccelerateInterpolator accelerateInterpolator = new AccelerateInterpolator();
 
     public StepTab(Context context) {
         this(context, null);
@@ -172,7 +177,7 @@ public class StepTab extends RelativeLayout {
                 : getResources().getDimensionPixelOffset(R.dimen.ms_step_tab_divider_length);
     }
 
-    // FIXME: 04/03/2017 fix animations on L+ (you can see the triangle inside of the circle if you look closely...)
+    // FIXME: 05/03/2017 stop tabs from changing positions due to changing font type (does not happen e.g. on API 16, investigate further)
     private AnimatedVectorDrawableCompat createCircleToWarningDrawable() {
         return AnimatedVectorDrawableCompat.create(getContext(), R.drawable.ms_avd_circle_to_warning);
     }
@@ -247,21 +252,21 @@ public class StepTab extends RelativeLayout {
         protected void changeToInactiveNumber() {
             mStepIconBackground.setColorFilter(mUnselectedColor);
             mStepTitle.setTextColor(mTitleColor);
-            mStepTitle.setAlpha(INACTIVE_STEP_TITLE_ALPHA);
+            mStepTitle.setAlpha(ALPHA_INACTIVE_STEP_TITLE);
             super.changeToInactiveNumber();
         }
 
         @Override
         protected void changeToActiveNumber() {
             mStepIconBackground.setColorFilter(mSelectedColor);
-            mStepTitle.setAlpha(OPAQUE_ALPHA);
+            mStepTitle.setAlpha(ALPHA_OPAQUE);
             super.changeToActiveNumber();
         }
 
         @Override
         protected void changeToDone() {
             mStepIconBackground.setColorFilter(mSelectedColor);
-            mStepTitle.setAlpha(OPAQUE_ALPHA);
+            mStepTitle.setAlpha(ALPHA_OPAQUE);
             super.changeToDone();
         }
     }
@@ -271,7 +276,7 @@ public class StepTab extends RelativeLayout {
         @Override
         protected void changeToInactiveNumber() {
             mStepIconBackground.setColorFilter(mUnselectedColor);
-            mStepTitle.setAlpha(INACTIVE_STEP_TITLE_ALPHA);
+            mStepTitle.setAlpha(ALPHA_INACTIVE_STEP_TITLE);
             super.changeToInactiveNumber();
         }
     }
@@ -283,7 +288,7 @@ public class StepTab extends RelativeLayout {
             mStepDoneIndicator.setVisibility(GONE);
             mStepNumber.setVisibility(VISIBLE);
             mStepIconBackground.setColorFilter(mUnselectedColor);
-            mStepTitle.setAlpha(INACTIVE_STEP_TITLE_ALPHA);
+            mStepTitle.setAlpha(ALPHA_INACTIVE_STEP_TITLE);
             super.changeToInactiveNumber();
         }
 
@@ -331,7 +336,7 @@ public class StepTab extends RelativeLayout {
 
             mStepIconBackground.setColorFilter(mUnselectedColor);
             mStepTitle.setTextColor(mTitleColor);
-            mStepTitle.setAlpha(INACTIVE_STEP_TITLE_ALPHA);
+            mStepTitle.setAlpha(ALPHA_INACTIVE_STEP_TITLE);
 
             super.changeToInactiveNumber();
         }
@@ -351,9 +356,12 @@ public class StepTab extends RelativeLayout {
 
         private void animateViewIn(final View view) {
             view.setVisibility(View.VISIBLE);
+            view.setAlpha(ALPHA_TRANSPARENT);
             view.setScaleX(HALF_SIZE_SCALE);
             view.setScaleY(HALF_SIZE_SCALE);
             view.animate()
+                    .setInterpolator(accelerateInterpolator)
+                    .alpha(ALPHA_OPAQUE)
                     .scaleX(FULL_SIZE_SCALE)
                     .scaleY(FULL_SIZE_SCALE);
 

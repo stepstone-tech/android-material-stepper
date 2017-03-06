@@ -5,18 +5,13 @@
     android:viewportWidth="24.0">
 
     <group
-        android:name="container"
+        android:name="icon_container"
         android:translateY="0">
 
         <path
-            android:name="outer_layer"
+            android:name="icon"
             android:fillColor="#ff000000"
-            android:pathData="@string/ms_warning_outer_layer_expanded_path" />
-
-        <path
-            android:name="original_warning"
-            android:fillColor="#ff000000"
-            android:pathData="@string/ms_warning_filled_path" />
+            android:pathData="@string/ms_circle_path" />
 
     </group>
 

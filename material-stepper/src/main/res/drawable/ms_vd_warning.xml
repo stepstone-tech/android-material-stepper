@@ -4,7 +4,8 @@
     android:viewportHeight="24.0"
     android:viewportWidth="24.0">
 
-    <group android:name="container"
+    <group
+        android:name="icon_container"
         android:translateY="@integer/ms_warning_end_translate_y">
 
         <group
@@ -25,7 +26,7 @@
 
         <path
             android:fillColor="#ff000000"
-            android:pathData="@string/ms_warning_default_path" />
+            android:pathData="@string/ms_warning_path" />
 
     </group>
 

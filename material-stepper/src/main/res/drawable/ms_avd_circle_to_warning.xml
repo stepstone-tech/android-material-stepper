@@ -21,21 +21,21 @@
                 <objectAnimator
                     android:propertyName="scaleX"
                     android:valueFrom="1"
+                    android:interpolator="@android:anim/decelerate_interpolator"
                     android:valueTo="@integer/ms_circle_start_scale"
-                    android:interpolator="@android:anim/accelerate_interpolator"
                     android:duration="@integer/ms_default_error_tab_animation_duration" />
 
                 <objectAnimator
                     android:propertyName="scaleY"
                     android:valueFrom="1"
                     android:valueTo="@integer/ms_circle_start_scale"
-                    android:interpolator="@android:anim/accelerate_interpolator"
+                    android:interpolator="@android:anim/decelerate_interpolator"
                     android:duration="@integer/ms_default_error_tab_animation_duration" />
             </set>
         </aapt:attr>
     </target>
 
-    <target android:name="container">
+    <target android:name="icon_container">
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:duration="@integer/ms_default_error_tab_animation_duration"

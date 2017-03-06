@@ -2,35 +2,23 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/ms_vd_circle">
 
-    <target android:name="outer_layer">
+    <target android:name="icon">
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:duration="@integer/ms_default_error_tab_animation_duration"
-                android:interpolator="@android:anim/accelerate_interpolator"
+                android:interpolator="@android:anim/decelerate_interpolator"
                 android:propertyName="pathData"
-                android:valueFrom="@string/ms_warning_outer_layer_expanded_path"
-                android:valueTo="@string/ms_warning_outer_layer_collapsed_path"
+                android:valueFrom="@string/ms_circle_path"
+                android:valueTo="@string/ms_warning_path"
                 android:valueType="pathType" />
         </aapt:attr>
     </target>
 
-    <target android:name="original_warning">
+    <target android:name="icon_container">
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:duration="@integer/ms_default_error_tab_animation_duration"
-                android:interpolator="@android:anim/accelerate_interpolator"
-                android:propertyName="pathData"
-                android:valueFrom="@string/ms_warning_filled_path"
-                android:valueTo="@string/ms_warning_default_path"
-                android:valueType="pathType" />
-        </aapt:attr>
-    </target>
-
-    <target android:name="container">
-        <aapt:attr name="android:animation">
-            <objectAnimator
-                android:duration="@integer/ms_default_error_tab_animation_duration"
-                android:interpolator="@android:anim/accelerate_interpolator"
+                android:interpolator="@android:anim/decelerate_interpolator"
                 android:propertyName="translateY"
                 android:valueFrom="0"
                 android:valueTo="@integer/ms_warning_end_translate_y" />

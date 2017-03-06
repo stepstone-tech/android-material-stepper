@@ -5,18 +5,13 @@
     android:viewportWidth="24.0">
 
     <group
-        android:name="container"
+        android:name="icon_container"
         android:translateY="@integer/ms_warning_end_translate_y">
 
         <path
-            android:name="outer_layer"
+            android:name="icon"
             android:fillColor="#ff000000"
-            android:pathData="@string/ms_warning_outer_layer_collapsed_path" />
-
-        <path
-            android:name="original_warning"
-            android:fillColor="#ff000000"
-            android:pathData="@string/ms_warning_default_path" />
+            android:pathData="@string/ms_warning_path" />
 
     </group>
 
