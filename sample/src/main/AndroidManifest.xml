@@ -35,6 +35,7 @@
         <activity android:name=".NoFragmentsActivity" />
         <activity android:name=".ProceedProgrammaticallyActivity"
             android:windowSoftInputMode="stateVisible"/>
+        <activity android:name=".DisabledTabNavigationActivity" />
         <activity
             android:name=".CustomStepperLayoutThemeActivity"
             android:theme="@style/AppThemeDark" />

@@ -118,6 +118,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ProceedProgrammaticallyActivity.class));
     }
 
+    @OnClick(R.id.disabledTabNavigation)
+    public void onDisabledTabNavigation(View view){
+        startActivity(new Intent(this, DisabledTabNavigationActivity.class));
+    }
+
     @OnClick(R.id.customStepperLayoutTheme)
     public void onCustomStepperLayoutThemeWithTabs(View view){
         startActivity(new Intent(this, CustomStepperLayoutThemeActivity.class));

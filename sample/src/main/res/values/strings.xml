@@ -17,6 +17,7 @@
     <string name="show_back_button">Show Back button on first step</string>
     <string name="no_fragments">No Fragment Stepper</string>
     <string name="proceed_programmatically">Proceed programmatically</string>
+    <string name="disabled_tab_navigation">Disabled tab navigation</string>
     <string name="custom_stepperlayout_theme">Custom StepperLayout theme</string>
 
     <string name="tab_title">Tab title</string>

@@ -355,8 +355,9 @@ For other examples, e.g. persisting state on rotation, displaying errors, changi
 | *ms_tabStepDividerWidth*        | dimension or reference                    | The width of the horizontal tab divider used in tabs stepper type            |
 | *ms_showBackButtonOnFirstStep*  | boolean                                   | Flag indicating if the Back (Previous step) button should be shown on the first step. False by default.            |
 | *ms_errorColor*                 | color or reference                        | Error color in Tabs stepper |
-| *ms_showErrorStateEnabled*      | boolean                                   | Flag indicating whether to show the error state. Only available with 'tabs' type. False by default. |
-| *ms_showErrorStateOnBackEnabled*| boolean                                   | Flag indicating whether to keep showing the error state when user moves back. Only available with 'tabs' type. False by default. |
+| *ms_showErrorStateEnabled*      | boolean                                   | Flag indicating whether to show the error state. Only applicable for 'tabs' type. False by default. |
+| *ms_showErrorStateOnBackEnabled*| boolean                                   | Flag indicating whether to keep showing the error state when user moves back. Only applicable for 'tabs' type. False by default. |
+| *ms_tabNavigationEnabled*       | boolean                                   | Flag indicating whether step navigation is possible by clicking on the tabs directly. Only applicable for 'tabs' type. True by default. |
 | *ms_stepperLayoutTheme*         | reference                                 | Theme to use for even more custom styling of the stepper layout. It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used. |
 
 ### StepperLayout style attributes 

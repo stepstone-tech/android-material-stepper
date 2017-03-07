@@ -222,6 +222,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private boolean mShowErrorStateOnBackEnabled;
 
+    private boolean mTabNavigationEnabled;
+
     @StyleRes
     private int mStepperLayoutTheme;
 
@@ -337,10 +339,12 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     @Override
     @UiThread
     public void onTabClicked(int position) {
-        if (position > mCurrentStepPosition) {
-            onNext();
-        } else if (position < mCurrentStepPosition) {
-            setCurrentStepPosition(position);
+        if (mTabNavigationEnabled) {
+            if (position > mCurrentStepPosition) {
+                onNext();
+            } else if (position < mCurrentStepPosition) {
+                setCurrentStepPosition(position);
+            }
         }
     }
 
@@ -434,6 +438,21 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      */
     public boolean isShowErrorStateOnBackEnabled() {
         return mShowErrorStateOnBackEnabled;
+    }
+
+    /**
+     * @return true if step navigation is possible by clicking on the tabs directly, false otherwise
+     */
+    public boolean isTabNavigationEnabled() {
+        return mTabNavigationEnabled;
+    }
+
+    /**
+     * Sets whether step navigation is possible by clicking on the tabs directly. Only applicable for 'tabs' type.
+     * @param tabNavigationEnabled true if step navigation is possible by clicking on the tabs directly, false otherwise
+     */
+    public void setTabNavigationEnabled(boolean tabNavigationEnabled) {
+        mTabNavigationEnabled = tabNavigationEnabled;
     }
 
     /**
@@ -620,6 +639,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
             mShowErrorStateOnBackEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBack, false);
             mShowErrorStateOnBackEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBackEnabled, mShowErrorStateOnBackEnabled);
+
+            mTabNavigationEnabled = a.getBoolean(R.styleable.StepperLayout_ms_tabNavigationEnabled, true);
 
             mStepperLayoutTheme = a.getResourceId(R.styleable.StepperLayout_ms_stepperLayoutTheme, R.style.MSDefaultStepperLayoutTheme);
 

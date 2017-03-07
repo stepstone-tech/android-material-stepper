@@ -55,14 +55,17 @@ limitations under the License.
         <!-- DEPRECATED: Use ms_showErrorStateEnabled instead -->
         <attr name="ms_showErrorState" format="boolean" />
 
-        <!-- Flag indicating whether to show the error state. Only available with 'tabs' type. False by default. -->
+        <!-- Flag indicating whether to show the error state. Only applicable for 'tabs' type. False by default. -->
         <attr name="ms_showErrorStateEnabled" format="boolean" />
 
         <!-- DEPRECATED: Use ms_showErrorStateOnBackEnabled instead -->
         <attr name="ms_showErrorStateOnBack" format="boolean" />
 
-        <!-- Flag indicating whether to keep showing the error state when user moves back. Only available with 'tabs' type. False by default. -->
+        <!-- Flag indicating whether to keep showing the error state when user moves back. Only applicable for 'tabs' type. False by default. -->
         <attr name="ms_showErrorStateOnBackEnabled" format="boolean" />
+
+        <!-- Flag indicating whether step navigation is possible by clicking on the tabs directly. Only applicable for 'tabs' type. True by default. -->
+        <attr name="ms_tabNavigationEnabled" format="boolean" />
 
         <!-- Theme to use for even more custom styling of the stepper layout.
              It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used.
