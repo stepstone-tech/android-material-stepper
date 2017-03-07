@@ -47,8 +47,8 @@ public class ProgressBarStepperType extends AbstractStepperType {
      * {@inheritDoc}
      */
     @Override
-    public void onStepSelected(int newStepPosition) {
-        mProgressBar.setProgress(newStepPosition + 1);
+    public void onStepSelected(int newStepPosition, boolean userTriggeredChange) {
+        mProgressBar.setProgressCompat(newStepPosition + 1, userTriggeredChange);
     }
 
     /**

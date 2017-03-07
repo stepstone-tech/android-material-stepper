@@ -62,7 +62,7 @@ public class TabsStepperType extends AbstractStepperType {
      * {@inheritDoc}
      */
     @Override
-    public void onStepSelected(int newStepPosition) {
+    public void onStepSelected(int newStepPosition, boolean userTriggeredChange) {
         if (!stepperLayout.isShowErrorStateEnabled()) {
             mStepErrors.clear();
         }

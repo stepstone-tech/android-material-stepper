@@ -57,10 +57,11 @@ public abstract class AbstractStepperType {
     }
 
     /**
-     * Called when a step gets selected as the new current step
+     * Called when a step gets selected as the new current step.
      * @param newStepPosition new current step position
+     * @param userTriggeredChange <code>true</code> if current step position changed as a direct result of user interaction
      */
-    public abstract void onStepSelected(int newStepPosition);
+    public abstract void onStepSelected(int newStepPosition, boolean userTriggeredChange);
 
     /**
      * Called to set whether the stepPosition has an error or not, changing it's appearance.

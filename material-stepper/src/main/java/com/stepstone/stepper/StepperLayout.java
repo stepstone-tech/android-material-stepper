@@ -681,7 +681,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     private void invalidateCurrentPosition() {
-        mStepperType.onStepSelected(mCurrentStepPosition);
+        mStepperType.onStepSelected(mCurrentStepPosition, false);
     }
 
     private boolean verifyCurrentStep(Step step) {
@@ -714,13 +714,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mListener.onCompleted(mCompleteNavigationButton);
     }
 
-    private void onUpdate(int newStepPosition, boolean animateButtons) {
+    private void onUpdate(int newStepPosition, boolean userTriggeredChange) {
         mPager.setCurrentItem(newStepPosition);
         final boolean isLast = isLastPosition(newStepPosition);
         final boolean isFirst = newStepPosition == 0;
-        AnimationUtil.fadeViewVisibility(mNextNavigationButton, isLast ? View.GONE : View.VISIBLE, animateButtons);
-        AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, !isLast ? View.GONE : View.VISIBLE, animateButtons);
-        AnimationUtil.fadeViewVisibility(mBackNavigationButton, isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE, animateButtons);
+        AnimationUtil.fadeViewVisibility(mNextNavigationButton, isLast ? View.GONE : View.VISIBLE, userTriggeredChange);
+        AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, !isLast ? View.GONE : View.VISIBLE, userTriggeredChange);
+        AnimationUtil.fadeViewVisibility(mBackNavigationButton, isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE, userTriggeredChange);
 
         final StepViewModel viewModel = mStepAdapter.getViewModel(newStepPosition);
 
@@ -732,7 +732,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         setCompoundDrawablesForNavigationButtons(viewModel.getBackButtonStartDrawableResId(), viewModel.getNextButtonEndDrawableResId());
 
-        mStepperType.onStepSelected(newStepPosition);
+        mStepperType.onStepSelected(newStepPosition, userTriggeredChange);
         mListener.onStepSelected(newStepPosition);
         Step step = mStepAdapter.findStep(newStepPosition);
         if (step != null) {

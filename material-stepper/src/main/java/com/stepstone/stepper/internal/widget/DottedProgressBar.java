@@ -25,7 +25,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 
 import com.stepstone.stepper.R;
@@ -43,6 +43,8 @@ public class DottedProgressBar extends LinearLayout {
     private static final float HALF_SCALE = 0.5f;
     private static final int DURATION_IMMEDIATE = 0;
     private static final int SCALE_ANIMATION_DEFAULT_DURATION = 300;
+
+    private static final DecelerateInterpolator DEFAULT_INTERPOLATOR = new DecelerateInterpolator();
 
     @ColorInt
     private int mUnselectedColor;
@@ -111,13 +113,12 @@ public class DottedProgressBar extends LinearLayout {
 
     private void update(boolean shouldAnimate) {
         for (int i = 0; i < mDotCount; i++) {
-            final AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
             if (i == mCurrent) {
                 getChildAt(i).animate()
                         .scaleX(FULL_SCALE)
                         .scaleY(FULL_SCALE)
                         .setDuration(shouldAnimate ? SCALE_ANIMATION_DEFAULT_DURATION : DURATION_IMMEDIATE)
-                        .setInterpolator(interpolator)
+                        .setInterpolator(DEFAULT_INTERPOLATOR)
                         .start();
                 colorChildAtPosition(i, true);
             } else {
@@ -125,7 +126,7 @@ public class DottedProgressBar extends LinearLayout {
                         .scaleX(HALF_SCALE)
                         .scaleY(HALF_SCALE)
                         .setDuration(shouldAnimate ? SCALE_ANIMATION_DEFAULT_DURATION : DURATION_IMMEDIATE)
-                        .setInterpolator(interpolator)
+                        .setInterpolator(DEFAULT_INTERPOLATOR)
                         .start();
                 colorChildAtPosition(i, false);
             }

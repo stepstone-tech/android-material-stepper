@@ -54,8 +54,8 @@ public class DotsStepperType extends AbstractStepperType {
      * {@inheritDoc}
      */
     @Override
-    public void onStepSelected(int newStepPosition) {
-        mDottedProgressBar.setCurrent(newStepPosition, true);
+    public void onStepSelected(int newStepPosition, boolean userTriggeredChange) {
+        mDottedProgressBar.setCurrent(newStepPosition, userTriggeredChange);
     }
 
     /**
