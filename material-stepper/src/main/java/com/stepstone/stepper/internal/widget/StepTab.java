@@ -188,11 +188,11 @@ public class StepTab extends RelativeLayout {
     }
 
     private Drawable createCircleToWarningDrawable() {
-        return createAnimatedVectorDrawable(R.drawable.ms_avd_circle_to_warning);
+        return createAnimatedVectorDrawable(R.drawable.ms_animated_vector_circle_to_warning_24dp);
     }
 
     private Drawable createWarningToCircleDrawable() {
-        return createAnimatedVectorDrawable(R.drawable.ms_avd_warning_to_circle);
+        return createAnimatedVectorDrawable(R.drawable.ms_animated_vector_warning_to_circle_24dp);
     }
 
     /**

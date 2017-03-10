@@ -1,6 +1,6 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:drawable="@drawable/ms_vd_warning">
+    android:drawable="@drawable/ms_vector_warning_24dp">
 
     <target android:name="circle">
         <aapt:attr name="android:animation">

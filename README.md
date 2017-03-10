@@ -321,10 +321,10 @@ To do so you need to use ```AbstractStepAdapter``` instead of ```AbstractFragmen
 For an example of how to use it with views please see the sample app.
 
 ### Showing an error on tabs if step verification failed
-To show an error in the tabbed stepper if step verification fails you need to set `ms_showErrorState` attribute to `true`.
+To show an error in the tabbed stepper if step verification fails you need to set `ms_showErrorStateEnabled` attribute to `true`.
 <p><img src ="./gifs/error-on-tabs.gif" width="360" height="640"/></p>
 
-If you want to keep the error displayed when going back to the previous step you need to also set `ms_showErrorStateOnBack` to `true`.
+If you want to keep the error displayed when going back to the previous step you need to also set `ms_showErrorStateOnBackEnabled` to `true`.
 
 ### Custom styling
 Basic styling can be done by choosing the active and inactive step colors. 

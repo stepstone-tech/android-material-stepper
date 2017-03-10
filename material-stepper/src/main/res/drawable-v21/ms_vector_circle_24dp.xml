@@ -6,12 +6,12 @@
 
     <group
         android:name="icon_container"
-        android:translateY="@integer/ms_warning_end_translate_y">
+        android:translateY="0">
 
         <path
             android:name="icon"
-            android:fillColor="#ff000000"
-            android:pathData="@string/ms_warning_path" />
+            android:fillColor="@android:color/black"
+            android:pathData="@string/ms_circle_path" />
 
     </group>
 

@@ -53,14 +53,14 @@ public class StepViewModel {
 
     /**
      * Drawable resource ID to be used for next button's end compound drawable.
-     * {@link com.stepstone.stepper.R.drawable#ic_chevron_end} is the default.
+     * {@link com.stepstone.stepper.R.drawable#ms_ic_chevron_end} is the default.
      */
     @DrawableRes
     private int mNextButtonEndDrawableResId;
 
     /**
      * Drawable resource ID to be used for back button's start compound drawable.
-     * {@link com.stepstone.stepper.R.drawable#ic_chevron_start} is the default.
+     * {@link com.stepstone.stepper.R.drawable#ms_ic_chevron_start} is the default.
      */
     @DrawableRes
     private int mBackButtonStartDrawableResId;
@@ -105,10 +105,10 @@ public class StepViewModel {
         private CharSequence mBackButtonLabel;
 
         @DrawableRes
-        private int mNextButtonEndDrawableResId = R.drawable.ic_chevron_end;
+        private int mNextButtonEndDrawableResId = R.drawable.ms_ic_chevron_end;
 
         @DrawableRes
-        private int mBackButtonStartDrawableResId = R.drawable.ic_chevron_start;
+        private int mBackButtonStartDrawableResId = R.drawable.ms_ic_chevron_start;
 
         /**
          * Creates a builder for the step info.

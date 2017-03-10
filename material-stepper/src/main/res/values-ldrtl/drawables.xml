@@ -15,6 +15,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <resources>
-    <drawable name="ic_chevron_start">@drawable/ic_chevron_right</drawable>
-    <drawable name="ic_chevron_end">@drawable/ic_chevron_left</drawable>
+    <drawable name="ms_ic_chevron_start">@drawable/ms_ic_chevron_right</drawable>
+    <drawable name="ms_ic_chevron_end">@drawable/ms_ic_chevron_left</drawable>
 </resources>

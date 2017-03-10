@@ -18,13 +18,13 @@
             <path
                 android:name="circle"
                 android:fillAlpha="1"
-                android:fillColor="#ff000000"
+                android:fillColor="@android:color/black"
                 android:pathData="@string/ms_circle_path" />
 
         </group>
 
         <path
-            android:fillColor="#ff000000"
+            android:fillColor="@android:color/black"
             android:pathData="@string/ms_warning_path" />
 
     </group>
