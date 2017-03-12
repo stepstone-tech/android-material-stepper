@@ -87,6 +87,19 @@ public class DelayedTransitionStepFragmentSample extends ButterKnifeFragment imp
         }, 2000L);
     }
 
+    /**
+     * Notifies this step that the complete button/tab was clicked, the step was verified
+     * and the user can complete the flow. This is so that the current step might perform
+     * some last minute operations e.g. a network call before completing the flow.
+     * {@link StepperLayout.OnCompleteClickedCallback} must be called once these operations finish.
+     *
+     * @param callback callback to call once the user wishes to complete the flow
+     */
+    @Override
+    public void onCompleteClicked(StepperLayout.OnCompleteClickedCallback callback) {
+        // not needed here
+    }
+
     private boolean shouldOperationSucceed() {
         return operationSwitch.isChecked();
     }
