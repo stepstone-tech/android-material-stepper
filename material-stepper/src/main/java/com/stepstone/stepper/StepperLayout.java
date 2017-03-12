@@ -145,13 +145,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         @UiThread
         public void complete() {
-            final int totalStepCount = mStepAdapter.getCount();
-
-            if (mCurrentStepPosition < totalStepCount - 1) {
-                return;
-            }
-
-            onComplete();
+            invalidateCurrentPosition();
+            mListener.onCompleted(mCompleteNavigationButton);
         }
 
     }
@@ -421,6 +416,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     public void setShowErrorStateOnBackEnabled(boolean showErrorStateOnBackEnabled) {
         this.mShowErrorStateOnBackEnabled = showErrorStateOnBackEnabled;
     }
+
     /**
      * Set whether the errors should be displayed when they occur or not. Default is <code>false</code>.
      *
@@ -746,8 +742,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             invalidateCurrentPosition();
             return;
         }
-        invalidateCurrentPosition();
-        mListener.onCompleted(mCompleteNavigationButton);
+
+        OnCompleteClickedCallback onCompleteClickedCallback = new OnCompleteClickedCallback();
+        if (step instanceof BlockingStep) {
+            ((BlockingStep) step).onCompleteClicked(onCompleteClickedCallback);
+        } else {
+            onCompleteClickedCallback.complete();
+        }
     }
 
     private void onUpdate(int newStepPosition, boolean userTriggeredChange) {
