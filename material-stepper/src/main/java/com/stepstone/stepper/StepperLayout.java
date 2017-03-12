@@ -141,6 +141,21 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     }
 
+    public class OnCompleteClickedCallback extends AbstractOnButtonClickedCallback {
+
+        @UiThread
+        public void complete() {
+            final int totalStepCount = mStepAdapter.getCount();
+
+            if (mCurrentStepPosition < totalStepCount - 1) {
+                return;
+            }
+
+            onComplete();
+        }
+
+    }
+
     public class OnBackClickedCallback extends AbstractOnButtonClickedCallback {
 
         @UiThread
