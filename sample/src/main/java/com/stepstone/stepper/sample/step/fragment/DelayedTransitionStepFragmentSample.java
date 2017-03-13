@@ -97,7 +97,7 @@ public class DelayedTransitionStepFragmentSample extends ButterKnifeFragment imp
      */
     @Override
     public void onCompleteClicked(StepperLayout.OnCompleteClickedCallback callback) {
-        // not needed here
+       callback.complete();
     }
 
     private boolean shouldOperationSucceed() {
