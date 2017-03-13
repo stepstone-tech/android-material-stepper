@@ -13,7 +13,7 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 ## Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:3.0.0'
+compile 'com.stepstone.stepper:material-stepper:3.1.0'
 ```
 
 ## Supported steppers
@@ -181,16 +181,17 @@ In order to set that color:
 
 1. Create a new color selector in `res/color`
     
-    ```xml
+```xml
     <?xml version="1.0" encoding="utf-8"?>
     <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
         <item app:state_verification_failed="true" android:color="#30BDBDBD"/>
         <item android:color="@color/ms_white"/>
     </selector>
-    ```
+```
+
 2. Change button's (text) color in layout file
     
-    ```xml
+```xml
     <?xml version="1.0" encoding="utf-8"?>
     <com.stepstone.stepper.StepperLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -200,23 +201,28 @@ In order to set that color:
         app:ms_stepperType="dots"
         app:ms_nextButtonColor="@color/ms_custom_button_text_color"
         app:ms_completeButtonColor="@color/ms_custom_button_text_color" />
-    ```
+```
+
 3. Toggle the state in code
     
-    ```java
+```java
     mStepperLayout.setNextButtonVerificationFailed(!enabled);
     mStepperLayout.setCompleteButtonVerificationFailed(!enabled);
-    ```
+```
 
-### Make an IO operation before going to the next step (optional)
-If the user wants to e.g. save something in the database or make a network call on a separate Thread after clicking on the Next button
-he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step. If the user wants to perform
-the blocking operations on the final step, when clicking on the Complete button, he needs to invoke the `complete()` method of the  `StepperLayout.OnCompleteClickedCallback`.
+### Make extra operations before going to the next step (optional)
+After clicking on the Next button if the user wants to e.g.:
+* save something in the database
+* make a network call on a separate Thread
+* simply save the data from the current step to some other component or parent Activity
+
+he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step.
+If the user wants to perform these operations on the final step, when clicking on the Complete button, he needs to invoke the `complete()` method of the  `StepperLayout.OnCompleteClickedCallback`.
 While operations are performed, and the user would like to go back you can cancel them and then invoke `onBackClicked()` method of the `StepperLayout.OnBackClickedCallback`.
 <p><img src ="./gifs/delayed-transition.gif" width="360" height="640"/></p>
-The fragment must implement `BlockingStep` instead of `Step`.
-Also, make sure that `goToNextStep()` gets called on the main thread.
-**Note:** the `onNextClicked(StepperLayout.OnNextClickedCallback)` method gets invoked after step verification.
+To do so the fragment/view must implement `BlockingStep` instead of `Step`.
+Also, make sure that `goToNextStep()` and/or `complete()` get called on the main thread.
+**Note:** `onNextClicked(StepperLayout.OnNextClickedCallback)` and ``onCompleteClicked(StepperLayout.OnCompleteClickedCallback)`` methods get invoked after step verification.
 E.g.:
 
 ```java
@@ -262,6 +268,7 @@ but display 'Summary' just before the last page.
 You might also want to use your custom icons instead of the default navigation button compound drawables or not show the compound drawables for some of the buttons.
 <p><img src ="./gifs/custom-navigation-buttons.gif" width="360" height="640"/></p>
 In such case you need to override the `getViewModel(int)` method from the `StepAdapter` e.g.
+
 ```java
     @NonNull
     @Override
