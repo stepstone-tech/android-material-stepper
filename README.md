@@ -210,7 +210,8 @@ In order to set that color:
 
 ### Make an IO operation before going to the next step (optional)
 If the user wants to e.g. save something in the database or make a network call on a separate Thread after clicking on the Next button
-he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step.
+he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step. If the user wants to perform
+the blocking operations on the final step, when clicking on the Complete button, he needs to invoke the `complete()` method of the  `StepperLayout.OnCompleteClickedCallback`.
 While operations are performed, and the user would like to go back you can cancel them and then invoke `onBackClicked()` method of the `StepperLayout.OnBackClickedCallback`.
 <p><img src ="./gifs/delayed-transition.gif" width="360" height="640"/></p>
 The fragment must implement `BlockingStep` instead of `Step`.
@@ -230,6 +231,17 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
             @Override
             public void run() {
                 callback.goToNextStep();
+            }
+        }, 2000L);
+    }
+
+    @Override
+    @UiThread
+    public void onCompleteClicked(final StepperLayout.OnCompleteClickedCallback callback) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                callback.complete();
             }
         }, 2000L);
     }
