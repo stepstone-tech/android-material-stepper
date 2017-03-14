@@ -219,6 +219,7 @@ he can perform these operations and then invoke the `goToNextStep()` method of t
 If the user wants to perform these operations on the final step, when clicking on the Complete button, he needs to invoke the `complete()` method of the  `StepperLayout.OnCompleteClickedCallback`.
 While operations are performed, and the user would like to go back you can cancel them and then invoke `onBackClicked()` method of the `StepperLayout.OnBackClickedCallback`.
 <p><img src ="./gifs/delayed-transition.gif" width="360" height="640"/></p>
+
 To do so the fragment/view must implement `BlockingStep` instead of `Step`.
 Also, make sure that `goToNextStep()` and/or `complete()` get called on the main thread.
 **Note:** `onNextClicked(StepperLayout.OnNextClickedCallback)` and ``onCompleteClicked(StepperLayout.OnCompleteClickedCallback)`` methods get invoked after step verification.
