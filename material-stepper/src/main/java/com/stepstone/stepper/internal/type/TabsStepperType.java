@@ -18,6 +18,7 @@ package com.stepstone.stepper.internal.type;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
+import android.util.SparseBooleanArray;
 import android.view.View;
 
 import com.stepstone.stepper.R;
@@ -54,6 +55,7 @@ public class TabsStepperType extends AbstractStepperType {
 
         if (stepperLayout.isInEditMode()) {
             mTabsContainer.setSteps(EDIT_MODE_STEP_TITLES);
+            mTabsContainer.updateSteps(0, new SparseBooleanArray());
             mTabsContainer.setVisibility(View.VISIBLE);
         }
     }
@@ -63,7 +65,7 @@ public class TabsStepperType extends AbstractStepperType {
      */
     @Override
     public void onStepSelected(int newStepPosition, boolean userTriggeredChange) {
-        if (!stepperLayout.isShowErrorStateEnabled()) {
+        if (!mStepperLayout.isShowErrorStateEnabled()) {
             mStepErrors.clear();
         }
         mTabsContainer.updateSteps(newStepPosition, mStepErrors);

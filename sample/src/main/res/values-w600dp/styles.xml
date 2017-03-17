@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="MainCoordinatorLayoutStyle">
+        <item name="android:background">#eeeeee</item>
+    </style>
+
+    <style name="MainAppBarLayoutStyle">
+        <item name="android:layout_height">172dp</item>
+    </style>
+
+    <style name="MainToolbarStyle">
+        <item name="layout_collapseMode">parallax</item>
+    </style>
+
+    <style name="MainListStyle">
+        <item name="android:layout_width">@dimen/max_main_list_width</item>
+        <item name="android:elevation" tools:targetApi="lollipop">4dp</item>
+        <item name="android:layout_marginTop">-64dp</item>
+    </style>
+
+</resources>

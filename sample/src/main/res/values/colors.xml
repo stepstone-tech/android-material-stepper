@@ -11,4 +11,9 @@
     <color name="darkColorPrimaryDark">#000000</color>
 
     <color name="contentTextColor">#DD000000</color>
+
+    <color name="white_87_opacity">#DDFFFFFF</color>
+
+    <color name="black_54_opacity">#89000000</color>
+
 </resources>

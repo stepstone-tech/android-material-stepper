@@ -22,6 +22,10 @@ public final class AnimationUtil {
     @IntDef({View.VISIBLE, View.INVISIBLE, View.GONE})
     @interface Visibility {}
 
+    public static final float ALPHA_OPAQUE = 1.0f;
+    public static final float ALPHA_INVISIBLE = 0.0f;
+    public static final float ALPHA_HALF = 0.5f;
+
     private static final int DEFAULT_DURATION = 300;
 
     private AnimationUtil() {
@@ -37,7 +41,7 @@ public final class AnimationUtil {
     public static void fadeViewVisibility(@NonNull final View view, @Visibility final int visibility, boolean animate) {
         ViewPropertyAnimator animator = view.animate();
         animator.cancel();
-        animator.alpha(visibility == View.VISIBLE ? 1 : 0)
+        animator.alpha(visibility == View.VISIBLE ? ALPHA_OPAQUE : ALPHA_INVISIBLE)
                 .setDuration(animate ? DEFAULT_DURATION : 0)
                 .setListener(new Animator.AnimatorListener() {
                     @Override

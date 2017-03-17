@@ -6,6 +6,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.DotStepper">
         <item name="ms_stepperStyle">@style/DotStepperStyle</item>
     </style>
@@ -80,6 +85,21 @@
     <style name="DarkStepTabTitleStyle" parent="MSStepTabTitle">
         <item name="android:textColor">@color/ms_white</item>
         <item name="fontPath">fonts/Oswald-Stencbab.ttf</item>
+    </style>
+
+
+    <style name="MainCoordinatorLayoutStyle" />
+
+    <style name="MainAppBarLayoutStyle">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MainToolbarStyle">
+        <item name="layout_collapseMode">none</item>
+    </style>
+
+    <style name="MainListStyle">
+        <item name="android:layout_width">match_parent</item>
     </style>
 
 </resources>

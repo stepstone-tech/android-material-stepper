@@ -16,6 +16,7 @@ limitations under the License.
 -->
 <resources>
     <color name="ms_black">#000000</color>
+    <color name="ms_black_87_opacity">#DD000000</color>
     <color name="ms_white">#FFFFFF</color>
     <color name="ms_material_blue_500">#2196f3</color>
     <color name="ms_material_grey_400">#BDBDBD</color>

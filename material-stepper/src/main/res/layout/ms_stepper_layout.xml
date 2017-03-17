@@ -13,11 +13,24 @@
         android:layout_width="match_parent"
         tools:style="@style/MSStepTabsContainer" />
 
-    <com.stepstone.stepper.internal.widget.NonSwipeableViewPager
-        android:id="@+id/ms_stepPager"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <com.stepstone.stepper.internal.widget.NonSwipeableViewPager
+            android:id="@+id/ms_stepPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:id="@+id/stepPagerProgressBar"
+            style="?attr/ms_stepPagerProgressBarStyle"
+            android:visibility="gone"
+            tools:style="@style/MSStepPagerProgressBarStyle" />
+
+    </FrameLayout>
+
 
     <RelativeLayout
         android:id="@+id/ms_bottomNavigation"

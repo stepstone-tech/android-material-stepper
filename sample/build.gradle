@@ -25,6 +25,8 @@ android {
 dependencies {
     compile project(':material-stepper')
     compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
+    compile ("com.android.support:recyclerview-v7:$androidSupportLibraryVersion")
+    compile ("com.android.support:design:$androidSupportLibraryVersion")
     compile ("com.jakewharton:butterknife:$butterknifeVersion")
     compile ("uk.co.chrisjenx:calligraphy:$calligraphyVersion")
 }

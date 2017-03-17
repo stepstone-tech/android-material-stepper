@@ -31,6 +31,9 @@ limitations under the License.
     <dimen name="ms_progress_bar_height">3dp</dimen>
     <dimen name="ms_error_drawable_padding">8dp</dimen>
     <dimen name="ms_navigation_button_text_size">14sp</dimen>
+    <dimen name="ms_progress_message_translation_when_hidden">6dp</dimen>
+    <dimen name="ms_progress_message_lateral_padding">24dp</dimen>
+    <dimen name="ms_progress_message_font_size">14sp</dimen>
 
     <!-- TABS -->
     <dimen name="ms_step_tab_height">72dp</dimen>

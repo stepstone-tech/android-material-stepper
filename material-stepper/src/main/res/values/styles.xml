@@ -105,6 +105,26 @@ limitations under the License.
         <item name="android:background">@drawable/ms_vertical_tab_divider</item>
     </style>
 
+    <style name="MSStepTabsProgressMessage" tools:targetApi="jelly_bean_mr1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:paddingEnd">@dimen/ms_progress_message_lateral_padding</item>
+        <item name="android:paddingLeft">@dimen/ms_progress_message_lateral_padding</item>
+        <item name="android:paddingRight">@dimen/ms_progress_message_lateral_padding</item>
+        <item name="android:paddingStart">@dimen/ms_progress_message_lateral_padding</item>
+        <item name="android:textColor">@color/ms_black_87_opacity</item>
+        <item name="android:textSize">@dimen/ms_progress_message_font_size</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="MSStepPagerProgressBarStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
     <style name="MSDefaultStepperLayoutTheme">
         <item name="ms_tabsContainerStyle">@style/MSStepTabsContainer</item>
         <item name="ms_bottomNavigationStyle">@style/MSBottomNavigation</item>
@@ -112,6 +132,7 @@ limitations under the License.
         <item name="ms_nextNavigationButtonStyle">@style/MSNavBarButton.Next</item>
         <item name="ms_completeNavigationButtonStyle">@style/MSNavBarButton.Complete</item>
         <item name="ms_colorableProgressBarStyle">@style/MSColorableProgressBar</item>
+        <item name="ms_stepPagerProgressBarStyle">@style/MSStepPagerProgressBarStyle</item>
 
         <item name="ms_stepTabsScrollViewStyle">@style/MSStepTabsScrollView</item>
         <item name="ms_stepTabsInnerContainerStyle">@style/MSStepTabsInnerContainer</item>
@@ -123,6 +144,7 @@ limitations under the License.
         <item name="ms_stepTabIconBackgroundStyle">@style/MSStepTabIconBackground</item>
         <item name="ms_stepTabTitleStyle">@style/MSStepTabTitle</item>
         <item name="ms_stepTabDividerStyle">@style/MSStepTabDivider</item>
+        <item name="ms_stepTabsProgressMessageStyle">@style/MSStepTabsProgressMessage</item>
     </style>
 
 </resources>

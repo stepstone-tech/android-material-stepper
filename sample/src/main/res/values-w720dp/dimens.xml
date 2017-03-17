@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="max_main_list_width">600dp</dimen>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_feedback_chooser"
+        android:title="Types"
+        app:showAsAction="always|withText">
+
+        <menu>
+
+            <group android:checkableBehavior="all">
+
+                <item
+                    android:id="@+id/menu_feedback_tabs"
+                    android:title="Tabs"
+                    android:checked="true"
+                    app:showAsAction="always|withText"/>
+
+                <item
+                    android:id="@+id/menu_feedback_content"
+                    android:title="Content"
+                    android:checked="true"
+                    app:showAsAction="always|withText"/>
+
+                <item
+                    android:id="@+id/menu_feedback_nav"
+                    android:title="Disabled bottom navigation"
+                    android:checked="true"
+                    app:showAsAction="always|withText"/>
+
+            </group>
+
+        </menu>
+
+    </item>
+
+</menu>

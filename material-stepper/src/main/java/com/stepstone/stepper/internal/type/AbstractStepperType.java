@@ -48,12 +48,12 @@ public abstract class AbstractStepperType {
      */
     public static final int TABS = 0x03;
 
-    final StepperLayout stepperLayout;
+    final StepperLayout mStepperLayout;
 
     final SparseBooleanArray mStepErrors = new SparseBooleanArray();
 
     public AbstractStepperType(StepperLayout stepperLayout) {
-        this.stepperLayout = stepperLayout;
+        this.mStepperLayout = stepperLayout;
     }
 
     /**
@@ -93,12 +93,12 @@ public abstract class AbstractStepperType {
 
     @ColorInt
     protected int getSelectedColor() {
-        return stepperLayout.getSelectedColor();
+        return mStepperLayout.getSelectedColor();
     }
 
     @ColorInt
     protected int getUnselectedColor() {
-        return stepperLayout.getUnselectedColor();
+        return mStepperLayout.getUnselectedColor();
     }
 
 }

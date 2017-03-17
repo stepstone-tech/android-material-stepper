@@ -22,6 +22,16 @@
             android:orientation="horizontal"
             tools:style="@style/MSStepTabsInnerContainer" />
 
+
     </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/ms_stepTabsProgressMessage"
+        style="?attr/ms_stepTabsProgressMessageStyle"
+        android:visibility="gone"
+        android:alpha="0"
+        android:translationY="@dimen/ms_progress_message_translation_when_hidden"
+        tools:style="@style/MSStepTabsProgressMessage"
+        tools:text="Saving data. This will take a moment..." />
 
 </merge>

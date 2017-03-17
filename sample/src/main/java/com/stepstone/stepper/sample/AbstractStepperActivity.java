@@ -64,7 +64,7 @@ public abstract class AbstractStepperActivity extends AppCompatActivity implemen
     public void onBackPressed() {
         final int currentStepPosition = mStepperLayout.getCurrentStepPosition();
         if (currentStepPosition > 0) {
-            mStepperLayout.setCurrentStepPosition(currentStepPosition - 1);
+            mStepperLayout.onBackClicked();
         } else {
             finish();
         }

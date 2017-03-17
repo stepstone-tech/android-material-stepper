@@ -67,6 +67,14 @@ limitations under the License.
         <!-- Flag indicating whether step navigation is possible by clicking on the tabs directly. Only applicable for 'tabs' type. True by default. -->
         <attr name="ms_tabNavigationEnabled" format="boolean" />
 
+        <!-- Type(s) of stepper feedback -->
+        <attr name="ms_stepperFeedbackType">
+            <flag name="none" value="1" />
+            <flag name="tabs" value="2" />
+            <flag name="content" value="4" />
+            <flag name="disabled_bottom_navigation" value="8" />
+        </attr>
+
         <!-- Theme to use for even more custom styling of the stepper layout.
              It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used.
              See StepperLayoutTheme below for a list of possible inner view styles to overwrite.
@@ -123,11 +131,17 @@ limitations under the License.
         <!-- Used by ms_stepProgressBar in layout/ms_stepper_layout -->
         <attr name="ms_colorableProgressBarStyle" format="reference" />
 
+        <!-- Used by ms_stepPagerProgressBar in layout/ms_stepper_layout -->
+        <attr name="ms_stepPagerProgressBarStyle" format="reference" />
+
         <!-- Used by ms_stepTabsScrollView in layout/ms_tabs_container -->
         <attr name="ms_stepTabsScrollViewStyle" format="reference" />
 
         <!-- Used by ms_stepTabsInnerContainer in layout/ms_tabs_container -->
         <attr name="ms_stepTabsInnerContainerStyle" format="reference" />
+
+        <!-- Used by ms_stepTabsProgressMessage in layout/ms_tabs_container -->
+        <attr name="ms_stepTabsProgressMessageStyle" format="reference" />
 
         <!-- Used in layout/ms_step_tab_container -->
         <attr name="ms_stepTabContainerStyle" format="reference" />

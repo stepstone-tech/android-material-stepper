@@ -43,6 +43,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.stepstone.stepper.adapter.StepAdapter;
+import com.stepstone.stepper.internal.feedback.StepperFeedbackType;
+import com.stepstone.stepper.internal.feedback.StepperFeedbackTypeFactory;
 import com.stepstone.stepper.internal.type.AbstractStepperType;
 import com.stepstone.stepper.internal.type.StepperTypeFactory;
 import com.stepstone.stepper.internal.util.AnimationUtil;
@@ -222,9 +224,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private int mTypeIdentifier = AbstractStepperType.PROGRESS_BAR;
 
+    private int mFeedbackTypeMask = StepperFeedbackType.NONE;
+
     private StepAdapter mStepAdapter;
 
     private AbstractStepperType mStepperType;
+
+    private StepperFeedbackType mStepperFeedbackType;
 
     private int mCurrentStepPosition;
 
@@ -233,6 +239,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     private boolean mShowErrorStateOnBackEnabled;
 
     private boolean mTabNavigationEnabled;
+
+    private boolean mInProgress;
 
     @StyleRes
     private int mStepperLayoutTheme;
@@ -243,7 +251,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     private OnClickListener mOnBackClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            onPrevious();
+            onBackClicked();
         }
     };
 
@@ -371,6 +379,22 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     /**
+     * To be called when the user wants to go to the previous step.
+     */
+    public void onBackClicked() {
+        Step step = findCurrentStep();
+
+        updateErrorFlagWhenGoingBack();
+
+        OnBackClickedCallback onBackClickedCallback = new OnBackClickedCallback();
+        if (step instanceof BlockingStep) {
+            ((BlockingStep) step).onBackClicked(onBackClickedCallback);
+        } else {
+            onBackClickedCallback.goToPrevStep();
+        }
+    }
+
+    /**
      * Sets the current step to the one at the provided index.
      * This does not verify the current step.
      * @param currentStepPosition new current step position
@@ -385,6 +409,11 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         onUpdate(currentStepPosition, true);
     }
 
+    /**
+     * Returns the position of the currently selected step.
+     *
+     * @return position of the currently selected step
+     */
     public int getCurrentStepPosition() {
         return mCurrentStepPosition;
     }
@@ -395,6 +424,18 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     public void setCompleteButtonVerificationFailed(boolean verificationFailed) {
         mCompleteNavigationButton.setVerificationFailed(verificationFailed);
+    }
+
+    public void setNextButtonEnabled(boolean enabled) {
+        mNextNavigationButton.setEnabled(enabled);
+    }
+
+    public void setCompleteButtonEnabled(boolean enabled) {
+        mCompleteNavigationButton.setEnabled(enabled);
+    }
+
+    public void setBackButtonEnabled(boolean enabled) {
+        mBackNavigationButton.setEnabled(enabled);
     }
 
     /**
@@ -496,6 +537,40 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mStepperType.setErrorFlag(mCurrentStepPosition, hasError);
     }
 
+    /**
+     * Shows a progress indicator. This does not have to be a progress bar and it depends on chosen stepper feedback types.
+     * @param progressMessage optional progress message if supported by the selected types
+     */
+    public void showProgress(@NonNull String progressMessage) {
+        mInProgress = true;
+        mStepperFeedbackType.showProgress(progressMessage);
+    }
+
+    /**
+     * Hides the progress indicator.
+     */
+    public void hideProgress() {
+        mInProgress = false;
+        mStepperFeedbackType.hideProgress();
+    }
+
+    /**
+     * Checks if there's an ongoing operation i.e. if {@link #showProgress(String)} was called and not followed by {@link #hideProgress()} yet.
+     * @return true if in progress, false otherwise
+     */
+    public boolean isInProgress() {
+        return mInProgress;
+    }
+
+    /**
+     * Sets the mask for the stepper feedback type.
+     * @param feedbackTypeMask step feedback type mask, should contain one or more flags from {@link StepperFeedbackType}
+     */
+    public void setFeedbackType(int feedbackTypeMask) {
+        mFeedbackTypeMask = feedbackTypeMask;
+        mStepperFeedbackType = StepperFeedbackTypeFactory.createType(mFeedbackTypeMask, this);
+    }
+
     @SuppressWarnings("RestrictedApi")
     private void init(AttributeSet attrs, @AttrRes int defStyleAttr) {
         initDefaultValues();
@@ -523,6 +598,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mTabsContainer.setVisibility(GONE);
 
         mStepperType = StepperTypeFactory.createType(mTypeIdentifier, this);
+        mStepperFeedbackType = StepperFeedbackTypeFactory.createType(mFeedbackTypeMask, this);
     }
 
     private void initNavigation() {
@@ -645,7 +721,11 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             mShowErrorStateEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateEnabled, mShowErrorStateEnabled);
 
             if (a.hasValue(R.styleable.StepperLayout_ms_stepperType)) {
-                mTypeIdentifier = a.getInt(R.styleable.StepperLayout_ms_stepperType, DEFAULT_TAB_DIVIDER_WIDTH);
+                mTypeIdentifier = a.getInt(R.styleable.StepperLayout_ms_stepperType, AbstractStepperType.PROGRESS_BAR);
+            }
+
+            if (a.hasValue(R.styleable.StepperLayout_ms_stepperFeedbackType)) {
+                mFeedbackTypeMask = a.getInt(R.styleable.StepperLayout_ms_stepperFeedbackType, StepperFeedbackType.NONE);
             }
 
             mShowErrorStateOnBackEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBack, false);
@@ -676,19 +756,6 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private Step findCurrentStep() {
         return mStepAdapter.findStep(mCurrentStepPosition);
-    }
-
-    private void onPrevious() {
-        Step step = findCurrentStep();
-
-        updateErrorFlagWhenGoingBack();
-
-        OnBackClickedCallback onBackClickedCallback = new OnBackClickedCallback();
-        if (step instanceof BlockingStep) {
-            ((BlockingStep) step).onBackClicked(onBackClickedCallback);
-        } else {
-            onBackClickedCallback.goToPrevStep();
-        }
     }
 
     private void updateErrorFlagWhenGoingBack() {
