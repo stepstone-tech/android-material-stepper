@@ -370,6 +370,9 @@ In layout:
         android:id="@+id/stepperLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:ms_backButtonColor="@color/ms_disabling_button_text_color_selector"
+        app:ms_nextButtonColor="@color/ms_disabling_button_text_color_selector"
+        app:ms_completeButtonColor="@color/ms_disabling_button_text_color_selector"
         app:ms_stepperType="tabs"
         app:ms_stepperFeedbackType="tabs|content|disabled_bottom_navigation" />
 ```
