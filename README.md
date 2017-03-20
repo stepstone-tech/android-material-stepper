@@ -352,7 +352,7 @@ It is possible to show stepper feedback for ongoing operations (see [Stepper fee
 To do so you firstly need to set ```ms_stepperFeedbackType``` to one or more of:
 * ```tabs``` - shows a progress message instead of the tabs during operation,
 * ```content``` - shows a progress bar on top of the steps' content and partially fades the content out during operation,
-* ```disabled_bottom_navigation``` - disables the buttons in the bottom navigation during operation.
+* ```disabled_bottom_navigation``` - disables the buttons in the bottom navigation during operation. In order to see that the buttons are disabled on the bottom navigation bar, maek sure that the button colors are assigned using color selectors with a disabled state (see the sample app).
 The default is ```none``` which does nothing. It is possible to use multiple flags together.
 
 After setting this to show the feedback you need to call ```StepperLayout#showProgress(@NonNull String progressMessage)```
