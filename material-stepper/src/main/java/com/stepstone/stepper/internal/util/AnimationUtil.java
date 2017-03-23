@@ -20,7 +20,8 @@ public final class AnimationUtil {
 
     @Retention(SOURCE)
     @IntDef({View.VISIBLE, View.INVISIBLE, View.GONE})
-    @interface Visibility {}
+    @interface Visibility {
+    }
 
     public static final float ALPHA_OPAQUE = 1.0f;
     public static final float ALPHA_INVISIBLE = 0.0f;

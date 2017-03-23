@@ -87,7 +87,7 @@ public class StepTab extends RelativeLayout {
      */
     private AbstractState mCurrentState = new InactiveNumberState();
 
-    private AccelerateInterpolator accelerateInterpolator = new AccelerateInterpolator();
+    private AccelerateInterpolator mAccelerateInterpolator = new AccelerateInterpolator();
 
     public StepTab(Context context) {
         this(context, null);
@@ -221,7 +221,8 @@ public class StepTab extends RelativeLayout {
      * <li>{@link InactiveNumberState} - for when we show the step number, but this step still hasn't been reached</li>
      * <li>{@link ActiveNumberState} - for when we show the step number of the currently active tab</li>
      * <li>{@link DoneState} - for when the step has already been completed and the user has moved to the next step</li>
-     * <li>{@link WarningState} - for when there has been an error on this step (if {@link StepperLayout#setShowErrorStateEnabled(boolean)} or <code>ms_showErrorStateEnabled</code> was set to <i>true</i>)</li>
+     * <li>{@link WarningState} - for when there has been an error on this step (if {@link StepperLayout#setShowErrorStateEnabled(boolean)}
+     * or <code>ms_showErrorStateEnabled</code> was set to <i>true</i>)</li>
      * </ul>
      */
     private abstract class AbstractState {
@@ -375,7 +376,7 @@ public class StepTab extends RelativeLayout {
             view.setScaleX(HALF_SIZE_SCALE);
             view.setScaleY(HALF_SIZE_SCALE);
             view.animate()
-                    .setInterpolator(accelerateInterpolator)
+                    .setInterpolator(mAccelerateInterpolator)
                     .alpha(ALPHA_OPAQUE)
                     .scaleX(FULL_SIZE_SCALE)
                     .scaleY(FULL_SIZE_SCALE);

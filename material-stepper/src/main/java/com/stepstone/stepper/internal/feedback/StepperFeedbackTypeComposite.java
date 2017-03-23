@@ -31,18 +31,18 @@ import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 @RestrictTo(LIBRARY)
 public class StepperFeedbackTypeComposite implements StepperFeedbackType {
 
-    private List<StepperFeedbackType> children = new ArrayList<>();
+    private List<StepperFeedbackType> mChildren = new ArrayList<>();
 
     @Override
     public void showProgress(@NonNull String progressMessage) {
-        for (StepperFeedbackType child : children) {
+        for (StepperFeedbackType child : mChildren) {
             child.showProgress(progressMessage);
         }
     }
 
     @Override
     public void hideProgress() {
-        for (StepperFeedbackType child : children) {
+        for (StepperFeedbackType child : mChildren) {
             child.hideProgress();
         }
     }
@@ -52,7 +52,7 @@ public class StepperFeedbackTypeComposite implements StepperFeedbackType {
      * @param component child to add
      */
     public void addComponent(StepperFeedbackType component) {
-        children.add(component);
+        mChildren.add(component);
     }
 
 }

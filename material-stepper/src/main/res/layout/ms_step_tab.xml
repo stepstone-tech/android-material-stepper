@@ -16,6 +16,7 @@
         <ImageView
             android:id="@+id/ms_stepIconBackground"
             style="?attr/ms_stepTabIconBackgroundStyle"
+            tools:ignore="ContentDescription"
             tools:style="@style/MSStepTabIconBackground" />
 
         <TextView
@@ -27,6 +28,7 @@
             android:id="@+id/ms_stepDoneIndicator"
             style="?attr/ms_stepTabDoneIndicatorStyle"
             android:visibility="gone"
+            tools:ignore="ContentDescription"
             tools:style="@style/MSStepTabDoneIndicator" />
 
     </FrameLayout>

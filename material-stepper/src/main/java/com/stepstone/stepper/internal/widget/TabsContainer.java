@@ -116,10 +116,6 @@ public class TabsContainer extends FrameLayout {
                 mUnselectedColor = a.getColor(R.styleable.TabsContainer_ms_inactiveTabColor, mUnselectedColor);
             }
 
-            if (a.hasValue(R.styleable.StepperLayout_ms_errorColor)) {
-                mErrorColor = a.getColor(R.styleable.StepperLayout_ms_errorColor, mErrorColor);
-            }
-
             a.recycle();
         }
         mContainerLateralPadding = context.getResources().getDimensionPixelOffset(R.dimen.ms_tabs_container_lateral_padding);

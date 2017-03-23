@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
+apply from: '../material-stepper/code_coverage.gradle'
+apply from: '../config/quality/quality.gradle'
 
 ext {
     bintrayRepo = 'maven'
@@ -41,10 +43,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        //workaround so that code coverage is working with Robolectric: http://stackoverflow.com/a/35769943/973379
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
 }
 
 dependencies {
     compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
+
+    testCompile("junit:junit:$junitVersion")
+    testCompile("org.mockito:mockito-core:$mockitoVersion")
+    testCompile("com.squareup.assertj:assertj-android:$assertjVersion")
+    testCompile("org.robolectric:robolectric:$robolectricVersion") {
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
 }
 
 gradle.taskGraph.beforeTask { Task task ->
@@ -56,6 +75,13 @@ gradle.taskGraph.beforeTask { Task task ->
         javadocTask.classpath = files(releaseVariant.javaCompile.classpath.files) + files(ext.androidJar)
     }
 }
+
+// Log out test results to console
+tasks.matching {it instanceof Test}.all {
+    testLogging.events = ["failed", "passed", "skipped"]
+}
+
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'jacocoTestReport'
 
 apply from: '../installv1.gradle'
 apply from: '../bintrayv1.gradle'

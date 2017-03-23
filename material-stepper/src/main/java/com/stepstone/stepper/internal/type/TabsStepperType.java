@@ -46,7 +46,6 @@ public class TabsStepperType extends AbstractStepperType {
     public TabsStepperType(StepperLayout stepperLayout) {
         super(stepperLayout);
         mTabsContainer = (TabsContainer) stepperLayout.findViewById(R.id.ms_stepTabsContainer);
-        mTabsContainer.setVisibility(View.VISIBLE);
         mTabsContainer.setSelectedColor(stepperLayout.getSelectedColor());
         mTabsContainer.setUnselectedColor(stepperLayout.getUnselectedColor());
         mTabsContainer.setErrorColor(stepperLayout.getErrorColor());

@@ -16,6 +16,7 @@ limitations under the License.
 
 package com.stepstone.stepper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -585,6 +586,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         bindViews();
 
         mPager.setOnTouchListener(new View.OnTouchListener() {
+
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;
@@ -824,7 +827,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         final boolean isFirst = newStepPosition == 0;
         AnimationUtil.fadeViewVisibility(mNextNavigationButton, isLast ? View.GONE : View.VISIBLE, userTriggeredChange);
         AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, !isLast ? View.GONE : View.VISIBLE, userTriggeredChange);
-        AnimationUtil.fadeViewVisibility(mBackNavigationButton, isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE, userTriggeredChange);
+        int backButtonTargetVisibility = isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE;
+        AnimationUtil.fadeViewVisibility(mBackNavigationButton, backButtonTargetVisibility, userTriggeredChange);
 
         final StepViewModel viewModel = mStepAdapter.getViewModel(newStepPosition);
 

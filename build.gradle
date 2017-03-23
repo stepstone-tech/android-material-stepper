@@ -25,6 +25,11 @@ configure(allprojects) {
         androidBuildToolsVersion            = "25.0.2"
         androidSupportLibraryVersion        = "25.2.0"
 
+        junitVersion                        = "4.12"
+        mockitoVersion                      = "1.10.19"
+        robolectricVersion                  = "3.3.1"
+        assertjVersion                      = "1.1.1"
+
         /* Sample only */
         butterknifeVersion                  = "7.0.1"
         calligraphyVersion                  = "2.2.0"

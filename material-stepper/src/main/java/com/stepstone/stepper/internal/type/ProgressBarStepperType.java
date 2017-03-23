@@ -38,9 +38,13 @@ public class ProgressBarStepperType extends AbstractStepperType {
     public ProgressBarStepperType(StepperLayout stepperLayout) {
         super(stepperLayout);
         mProgressBar = (ColorableProgressBar) stepperLayout.findViewById(R.id.ms_stepProgressBar);
-        mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setProgressColor(getSelectedColor());
         mProgressBar.setProgressBackgroundColor(getUnselectedColor());
+        if (stepperLayout.isInEditMode()) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.setProgressCompat(1, false);
+            mProgressBar.setMax(3);
+        }
     }
 
     /**

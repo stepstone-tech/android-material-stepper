@@ -25,14 +25,14 @@ public class VerificationError {
     /**
      * A message explaining the cause of the error.
      */
-    private String errorMessage;
+    private String mErrorMessage;
 
     public VerificationError(String errorMessage) {
-        this.errorMessage = errorMessage;
+        this.mErrorMessage = errorMessage;
     }
 
     public String getErrorMessage() {
-        return errorMessage;
+        return mErrorMessage;
     }
 
 }
