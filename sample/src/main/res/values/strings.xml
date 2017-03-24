@@ -19,6 +19,7 @@
     <string name="show_back_button">Show Back button on first step</string>
     <string name="no_fragments">No Fragment Stepper</string>
     <string name="proceed_programmatically">Proceed programmatically</string>
+    <string name="passing_data_between_steps">Passing data between steps</string>
     <string name="disabled_tab_navigation">Disabled tab navigation</string>
     <string name="custom_stepperlayout_theme">Custom StepperLayout theme</string>
 
@@ -40,6 +41,7 @@
     <string name="show_back_button_description">Show how to display a Back button on the first step of the stepper layout.</string>
     <string name="no_fragments_description">StepperLayout used with pure Views instead of Fragments</string>
     <string name="proceed_programmatically_description">Shows how to navigate to the next steps without clicking on the bottom navigation buttons</string>
+    <string name="passing_data_between_steps_description">Shows how to pass data from one fragment to the next by using parent Activity</string>
     <string name="disabled_tab_navigation_description">Shows how to disable clicking on tabs in a tabbed stepper</string>
     <string name="custom_stepperlayout_theme_description">Shows a styled stepper layout with custom fonts &amp; colors</string>
 

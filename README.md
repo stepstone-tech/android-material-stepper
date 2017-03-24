@@ -215,7 +215,7 @@ In order to set that color:
 After clicking on the Next button if the user wants to e.g.:
 * save something in the database
 * make a network call on a separate Thread
-* simply save the data from the current step to some other component or parent Activity
+* simply save the data from the current step to some other component or parent Activity (see 'Passing data between steps' in the sample app for more details)
 
 he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step.
 If the user wants to perform these operations on the final step, when clicking on the Complete button, he needs to invoke the `complete()` method of the  `StepperLayout.OnCompleteClickedCallback`.

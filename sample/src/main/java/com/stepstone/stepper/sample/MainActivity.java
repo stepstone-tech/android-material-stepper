@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     new SampleItem(getString(R.string.show_back_button), getString(R.string.show_back_button_description), ReturnButtonActivity.class),
                     new SampleItem(getString(R.string.no_fragments), getString(R.string.no_fragments_description), NoFragmentsActivity.class),
                     new SampleItem(getString(R.string.proceed_programmatically), getString(R.string.proceed_programmatically_description), ProceedProgrammaticallyActivity.class),
+                    new SampleItem(getString(R.string.passing_data_between_steps), getString(R.string.passing_data_between_steps_description), PassDataBetweenStepsActivity.class),
                     new SampleItem(getString(R.string.disabled_tab_navigation), getString(R.string.disabled_tab_navigation_description), DisabledTabNavigationActivity.class),
                     new SampleItem(getString(R.string.custom_stepperlayout_theme), getString(R.string.custom_stepperlayout_theme_description), CustomStepperLayoutThemeActivity.class)
             );

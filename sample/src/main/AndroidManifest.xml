@@ -37,6 +37,8 @@
         <activity android:name=".NoFragmentsActivity" />
         <activity android:name=".ProceedProgrammaticallyActivity"
             android:windowSoftInputMode="stateVisible"/>
+        <activity android:name=".PassDataBetweenStepsActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".DisabledTabNavigationActivity" />
         <activity
             android:name=".CustomStepperLayoutThemeActivity"

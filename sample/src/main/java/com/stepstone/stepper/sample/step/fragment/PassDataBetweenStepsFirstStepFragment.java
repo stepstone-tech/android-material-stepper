@@ -16,40 +16,38 @@ limitations under the License.
 
 package com.stepstone.stepper.sample.step.fragment;
 
-import android.os.Bundle;
-import android.os.Handler;
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
+import com.stepstone.stepper.sample.DataManager;
 import com.stepstone.stepper.sample.R;
 
 import butterknife.Bind;
 
-public class StepperFeedbackStepFragment extends ButterKnifeFragment implements BlockingStep {
+public class PassDataBetweenStepsFirstStepFragment extends ButterKnifeFragment implements BlockingStep {
 
-    private static final String STEP_POSITION = "step_position";
-
-    public static StepperFeedbackStepFragment newInstance(int stepPosition) {
-        StepperFeedbackStepFragment fragment = new StepperFeedbackStepFragment();
-        Bundle arguments = new Bundle();
-        arguments.putInt(STEP_POSITION, stepPosition);
-        fragment.setArguments(arguments);
-        return fragment;
+    public static PassDataBetweenStepsFirstStepFragment newInstance() {
+        return new PassDataBetweenStepsFirstStepFragment();
     }
 
-    @Bind(R.id.stepContent)
-    TextView stepContent;
+    @Bind(R.id.editText)
+    EditText editText;
+
+    private DataManager dataManager;
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        stepContent.setText("Step content #" + getArguments().getInt(STEP_POSITION) + "\n" + getString(R.string.lorem_ipsum));
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof DataManager) {
+            dataManager = (DataManager) context;
+        } else {
+            throw new IllegalStateException("Activity must implement DataManager interface!");
+        }
     }
 
     @Override
@@ -68,14 +66,9 @@ public class StepperFeedbackStepFragment extends ButterKnifeFragment implements 
     @Override
     @UiThread
     public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
-        callback.getStepperLayout().showProgress("Operation in progress, please wait...");
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                callback.goToNextStep();
-                callback.getStepperLayout().hideProgress();
-            }
-        }, 2000L);
+        String enteredText = editText.getText().toString();
+        dataManager.saveData(enteredText);
+        callback.goToNextStep();
     }
 
     @Override
@@ -91,6 +84,6 @@ public class StepperFeedbackStepFragment extends ButterKnifeFragment implements 
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_with_text_content;
+        return R.layout.fragment_step_form;
     }
 }

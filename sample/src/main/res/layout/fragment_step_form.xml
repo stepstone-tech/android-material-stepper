@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:hint="@string/enter_password"
-        android:inputType="textPassword"
         android:imeOptions="actionDone"/>
 
 </FrameLayout>
