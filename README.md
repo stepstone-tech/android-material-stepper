@@ -10,17 +10,36 @@ Quoting the [documentation](https://www.google.com/design/spec/components/steppe
 
 >Steppers display progress through a sequence by breaking it up into multiple logical and numbered steps.
 
-## Download (from JCenter)
-```groovy
-compile 'com.stepstone.stepper:material-stepper:3.2.0'
-```
+All of the code & features mentioned in [Getting started](#getting-started) and [Advanced usage](#advanced-usage) are showcased in the sample app.
+Moreover, you can find there other examples, e.g. how to persist state on rotation, display errors, change whether the user can go to the next step, etc. So please have a look!
+
+## Jump to section
+- [Supported steppers](#supported-steppers)
+- [Supported features](#supported-features)
+- [Getting started](#getting-started)
+- [Advanced usage](#advanced-usage)
+  - [Making extra operations before going to the next step](#making-extra-operations-before-going-to-the-next-step)
+  - [Changing button labels & compound drawables per step](#changing-button-labels--compound-drawables-per-step)
+  - [Custom styling](#custom-styling)
+  - [Using same stepper styling across the application](#using-same-stepper-styling-across-the-application)
+  - [Showing a Back button on first step](#showing-a-back-button-on-first-step)
+  - [Using Views instead of Fragments as Steps](#using-views-instead-of-fragments-as-steps)
+  - [Showing an error on tabs if step verification failed](#showing-an-error-on-tabs-if-step-verification-failed)
+  - [Stepper feedback](#stepper-feedback)
+  - [Changing button text color when going to the next step should be disabled](#changing-button-text-color-when-going-to-the-next-step-should-be-disabled)
+- [StepperLayout attributes](#stepperlayout-attributes)
+	- [View attributes](#view-attributes)
+	- [StepperLayout style attributes](#stepperlayout-style-attributes)
+- [License](#license)
 
 ## Supported steppers
-  - Mobile stepper with dots <br/>
+
+### Mobile stepper with dots <br/>
 <img src ="./gifs/dotted-progress-bar.gif" width="360" height="640"/>&nbsp;&nbsp;<img src ="./gifs/dotted-progress-bar-styled.gif" width="360" height="640"/>
-  - Mobile stepper with progress bar <br/>
+
+### Mobile stepper with progress bar <br/>
 <img src ="./gifs/linear-progress-bar.gif" width="360" height="640"/>&nbsp;&nbsp;<img src ="./gifs/linear-progress-bar-styled.gif" width="360" height="640"/>
-  - Horizontal stepper <br/>
+### Horizontal stepper <br/>
 <img src ="./gifs/tabs.gif" width="640" height="360"/>
 <img src ="./gifs/tabs-styled.gif" width="640" height="360"/>
 
@@ -34,6 +53,11 @@ compile 'com.stepstone.stepper:material-stepper:3.2.0'
   - showing stepper feedback for ongoing operations (see [Stepper feedback](https://material.io/guidelines/components/steppers.html#steppers-types-of-steppers))
   
 ## Getting started
+
+### Download (from JCenter)
+```groovy
+compile 'com.stepstone.stepper:material-stepper:3.2.0'
+```
 
 ### Create layout in XML
 
@@ -172,46 +196,9 @@ public class StepperActivity extends AppCompatActivity implements StepperLayout.
 }
 ```
 
-### Change Next/Complete button's text color when going to the next step should be disabled (optional)
-It is possible to change the Next/Complete button's text color (together with right chevron's color)
-when all the criteria to go to the next step are not met. This color should indicate that
-the user cannot go to next step yet and look as if disabled. Clicking on the button will still perform the regular
-step verification. There is a custom state added since setting `android:state_enabled` to `false` in a color selector would disable the clicks
-and we want to have them so that we can show an info message for the user.
-In order to set that color:
+## Advanced usage
 
-1. Create a new color selector in `res/color`
-    
-```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-        <item app:state_verification_failed="true" android:color="#30BDBDBD"/>
-        <item android:color="@color/ms_white"/>
-    </selector>
-```
-
-2. Change button's (text) color in layout file
-    
-```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <com.stepstone.stepper.StepperLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/stepperLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:ms_stepperType="dots"
-        app:ms_nextButtonColor="@color/ms_custom_button_text_color"
-        app:ms_completeButtonColor="@color/ms_custom_button_text_color" />
-```
-
-3. Toggle the state in code
-    
-```java
-    mStepperLayout.setNextButtonVerificationFailed(!enabled);
-    mStepperLayout.setCompleteButtonVerificationFailed(!enabled);
-```
-
-### Make extra operations before going to the next step (optional)
+### Making extra operations before going to the next step
 After clicking on the Next button if the user wants to e.g.:
 * save something in the database
 * make a network call on a separate Thread
@@ -264,7 +251,7 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 }
 ```
 
-### Changing Back/Next button labels & compound drawables per step
+### Changing button labels & compound drawables per step
 Sometimes you might want to have different labels on the Next and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
 but display 'Summary' just before the last page.
 You might also want to use your custom icons instead of the default navigation button compound drawables or not show the compound drawables for some of the buttons.
@@ -301,7 +288,14 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
     }
 ```
 
-### Using the same stepper styling across the application
+### Custom styling
+Basic styling can be done by choosing the active and inactive step colors. 
+There are some additional properties which can be changed directly from StepperLayout's attributes e.g. the background of bottom navigation buttons (see [StepperLayout attributes](#stepperlayout-attributes))
+For advanced styling you can use `ms_stepperLayoutTheme` StepperLayout's attribute and provide your custom style to be used.
+See 'Custom StepperLayout theme' in the sample app for an example.
+<p><img src ="./gifs/custom-theme.gif" width="360" height="640"/></p>
+
+### Using same stepper styling across the application
 If you have many steppers in your application in different activities/fragments you might want to set a common style in a theme.
 To do so, you need to set the `ms_stepperStyle` attribute in the theme, e.g.
 ```xml
@@ -336,7 +330,7 @@ This behaviour can be changed by setting ```ms_showBackButtonOnFirstStep``` to `
 ```
 To get a callback when this button was pressed you need set a ```StepperListener``` and write your own custom return logic in the ```onReturn()``` method to e.g. close the Activity.
 
-### Using with Views instead of Fragments
+### Using Views instead of Fragments as Steps
 It is possible to use this library without the need to rely on Fragments.
 To do so you need to use ```AbstractStepAdapter``` instead of ```AbstractFragmentStepAdapter```.
 For an example of how to use it with views please see the sample app.
@@ -401,17 +395,51 @@ public class StepperFeedbackStepFragment extends Fragment implements BlockingSte
 
 ```
 
-### Custom styling
-Basic styling can be done by choosing the active and inactive step colors. 
-There are some additional properties which can be changed directly from StepperLayout's attributes e.g. the background of bottom navigation buttons (see <a href="#stepperlayout-attributes">StepperLayout attributes</a>)
-For advanced styling you can use `ms_stepperLayoutTheme` StepperLayout's attribute and provide your custom style to be used.
-See 'Custom StepperLayout theme' in the sample app for an example.
-<p><img src ="./gifs/custom-theme.gif" width="360" height="640"/></p>
+### Changing button text color when going to the next step should be disabled
+It is possible to change the Next/Complete button's text color (together with right chevron's color)
+when all the criteria to go to the next step are not met. This color should indicate that
+the user cannot go to next step yet and look as if disabled. Clicking on the button will still perform the regular
+step verification. There is a custom state added since setting `android:state_enabled` to `false` in a color selector would disable the clicks
+and we want to have them so that we can show an info message for the user.
+In order to set that color:
 
-### Advanced usage
-For other examples, e.g. persisting state on rotation, displaying errors, changing whether the user can go to the next step, etc. check out the sample app.
+1. Create a new color selector in `res/color`
+    
+```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item app:state_verification_failed="true" android:color="#30BDBDBD"/>
+        <item android:color="@color/ms_white"/>
+    </selector>
+```
+
+2. Change button's (text) color in layout file
+    
+```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <com.stepstone.stepper.StepperLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/stepperLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ms_stepperType="dots"
+        app:ms_nextButtonColor="@color/ms_custom_button_text_color"
+        app:ms_completeButtonColor="@color/ms_custom_button_text_color" />
+```
+
+3. Toggle the state in code
+    
+```java
+    mStepperLayout.setNextButtonVerificationFailed(!enabled);
+    mStepperLayout.setCompleteButtonVerificationFailed(!enabled);
+```
 
 ## StepperLayout attributes
+
+### View attributes
+A list of base StepperLayout attributes used for behaviour configuration & base UI configuration.
+For advanced styling please see [StepperLayout style attributes](#stepperlayout-style-attributes).
+
 | Attribute name                  | Format                                                              | Description |
 | --------------------------------|---------------------------------------------------------------------|-------------|
 | *ms_stepperType*                | one of `dots`, `progress_bar` or `tabs`                             | **REQUIRED:** Type of the stepper |
@@ -436,7 +464,7 @@ For other examples, e.g. persisting state on rotation, displaying errors, changi
 | *ms_stepperFeedbackType*        | flag(s): `none` or `tabs`, `content` & `disabled_bottom_navigation` | Type(s) of stepper feedback. Can be a combination of `tabs`, `content` & `disabled_bottom_navigation`. Default is `none`.|
 | *ms_stepperLayoutTheme*         | reference                                                           | Theme to use for even more custom styling of the stepper layout. It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used. |
 
-### StepperLayout style attributes 
+### StepperLayout style attributes
 A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperLayout's child views.
 
 | Attribute name                    | Description                                                   |
@@ -457,11 +485,6 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 | *ms_stepTabIconBackgroundStyle*   | Used by ms_stepIconBackground in layout/ms_step_tab           |
 | *ms_stepTabTitleStyle*            | Used by ms_stepTitle in layout/ms_step_tab                    |
 | *ms_stepTabDividerStyle*          | Used by ms_stepDivider in layout/ms_step_tab                  |
-
-## Missing features
-  - support for non-linear steppers
-  - support for non-editable steppers
-  - support for Alternative labels in the horizontal stepper
   
 ## License
 Copyright 2016 StepStone Services
