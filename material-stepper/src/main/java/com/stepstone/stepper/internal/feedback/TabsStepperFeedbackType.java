@@ -38,6 +38,8 @@ public class TabsStepperFeedbackType implements StepperFeedbackType {
 
     private final float mProgressMessageTranslationWhenHidden;
 
+    private boolean mTabNavigationEnabled;
+
     private TextView mProgressMessageTextView;
 
     private View mTabs;
@@ -54,6 +56,7 @@ public class TabsStepperFeedbackType implements StepperFeedbackType {
 
     @Override
     public void showProgress(@NonNull String progressMessage) {
+        mTabNavigationEnabled = mStepperLayout.isTabNavigationEnabled();
         setTabNavigationEnabled(false);
         mProgressMessageTextView.setText(progressMessage);
         mProgressMessageTextView.animate()
@@ -70,7 +73,7 @@ public class TabsStepperFeedbackType implements StepperFeedbackType {
 
     @Override
     public void hideProgress() {
-        setTabNavigationEnabled(true);
+        setTabNavigationEnabled(mTabNavigationEnabled);
 
         mProgressMessageTextView.animate()
                 .setStartDelay(0)

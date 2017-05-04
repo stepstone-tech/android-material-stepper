@@ -539,20 +539,24 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     /**
-     * Shows a progress indicator. This does not have to be a progress bar and it depends on chosen stepper feedback types.
+     * Shows a progress indicator if not already shown. This does not have to be a progress bar and it depends on chosen stepper feedback types.
      * @param progressMessage optional progress message if supported by the selected types
      */
     public void showProgress(@NonNull String progressMessage) {
-        mInProgress = true;
-        mStepperFeedbackType.showProgress(progressMessage);
+        if (!mInProgress) {
+            mStepperFeedbackType.showProgress(progressMessage);
+            mInProgress = true;
+        }
     }
 
     /**
-     * Hides the progress indicator.
+     * Hides the progress indicator if visible.
      */
     public void hideProgress() {
-        mInProgress = false;
-        mStepperFeedbackType.hideProgress();
+        if (mInProgress) {
+            mInProgress = false;
+            mStepperFeedbackType.hideProgress();
+        }
     }
 
     /**

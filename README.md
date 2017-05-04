@@ -56,7 +56,7 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 
 ### Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:3.2.0'
+compile 'com.stepstone.stepper:material-stepper:3.2.1'
 ```
 
 ### Create layout in XML
