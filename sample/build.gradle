@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion project.androidCompileSdkVersion
@@ -21,12 +23,21 @@ android {
     }
 }
 
-
 dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+
     compile project(':material-stepper')
-    compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
-    compile ("com.android.support:recyclerview-v7:$androidSupportLibraryVersion")
-    compile ("com.android.support:design:$androidSupportLibraryVersion")
-    compile ("com.jakewharton:butterknife:$butterknifeVersion")
-    compile ("uk.co.chrisjenx:calligraphy:$calligraphyVersion")
+    compile "com.android.support:appcompat-v7:$androidSupportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$androidSupportLibraryVersion"
+    compile "com.android.support:design:$androidSupportLibraryVersion"
+
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    compile "uk.co.chrisjenx:calligraphy:$calligraphyVersion"
+
+}
+
+repositories {
+    mavenCentral()
 }
