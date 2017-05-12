@@ -22,21 +22,24 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.stepstone.stepper.internal.widget.pagetransformer.StepPageTransformerFactory;
+
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
- * A non-swipeable viewpager.<br>
+ * A non-swipeable viewpager with RTL support.<br>
  * <a href="http://stackoverflow.com/questions/9650265/how-do-disable-paging-by-swiping-with-finger-in-viewpager-but-still-be-able-to-s">Source</a>
  */
 @RestrictTo(LIBRARY)
-public class NonSwipeableViewPager extends ViewPager {
+public class StepViewPager extends ViewPager {
 
-    public NonSwipeableViewPager(Context context) {
-        super(context);
+    public StepViewPager(Context context) {
+        this(context, null);
     }
 
-    public NonSwipeableViewPager(Context context, AttributeSet attrs) {
+    public StepViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setPageTransformer(false, StepPageTransformerFactory.createPageTransformer(context));
     }
 
     @Override
@@ -50,4 +53,5 @@ public class NonSwipeableViewPager extends ViewPager {
         // Never allow swiping to switch between pages
         return false;
     }
+
 }

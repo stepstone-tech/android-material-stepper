@@ -85,3 +85,5 @@ check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'jacocoTestReport'
 
 apply from: '../installv1.gradle'
 apply from: '../bintrayv1.gradle'
+
+install.mustRunAfter check

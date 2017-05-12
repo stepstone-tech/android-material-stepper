@@ -32,7 +32,7 @@ before_script:
   - printf 'bintray.user=dummy_user\nbintray.apikey=dummy_api_key' > local.properties
 
 script:
-  - ./gradlew check
+  - ./gradlew check install
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

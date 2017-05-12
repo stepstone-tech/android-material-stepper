@@ -1,7 +1,6 @@
 package com.stepstone.stepper;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,14 +9,13 @@ import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
+import com.stepstone.stepper.test.runner.StepperRobolectricTestRunner;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import static com.stepstone.stepper.test.assertion.StepperLayoutAssert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -26,15 +24,14 @@ import static org.mockito.Mockito.mock;
 /**
  * @author Piotr Zawadzki
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(sdk = Build.VERSION_CODES.LOLLIPOP, constants = BuildConfig.class)
+@RunWith(StepperRobolectricTestRunner.class)
 public class StepperLayoutSanityTest {
 
     private static final String TYPE_PROGRESS_BAR = "progress_bar";
     private static final String TYPE_DOTS = "dots";
     private static final String TYPE_TABS = "tabs";
 
-    private FragmentActivity activity;
+    FragmentActivity activity;
 
     @Before
     public void setUp() throws Exception {

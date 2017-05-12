@@ -18,7 +18,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <com.stepstone.stepper.internal.widget.NonSwipeableViewPager
+        <com.stepstone.stepper.internal.widget.StepViewPager
             android:id="@+id/ms_stepPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

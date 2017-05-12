@@ -331,9 +331,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     /**
-     * Overrides the default page transformer used in the underlying {@link ViewPager}
+     * Overrides the default page transformer used in the underlying {@link com.stepstone.stepper.internal.widget.StepViewPager}.
+     * If you're supporting RTL make sure your {@link android.support.v4.view.ViewPager.PageTransformer} accounts for it.
      *
      * @param pageTransformer new page transformer
+     *
+     * @see com.stepstone.stepper.internal.widget.StepViewPager
+     * @see com.stepstone.stepper.internal.widget.pagetransformer.StepPageTransformerFactory
      */
     public void setPageTransformer(@Nullable ViewPager.PageTransformer pageTransformer) {
         mPager.setPageTransformer(false, pageTransformer);
