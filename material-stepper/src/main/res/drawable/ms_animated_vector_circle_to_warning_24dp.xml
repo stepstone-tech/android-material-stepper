@@ -4,18 +4,6 @@
     android:drawable="@drawable/ms_vector_circle_24dp"
     tools:targetApi="lollipop">
 
-    <target android:name="circle">
-        <aapt:attr name="android:animation">
-            <!-- This hack is needed since setting duration to 0 and startOffset to 300 does not trigger the animation... -->
-            <objectAnimator
-                android:duration="1"
-                android:startOffset="299"
-                android:propertyName="fillAlpha"
-                android:valueFrom="1"
-                android:valueTo="0" />
-        </aapt:attr>
-    </target>
-
     <target android:name="circle_group">
         <aapt:attr name="android:animation">
             <set>
@@ -44,6 +32,18 @@
                 android:propertyName="translateY"
                 android:valueFrom="0"
                 android:valueTo="@integer/ms_warning_end_translate_y" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="circle">
+        <aapt:attr name="android:animation">
+            <!-- This hack is needed since setting duration to 0 and startOffset to 300 does not trigger the animation... -->
+            <objectAnimator
+                android:duration="1"
+                android:startOffset="299"
+                android:propertyName="fillAlpha"
+                android:valueFrom="1"
+                android:valueTo="0" />
         </aapt:attr>
     </target>
 
