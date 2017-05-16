@@ -15,7 +15,7 @@
 
     <TextView
         android:id="@+id/item_sample_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/ms_black_87_opacity"
         android:textSize="16sp"
@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/item_sample_subtitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black_54_opacity"
         android:textSize="14sp"

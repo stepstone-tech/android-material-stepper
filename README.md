@@ -56,7 +56,7 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 
 ### Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:3.2.1'
+compile 'com.stepstone.stepper:material-stepper:3.2.2'
 ```
 
 ### Create layout in XML
@@ -287,6 +287,8 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
         return builder.create();
     }
 ```
+
+NOTE: To change Complete button's label you need use `ms_completeButtonText` attribute from StepperLayout.
 
 ### Custom styling
 Basic styling can be done by choosing the active and inactive step colors. 

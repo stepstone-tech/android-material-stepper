@@ -52,6 +52,10 @@ android {
             }
         }
     }
+
+    lintOptions {
+        warningsAsErrors true
+    }
 }
 
 dependencies {
