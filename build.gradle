@@ -1,5 +1,5 @@
 buildscript {
-    ext.gradleAndroidVersion        = '2.3.1'
+    ext.gradleAndroidVersion        = '2.3.2'
     ext.kotlinVersion               = '1.1.2-3'
     ext.bintrayVersion              = '1.4'
     ext.mavenGradlePluginVersion    = '1.4.1'
