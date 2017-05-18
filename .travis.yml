@@ -44,5 +44,8 @@ after_failure:
   - cat material-stepper/build/reports/findbugs/findbugs.xml || echo "Report missing"
   - echo 'PMD report:'
   - cat material-stepper/build/reports/pmd/pmd.xml || echo "Report missing"
-  - echo 'Lint report:'
+  - echo 'Lint reports:'
+  - echo 'library:'
   - cat material-stepper/build/reports/lint-results.xml || echo "Report missing"
+  - echo 'sample:'
+  - cat sample/build/reports/lint-results.xml || echo "Report missing"
