@@ -22,7 +22,6 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Handler;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -40,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -310,13 +310,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mStepperType.onNewAdapter(stepAdapter);
 
         // this is so that the fragments in the adapter can be created BEFORE the onUpdate() method call
-        new Handler().post(new Runnable() {
+        mPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public void run() {
+            public void onGlobalLayout() {
+                mPager.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 onUpdate(mCurrentStepPosition, false);
             }
         });
-
     }
 
     /**
