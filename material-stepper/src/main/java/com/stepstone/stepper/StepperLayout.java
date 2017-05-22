@@ -34,6 +34,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -283,6 +284,12 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     public StepperLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs, defStyleAttr);
+    }
+
+    @Override
+    public final void setOrientation(@LinearLayoutCompat.OrientationMode int orientation) {
+        //only vertical orientation is supported
+        super.setOrientation(VERTICAL);
     }
 
     public void setListener(@NonNull StepperListener listener) {
@@ -591,6 +598,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         contextThemeWrapper.setTheme(mStepperLayoutTheme);
 
         LayoutInflater.from(contextThemeWrapper).inflate(R.layout.ms_stepper_layout, this, true);
+
+        setOrientation(VERTICAL);
+
         bindViews();
 
         mPager.setOnTouchListener(new View.OnTouchListener() {

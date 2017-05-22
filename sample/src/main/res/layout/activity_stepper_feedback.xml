@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical"
     app:ms_backButtonColor="@color/ms_disabling_button_text_color_selector"
     app:ms_nextButtonColor="@color/ms_disabling_button_text_color_selector"
     app:ms_completeButtonColor="@color/ms_disabling_button_text_color_selector"

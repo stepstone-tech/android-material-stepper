@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
+import android.widget.LinearLayout;
 
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.test.runner.StepperRobolectricTestRunner;
@@ -18,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 
 import static com.stepstone.stepper.test.assertion.StepperLayoutAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 
@@ -30,6 +32,8 @@ public class StepperLayoutSanityTest {
     private static final String TYPE_PROGRESS_BAR = "progress_bar";
     private static final String TYPE_DOTS = "dots";
     private static final String TYPE_TABS = "tabs";
+
+    private static final String ORIENTATION_HORIZONTAL = "horizontal";
 
     FragmentActivity activity;
 
@@ -129,6 +133,38 @@ public class StepperLayoutSanityTest {
                 .hasTabsShown()
                 .hasHorizontalProgressBarHidden()
                 .hasDottedProgressBarHidden();
+    }
+
+    @Test
+    public void should_ignore_horizontal_orientation_if_provided_from_attributes() {
+        //given
+        AttributeSet attributeSet = Robolectric.buildAttributeSet()
+                .addAttribute(R.attr.ms_stepperType, TYPE_DOTS)
+                .addAttribute(android.R.attr.orientation, ORIENTATION_HORIZONTAL)
+                .build();
+
+        //when
+        StepperLayout stepperLayout = new StepperLayout(activity, attributeSet);
+
+        //then
+        assertVerticalOrientationUsed(stepperLayout);
+    }
+
+    @Test
+    public void should_ignore_horizontal_orientation_if_provided_programmatically() {
+        //given
+        AttributeSet attributeSet = createAttributeSetWithStepperType(TYPE_DOTS);
+        StepperLayout stepperLayout = new StepperLayout(activity, attributeSet);
+
+        //when
+        stepperLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+        //then
+        assertVerticalOrientationUsed(stepperLayout);
+    }
+
+    private void assertVerticalOrientationUsed(StepperLayout stepperLayout) {
+        assertEquals("Invalid orientation", stepperLayout.getOrientation(), LinearLayout.VERTICAL);
     }
 
     private void whenAdapterIsSet(StepperLayout stepperLayout) {
