@@ -320,6 +320,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                //noinspection deprecation
                 mPager.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 onUpdate(mCurrentStepPosition, false);
             }

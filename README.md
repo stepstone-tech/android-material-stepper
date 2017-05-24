@@ -68,7 +68,6 @@ compile 'com.stepstone.stepper:material-stepper:3.2.2'
     android:id="@+id/stepperLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:ms_stepperType="progress_bar" />
 ```
 
