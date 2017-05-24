@@ -37,7 +37,3 @@ dependencies {
     compile "uk.co.chrisjenx:calligraphy:$calligraphyVersion"
 
 }
-
-repositories {
-    mavenCentral()
-}
