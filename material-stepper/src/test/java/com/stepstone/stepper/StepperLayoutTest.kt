@@ -33,7 +33,7 @@ class StepperLayoutTest {
     lateinit var stepperLayout: StepperLayout
 
     @Test
-    fun `All type specific indicators should be hidden when adapter is not set for StepperLayout with 'progress_bar' type `() {
+    fun `All type specific indicators should be hidden when adapter is not set for StepperLayout with 'progress_bar' type`() {
         //given
         val attributeSet = createAttributeSetWithStepperType(TYPE_PROGRESS_BAR)
 
@@ -48,7 +48,7 @@ class StepperLayoutTest {
     }
 
     @Test
-    fun `All type specific indicators should be hidden when adapter is not set for StepperLayout with 'dots' type `() {
+    fun `All type specific indicators should be hidden when adapter is not set for StepperLayout with 'dots' type`() {
         //given
         val attributeSet = createAttributeSetWithStepperType(TYPE_DOTS)
 
@@ -63,7 +63,7 @@ class StepperLayoutTest {
     }
 
     @Test
-    fun `All type specific indicators should be hidden when adapter is not set for StepperLayout with 'tabs' type `() {
+    fun `All type specific indicators should be hidden when adapter is not set for StepperLayout with 'tabs' type`() {
         //given
         val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
 

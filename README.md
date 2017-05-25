@@ -30,6 +30,7 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 - [StepperLayout attributes](#stepperlayout-attributes)
 	- [View attributes](#view-attributes)
 	- [StepperLayout style attributes](#stepperlayout-style-attributes)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Supported steppers
@@ -486,6 +487,16 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 | *ms_stepTabIconBackgroundStyle*   | Used by ms_stepIconBackground in layout/ms_step_tab           |
 | *ms_stepTabTitleStyle*            | Used by ms_stepTitle in layout/ms_step_tab                    |
 | *ms_stepTabDividerStyle*          | Used by ms_stepDivider in layout/ms_step_tab                  |
+
+
+## Contributing
+All contributions are welcome and encouraged!
+
+Pull requests should be merged to the ```develop``` branch (Rebase & merge preferred).
+Once ```develop``` is stable and we're ready to release the next version
+it should be merged to ```master```. Next, a new version should be
+uploaded to Bintray and a new release should be created on GitHub.
+Library releases should be made from the ```master``` branch.
   
 ## License
 Copyright 2016 StepStone Services
