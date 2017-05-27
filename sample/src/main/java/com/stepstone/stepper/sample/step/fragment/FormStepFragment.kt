@@ -21,14 +21,12 @@ import android.text.TextUtils
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-
+import butterknife.BindView
+import butterknife.OnEditorAction
 import com.stepstone.stepper.Step
 import com.stepstone.stepper.VerificationError
 import com.stepstone.stepper.sample.OnProceedListener
 import com.stepstone.stepper.sample.R
-
-import butterknife.BindView
-import butterknife.OnEditorAction
 
 internal class FormStepFragment : ButterKnifeFragment(), Step {
 

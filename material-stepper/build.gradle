@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'maven'
 apply from: '../material-stepper/code_coverage.gradle'
 apply from: '../config/quality/quality.gradle'
@@ -29,7 +30,7 @@ ext {
 
 android {
     compileSdkVersion project.androidCompileSdkVersion
-    buildToolsVersion ("$androidBuildToolsVersion")
+    buildToolsVersion("$androidBuildToolsVersion")
 
     defaultConfig {
         minSdkVersion project.androidMinSdkVersion
@@ -59,15 +60,18 @@ android {
 }
 
 dependencies {
-    compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
+    compile "com.android.support:appcompat-v7:$androidSupportLibraryVersion"
 
-    testCompile("junit:junit:$junitVersion")
-    testCompile("org.mockito:mockito-core:$mockitoVersion")
-    testCompile("com.squareup.assertj:assertj-android:$assertjVersion")
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "com.squareup.assertj:assertj-android:$assertjVersion"
     testCompile("org.robolectric:robolectric:$robolectricVersion") {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
     }
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    testCompile "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
 }
 
 gradle.taskGraph.beforeTask { Task task ->
@@ -81,7 +85,7 @@ gradle.taskGraph.beforeTask { Task task ->
 }
 
 // Log out test results to console
-tasks.matching {it instanceof Test}.all {
+tasks.matching { it instanceof Test }.all {
     testLogging.events = ["failed", "passed", "skipped"]
 }
 

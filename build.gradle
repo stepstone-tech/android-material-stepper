@@ -18,6 +18,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
     }
 }
 
@@ -31,7 +32,8 @@ configure(allprojects) {
         androidSupportLibraryVersion        = '25.3.1'
 
         junitVersion                        = '4.12'
-        mockitoVersion                      = '1.10.19'
+        mockitoVersion                      = '2.7.21'
+        mockitoKotlinVersion                = '1.4.0'
         robolectricVersion                  = '3.3.1'
         assertjVersion                      = '1.1.1'
 
