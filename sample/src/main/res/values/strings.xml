@@ -21,6 +21,7 @@
     <string name="proceed_programmatically">Proceed programmatically</string>
     <string name="passing_data_between_steps">Passing data between steps</string>
     <string name="disabled_tab_navigation">Disabled tab navigation</string>
+    <string name="hidden_bottom_navigation">Hidden bottom navigation</string>
     <string name="custom_stepperlayout_theme">Custom StepperLayout theme</string>
 
     <string name="default_dots_description">The default implementation of a dotted stepper</string>
@@ -43,6 +44,7 @@
     <string name="proceed_programmatically_description">Shows how to navigate to the next steps without clicking on the bottom navigation buttons</string>
     <string name="passing_data_between_steps_description">Shows how to pass data from one fragment to the next by using parent Activity</string>
     <string name="disabled_tab_navigation_description">Shows how to disable clicking on tabs in a tabbed stepper</string>
+    <string name="hidden_bottom_navigation_description">Shows how to hide bottom navigation</string>
     <string name="custom_stepperlayout_theme_description">Shows a styled stepper layout with custom fonts &amp; colors</string>
 
     <string name="tab_title">Tab title</string>

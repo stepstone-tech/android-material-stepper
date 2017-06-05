@@ -40,6 +40,7 @@
         <activity android:name=".PassDataBetweenStepsActivity"
             android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".DisabledTabNavigationActivity" />
+        <activity android:name=".HiddenBottomNavigationActivity" />
         <activity
             android:name=".CustomStepperLayoutThemeActivity"
             android:theme="@style/AppThemeDark" />
