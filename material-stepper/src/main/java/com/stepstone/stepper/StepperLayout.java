@@ -224,6 +224,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private boolean mShowBackButtonOnFirstStep;
 
+    private boolean mShowBottomNavigation;
+
     private int mTypeIdentifier = AbstractStepperType.PROGRESS_BAR;
 
     private int mFeedbackTypeMask = StepperFeedbackType.NONE;
@@ -618,6 +620,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mDottedProgressBar.setVisibility(GONE);
         mProgressBar.setVisibility(GONE);
         mTabsContainer.setVisibility(GONE);
+        mStepNavigation.setVisibility(mShowBottomNavigation ? View.VISIBLE : View.GONE);
 
         mStepperType = StepperTypeFactory.createType(mTypeIdentifier, this);
         mStepperFeedbackType = StepperFeedbackTypeFactory.createType(mFeedbackTypeMask, this);
@@ -738,6 +741,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             }
 
             mShowBackButtonOnFirstStep = a.getBoolean(R.styleable.StepperLayout_ms_showBackButtonOnFirstStep, false);
+
+            mShowBottomNavigation = a.getBoolean(R.styleable.StepperLayout_ms_showBottomNavigation, true);
 
             mShowErrorStateEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorState, false);
             mShowErrorStateEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateEnabled, mShowErrorStateEnabled);
