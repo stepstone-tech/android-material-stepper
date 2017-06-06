@@ -453,6 +453,10 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mBackNavigationButton.setEnabled(enabled);
     }
 
+    public void setShowBottomNavigation(boolean showBottomNavigation) {
+        mStepNavigation.setVisibility(showBottomNavigation ? View.VISIBLE : View.GONE);
+    }
+
     /**
      * Set whether when going backwards should clear the error state from the Tab. Default is <code>false</code>.
      *
