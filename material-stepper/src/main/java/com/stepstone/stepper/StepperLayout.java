@@ -433,26 +433,58 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         return mCurrentStepPosition;
     }
 
+    /**
+     * Sets whether the Next button in the bottom navigation bar should be in the
+     * 'verification failed' state i.e. still clickable but with an option to display it
+     * differently to indicate to the user that he cannot go to the next step yet.
+     * @param verificationFailed false if verification failed, true otherwise
+     */
     public void setNextButtonVerificationFailed(boolean verificationFailed) {
         mNextNavigationButton.setVerificationFailed(verificationFailed);
     }
 
+    /**
+     * Sets whether the Complete button in the bottom navigation bar should be in the
+     * 'verification failed' state i.e. still clickable but with an option to display it
+     * differently to indicate to the user that he cannot finish the process yet.
+     * @param verificationFailed false if verification failed, true otherwise
+     */
     public void setCompleteButtonVerificationFailed(boolean verificationFailed) {
         mCompleteNavigationButton.setVerificationFailed(verificationFailed);
     }
 
+    /**
+     * Sets whether the Next button in the bottom navigation bar should be enabled (clickable).
+     * setting this to <i>false</i> will make it unclickable.
+     * @param enabled true if the button should be clickable, false otherwise
+     */
     public void setNextButtonEnabled(boolean enabled) {
         mNextNavigationButton.setEnabled(enabled);
     }
 
+    /**
+     * Sets whether the Complete button in the bottom navigation bar should be enabled (clickable).
+     * setting this to <i>false</i> will make it unclickable.
+     * @param enabled true if the button should be clickable, false otherwise
+     */
     public void setCompleteButtonEnabled(boolean enabled) {
         mCompleteNavigationButton.setEnabled(enabled);
     }
 
+    /**
+     * Sets whether the Back button in the bottom navigation bar should be enabled (clickable).
+     * setting this to <i>false</i> will make it unclickable.
+     * @param enabled true if the button should be clickable, false otherwise
+     */
     public void setBackButtonEnabled(boolean enabled) {
         mBackNavigationButton.setEnabled(enabled);
     }
 
+    /**
+     * Set whether the bottom navigation bar (with Back/Next/Complete buttons) should be visible.
+     * <i>true</i> by default.
+     * @param showBottomNavigation true if bottom navigation should be visible, false otherwise
+     */
     public void setShowBottomNavigation(boolean showBottomNavigation) {
         mStepNavigation.setVisibility(showBottomNavigation ? View.VISIBLE : View.GONE);
     }

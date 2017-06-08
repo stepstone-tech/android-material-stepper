@@ -153,6 +153,58 @@ class StepperLayoutTest {
         assertStepperLayout().hasOrientation(LinearLayout.VERTICAL)
     }
 
+    @Test
+    fun `Horizontal orientation should be set by default`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_DOTS)
+
+        //when
+        stepperLayout = createStepperLayoutInActivity(attributeSet)
+
+        //then
+        assertStepperLayout().hasOrientation(LinearLayout.VERTICAL)
+    }
+
+    @Test
+    fun `Bottom navigation should be visible by default`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
+
+        //when
+        stepperLayout = createStepperLayoutInActivity(attributeSet)
+
+        //then
+        assertStepperLayout().hasBottomNavigationShown()
+    }
+
+    @Test
+    fun `Bottom navigation should be hidden if 'ms_showBottomNavigation' attribute is set to 'false' in XML`() {
+        //given
+        val attributeSet = Robolectric.buildAttributeSet()
+                .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
+                .addAttribute(R.attr.ms_showBottomNavigation, "false")
+                .build()
+
+        //when
+        stepperLayout = createStepperLayoutInActivity(attributeSet)
+
+        //then
+        assertStepperLayout().hasBottomNavigationHidden()
+    }
+
+    @Test
+    fun `Bottom navigation should be hidden if set programmatically`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
+        stepperLayout = createStepperLayoutInActivity(attributeSet)
+
+        //when
+        stepperLayout.setShowBottomNavigation(false)
+
+        //then
+        assertStepperLayout().hasBottomNavigationHidden()
+    }
+
     fun createAttributeSetWithStepperType(stepperType: String): AttributeSet {
         return Robolectric.buildAttributeSet()
                 .addAttribute(R.attr.ms_stepperType, stepperType)

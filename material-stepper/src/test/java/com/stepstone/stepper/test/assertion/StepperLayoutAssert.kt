@@ -1,11 +1,8 @@
 package com.stepstone.stepper.test.assertion
 
 import android.support.annotation.IdRes
-import android.view.View
-
 import com.stepstone.stepper.R
 import com.stepstone.stepper.StepperLayout
-
 import org.assertj.android.api.Assertions
 import org.assertj.android.api.view.ViewAssert
 import org.assertj.android.api.widget.AbstractLinearLayoutAssert
@@ -50,6 +47,16 @@ class StepperLayoutAssert constructor(actual: StepperLayout) : AbstractLinearLay
 
     fun hasTabsHidden(): StepperLayoutAssert {
         hasNotNullChildView(R.id.ms_stepTabsContainer).isGone
+        return this
+    }
+
+    fun hasBottomNavigationShown(): StepperLayoutAssert {
+        hasNotNullChildView(R.id.ms_bottomNavigation).isVisible
+        return this
+    }
+
+    fun hasBottomNavigationHidden(): StepperLayoutAssert {
+        hasNotNullChildView(R.id.ms_bottomNavigation).isGone
         return this
     }
 
