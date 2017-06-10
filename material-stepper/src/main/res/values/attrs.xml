@@ -52,6 +52,9 @@ limitations under the License.
         <!-- Flag indicating if the Back (Previous step) button should be shown on the first step. False by default. -->
         <attr name="ms_showBackButtonOnFirstStep" format="boolean" />
 
+        <!-- Flag indicating if the Bottom Navigation should be shown on the layout. True by default. -->
+        <attr name="ms_showBottomNavigation" format="boolean" />
+
         <!-- DEPRECATED: Use ms_showErrorStateEnabled instead -->
         <attr name="ms_showErrorState" format="boolean" />
 
