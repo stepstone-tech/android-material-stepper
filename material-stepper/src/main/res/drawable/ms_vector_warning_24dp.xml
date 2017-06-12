@@ -8,22 +8,8 @@
         android:name="icon_container"
         android:translateY="@integer/ms_warning_end_translate_y">
 
-        <group
-            android:name="circle_group"
-            android:pivotX="12"
-            android:pivotY="12"
-            android:scaleX="@integer/ms_circle_start_scale"
-            android:scaleY="@integer/ms_circle_start_scale">
-
-            <path
-                android:name="circle"
-                android:fillAlpha="0"
-                android:fillColor="@android:color/black"
-                android:pathData="@string/ms_circle_path" />
-
-        </group>
-
         <path
+            android:name="icon"
             android:fillColor="@android:color/black"
             android:pathData="@string/ms_warning_path" />
 

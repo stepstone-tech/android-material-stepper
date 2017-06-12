@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -196,20 +195,13 @@ public class StepTab extends RelativeLayout {
     }
 
     /**
-     * Inflates an animated vector drawable. On Lollipop+ this uses the native {@link android.graphics.drawable.AnimatedVectorDrawable}
-     * and below it inflates the drawable as a {@link AnimatedVectorDrawableCompat}.
+     * Inflates an animated vector drawable.
      *
      * @param animatedVectorDrawableResId resource ID for the animated vector
      * @return animated vector drawable
      */
     public Drawable createAnimatedVectorDrawable(@DrawableRes int animatedVectorDrawableResId) {
-        Context context = getContext();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Drawable drawable = context.getDrawable(animatedVectorDrawableResId);
-            return drawable.getConstantState().newDrawable(context.getResources());
-        } else {
-            return AnimatedVectorDrawableCompat.create(context, animatedVectorDrawableResId);
-        }
+        return AnimatedVectorDrawableCompat.create(getContext(), animatedVectorDrawableResId);
     }
 
     /**

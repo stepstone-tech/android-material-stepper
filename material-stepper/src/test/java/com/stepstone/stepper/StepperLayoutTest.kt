@@ -205,6 +205,22 @@ class StepperLayoutTest {
         assertStepperLayout().hasBottomNavigationHidden()
     }
 
+    @Test
+    fun `Bottom navigation should be shown if set programmatically`() {
+        //given
+        val attributeSet = Robolectric.buildAttributeSet()
+                .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
+                .addAttribute(R.attr.ms_showBottomNavigation, "false")
+                .build()
+        stepperLayout = createStepperLayoutInActivity(attributeSet)
+
+        //when
+        stepperLayout.setShowBottomNavigation(true)
+
+        //then
+        assertStepperLayout().hasBottomNavigationShown()
+    }
+
     fun createAttributeSetWithStepperType(stepperType: String): AttributeSet {
         return Robolectric.buildAttributeSet()
                 .addAttribute(R.attr.ms_stepperType, stepperType)

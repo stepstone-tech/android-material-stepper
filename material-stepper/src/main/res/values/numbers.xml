@@ -5,6 +5,4 @@
 
     <integer name="ms_warning_end_translate_y">2</integer>
 
-    <item name="ms_circle_start_scale" type="integer" format="float">0.5</item>
-
 </resources>
