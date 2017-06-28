@@ -45,6 +45,8 @@ public class StepperTypeFactory {
                 return new ProgressBarStepperType(stepperLayout);
             case AbstractStepperType.TABS:
                 return new TabsStepperType(stepperLayout);
+            case AbstractStepperType.NONE:
+                return new NoneStepperType(stepperLayout);
             default:
                 Log.e(TAG, "Unsupported type: " + stepType);
                 throw new IllegalArgumentException("Unsupported type: " + stepType);

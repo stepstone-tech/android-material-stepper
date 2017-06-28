@@ -89,6 +89,7 @@ limitations under the License.
             <enum name="dots" value="0x01" />
             <enum name="progress_bar" value="0x02" />
             <enum name="tabs" value="0x03" />
+            <enum name="none" value="0x04" />
         </attr>
 
     </declare-styleable>

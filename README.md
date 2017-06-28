@@ -451,7 +451,7 @@ For advanced styling please see [StepperLayout style attributes](#stepperlayout-
 
 | Attribute name                  | Format                                                              | Description |
 | --------------------------------|---------------------------------------------------------------------|-------------|
-| *ms_stepperType*                | one of `dots`, `progress_bar` or `tabs`                             | **REQUIRED:** Type of the stepper |
+| *ms_stepperType*                | one of `dots`, `progress_bar`, `tabs` or `none`                     | **REQUIRED:** Type of the stepper |
 | *ms_backButtonColor*            | color or reference                                                  | BACK button's text color           |
 | *ms_nextButtonColor*            | color or reference                                                  | NEXT button's text color            |
 | *ms_completeButtonColor*        | color or reference                                                  | COMPLETE button's text color            |
