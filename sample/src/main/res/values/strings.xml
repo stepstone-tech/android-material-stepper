@@ -6,6 +6,7 @@
     <string name="themed_dots">Themed dots</string>
     <string name="default_progress_bar">Default progress bar</string>
     <string name="styled_progress_bar">Styled progress bar</string>
+    <string name="default_none">Default \'none\'</string>
     <string name="default_tabs">Default tabs</string>
     <string name="styled_tabs">Styled tabs</string>
     <string name="error_tabs">Show errors on tabs</string>
@@ -31,6 +32,7 @@
     <string name="styled_progress_bar_description">Horizontal progress bar stepper styled through view attributes in the layout file</string>
     <string name="default_tabs_description">The default implementation of a tabbed stepper</string>
     <string name="styled_tabs_description">Tabbed stepper styled through view attributes in the layout file</string>
+    <string name="default_none_description">The default implementation of a stepper without any particular current step indication</string>
     <string name="error_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs</string>
     <string name="error_color_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs with a custom error color</string>
     <string name="error_back_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs and keeps it displayed when going to a previous step</string>

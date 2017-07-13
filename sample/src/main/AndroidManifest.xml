@@ -25,6 +25,7 @@
         <activity android:name=".StyledProgressBarActivity" />
         <activity android:name=".DefaultTabsActivity" />
         <activity android:name=".StyledTabsActivity" />
+        <activity android:name=".DefaultNoneActivity" />
         <activity android:name=".ShowErrorOnBackTabActivity" />
         <activity android:name=".ShowErrorTabActivity" />
         <activity android:name=".ShowErrorCustomColorTabActivity" />

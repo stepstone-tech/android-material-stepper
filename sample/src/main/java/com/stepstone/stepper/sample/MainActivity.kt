@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 SampleItem(getString(R.string.styled_progress_bar), getString(R.string.styled_progress_bar_description), StyledProgressBarActivity::class.java),
                 SampleItem(getString(R.string.default_tabs), getString(R.string.default_tabs_description), DefaultTabsActivity::class.java),
                 SampleItem(getString(R.string.styled_tabs), getString(R.string.styled_tabs_description), StyledTabsActivity::class.java),
+                SampleItem(getString(R.string.default_none), getString(R.string.default_none_description), DefaultNoneActivity::class.java),
                 SampleItem(getString(R.string.error_tabs), getString(R.string.error_tabs_description), ShowErrorTabActivity::class.java),
                 SampleItem(getString(R.string.error_color_tabs), getString(R.string.error_color_tabs_description), ShowErrorCustomColorTabActivity::class.java),
                 SampleItem(getString(R.string.error_back_tabs), getString(R.string.error_back_tabs_description), ShowErrorOnBackTabActivity::class.java),

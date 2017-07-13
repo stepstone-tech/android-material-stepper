@@ -36,13 +36,18 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 ## Supported steppers
 
 ### Mobile stepper with dots <br/>
-<img src ="./gifs/dotted-progress-bar.gif" width="360" height="640"/>&nbsp;&nbsp;<img src ="./gifs/dotted-progress-bar-styled.gif" width="360" height="640"/>
+<img src ="./gifs/dotted-progress-bar.gif" width="360" />&nbsp;&nbsp;<img src ="./gifs/dotted-progress-bar-styled.gif" width="360" />
 
 ### Mobile stepper with progress bar <br/>
-<img src ="./gifs/linear-progress-bar.gif" width="360" height="640"/>&nbsp;&nbsp;<img src ="./gifs/linear-progress-bar-styled.gif" width="360" height="640"/>
+<img src ="./gifs/linear-progress-bar.gif" width="360" />&nbsp;&nbsp;<img src ="./gifs/linear-progress-bar-styled.gif" width="360" />
+
+### Mobile stepper without a progress indicator <br/>
+<img src ="./gifs/none.gif" width="360" />
+
 ### Horizontal stepper <br/>
-<img src ="./gifs/tabs.gif" width="640" height="360"/>
-<img src ="./gifs/tabs-styled.gif" width="640" height="360"/>
+<img src ="./gifs/tabs.gif" width="640" />
+<img src ="./gifs/tabs-styled.gif" width="640" />
+
 
 ## Supported features
   - color customisation of individual widgets inside of the stepper via View attributes or a style from a theme
@@ -207,7 +212,7 @@ After clicking on the Next button if the user wants to e.g.:
 he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step.
 If the user wants to perform these operations on the final step, when clicking on the Complete button, he needs to invoke the `complete()` method of the  `StepperLayout.OnCompleteClickedCallback`.
 While operations are performed, and the user would like to go back you can cancel them and then invoke `onBackClicked()` method of the `StepperLayout.OnBackClickedCallback`.
-<p><img src ="./gifs/delayed-transition.gif" width="360" height="640"/></p>
+<p><img src ="./gifs/delayed-transition.gif" width="360" /></p>
 
 To do so the fragment/view must implement `BlockingStep` instead of `Step`.
 Also, make sure that `goToNextStep()` and/or `complete()` get called on the main thread.
@@ -255,7 +260,7 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 Sometimes you might want to have different labels on the Next and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
 but display 'Summary' just before the last page.
 You might also want to use your custom icons instead of the default navigation button compound drawables or not show the compound drawables for some of the buttons.
-<p><img src ="./gifs/custom-navigation-buttons.gif" width="360" height="640"/></p>
+<p><img src ="./gifs/custom-navigation-buttons.gif" width="360" /></p>
 In such case you need to override the `getViewModel(int)` method from the `StepAdapter` e.g.
 
 ```java
@@ -295,7 +300,7 @@ Basic styling can be done by choosing the active and inactive step colors.
 There are some additional properties which can be changed directly from StepperLayout's attributes e.g. the background of bottom navigation buttons (see [StepperLayout attributes](#stepperlayout-attributes))
 For advanced styling you can use `ms_stepperLayoutTheme` StepperLayout's attribute and provide your custom style to be used.
 See 'Custom StepperLayout theme' in the sample app for an example.
-<p><img src ="./gifs/custom-theme.gif" width="360" height="640"/></p>
+<p><img src ="./gifs/custom-theme.gif" width="360" /></p>
 
 ### Using same stepper styling across the application
 If you have many steppers in your application in different activities/fragments you might want to set a common style in a theme.
@@ -339,7 +344,7 @@ For an example of how to use it with views please see the sample app.
 
 ### Showing an error on tabs if step verification failed
 To show an error in the tabbed stepper if step verification fails you need to set `ms_showErrorStateEnabled` attribute to `true`.
-<p><img src ="./gifs/error-on-tabs.gif" width="640" height="360"/></p>
+<p><img src ="./gifs/error-on-tabs.gif" width="640" /></p>
 
 If you want to keep the error displayed when going back to the previous step you need to also set `ms_showErrorStateOnBackEnabled` to `true`.
 
@@ -355,7 +360,7 @@ The default is ```none``` which does nothing. It is possible to use multiple fla
 After setting this to show the feedback you need to call ```StepperLayout#showProgress(@NonNull String progressMessage)```
 and do hide the progress indicator you need to call ```StepperLayout#hideProgress()```.
 
-<p><img src ="./gifs/stepper-feedback.gif" width="640" height="360"/></p>
+<p><img src ="./gifs/stepper-feedback.gif" width="640" /></p>
 
 E.g.
 In layout:

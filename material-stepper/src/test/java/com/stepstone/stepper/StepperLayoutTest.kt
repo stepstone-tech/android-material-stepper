@@ -25,6 +25,7 @@ class StepperLayoutTest {
         const val TYPE_PROGRESS_BAR = "progress_bar"
         const val TYPE_DOTS = "dots"
         const val TYPE_TABS = "tabs"
+        const val TYPE_NONE = "none"
 
         const val ORIENTATION_HORIZONTAL = "horizontal"
 
@@ -75,6 +76,36 @@ class StepperLayoutTest {
                 .hasTabsHidden()
                 .hasHorizontalProgressBarHidden()
                 .hasDottedProgressBarHidden()
+    }
+
+    @Test
+    fun `All type specific indicators should be hidden when adapter is not set for StepperLayout with 'none' type`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_NONE)
+
+        //when
+        stepperLayout = createStepperLayoutInActivity(attributeSet)
+
+        //then
+        assertStepperLayout()
+                .hasHorizontalProgressBarHidden()
+                .hasDottedProgressBarHidden()
+                .hasTabsHidden()
+    }
+
+    @Test
+    fun `All type specific indicators should be hidden when adapter is set for StepperLayout with 'none' type`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_NONE)
+
+        //when
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet)
+
+        //then
+        assertStepperLayout()
+                .hasHorizontalProgressBarHidden()
+                .hasDottedProgressBarHidden()
+                .hasTabsHidden()
     }
 
     @Test
