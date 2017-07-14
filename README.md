@@ -257,7 +257,7 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 ```
 
 ### Changing button labels & compound drawables per step
-Sometimes you might want to have different labels on the Next and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
+Sometimes you might want to have different labels on the Next/Complete and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
 but display 'Summary' just before the last page.
 You might also want to use your custom icons instead of the default navigation button compound drawables or not show the compound drawables for some of the buttons.
 <p><img src ="./gifs/custom-navigation-buttons.gif" width="360" /></p>
@@ -284,7 +284,9 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
                     .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow);
                 break;
             case 2:
-                builder.setBackButtonLabel("Go back");
+                builder
+                    .setBackButtonLabel("Go back")
+                    .setCompleteButtonLabel("I'm done!");
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported position: " + position);
@@ -292,8 +294,6 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
         return builder.create();
     }
 ```
-
-NOTE: To change Complete button's label you need use `ms_completeButtonText` attribute from StepperLayout.
 
 ### Custom styling
 Basic styling can be done by choosing the active and inactive step colors. 

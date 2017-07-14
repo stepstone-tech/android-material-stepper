@@ -42,6 +42,15 @@ public class StepViewModel {
     private CharSequence mNextButtonLabel;
 
     /**
+     * Allows to override the text on the Complete button for this step.
+     * This step has to be the last step for this to have any effect.
+     * To do so you need to return a non-null String of the label.
+     * By default this is {@code null}.
+     */
+    @Nullable
+    private CharSequence mCompleteButtonLabel;
+
+    /**
      * Allows to override the text on the Back button for this step.
      * To do so you need to return a non-null String of the label.
      * If you wish to change the text for selected steps only (and leave the default for the rest)
@@ -76,6 +85,11 @@ public class StepViewModel {
     }
 
     @Nullable
+    public CharSequence getCompleteButtonLabel() {
+        return mCompleteButtonLabel;
+    }
+
+    @Nullable
     public CharSequence getBackButtonLabel() {
         return mBackButtonLabel;
     }
@@ -100,6 +114,9 @@ public class StepViewModel {
 
         @Nullable
         private CharSequence mNextButtonLabel;
+
+        @Nullable
+        private CharSequence mCompleteButtonLabel;
 
         @Nullable
         private CharSequence mBackButtonLabel;
@@ -164,6 +181,28 @@ public class StepViewModel {
         }
 
         /**
+         * Set the label of the complete button using the given resource id.
+         *
+         * @param completeButtonLabelId string resource ID for the Complete button
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder setCompleteButtonLabel(@StringRes int completeButtonLabelId) {
+            this.mCompleteButtonLabel = mContext.getString(completeButtonLabelId);
+            return this;
+        }
+
+        /**
+         * Set the label of the complete button.
+         *
+         * @param completeButtonLabel CharSequence to be used as a Complete button label
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder setCompleteButtonLabel(@Nullable CharSequence completeButtonLabel) {
+            this.mCompleteButtonLabel = completeButtonLabel;
+            return this;
+        }
+
+        /**
          * Set the label of the back button using the given resource id.
          *
          * @param backButtonLabelId string resource ID for the Back button
@@ -217,6 +256,7 @@ public class StepViewModel {
             viewModel.mTitle = this.mTitle;
             viewModel.mBackButtonLabel = this.mBackButtonLabel;
             viewModel.mNextButtonLabel = this.mNextButtonLabel;
+            viewModel.mCompleteButtonLabel = this.mCompleteButtonLabel;
             viewModel.mNextButtonEndDrawableResId = this.mNextButtonEndDrawableResId;
             viewModel.mBackButtonStartDrawableResId = this.mBackButtonStartDrawableResId;
             return viewModel;

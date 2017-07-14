@@ -38,7 +38,9 @@ class CustomButtonsSampleFragmentStepAdapter(fm: FragmentManager, context: Conte
                     .setNextButtonLabel(R.string.go_to_summary)
                     .setBackButtonLabel("Go to first")
                     .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow)
-            2 -> builder.setBackButtonLabel("Go back")
+            2 -> builder
+                    .setBackButtonLabel("Go back")
+                    .setCompleteButtonLabel("I'm done!")
             else -> throw IllegalArgumentException("Unsupported position: " + position)
         }
         return builder.create()

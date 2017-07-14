@@ -896,6 +896,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         if (!isLast) {
             updateNextButton(viewModel);
+        } else {
+            updateCompleteButton(viewModel);
         }
 
         setCompoundDrawablesForNavigationButtons(viewModel.getBackButtonStartDrawableResId(), viewModel.getNextButtonEndDrawableResId());
@@ -905,6 +907,15 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         Step step = mStepAdapter.findStep(newStepPosition);
         if (step != null) {
             step.onSelected();
+        }
+    }
+
+    private void updateCompleteButton(@NonNull StepViewModel viewModel) {
+        CharSequence completeButtonTextForStep = viewModel.getCompleteButtonLabel();
+        if (completeButtonTextForStep == null) {
+            mCompleteNavigationButton.setText(mCompleteButtonText);
+        } else {
+            mCompleteNavigationButton.setText(completeButtonTextForStep);
         }
     }
 
