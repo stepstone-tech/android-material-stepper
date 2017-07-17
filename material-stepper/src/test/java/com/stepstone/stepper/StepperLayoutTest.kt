@@ -6,11 +6,13 @@ import com.stepstone.stepper.test.assertion.StepperLayoutAssert
 import com.stepstone.stepper.test.assertion.StepperLayoutAssert.Companion.assertThat
 import com.stepstone.stepper.test.runner.StepperRobolectricTestRunner
 import com.stepstone.stepper.test.test_double.SpyStepAdapter
+import com.stepstone.stepper.viewmodel.StepViewModel
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.verify
 import org.robolectric.Robolectric
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.android.controller.ActivityController
 
 
@@ -28,6 +30,8 @@ class StepperLayoutTest {
         const val TYPE_NONE = "none"
 
         const val ORIENTATION_HORIZONTAL = "horizontal"
+
+        const val LAST_PAGE_INDEX = 2
 
     }
 
@@ -252,6 +256,136 @@ class StepperLayoutTest {
         assertStepperLayout().hasBottomNavigationShown()
     }
 
+    @Test
+    fun `Should show only 'Next' button on first page by default`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
+
+        //when
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet)
+
+        //then
+        assertStepperLayout()
+                .hasBackButtonHidden()
+                .hasNextButtonShown()
+                .hasCompleteButtonHidden()
+    }
+
+    @Test
+    fun `Should show 'Back' and 'Next' buttons on first page if specified in view attributes`() {
+        //given
+        val attributeSet = Robolectric.buildAttributeSet()
+                        .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
+                        .addAttribute(R.attr.ms_showBackButtonOnFirstStep, true.toString())
+                        .build()
+
+        //when
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet)
+
+        //then
+        assertStepperLayout()
+                .hasBackButtonShown()
+                .hasNextButtonShown()
+                .hasCompleteButtonHidden()
+    }
+
+    @Test
+    fun `Should show 'Complete' button (and 'Back' button) on last page by default`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet)
+
+        //when
+        goToLastPage()
+
+        //then
+        assertStepperLayout()
+                .hasBackButtonShown()
+                .hasNextButtonHidden()
+                .hasCompleteButtonShown()
+    }
+
+    @Test
+    fun `Should show 'Back' and 'Next' buttons on middle page by default`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet)
+
+        //when
+        goToMiddlePage()
+
+        //then
+        assertStepperLayout()
+                .hasBackButtonShown()
+                .hasNextButtonShown()
+                .hasCompleteButtonHidden()
+    }
+
+    @Test
+    fun `Should hide 'Next' button on first page if specified in first step's StepViewModel`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
+        val firstStepViewModel = StepViewModel.Builder(RuntimeEnvironment.application)
+                .setEndButtonVisible(false)
+                .create()
+
+        //when
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet, firstStepViewModel, null, null)
+
+        //then
+        assertStepperLayout()
+                .hasBackButtonHidden()
+                .hasNextButtonHidden()
+                .hasCompleteButtonHidden()
+    }
+
+    @Test
+    fun `Should hide 'Back' and 'Next' buttons on middle page if specified in middle step's StepViewModel`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
+        val middleStepViewModel = StepViewModel.Builder(RuntimeEnvironment.application)
+                .setEndButtonVisible(false)
+                .setBackButtonVisible(false)
+                .create()
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet, null, middleStepViewModel, null)
+
+        //when
+        goToMiddlePage()
+
+        //then
+        assertStepperLayout()
+                .hasBackButtonHidden()
+                .hasNextButtonHidden()
+                .hasCompleteButtonHidden()
+    }
+
+    @Test
+    fun `Should hide 'Complete' button on last page if specified in last step's StepViewModel`() {
+        //given
+        val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
+        val lastStepViewModel = StepViewModel.Builder(RuntimeEnvironment.application)
+                .setEndButtonVisible(false)
+                .create()
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet, null, null, lastStepViewModel)
+
+        //when
+        goToLastPage()
+
+        //then
+        assertStepperLayout()
+                .hasBackButtonShown()
+                .hasNextButtonHidden()
+                .hasCompleteButtonHidden()
+    }
+
+    private fun goToLastPage() {
+        stepperLayout.currentStepPosition = LAST_PAGE_INDEX
+    }
+
+    private fun goToMiddlePage() {
+        stepperLayout.currentStepPosition = LAST_PAGE_INDEX - 1
+    }
+
     fun createAttributeSetWithStepperType(stepperType: String): AttributeSet {
         return Robolectric.buildAttributeSet()
                 .addAttribute(R.attr.ms_stepperType, stepperType)
@@ -266,7 +400,27 @@ class StepperLayoutTest {
     }
 
     fun createStepperLayoutWithAdapterSetInActivity(attributeSet: AttributeSet): StepperLayout {
-        val activity = ActivityController.of(Robolectric.getShadowsAdapter(), StepperLayoutWithAdapterActivity().withStepperLayoutAttributes(attributeSet))
+        return createStepperLayoutWithAdapterSetInActivity(attributeSet, null, null, null)
+    }
+
+    /**
+     * Creates a [StepperLayout] set in the Activity with [StepViewModel]s provided in the attributes.
+     * If a [StepViewModel] is null then the default [StepViewModel] from [StepperLayoutWithAdapterActivity.defaultStepViewModel] is used.
+     */
+    fun createStepperLayoutWithAdapterSetInActivity(attributeSet: AttributeSet,
+                                                    firstViewModel: StepViewModel?,
+                                                    middleViewModel: StepViewModel?,
+                                                    lastViewModel: StepViewModel?): StepperLayout {
+        val stepperLayoutWithAdapterActivity = object: StepperLayoutWithAdapterActivity() {
+
+            override fun getFirstStepViewModel() = firstViewModel ?: super.getFirstStepViewModel()
+
+            override fun getSecondStepViewModel() = middleViewModel ?: super.getSecondStepViewModel()
+
+            override fun getLastStepViewModel() = lastViewModel ?: super.getLastStepViewModel()
+
+        }
+        val activity = ActivityController.of(Robolectric.getShadowsAdapter(), stepperLayoutWithAdapterActivity.withStepperLayoutAttributes(attributeSet))
                 .setup()
                 .get()
         return activity.stepperLayout

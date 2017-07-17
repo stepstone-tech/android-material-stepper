@@ -31,6 +31,7 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 - [StepperLayout attributes](#stepperlayout-attributes)
 	- [View attributes](#view-attributes)
 	- [StepperLayout style attributes](#stepperlayout-style-attributes)
+- [Changelog](#changelog)
 - [License](#license)
 
 ## Supported steppers
@@ -272,21 +273,21 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
         switch (position) {
             case 0:
                 builder
-                    .setNextButtonLabel("This way")
+                    .setEndButtonLabel("This way")
                     .setBackButtonLabel("Cancel")
                     .setNextButtonEndDrawableResId(R.drawable.ms_forward_arrow)
                     .setBackButtonStartDrawableResId(StepViewModel.NULL_DRAWABLE);
                 break;
             case 1:
                 builder
-                    .setNextButtonLabel(R.string.go_to_summary)
+                    .setEndButtonLabel(R.string.go_to_summary)
                     .setBackButtonLabel("Go to first")
                     .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow);
                 break;
             case 2:
                 builder
                     .setBackButtonLabel("Go back")
-                    .setCompleteButtonLabel("I'm done!");
+                    .setEndButtonLabel("I'm done!");
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported position: " + position);
@@ -294,6 +295,10 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
         return builder.create();
     }
 ```
+
+It is also possible to hide Back/Next/Complete buttons on each step if needed.
+To do so you need to call `setBackButtonVisible(false)` and/or `setEndButtonVisible(false)` on
+`StepViewModel.Builder` in your adapter.
 
 ### Custom styling
 Basic styling can be done by choosing the active and inactive step colors. 
@@ -500,7 +505,10 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 | *ms_stepTabIconBackgroundStyle*   | Used by ms_stepIconBackground in layout/ms_step_tab           |
 | *ms_stepTabTitleStyle*            | Used by ms_stepTitle in layout/ms_step_tab                    |
 | *ms_stepTabDividerStyle*          | Used by ms_stepDivider in layout/ms_step_tab                  |
-  
+
+## Changelog
+See [changelog](CHANGELOG.md)
+
 ## License
 Copyright 2016 StepStone Services
     

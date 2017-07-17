@@ -43,6 +43,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.feedback.StepperFeedbackType;
@@ -885,20 +886,21 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mPager.setCurrentItem(newStepPosition);
         final boolean isLast = isLastPosition(newStepPosition);
         final boolean isFirst = newStepPosition == 0;
-        AnimationUtil.fadeViewVisibility(mNextNavigationButton, isLast ? View.GONE : View.VISIBLE, userTriggeredChange);
-        AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, !isLast ? View.GONE : View.VISIBLE, userTriggeredChange);
-        int backButtonTargetVisibility = isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE;
-        AnimationUtil.fadeViewVisibility(mBackNavigationButton, backButtonTargetVisibility, userTriggeredChange);
-
         final StepViewModel viewModel = mStepAdapter.getViewModel(newStepPosition);
+
+        int backButtonTargetVisibility = (isFirst && !mShowBackButtonOnFirstStep) || !viewModel.isBackButtonVisible() ? View.GONE : View.VISIBLE;
+        int nextButtonVisibility = isLast || !viewModel.isEndButtonVisible() ? View.GONE : View.VISIBLE;
+        int completeButtonVisibility = !isLast || !viewModel.isEndButtonVisible() ? View.GONE : View.VISIBLE;
+
+        AnimationUtil.fadeViewVisibility(mNextNavigationButton, nextButtonVisibility, userTriggeredChange);
+        AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, completeButtonVisibility, userTriggeredChange);
+        AnimationUtil.fadeViewVisibility(mBackNavigationButton, backButtonTargetVisibility, userTriggeredChange);
 
         updateBackButton(viewModel);
 
-        if (!isLast) {
-            updateNextButton(viewModel);
-        } else {
-            updateCompleteButton(viewModel);
-        }
+        updateEndButton(viewModel.getEndButtonLabel(),
+                isLast ? mCompleteButtonText : mNextButtonText,
+                isLast ? mCompleteNavigationButton : mNextNavigationButton);
 
         setCompoundDrawablesForNavigationButtons(viewModel.getBackButtonStartDrawableResId(), viewModel.getNextButtonEndDrawableResId());
 
@@ -910,21 +912,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
     }
 
-    private void updateCompleteButton(@NonNull StepViewModel viewModel) {
-        CharSequence completeButtonTextForStep = viewModel.getCompleteButtonLabel();
-        if (completeButtonTextForStep == null) {
-            mCompleteNavigationButton.setText(mCompleteButtonText);
+    private void updateEndButton(@Nullable CharSequence endButtonTextForStep,
+                                 @Nullable CharSequence defaultEndButtonText,
+                                 @NonNull TextView endButton) {
+        if (endButtonTextForStep == null) {
+            endButton.setText(defaultEndButtonText);
         } else {
-            mCompleteNavigationButton.setText(completeButtonTextForStep);
-        }
-    }
-
-    private void updateNextButton(@NonNull StepViewModel viewModel) {
-        CharSequence nextButtonTextForStep = viewModel.getNextButtonLabel();
-        if (nextButtonTextForStep == null) {
-            mNextNavigationButton.setText(mNextButtonText);
-        } else {
-            mNextNavigationButton.setText(nextButtonTextForStep);
+            endButton.setText(endButtonTextForStep);
         }
     }
 

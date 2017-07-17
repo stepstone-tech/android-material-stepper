@@ -13,14 +13,12 @@ import com.stepstone.stepper.viewmodel.StepViewModel
 /**
  * Creates Spy [DummyStepFragment]s which can be later verified.
  */
-class SpyStepAdapter(fm: FragmentManager, context: Context) : AbstractFragmentStepAdapter(fm, context) {
+class SpyStepAdapter(fm: FragmentManager, context: Context, val viewModels: List<StepViewModel>) : AbstractFragmentStepAdapter(fm, context) {
 
     val steps = SparseArray<Step>()
 
     override fun getViewModel(@IntRange(from = 0) position: Int): StepViewModel {
-        return StepViewModel.Builder(context)
-                .setTitle("Dummy title")
-                .create()
+        return viewModels[position]
     }
 
     override fun createStep(position: Int): Step {
@@ -29,5 +27,5 @@ class SpyStepAdapter(fm: FragmentManager, context: Context) : AbstractFragmentSt
         return stepFragment
     }
 
-    override fun getCount() = 3
+    override fun getCount() = viewModels.size
 }

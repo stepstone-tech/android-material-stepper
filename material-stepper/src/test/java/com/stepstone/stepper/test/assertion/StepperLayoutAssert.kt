@@ -60,6 +60,36 @@ class StepperLayoutAssert constructor(actual: StepperLayout) : AbstractLinearLay
         return this
     }
 
+    fun hasBackButtonShown(): StepperLayoutAssert {
+        hasNotNullChildView(R.id.ms_stepPrevButton).isVisible
+        return this
+    }
+
+    fun hasBackButtonHidden(): StepperLayoutAssert {
+        hasNotNullChildView(R.id.ms_stepPrevButton).isGone
+        return this
+    }
+
+    fun hasNextButtonShown(): StepperLayoutAssert {
+        hasNotNullChildView(R.id.ms_stepNextButton).isVisible
+        return this
+    }
+
+    fun hasNextButtonHidden(): StepperLayoutAssert {
+        hasNotNullChildView(R.id.ms_stepNextButton).isGone
+        return this
+    }
+
+    fun hasCompleteButtonShown(): StepperLayoutAssert {
+        hasNotNullChildView(R.id.ms_stepCompleteButton).isVisible
+        return this
+    }
+
+    fun hasCompleteButtonHidden(): StepperLayoutAssert {
+        hasNotNullChildView(R.id.ms_stepCompleteButton).isGone
+        return this
+    }
+
     private fun hasNotNullChildView(@IdRes childId: Int): ViewAssert {
         val progressBar = actual.findViewById(childId)
         return Assertions.assertThat(progressBar).isNotNull

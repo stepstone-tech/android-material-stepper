@@ -28,7 +28,7 @@ import com.stepstone.stepper.sample.adapter.CustomButtonsSampleFragmentStepAdapt
 import butterknife.BindView
 import butterknife.ButterKnife
 
-class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.StepperListener {
+class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.StepperListener, OnProceedListener {
 
     companion object {
 
@@ -75,6 +75,10 @@ class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.Stepp
 
     override fun onReturn() {
         finish()
+    }
+
+    override fun onProceed() {
+        mStepperLayout.proceed()
     }
 
 }

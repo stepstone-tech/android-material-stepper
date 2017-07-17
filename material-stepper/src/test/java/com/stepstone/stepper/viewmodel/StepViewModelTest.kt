@@ -16,13 +16,11 @@ class StepViewModelTest {
 
         val TITLE = "my fancy title"
 
-        val NEXT_BUTTON_LABEL = "next label"
+        val END_BUTTON_LABEL = "next or complete label"
         val BACK_BUTTON_LABEL = "back label"
-        val COMPLETE_BUTTON_LABEL = "complete label"
 
-        val NEXT_BUTTON_LABEL_RES_ID = android.R.string.paste
+        val END_BUTTON_LABEL_RES_ID = android.R.string.paste
         val BACK_BUTTON_LABEL_RES_ID = android.R.string.cancel
-        val COMPLETE_BUTTON_LABEL_RES_ID = android.R.string.cut
 
         val TITLE_RES_ID = android.R.string.copy
 
@@ -33,9 +31,8 @@ class StepViewModelTest {
 
     val mockContext = mock<Context> {
         on { getString(TITLE_RES_ID) } doReturn TITLE
-        on { getString(NEXT_BUTTON_LABEL_RES_ID) } doReturn NEXT_BUTTON_LABEL
+        on { getString(END_BUTTON_LABEL_RES_ID) } doReturn END_BUTTON_LABEL
         on { getString(BACK_BUTTON_LABEL_RES_ID) } doReturn BACK_BUTTON_LABEL
-        on { getString(COMPLETE_BUTTON_LABEL_RES_ID) } doReturn COMPLETE_BUTTON_LABEL
     }
 
     @Test
@@ -50,10 +47,11 @@ class StepViewModelTest {
         assertThat(stepViewModel)
                 .hasTitle(null)
                 .hasBackButtonLabel(null)
-                .hasNextButtonLabel(null)
-                .hasCompleteButtonLabel(null)
+                .hasEndButtonLabel(null)
                 .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
                 .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
     }
 
     @Test
@@ -69,10 +67,11 @@ class StepViewModelTest {
         assertThat(stepViewModel)
                 .hasTitle(TITLE)
                 .hasBackButtonLabel(null)
-                .hasNextButtonLabel(null)
-                .hasCompleteButtonLabel(null)
+                .hasEndButtonLabel(null)
                 .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
                 .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
     }
 
     @Test
@@ -88,48 +87,51 @@ class StepViewModelTest {
         assertThat(stepViewModel)
                 .hasTitle(TITLE)
                 .hasBackButtonLabel(null)
-                .hasNextButtonLabel(null)
-                .hasCompleteButtonLabel(null)
+                .hasEndButtonLabel(null)
                 .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
                 .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
     }
 
     @Test
-    fun `Should build StepViewModel with custom next button label string`() {
+    fun `Should build StepViewModel with custom Complete or Next button label string`() {
         //given
         val builder = StepViewModel.Builder(mockContext)
-                .setNextButtonLabel(NEXT_BUTTON_LABEL)
+                .setEndButtonLabel(END_BUTTON_LABEL)
 
         //when
         val stepViewModel = builder.create()
 
         //then
         assertThat(stepViewModel)
-                .hasNextButtonLabel(NEXT_BUTTON_LABEL)
+                .hasEndButtonLabel(END_BUTTON_LABEL)
                 .hasTitle(null)
                 .hasBackButtonLabel(null)
-                .hasCompleteButtonLabel(null)
                 .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
                 .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
     }
 
     @Test
-    fun `Should build StepViewModel with custom next button label resource`() {
+    fun `Should build StepViewModel with custom Complete or Next button label resource`() {
         //given
         val builder = StepViewModel.Builder(mockContext)
-                .setNextButtonLabel(NEXT_BUTTON_LABEL_RES_ID)
+                .setEndButtonLabel(END_BUTTON_LABEL_RES_ID)
 
         //when
         val stepViewModel = builder.create()
 
         //then
         assertThat(stepViewModel)
-                .hasNextButtonLabel(NEXT_BUTTON_LABEL)
+                .hasEndButtonLabel(END_BUTTON_LABEL)
                 .hasTitle(null)
                 .hasBackButtonLabel(null)
-                .hasCompleteButtonLabel(null)
                 .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
                 .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
     }
 
     @Test
@@ -145,10 +147,11 @@ class StepViewModelTest {
         assertThat(stepViewModel)
                 .hasBackButtonLabel(BACK_BUTTON_LABEL)
                 .hasTitle(null)
-                .hasNextButtonLabel(null)
-                .hasCompleteButtonLabel(null)
+                .hasEndButtonLabel(null)
                 .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
                 .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
     }
 
     @Test
@@ -164,48 +167,11 @@ class StepViewModelTest {
         assertThat(stepViewModel)
                 .hasBackButtonLabel(BACK_BUTTON_LABEL)
                 .hasTitle(null)
-                .hasNextButtonLabel(null)
-                .hasCompleteButtonLabel(null)
+                .hasEndButtonLabel(null)
                 .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
                 .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
-    }
-
-    @Test
-    fun `Should build StepViewModel with custom complete button label string`() {
-        //given
-        val builder = StepViewModel.Builder(mockContext)
-                .setCompleteButtonLabel(COMPLETE_BUTTON_LABEL)
-
-        //when
-        val stepViewModel = builder.create()
-
-        //then
-        assertThat(stepViewModel)
-                .hasCompleteButtonLabel(COMPLETE_BUTTON_LABEL)
-                .hasTitle(null)
-                .hasNextButtonLabel(null)
-                .hasBackButtonLabel(null)
-                .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
-                .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
-    }
-
-    @Test
-    fun `Should build StepViewModel with custom complete button label resource`() {
-        //given
-        val builder = StepViewModel.Builder(mockContext)
-                .setCompleteButtonLabel(COMPLETE_BUTTON_LABEL_RES_ID)
-
-        //when
-        val stepViewModel = builder.create()
-
-        //then
-        assertThat(stepViewModel)
-                .hasCompleteButtonLabel(COMPLETE_BUTTON_LABEL)
-                .hasTitle(null)
-                .hasNextButtonLabel(null)
-                .hasBackButtonLabel(null)
-                .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
-                .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
     }
 
     @Test
@@ -221,10 +187,11 @@ class StepViewModelTest {
         assertThat(stepViewModel)
                 .hasNextButtonEndDrawableResId(NEXT_BUTTON_ICON_RES_ID)
                 .hasTitle(null)
-                .hasNextButtonLabel(null)
+                .hasEndButtonLabel(null)
                 .hasBackButtonLabel(null)
-                .hasCompleteButtonLabel(null)
                 .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
     }
 
     @Test
@@ -240,10 +207,51 @@ class StepViewModelTest {
         assertThat(stepViewModel)
                 .hasBackButtonStartDrawableResId(BACK_BUTTON_ICON_RES_ID)
                 .hasTitle(null)
-                .hasNextButtonLabel(null)
+                .hasEndButtonLabel(null)
                 .hasBackButtonLabel(null)
-                .hasCompleteButtonLabel(null)
                 .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonVisible(true)
+                .hasEndButtonVisible(true)
+    }
+
+    @Test
+    fun `Should build StepViewModel with hidden Back button`() {
+        //given
+        val builder = StepViewModel.Builder(mockContext)
+                .setBackButtonVisible(false)
+
+        //when
+        val stepViewModel = builder.create()
+
+        //then
+        assertThat(stepViewModel)
+                .hasBackButtonVisible(false)
+                .hasTitle(null)
+                .hasEndButtonLabel(null)
+                .hasBackButtonLabel(null)
+                .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
+                .hasEndButtonVisible(true)
+    }
+
+    @Test
+    fun `Should build StepViewModel with hidden Complete and Next button`() {
+        //given
+        val builder = StepViewModel.Builder(mockContext)
+                .setEndButtonVisible(false)
+
+        //when
+        val stepViewModel = builder.create()
+
+        //then
+        assertThat(stepViewModel)
+                .hasEndButtonVisible(false)
+                .hasTitle(null)
+                .hasEndButtonLabel(null)
+                .hasBackButtonLabel(null)
+                .hasNextButtonEndDrawableResId(R.drawable.ms_ic_chevron_end)
+                .hasBackButtonStartDrawableResId(R.drawable.ms_ic_chevron_start)
+                .hasBackButtonVisible(true)
     }
 
 }

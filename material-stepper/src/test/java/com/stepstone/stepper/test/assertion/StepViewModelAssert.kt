@@ -22,13 +22,8 @@ class StepViewModelAssert constructor(actual: StepViewModel) : AbstractAssert<St
         return this
     }
 
-    fun hasNextButtonLabel(nextButtonLabel: CharSequence?): StepViewModelAssert {
-        assertEquals("Incorrect label for the Next button!", nextButtonLabel, actual.nextButtonLabel)
-        return this
-    }
-
-    fun hasCompleteButtonLabel(completeButtonLabel: CharSequence?): StepViewModelAssert {
-        assertEquals("Incorrect label for the Complete button!", completeButtonLabel, actual.completeButtonLabel)
+    fun hasEndButtonLabel(endButtonLabel: CharSequence?): StepViewModelAssert {
+        assertEquals("Incorrect label for the Complete/Next button!", endButtonLabel, actual.endButtonLabel)
         return this
     }
 
@@ -44,6 +39,16 @@ class StepViewModelAssert constructor(actual: StepViewModel) : AbstractAssert<St
 
     fun hasBackButtonStartDrawableResId(backButtonStartDrawableResId: Int): StepViewModelAssert {
         assertEquals("Incorrect drawable resource id for the Back button!", backButtonStartDrawableResId, actual.backButtonStartDrawableResId)
+        return this
+    }
+
+    fun hasEndButtonVisible(endButtonVisible: Boolean): StepViewModelAssert {
+        assertEquals("Incorrect Next/Complete button visibility!", endButtonVisible, actual.isEndButtonVisible)
+        return this
+    }
+
+    fun hasBackButtonVisible(backButtonVisible: Boolean): StepViewModelAssert {
+        assertEquals("Incorrect Back button visibility!", backButtonVisible, actual.isBackButtonVisible)
         return this
     }
 
