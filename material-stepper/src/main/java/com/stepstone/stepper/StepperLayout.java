@@ -25,6 +25,7 @@ import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -236,6 +237,12 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     private AbstractStepperType mStepperType;
 
     private StepperFeedbackType mStepperFeedbackType;
+
+    @FloatRange(from = 0.0f, to = 1.0f)
+    private float mContentFadeAlpha = AnimationUtil.ALPHA_HALF;
+
+    @DrawableRes
+    private int mContentOverlayBackground;
 
     private int mCurrentStepPosition;
 
@@ -627,6 +634,23 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mStepperFeedbackType = StepperFeedbackTypeFactory.createType(mFeedbackTypeMask, this);
     }
 
+    /**
+     * @return An alpha value from 0 to 1.0f to be used for the faded out view if 'content_fade' stepper feedback is set. 0.5f by default.
+     */
+    @FloatRange(from = 0.0f, to = 1.0f)
+    public float getContentFadeAlpha() {
+        return mContentFadeAlpha;
+    }
+
+    /**
+     * @return Background res ID to be used for the overlay on top of the content
+     * if 'content_overlay' stepper feedback type is set. 0 if default background should be used.
+     */
+    @DrawableRes
+    public int getContentOverlayBackground() {
+        return mContentOverlayBackground;
+    }
+
     @SuppressWarnings("RestrictedApi")
     private void init(AttributeSet attrs, @AttrRes int defStyleAttr) {
         initDefaultValues();
@@ -790,6 +814,14 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
             if (a.hasValue(R.styleable.StepperLayout_ms_stepperFeedbackType)) {
                 mFeedbackTypeMask = a.getInt(R.styleable.StepperLayout_ms_stepperFeedbackType, StepperFeedbackType.NONE);
+            }
+
+            if (a.hasValue(R.styleable.StepperLayout_ms_stepperFeedback_contentFadeAlpha)) {
+                mContentFadeAlpha = a.getFloat(R.styleable.StepperLayout_ms_stepperFeedback_contentFadeAlpha, AnimationUtil.ALPHA_HALF);
+            }
+
+            if (a.hasValue(R.styleable.StepperLayout_ms_stepperFeedback_contentOverlayBackground)) {
+                mContentOverlayBackground = a.getResourceId(R.styleable.StepperLayout_ms_stepperFeedback_contentOverlayBackground, 0);
             }
 
             mShowErrorStateOnBackEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBack, false);

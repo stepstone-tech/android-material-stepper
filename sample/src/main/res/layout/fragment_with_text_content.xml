@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee">
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        android:text="@string/clickable_element" />
 
     <TextView
         android:id="@+id/stepContent"
@@ -11,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:padding="16dp"
-        tools:text="@string/lorem_ipsum"
-        android:textColor="@color/contentTextColor" />
+        android:textColor="@color/contentTextColor"
+        tools:text="@string/lorem_ipsum" />
 
-</FrameLayout>
+</LinearLayout>

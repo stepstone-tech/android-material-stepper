@@ -356,9 +356,12 @@ If you want to keep the error displayed when going back to the previous step you
 ### Stepper feedback
 It is possible to show stepper feedback for ongoing operations (see [Stepper feedback](https://material.io/guidelines/components/steppers.html#steppers-types-of-steppers)).
 To do so you firstly need to set ```ms_stepperFeedbackType``` to one or more of:
-* ```tabs``` - shows a progress message instead of the tabs during operation,
-* ```content``` - shows a progress bar on top of the steps' content and partially fades the content out during operation,
+* ```tabs``` - shows a progress message instead of the tabs during operation.
+* ```content_progress``` - shows a progress bar on top of the steps' content.
+* ```content_fade``` - partially fades the content out during operation (should not be used together with ```content_overlay```). You can change the default fade amount with `ms_stepperFeedback_contentFadeAlpha` attribute.
+* ```content_overlay``` - shows a dimmed overlay over the content during the operation (should not be used together with ```content_fade```). You can change the overlay background with `ms_stepperFeedback_contentOverlayBackground` attribute.
 * ```disabled_bottom_navigation``` - disables the buttons in the bottom navigation during operation. In order to see that the buttons are disabled on the bottom navigation bar, make sure that the button colors are assigned using color selectors with a disabled state (see the sample app).
+* ```disabled_content_interaction``` - intercepts touch events on the steps' content and ignores them during operation.
 
 The default is ```none``` which does nothing. It is possible to use multiple flags together.
 
@@ -480,7 +483,9 @@ For advanced styling please see [StepperLayout style attributes](#stepperlayout-
 | *ms_showErrorStateEnabled*      | boolean                                                             | Flag indicating whether to show the error state. Only applicable for 'tabs' type. False by default. |
 | *ms_showErrorStateOnBackEnabled*| boolean                                                             | Flag indicating whether to keep showing the error state when user moves back. Only applicable for 'tabs' type. False by default. |
 | *ms_tabNavigationEnabled*       | boolean                                                             | Flag indicating whether step navigation is possible by clicking on the tabs directly. Only applicable for 'tabs' type. True by default. |
-| *ms_stepperFeedbackType*        | flag(s): `none` or `tabs`, `content` & `disabled_bottom_navigation` | Type(s) of stepper feedback. Can be a combination of `tabs`, `content` & `disabled_bottom_navigation`. Default is `none`.|
+| *ms_stepperFeedbackType*        | flag(s): `none` or `tabs`, `content_progress`, `content_fade`, `content_overlay`, `disabled_bottom_navigation` & `disabled_content_interaction` | Type(s) of stepper feedback. Can be a combination of `tabs`, `content_progress`, `content_fade`, `content_overlay`, `disabled_bottom_navigation` & `disabled_content_interaction`. Default is `none`.|
+| *ms_stepperFeedback_contentFadeAlpha* | float                                                         | An alpha value from 0 to 1.0f to be used for the faded out view if `content_fade` stepper feedback type is set. 0.5f by default. |
+| *ms_stepperFeedback_contentOverlayBackground* | reference                                             | Background to be used for the overlay on top of the content if `content_overlay` stepper feedback type is set. |
 | *ms_showBottomNavigation*       | boolean                                                             | Flag indicating if the Bottom Navigation bar should be shown on the layout. True by default. |
 | *ms_stepperLayoutTheme*         | reference                                                           | Theme to use for even more custom styling of the stepper layout. It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used. |
 
@@ -496,6 +501,7 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 | *ms_completeNavigationButtonStyle*| Used by ms_stepCompleteButton in layout/ms_stepper_layout     |
 | *ms_colorableProgressBarStyle*    | Used by ms_stepProgressBar in layout/ms_stepper_layout        |
 | *ms_stepPagerProgressBarStyle*    | Used by ms_stepPagerProgressBar in layout/ms_stepper_layout   |
+| *ms_stepPagerOverlayStyle*        | Used by ms_stepPagerOverlay in layout/ms_stepper_layout   |
 | *ms_stepTabsScrollViewStyle*      | Used by ms_stepTabsScrollView in layout/ms_tabs_container     |
 | *ms_stepTabsInnerContainerStyle*  | Used by ms_stepTabsInnerContainer in layout/ms_tabs_container |
 | *ms_stepTabsProgressMessageStyle* | Used by ms_stepTabsProgressMessage in layout/ms_tabs_container|

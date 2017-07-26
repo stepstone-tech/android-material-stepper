@@ -16,4 +16,6 @@
 
     <color name="black_54_opacity">#89000000</color>
 
+    <color name="custom_overlay_background">#483f9ab1</color>
+
 </resources>

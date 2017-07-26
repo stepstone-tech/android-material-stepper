@@ -9,5 +9,7 @@
     app:ms_nextButtonColor="@color/ms_disabling_button_text_color_selector"
     app:ms_completeButtonColor="@color/ms_disabling_button_text_color_selector"
     app:ms_showErrorState="true"
-    app:ms_stepperFeedbackType="tabs|content|disabled_bottom_navigation"
+    app:ms_stepperFeedbackType="tabs|content_progress|content_fade|disabled_bottom_navigation|disabled_content_interaction"
+    app:ms_stepperFeedback_contentFadeAlpha="0.3"
+    app:ms_stepperFeedback_contentOverlayBackground="@color/custom_overlay_background"
     app:ms_stepperType="tabs" />

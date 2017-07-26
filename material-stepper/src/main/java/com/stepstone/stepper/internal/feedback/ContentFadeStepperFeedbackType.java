@@ -16,40 +16,45 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.feedback;
 
+import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
+import android.view.View;
 
+import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_OPAQUE;
 
 /**
- * Feedback stepper type which disables the buttons in the bottom navigation when an operation is in progress.
+ * Feedback stepper type which partially fades the content out.
  */
 @RestrictTo(LIBRARY)
-public class DisabledBottomNavigationStepperFeedbackType implements StepperFeedbackType {
+public class ContentFadeStepperFeedbackType implements StepperFeedbackType {
 
     @NonNull
-    private StepperLayout mStepperLayout;
+    private final View mPager;
 
-    public DisabledBottomNavigationStepperFeedbackType(@NonNull StepperLayout stepperLayout) {
-        mStepperLayout = stepperLayout;
+    @FloatRange(from = 0.0f, to = 1.0f)
+    private final float mFadeOutAlpha;
+
+    public ContentFadeStepperFeedbackType(@NonNull StepperLayout stepperLayout) {
+        mPager = stepperLayout.findViewById(R.id.ms_stepPager);
+        mFadeOutAlpha = stepperLayout.getContentFadeAlpha();
     }
 
     @Override
     public void showProgress(@NonNull String progressMessage) {
-        setButtonsEnabled(false);
+        mPager.animate()
+                .alpha(mFadeOutAlpha)
+                .setDuration(PROGRESS_ANIMATION_DURATION);
     }
 
     @Override
     public void hideProgress() {
-        setButtonsEnabled(true);
+        mPager.animate()
+                .alpha(ALPHA_OPAQUE)
+                .setDuration(PROGRESS_ANIMATION_DURATION);
     }
-
-    private void setButtonsEnabled(boolean enabled) {
-        mStepperLayout.setNextButtonEnabled(enabled);
-        mStepperLayout.setCompleteButtonEnabled(enabled);
-        mStepperLayout.setBackButtonEnabled(enabled);
-    }
-
 }

@@ -1,19 +1,17 @@
 package com.stepstone.stepper
 
-import android.util.AttributeSet
 import android.widget.LinearLayout
+import com.stepstone.stepper.test.*
 import com.stepstone.stepper.test.assertion.StepperLayoutAssert
-import com.stepstone.stepper.test.assertion.StepperLayoutAssert.Companion.assertThat
 import com.stepstone.stepper.test.runner.StepperRobolectricTestRunner
 import com.stepstone.stepper.test.test_double.SpyStepAdapter
 import com.stepstone.stepper.viewmodel.StepViewModel
-import org.junit.Assert.assertNotNull
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.verify
+import org.mockito.Mockito
 import org.robolectric.Robolectric
 import org.robolectric.RuntimeEnvironment
-import org.robolectric.android.controller.ActivityController
 
 
 /**
@@ -23,11 +21,6 @@ import org.robolectric.android.controller.ActivityController
 class StepperLayoutTest {
 
     companion object {
-
-        const val TYPE_PROGRESS_BAR = "progress_bar"
-        const val TYPE_DOTS = "dots"
-        const val TYPE_TABS = "tabs"
-        const val TYPE_NONE = "none"
 
         const val ORIENTATION_HORIZONTAL = "horizontal"
 
@@ -386,55 +379,15 @@ class StepperLayoutTest {
         stepperLayout.currentStepPosition = LAST_PAGE_INDEX - 1
     }
 
-    fun createAttributeSetWithStepperType(stepperType: String): AttributeSet {
-        return Robolectric.buildAttributeSet()
-                .addAttribute(R.attr.ms_stepperType, stepperType)
-                .build()
-    }
-
-    fun createStepperLayoutInActivity(attributeSet: AttributeSet): StepperLayout {
-        val activity = ActivityController.of(Robolectric.getShadowsAdapter(), StepperLayoutActivity().withStepperLayoutAttributes(attributeSet))
-                .setup()
-                .get()
-        return activity.stepperLayout
-    }
-
-    fun createStepperLayoutWithAdapterSetInActivity(attributeSet: AttributeSet): StepperLayout {
-        return createStepperLayoutWithAdapterSetInActivity(attributeSet, null, null, null)
-    }
-
-    /**
-     * Creates a [StepperLayout] set in the Activity with [StepViewModel]s provided in the attributes.
-     * If a [StepViewModel] is null then the default [StepViewModel] from [StepperLayoutWithAdapterActivity.defaultStepViewModel] is used.
-     */
-    fun createStepperLayoutWithAdapterSetInActivity(attributeSet: AttributeSet,
-                                                    firstViewModel: StepViewModel?,
-                                                    middleViewModel: StepViewModel?,
-                                                    lastViewModel: StepViewModel?): StepperLayout {
-        val stepperLayoutWithAdapterActivity = object: StepperLayoutWithAdapterActivity() {
-
-            override fun getFirstStepViewModel() = firstViewModel ?: super.getFirstStepViewModel()
-
-            override fun getSecondStepViewModel() = middleViewModel ?: super.getSecondStepViewModel()
-
-            override fun getLastStepViewModel() = lastViewModel ?: super.getLastStepViewModel()
-
-        }
-        val activity = ActivityController.of(Robolectric.getShadowsAdapter(), stepperLayoutWithAdapterActivity.withStepperLayoutAttributes(attributeSet))
-                .setup()
-                .get()
-        return activity.stepperLayout
-    }
-
     fun assertStepperLayout(): StepperLayoutAssert {
-        return assertThat(stepperLayout)
+        return StepperLayoutAssert.assertThat(stepperLayout)
     }
 
     fun assertFirstFragmentWasNotifiedAboutBeingSelected() {
         val stepAdapter = stepperLayout.adapter as SpyStepAdapter
         val firstStep = stepAdapter.steps.get(0)
-        assertNotNull("Step not found", firstStep)
-        verify(firstStep).onSelected()
+        Assert.assertNotNull("Step not found", firstStep)
+        Mockito.verify(firstStep).onSelected()
     }
 
 }

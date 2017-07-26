@@ -19,44 +19,37 @@ package com.stepstone.stepper.internal.feedback;
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.stepstone.stepper.R;
+import com.stepstone.stepper.StepperLayout;
+import com.stepstone.stepper.internal.widget.StepViewPager;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
- * A stepper feedback type which is a composition of other feedback type, which allows to select only a group of feedback types.
- * See Stepper feedback section in https://material.io/guidelines/components/steppers.html#steppers-types-of-steppers
+ * Feedback stepper type which intercepts touch events on the steps' content and ignores them.
  */
 @RestrictTo(LIBRARY)
-public class StepperFeedbackTypeComposite implements StepperFeedbackType {
+public class DisabledContentInteractionStepperFeedbackType implements StepperFeedbackType {
 
     @NonNull
-    private List<StepperFeedbackType> mChildren = new ArrayList<>();
+    private final StepViewPager mStepPager;
+
+    public DisabledContentInteractionStepperFeedbackType(@NonNull StepperLayout stepperLayout) {
+        mStepPager = (StepViewPager) stepperLayout.findViewById(R.id.ms_stepPager);
+    }
 
     @Override
     public void showProgress(@NonNull String progressMessage) {
-        for (StepperFeedbackType child : mChildren) {
-            child.showProgress(progressMessage);
-        }
+        setContentInteractionEnabled(false);
     }
 
     @Override
     public void hideProgress() {
-        for (StepperFeedbackType child : mChildren) {
-            child.hideProgress();
-        }
+        setContentInteractionEnabled(true);
     }
 
-    /**
-     * Adds a child component to this composite.
-     * @param component child to add
-     */
-    public void addComponent(@NonNull StepperFeedbackType component) {
-        mChildren.add(component);
+    private void setContentInteractionEnabled(boolean enabled) {
+        mStepPager.setBlockTouchEventsFromChildrenEnabled(!enabled);
     }
 
-    public List<StepperFeedbackType> getChildComponents() {
-        return mChildren;
-    }
 }
