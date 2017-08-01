@@ -18,14 +18,32 @@
                     app:showAsAction="always|withText"/>
 
                 <item
-                    android:id="@+id/menu_feedback_content"
-                    android:title="Content"
+                    android:id="@+id/menu_feedback_content_progress"
+                    android:title="Content progress"
                     android:checked="true"
+                    app:showAsAction="always|withText"/>
+
+                <item
+                    android:id="@+id/menu_feedback_content_fade"
+                    android:title="Content fade"
+                    android:checked="true"
+                    app:showAsAction="always|withText"/>
+
+                <item
+                    android:id="@+id/menu_feedback_content_overlay"
+                    android:title="Content overlay"
+                    android:checked="false"
                     app:showAsAction="always|withText"/>
 
                 <item
                     android:id="@+id/menu_feedback_nav"
                     android:title="Disabled bottom navigation"
+                    android:checked="true"
+                    app:showAsAction="always|withText"/>
+
+                <item
+                    android:id="@+id/menu_feedback_content_interaction"
+                    android:title="Disabled content interaction"
                     android:checked="true"
                     app:showAsAction="always|withText"/>
 

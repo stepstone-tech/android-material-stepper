@@ -6,6 +6,7 @@
     <string name="themed_dots">Themed dots</string>
     <string name="default_progress_bar">Default progress bar</string>
     <string name="styled_progress_bar">Styled progress bar</string>
+    <string name="default_none">Default \'none\'</string>
     <string name="default_tabs">Default tabs</string>
     <string name="styled_tabs">Styled tabs</string>
     <string name="error_tabs">Show errors on tabs</string>
@@ -31,6 +32,7 @@
     <string name="styled_progress_bar_description">Horizontal progress bar stepper styled through view attributes in the layout file</string>
     <string name="default_tabs_description">The default implementation of a tabbed stepper</string>
     <string name="styled_tabs_description">Tabbed stepper styled through view attributes in the layout file</string>
+    <string name="default_none_description">The default implementation of a stepper without any particular current step indication</string>
     <string name="error_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs</string>
     <string name="error_color_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs with a custom error color</string>
     <string name="error_back_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs and keeps it displayed when going to a previous step</string>
@@ -52,7 +54,9 @@
     <string name="lorem_ipsum2">Lorem ipsum dolor sit amet, sale viris intellegam usu eu, persius patrioque sea at. Ne salutandi repudiandae mei, cu mollis accusam mediocrem mea. Altera dolorem praesent at vis. Torquatos philosophia ad quo. Omnis adipiscing has ea, mel no hinc iudico percipit.</string>
     <string name="lorem_ipsum3">Antiopam consetetur mel in. Urbanitas constituto persequeris ex ius, sed ei elitr ridens temporibus. Ex probo lorem etiam sea, ut meliore electram scripserit vim. Et dicunt facilisis his, tamquam postulant mei te. Eum ei aperiri labitur eripuit, ut sit autem pertinax.</string>
     <string name="enter_password">Enter password…</string>
+    <string name="clickable_element">Clickable element</string>
 
     <string name="go_to_summary">Summary</string>
     <string name="operation_succeed_switch_message">Should operation succeed?</string>
+
 </resources>

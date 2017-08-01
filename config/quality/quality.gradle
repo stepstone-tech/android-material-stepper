@@ -57,9 +57,6 @@ task findbugs(type: FindBugs,
         xml {
             destination "$reportsDir/findbugs/findbugs.xml"
         }
-        html {
-            destination "$reportsDir/findbugs/findbugs.html"
-        }
     }
 
     classpath = files()

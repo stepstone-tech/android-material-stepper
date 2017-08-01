@@ -24,16 +24,34 @@ public interface StepperFeedbackType {
     int TABS = 1 << 1;
 
     /**
-     * Shows a progress bar on top of the steps' content and partially fades the content out during operation.
-     * @see ContentStepperFeedbackType
+     * Shows a progress bar on top of the steps' content.
+     * @see ContentProgressStepperFeedbackType
      */
-    int CONTENT = 1 << 2;
+    int CONTENT_PROGRESS = 1 << 2;
 
     /**
      * Disables the buttons in the bottom navigation during operation.
      * @see DisabledBottomNavigationStepperFeedbackType
      */
     int DISABLED_BOTTOM_NAVIGATION = 1 << 3;
+
+    /**
+     * Disables content interaction during operation i.e. stops step views from receiving touch events.
+     * @see DisabledContentInteractionStepperFeedbackType
+     */
+    int DISABLED_CONTENT_INTERACTION = 1 << 4;
+
+    /**
+     * Partially fades the content out during operation.
+     * @see ContentFadeStepperFeedbackType
+     */
+    int CONTENT_FADE = 1 << 5;
+
+    /**
+     * Shows a dimmed overlay over the content during operation.
+     * @see ContentOverlayStepperFeedbackType
+     */
+    int CONTENT_OVERLAY = 1 << 6;
 
     int PROGRESS_ANIMATION_DURATION = 200;
 

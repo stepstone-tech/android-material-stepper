@@ -31,18 +31,24 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 - [StepperLayout attributes](#stepperlayout-attributes)
 	- [View attributes](#view-attributes)
 	- [StepperLayout style attributes](#stepperlayout-style-attributes)
+- [Changelog](#changelog)
 - [License](#license)
 
 ## Supported steppers
 
 ### Mobile stepper with dots <br/>
-<img src ="./gifs/dotted-progress-bar.gif" width="360" height="640"/>&nbsp;&nbsp;<img src ="./gifs/dotted-progress-bar-styled.gif" width="360" height="640"/>
+<img src ="./gifs/dotted-progress-bar.gif" width="360" />&nbsp;&nbsp;<img src ="./gifs/dotted-progress-bar-styled.gif" width="360" />
 
 ### Mobile stepper with progress bar <br/>
-<img src ="./gifs/linear-progress-bar.gif" width="360" height="640"/>&nbsp;&nbsp;<img src ="./gifs/linear-progress-bar-styled.gif" width="360" height="640"/>
+<img src ="./gifs/linear-progress-bar.gif" width="360" />&nbsp;&nbsp;<img src ="./gifs/linear-progress-bar-styled.gif" width="360" />
+
+### Mobile stepper without a progress indicator <br/>
+<img src ="./gifs/none.gif" width="360" />
+
 ### Horizontal stepper <br/>
-<img src ="./gifs/tabs.gif" width="640" height="360"/>
-<img src ="./gifs/tabs-styled.gif" width="640" height="360"/>
+<img src ="./gifs/tabs.gif" width="640" />
+<img src ="./gifs/tabs-styled.gif" width="640" />
+
 
 ## Supported features
   - color customisation of individual widgets inside of the stepper via View attributes or a style from a theme
@@ -57,7 +63,7 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 
 ### Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:3.3.0'
+compile 'com.stepstone.stepper:material-stepper:4.0.0'
 ```
 
 ### Create layout in XML
@@ -207,7 +213,7 @@ After clicking on the Next button if the user wants to e.g.:
 he can perform these operations and then invoke the `goToNextStep()` method of the `StepperLayout.OnNextClickedCallback` in the current Step.
 If the user wants to perform these operations on the final step, when clicking on the Complete button, he needs to invoke the `complete()` method of the  `StepperLayout.OnCompleteClickedCallback`.
 While operations are performed, and the user would like to go back you can cancel them and then invoke `onBackClicked()` method of the `StepperLayout.OnBackClickedCallback`.
-<p><img src ="./gifs/delayed-transition.gif" width="360" height="640"/></p>
+<p><img src ="./gifs/delayed-transition.gif" width="360" /></p>
 
 To do so the fragment/view must implement `BlockingStep` instead of `Step`.
 Also, make sure that `goToNextStep()` and/or `complete()` get called on the main thread.
@@ -252,10 +258,10 @@ public class DelayedTransitionStepFragmentSample extends Fragment implements Blo
 ```
 
 ### Changing button labels & compound drawables per step
-Sometimes you might want to have different labels on the Next and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
+Sometimes you might want to have different labels on the Next/Complete and/or Back navigation buttons on different steps e.g. use the default labels on the first few steps,
 but display 'Summary' just before the last page.
 You might also want to use your custom icons instead of the default navigation button compound drawables or not show the compound drawables for some of the buttons.
-<p><img src ="./gifs/custom-navigation-buttons.gif" width="360" height="640"/></p>
+<p><img src ="./gifs/custom-navigation-buttons.gif" width="360" /></p>
 In such case you need to override the `getViewModel(int)` method from the `StepAdapter` e.g.
 
 ```java
@@ -267,19 +273,21 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
         switch (position) {
             case 0:
                 builder
-                    .setNextButtonLabel("This way")
+                    .setEndButtonLabel("This way")
                     .setBackButtonLabel("Cancel")
                     .setNextButtonEndDrawableResId(R.drawable.ms_forward_arrow)
                     .setBackButtonStartDrawableResId(StepViewModel.NULL_DRAWABLE);
                 break;
             case 1:
                 builder
-                    .setNextButtonLabel(R.string.go_to_summary)
+                    .setEndButtonLabel(R.string.go_to_summary)
                     .setBackButtonLabel("Go to first")
                     .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow);
                 break;
             case 2:
-                builder.setBackButtonLabel("Go back");
+                builder
+                    .setBackButtonLabel("Go back")
+                    .setEndButtonLabel("I'm done!");
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported position: " + position);
@@ -288,14 +296,16 @@ In such case you need to override the `getViewModel(int)` method from the `StepA
     }
 ```
 
-NOTE: To change Complete button's label you need use `ms_completeButtonText` attribute from StepperLayout.
+It is also possible to hide Back/Next/Complete buttons on each step if needed.
+To do so you need to call `setBackButtonVisible(false)` and/or `setEndButtonVisible(false)` on
+`StepViewModel.Builder` in your adapter.
 
 ### Custom styling
 Basic styling can be done by choosing the active and inactive step colors. 
 There are some additional properties which can be changed directly from StepperLayout's attributes e.g. the background of bottom navigation buttons (see [StepperLayout attributes](#stepperlayout-attributes))
 For advanced styling you can use `ms_stepperLayoutTheme` StepperLayout's attribute and provide your custom style to be used.
 See 'Custom StepperLayout theme' in the sample app for an example.
-<p><img src ="./gifs/custom-theme.gif" width="360" height="640"/></p>
+<p><img src ="./gifs/custom-theme.gif" width="360" /></p>
 
 ### Using same stepper styling across the application
 If you have many steppers in your application in different activities/fragments you might want to set a common style in a theme.
@@ -339,23 +349,26 @@ For an example of how to use it with views please see the sample app.
 
 ### Showing an error on tabs if step verification failed
 To show an error in the tabbed stepper if step verification fails you need to set `ms_showErrorStateEnabled` attribute to `true`.
-<p><img src ="./gifs/error-on-tabs.gif" width="640" height="360"/></p>
+<p><img src ="./gifs/error-on-tabs.gif" width="640" /></p>
 
 If you want to keep the error displayed when going back to the previous step you need to also set `ms_showErrorStateOnBackEnabled` to `true`.
 
 ### Stepper feedback
 It is possible to show stepper feedback for ongoing operations (see [Stepper feedback](https://material.io/guidelines/components/steppers.html#steppers-types-of-steppers)).
 To do so you firstly need to set ```ms_stepperFeedbackType``` to one or more of:
-* ```tabs``` - shows a progress message instead of the tabs during operation,
-* ```content``` - shows a progress bar on top of the steps' content and partially fades the content out during operation,
+* ```tabs``` - shows a progress message instead of the tabs during operation.
+* ```content_progress``` - shows a progress bar on top of the steps' content.
+* ```content_fade``` - partially fades the content out during operation (should not be used together with ```content_overlay```). You can change the default fade amount with `ms_stepperFeedback_contentFadeAlpha` attribute.
+* ```content_overlay``` - shows a dimmed overlay over the content during the operation (should not be used together with ```content_fade```). You can change the overlay background with `ms_stepperFeedback_contentOverlayBackground` attribute.
 * ```disabled_bottom_navigation``` - disables the buttons in the bottom navigation during operation. In order to see that the buttons are disabled on the bottom navigation bar, make sure that the button colors are assigned using color selectors with a disabled state (see the sample app).
+* ```disabled_content_interaction``` - intercepts touch events on the steps' content and ignores them during operation.
 
 The default is ```none``` which does nothing. It is possible to use multiple flags together.
 
 After setting this to show the feedback you need to call ```StepperLayout#showProgress(@NonNull String progressMessage)```
 and do hide the progress indicator you need to call ```StepperLayout#hideProgress()```.
 
-<p><img src ="./gifs/stepper-feedback.gif" width="640" height="360"/></p>
+<p><img src ="./gifs/stepper-feedback.gif" width="640" /></p>
 
 E.g.
 In layout:
@@ -451,7 +464,7 @@ For advanced styling please see [StepperLayout style attributes](#stepperlayout-
 
 | Attribute name                  | Format                                                              | Description |
 | --------------------------------|---------------------------------------------------------------------|-------------|
-| *ms_stepperType*                | one of `dots`, `progress_bar` or `tabs`                             | **REQUIRED:** Type of the stepper |
+| *ms_stepperType*                | one of `dots`, `progress_bar`, `tabs` or `none`                     | **REQUIRED:** Type of the stepper |
 | *ms_backButtonColor*            | color or reference                                                  | BACK button's text color           |
 | *ms_nextButtonColor*            | color or reference                                                  | NEXT button's text color            |
 | *ms_completeButtonColor*        | color or reference                                                  | COMPLETE button's text color            |
@@ -470,7 +483,9 @@ For advanced styling please see [StepperLayout style attributes](#stepperlayout-
 | *ms_showErrorStateEnabled*      | boolean                                                             | Flag indicating whether to show the error state. Only applicable for 'tabs' type. False by default. |
 | *ms_showErrorStateOnBackEnabled*| boolean                                                             | Flag indicating whether to keep showing the error state when user moves back. Only applicable for 'tabs' type. False by default. |
 | *ms_tabNavigationEnabled*       | boolean                                                             | Flag indicating whether step navigation is possible by clicking on the tabs directly. Only applicable for 'tabs' type. True by default. |
-| *ms_stepperFeedbackType*        | flag(s): `none` or `tabs`, `content` & `disabled_bottom_navigation` | Type(s) of stepper feedback. Can be a combination of `tabs`, `content` & `disabled_bottom_navigation`. Default is `none`.|
+| *ms_stepperFeedbackType*        | flag(s): `none` or `tabs`, `content_progress`, `content_fade`, `content_overlay`, `disabled_bottom_navigation` & `disabled_content_interaction` | Type(s) of stepper feedback. Can be a combination of `tabs`, `content_progress`, `content_fade`, `content_overlay`, `disabled_bottom_navigation` & `disabled_content_interaction`. Default is `none`.|
+| *ms_stepperFeedback_contentFadeAlpha* | float                                                         | An alpha value from 0 to 1.0f to be used for the faded out view if `content_fade` stepper feedback type is set. 0.5f by default. |
+| *ms_stepperFeedback_contentOverlayBackground* | reference                                             | Background to be used for the overlay on top of the content if `content_overlay` stepper feedback type is set. |
 | *ms_showBottomNavigation*       | boolean                                                             | Flag indicating if the Bottom Navigation bar should be shown on the layout. True by default. |
 | *ms_stepperLayoutTheme*         | reference                                                           | Theme to use for even more custom styling of the stepper layout. It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used. |
 
@@ -486,6 +501,7 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 | *ms_completeNavigationButtonStyle*| Used by ms_stepCompleteButton in layout/ms_stepper_layout     |
 | *ms_colorableProgressBarStyle*    | Used by ms_stepProgressBar in layout/ms_stepper_layout        |
 | *ms_stepPagerProgressBarStyle*    | Used by ms_stepPagerProgressBar in layout/ms_stepper_layout   |
+| *ms_stepPagerOverlayStyle*        | Used by ms_stepPagerOverlay in layout/ms_stepper_layout   |
 | *ms_stepTabsScrollViewStyle*      | Used by ms_stepTabsScrollView in layout/ms_tabs_container     |
 | *ms_stepTabsInnerContainerStyle*  | Used by ms_stepTabsInnerContainer in layout/ms_tabs_container |
 | *ms_stepTabsProgressMessageStyle* | Used by ms_stepTabsProgressMessage in layout/ms_tabs_container|
@@ -495,7 +511,10 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 | *ms_stepTabIconBackgroundStyle*   | Used by ms_stepIconBackground in layout/ms_step_tab           |
 | *ms_stepTabTitleStyle*            | Used by ms_stepTitle in layout/ms_step_tab                    |
 | *ms_stepTabDividerStyle*          | Used by ms_stepDivider in layout/ms_step_tab                  |
-  
+
+## Changelog
+See [changelog](CHANGELOG.md)
+
 ## License
 Copyright 2016 StepStone Services
     

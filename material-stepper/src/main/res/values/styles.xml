@@ -125,6 +125,10 @@ limitations under the License.
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <style name="MSStepPagerOverlayStyle">
+        <item name="android:background">@color/ms_defaultContentOverlayColor</item>
+    </style>
+
     <style name="MSDefaultStepperLayoutTheme">
         <item name="ms_tabsContainerStyle">@style/MSStepTabsContainer</item>
         <item name="ms_bottomNavigationStyle">@style/MSBottomNavigation</item>
@@ -133,6 +137,7 @@ limitations under the License.
         <item name="ms_completeNavigationButtonStyle">@style/MSNavBarButton.Complete</item>
         <item name="ms_colorableProgressBarStyle">@style/MSColorableProgressBar</item>
         <item name="ms_stepPagerProgressBarStyle">@style/MSStepPagerProgressBarStyle</item>
+        <item name="ms_stepPagerOverlayStyle">@style/MSStepPagerOverlayStyle</item>
 
         <item name="ms_stepTabsScrollViewStyle">@style/MSStepTabsScrollView</item>
         <item name="ms_stepTabsInnerContainerStyle">@style/MSStepTabsInnerContainer</item>

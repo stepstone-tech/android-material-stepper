@@ -48,6 +48,11 @@ public abstract class AbstractStepperType {
      */
     public static final int TABS = 0x03;
 
+    /**
+     * No indicator
+     */
+    public static final int NONE = 0x04;
+
     final StepperLayout mStepperLayout;
 
     final SparseBooleanArray mStepErrors = new SparseBooleanArray();

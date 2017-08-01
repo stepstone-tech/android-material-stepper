@@ -76,21 +76,39 @@ class StepperFeedbackActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val itemId = item.itemId
 
-        if (!mStepperLayout.isInProgress && (itemId == R.id.menu_feedback_content || itemId == R.id.menu_feedback_tabs || itemId == R.id.menu_feedback_nav)) {
+        if (!mStepperLayout.isInProgress
+                && (itemId == R.id.menu_feedback_content_progress
+                || itemId == R.id.menu_feedback_content_fade
+                || itemId == R.id.menu_feedback_content_overlay
+                || itemId == R.id.menu_feedback_tabs
+                || itemId == R.id.menu_feedback_nav
+                || itemId == R.id.menu_feedback_content_interaction)) {
             toggleItem(item)
             val tabsEnabled = mMenu?.findItem(R.id.menu_feedback_tabs)?.isChecked
-            val contentEnabled = mMenu?.findItem(R.id.menu_feedback_content)?.isChecked
+            val contentProgressEnabled = mMenu?.findItem(R.id.menu_feedback_content_progress)?.isChecked
+            val contentFadeEnabled = mMenu?.findItem(R.id.menu_feedback_content_fade)?.isChecked
+            val contentOverlayEnabled = mMenu?.findItem(R.id.menu_feedback_content_overlay)?.isChecked
             val disablingBottomNavigationEnabled = mMenu?.findItem(R.id.menu_feedback_nav)?.isChecked
+            val disablingContentInteractionEnabled = mMenu?.findItem(R.id.menu_feedback_content_interaction)?.isChecked
 
             var feedbackMask = 0
             if (tabsEnabled == true) {
                 feedbackMask = feedbackMask or StepperFeedbackType.TABS
             }
-            if (contentEnabled == true) {
-                feedbackMask = feedbackMask or StepperFeedbackType.CONTENT
+            if (contentProgressEnabled == true) {
+                feedbackMask = feedbackMask or StepperFeedbackType.CONTENT_PROGRESS
+            }
+            if (contentFadeEnabled == true) {
+                feedbackMask = feedbackMask or StepperFeedbackType.CONTENT_FADE
+            }
+            if (contentOverlayEnabled == true) {
+                feedbackMask = feedbackMask or StepperFeedbackType.CONTENT_OVERLAY
             }
             if (disablingBottomNavigationEnabled == true) {
                 feedbackMask = feedbackMask or StepperFeedbackType.DISABLED_BOTTOM_NAVIGATION
+            }
+            if (disablingContentInteractionEnabled == true) {
+                feedbackMask = feedbackMask or StepperFeedbackType.DISABLED_CONTENT_INTERACTION
             }
             if (feedbackMask == 0) {
                 feedbackMask = StepperFeedbackType.NONE

@@ -25,6 +25,7 @@ import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -43,6 +44,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.feedback.StepperFeedbackType;
@@ -235,6 +237,12 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     private AbstractStepperType mStepperType;
 
     private StepperFeedbackType mStepperFeedbackType;
+
+    @FloatRange(from = 0.0f, to = 1.0f)
+    private float mContentFadeAlpha = AnimationUtil.ALPHA_HALF;
+
+    @DrawableRes
+    private int mContentOverlayBackground;
 
     private int mCurrentStepPosition;
 
@@ -626,6 +634,23 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mStepperFeedbackType = StepperFeedbackTypeFactory.createType(mFeedbackTypeMask, this);
     }
 
+    /**
+     * @return An alpha value from 0 to 1.0f to be used for the faded out view if 'content_fade' stepper feedback is set. 0.5f by default.
+     */
+    @FloatRange(from = 0.0f, to = 1.0f)
+    public float getContentFadeAlpha() {
+        return mContentFadeAlpha;
+    }
+
+    /**
+     * @return Background res ID to be used for the overlay on top of the content
+     * if 'content_overlay' stepper feedback type is set. 0 if default background should be used.
+     */
+    @DrawableRes
+    public int getContentOverlayBackground() {
+        return mContentOverlayBackground;
+    }
+
     @SuppressWarnings("RestrictedApi")
     private void init(AttributeSet attrs, @AttrRes int defStyleAttr) {
         initDefaultValues();
@@ -791,6 +816,14 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
                 mFeedbackTypeMask = a.getInt(R.styleable.StepperLayout_ms_stepperFeedbackType, StepperFeedbackType.NONE);
             }
 
+            if (a.hasValue(R.styleable.StepperLayout_ms_stepperFeedback_contentFadeAlpha)) {
+                mContentFadeAlpha = a.getFloat(R.styleable.StepperLayout_ms_stepperFeedback_contentFadeAlpha, AnimationUtil.ALPHA_HALF);
+            }
+
+            if (a.hasValue(R.styleable.StepperLayout_ms_stepperFeedback_contentOverlayBackground)) {
+                mContentOverlayBackground = a.getResourceId(R.styleable.StepperLayout_ms_stepperFeedback_contentOverlayBackground, 0);
+            }
+
             mShowErrorStateOnBackEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBack, false);
             mShowErrorStateOnBackEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBackEnabled, mShowErrorStateOnBackEnabled);
 
@@ -885,18 +918,21 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         mPager.setCurrentItem(newStepPosition);
         final boolean isLast = isLastPosition(newStepPosition);
         final boolean isFirst = newStepPosition == 0;
-        AnimationUtil.fadeViewVisibility(mNextNavigationButton, isLast ? View.GONE : View.VISIBLE, userTriggeredChange);
-        AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, !isLast ? View.GONE : View.VISIBLE, userTriggeredChange);
-        int backButtonTargetVisibility = isFirst && !mShowBackButtonOnFirstStep ? View.GONE : View.VISIBLE;
-        AnimationUtil.fadeViewVisibility(mBackNavigationButton, backButtonTargetVisibility, userTriggeredChange);
-
         final StepViewModel viewModel = mStepAdapter.getViewModel(newStepPosition);
+
+        int backButtonTargetVisibility = (isFirst && !mShowBackButtonOnFirstStep) || !viewModel.isBackButtonVisible() ? View.GONE : View.VISIBLE;
+        int nextButtonVisibility = isLast || !viewModel.isEndButtonVisible() ? View.GONE : View.VISIBLE;
+        int completeButtonVisibility = !isLast || !viewModel.isEndButtonVisible() ? View.GONE : View.VISIBLE;
+
+        AnimationUtil.fadeViewVisibility(mNextNavigationButton, nextButtonVisibility, userTriggeredChange);
+        AnimationUtil.fadeViewVisibility(mCompleteNavigationButton, completeButtonVisibility, userTriggeredChange);
+        AnimationUtil.fadeViewVisibility(mBackNavigationButton, backButtonTargetVisibility, userTriggeredChange);
 
         updateBackButton(viewModel);
 
-        if (!isLast) {
-            updateNextButton(viewModel);
-        }
+        updateEndButton(viewModel.getEndButtonLabel(),
+                isLast ? mCompleteButtonText : mNextButtonText,
+                isLast ? mCompleteNavigationButton : mNextNavigationButton);
 
         setCompoundDrawablesForNavigationButtons(viewModel.getBackButtonStartDrawableResId(), viewModel.getNextButtonEndDrawableResId());
 
@@ -908,12 +944,13 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
     }
 
-    private void updateNextButton(@NonNull StepViewModel viewModel) {
-        CharSequence nextButtonTextForStep = viewModel.getNextButtonLabel();
-        if (nextButtonTextForStep == null) {
-            mNextNavigationButton.setText(mNextButtonText);
+    private void updateEndButton(@Nullable CharSequence endButtonTextForStep,
+                                 @Nullable CharSequence defaultEndButtonText,
+                                 @NonNull TextView endButton) {
+        if (endButtonTextForStep == null) {
+            endButton.setText(defaultEndButtonText);
         } else {
-            mNextNavigationButton.setText(nextButtonTextForStep);
+            endButton.setText(endButtonTextForStep);
         }
     }
 

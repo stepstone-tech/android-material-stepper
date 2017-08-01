@@ -74,9 +74,18 @@ limitations under the License.
         <attr name="ms_stepperFeedbackType">
             <flag name="none" value="1" />
             <flag name="tabs" value="2" />
-            <flag name="content" value="4" />
+            <flag name="content_progress" value="4" />
             <flag name="disabled_bottom_navigation" value="8" />
+            <flag name="disabled_content_interaction" value="16" />
+            <flag name="content_fade" value="32" />
+            <flag name="content_overlay" value="64" />
         </attr>
+
+        <!-- An alpha value from 0 to 1.0f to be used for the faded out view if 'content_fade' stepper feedback type is set. 0.5f by default. -->
+        <attr name="ms_stepperFeedback_contentFadeAlpha" format="float" />
+
+        <!-- Background to be used for the overlay on top of the content if 'content_overlay' stepper feedback type is set. -->
+        <attr name="ms_stepperFeedback_contentOverlayBackground" format="reference" />
 
         <!-- Theme to use for even more custom styling of the stepper layout.
              It is recommended that it should extend @style/MSDefaultStepperLayoutTheme, which is the default theme used.
@@ -89,6 +98,7 @@ limitations under the License.
             <enum name="dots" value="0x01" />
             <enum name="progress_bar" value="0x02" />
             <enum name="tabs" value="0x03" />
+            <enum name="none" value="0x04" />
         </attr>
 
     </declare-styleable>
@@ -136,6 +146,9 @@ limitations under the License.
 
         <!-- Used by ms_stepPagerProgressBar in layout/ms_stepper_layout -->
         <attr name="ms_stepPagerProgressBarStyle" format="reference" />
+
+        <!-- Used by ms_stepPagerOverlay in layout/ms_stepper_layout -->
+        <attr name="ms_stepPagerOverlayStyle" format="reference" />
 
         <!-- Used by ms_stepTabsScrollView in layout/ms_tabs_container -->
         <attr name="ms_stepTabsScrollViewStyle" format="reference" />

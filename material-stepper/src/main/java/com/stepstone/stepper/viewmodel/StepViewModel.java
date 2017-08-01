@@ -22,24 +22,34 @@ public class StepViewModel {
      */
     public static final int NULL_DRAWABLE = -1;
 
-    private StepViewModel() {}
+    private StepViewModel(@Nullable CharSequence title,
+                          @Nullable CharSequence endButtonLabel, @Nullable CharSequence backButtonLabel,
+                          @DrawableRes int nextButtonEndDrawableResId, @DrawableRes int backButtonStartDrawableResId,
+                          boolean endButtonVisible, boolean backButtonVisible) {
+        mTitle = title;
+        mEndButtonLabel = endButtonLabel;
+        mBackButtonLabel = backButtonLabel;
+        mNextButtonEndDrawableResId = nextButtonEndDrawableResId;
+        mBackButtonStartDrawableResId = backButtonStartDrawableResId;
+        mEndButtonVisible = endButtonVisible;
+        mBackButtonVisible = backButtonVisible;
+    }
 
     /**
      * The displayable name of the step.
      */
     @Nullable
-    private CharSequence mTitle;
+    private final CharSequence mTitle;
 
     /**
-     * Allows to override the text on the Next button for this step.
+     * Allows to override the text on the Complete/Next button for this step.
      * To do so you need to return a non-null String of the label.
      * If you wish to change the text for selected steps only (and leave the default for the rest)
      * then return {@code null} for the default ones.
      * By default this is {@code null}.
-     * This is not used for the last step.
      */
     @Nullable
-    private CharSequence mNextButtonLabel;
+    private final CharSequence mEndButtonLabel;
 
     /**
      * Allows to override the text on the Back button for this step.
@@ -49,21 +59,33 @@ public class StepViewModel {
      * By default this is {@code null}.
      */
     @Nullable
-    private CharSequence mBackButtonLabel;
+    private final CharSequence mBackButtonLabel;
 
     /**
      * Drawable resource ID to be used for next button's end compound drawable.
      * {@link com.stepstone.stepper.R.drawable#ms_ic_chevron_end} is the default.
      */
     @DrawableRes
-    private int mNextButtonEndDrawableResId;
+    private final int mNextButtonEndDrawableResId;
 
     /**
      * Drawable resource ID to be used for back button's start compound drawable.
      * {@link com.stepstone.stepper.R.drawable#ms_ic_chevron_start} is the default.
      */
     @DrawableRes
-    private int mBackButtonStartDrawableResId;
+    private final int mBackButtonStartDrawableResId;
+
+    /**
+     * Flag indicating if the Next/Complete button should be shown on the bottom bar.
+     * {@code true} by default.
+     */
+    private final boolean mEndButtonVisible;
+
+    /**
+     * Flag indicating if the Back button should be shown on the bottom bar.
+     * {@code true} by default.
+     */
+    private final boolean mBackButtonVisible;
 
     @Nullable
     public CharSequence getTitle() {
@@ -71,8 +93,8 @@ public class StepViewModel {
     }
 
     @Nullable
-    public CharSequence getNextButtonLabel() {
-        return mNextButtonLabel;
+    public CharSequence getEndButtonLabel() {
+        return mEndButtonLabel;
     }
 
     @Nullable
@@ -90,6 +112,14 @@ public class StepViewModel {
         return mBackButtonStartDrawableResId;
     }
 
+    public boolean isEndButtonVisible() {
+        return mEndButtonVisible;
+    }
+
+    public boolean isBackButtonVisible() {
+        return mBackButtonVisible;
+    }
+
     public static class Builder {
 
         @NonNull
@@ -99,7 +129,7 @@ public class StepViewModel {
         private CharSequence mTitle;
 
         @Nullable
-        private CharSequence mNextButtonLabel;
+        private CharSequence mEndButtonLabel;
 
         @Nullable
         private CharSequence mBackButtonLabel;
@@ -109,6 +139,10 @@ public class StepViewModel {
 
         @DrawableRes
         private int mBackButtonStartDrawableResId = R.drawable.ms_ic_chevron_start;
+
+        private boolean mEndButtonVisible = true;
+
+        private boolean mBackButtonVisible = true;
 
         /**
          * Creates a builder for the step info.
@@ -126,7 +160,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setTitle(@StringRes int titleId) {
-            this.mTitle = mContext.getString(titleId);
+            mTitle = mContext.getString(titleId);
             return this;
         }
 
@@ -137,29 +171,29 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setTitle(@Nullable CharSequence title) {
-            this.mTitle = title;
+            mTitle = title;
             return this;
         }
 
         /**
-         * Set the label of the next button using the given resource id.
+         * Set the label of the Complete/Next button.
          *
-         * @param nextButtonLabelId string resource ID for the Next button
+         * @param endButtonLabel CharSequence to be used as a Complete/Next button label
          * @return This Builder object to allow for chaining of calls to set methods
          */
-        public Builder setNextButtonLabel(@StringRes int nextButtonLabelId) {
-            this.mNextButtonLabel = mContext.getString(nextButtonLabelId);
+        public Builder setEndButtonLabel(@Nullable CharSequence endButtonLabel) {
+            mEndButtonLabel = endButtonLabel;
             return this;
         }
 
         /**
-         * Set the label of the next button.
+         * Set the label of the Complete/Next button using the given resource id.
          *
-         * @param nextButtonLabel CharSequence to be used as a Next button label
+         * @param endButtonLabelId string resource ID for the Complete/Next button
          * @return This Builder object to allow for chaining of calls to set methods
          */
-        public Builder setNextButtonLabel(@Nullable CharSequence nextButtonLabel) {
-            this.mNextButtonLabel = nextButtonLabel;
+        public Builder setEndButtonLabel(@StringRes int endButtonLabelId) {
+            mEndButtonLabel = mContext.getString(endButtonLabelId);
             return this;
         }
 
@@ -170,7 +204,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setBackButtonLabel(@StringRes int backButtonLabelId) {
-            this.mBackButtonLabel = mContext.getString(backButtonLabelId);
+            mBackButtonLabel = mContext.getString(backButtonLabelId);
             return this;
         }
 
@@ -181,7 +215,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setBackButtonLabel(@Nullable CharSequence backButtonLabel) {
-            this.mBackButtonLabel = backButtonLabel;
+            mBackButtonLabel = backButtonLabel;
             return this;
         }
 
@@ -192,7 +226,7 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setNextButtonEndDrawableResId(@DrawableRes int nextButtonEndDrawableResId) {
-            this.mNextButtonEndDrawableResId = nextButtonEndDrawableResId;
+            mNextButtonEndDrawableResId = nextButtonEndDrawableResId;
             return this;
         }
 
@@ -203,7 +237,29 @@ public class StepViewModel {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setBackButtonStartDrawableResId(@DrawableRes int backButtonStartDrawableResId) {
-            this.mBackButtonStartDrawableResId = backButtonStartDrawableResId;
+            mBackButtonStartDrawableResId = backButtonStartDrawableResId;
+            return this;
+        }
+
+        /**
+         * Set the flag indicating if the Next/Complete button should be shown on the bottom bar.
+         *
+         * @param endButtonVisible {@code true} if Next/Complete button should be shown, {@code false} otherwise
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder setEndButtonVisible(boolean endButtonVisible) {
+            mEndButtonVisible = endButtonVisible;
+            return this;
+        }
+
+        /**
+         * Set the flag indicating if the Back button should be shown on the bottom bar.
+         *
+         * @param backButtonVisible {@code true} if Back button should be shown, {@code false} otherwise
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder setBackButtonVisible(boolean backButtonVisible) {
+            mBackButtonVisible = backButtonVisible;
             return this;
         }
 
@@ -213,13 +269,10 @@ public class StepViewModel {
          * @return created StepViewModel
          */
         public StepViewModel create() {
-            final StepViewModel viewModel = new StepViewModel();
-            viewModel.mTitle = this.mTitle;
-            viewModel.mBackButtonLabel = this.mBackButtonLabel;
-            viewModel.mNextButtonLabel = this.mNextButtonLabel;
-            viewModel.mNextButtonEndDrawableResId = this.mNextButtonEndDrawableResId;
-            viewModel.mBackButtonStartDrawableResId = this.mBackButtonStartDrawableResId;
-            return viewModel;
+            return new StepViewModel(mTitle,
+                    mEndButtonLabel, mBackButtonLabel,
+                    mNextButtonEndDrawableResId, mBackButtonStartDrawableResId,
+                    mEndButtonVisible, mBackButtonVisible);
         }
 
     }

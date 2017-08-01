@@ -3,9 +3,7 @@ package com.stepstone.stepper.internal.widget.pagetransformer
 import android.view.View
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
-import com.stepstone.stepper.test.runner.StepperRobolectricTestRunner
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.AdditionalMatchers.or
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mockito.verify
@@ -13,7 +11,6 @@ import org.mockito.Mockito.verify
 /**
  * @author Piotr Zawadzki
  */
-@RunWith(StepperRobolectricTestRunner::class)
 class StepperRtlPageTransformerTest {
 
     companion object {

@@ -40,16 +40,19 @@ public class TabsStepperFeedbackType implements StepperFeedbackType {
 
     private boolean mTabNavigationEnabled;
 
+    @NonNull
     private TextView mProgressMessageTextView;
 
-    private View mTabs;
+    @NonNull
+    private View mTabsScrollingContainer;
 
+    @NonNull
     private StepperLayout mStepperLayout;
 
     public TabsStepperFeedbackType(@NonNull StepperLayout stepperLayout) {
         mProgressMessageTranslationWhenHidden = stepperLayout.getResources().getDimension(R.dimen.ms_progress_message_translation_when_hidden);
         mProgressMessageTextView = (TextView) stepperLayout.findViewById(R.id.ms_stepTabsProgressMessage);
-        mTabs = stepperLayout.findViewById(R.id.ms_stepTabsScrollView);
+        mTabsScrollingContainer = stepperLayout.findViewById(R.id.ms_stepTabsScrollView);
         mStepperLayout = stepperLayout;
         mProgressMessageTextView.setVisibility(View.VISIBLE);
     }
@@ -64,7 +67,7 @@ public class TabsStepperFeedbackType implements StepperFeedbackType {
                 .alpha(ALPHA_OPAQUE)
                 .translationY(0.0f)
                 .setDuration(PROGRESS_ANIMATION_DURATION);
-        mTabs.animate()
+        mTabsScrollingContainer.animate()
                 .alpha(ALPHA_INVISIBLE)
                 .setStartDelay(0)
                 .setInterpolator(new LinearInterpolator())
@@ -80,7 +83,7 @@ public class TabsStepperFeedbackType implements StepperFeedbackType {
                 .alpha(ALPHA_INVISIBLE)
                 .translationY(mProgressMessageTranslationWhenHidden)
                 .setDuration(PROGRESS_ANIMATION_DURATION);
-        mTabs.animate()
+        mTabsScrollingContainer.animate()
                 .alpha(ALPHA_OPAQUE)
                 .setStartDelay(PROGRESS_ANIMATION_DURATION)
                 .setInterpolator(new AccelerateInterpolator())
