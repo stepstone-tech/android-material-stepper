@@ -18,4 +18,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - **Breaking change:** Changed `setNextButtonLabel` methods in `StepViewModel.Builder` to `setEndButtonLabel` so that it works for both Next and Complete buttons (issue #107)
 - **Breaking change:** Split `content` stepper feedback type into `content_progress` and `content_fade`.
 
-[4.0.0]: https://github.com/stepstone-tech/android-material-stepper/compare/v3.3.0...4.0.0
+[4.0.0]: https://github.com/stepstone-tech/android-material-stepper/compare/v3.3.0...v4.0.0
