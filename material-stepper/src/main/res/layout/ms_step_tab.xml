@@ -4,7 +4,7 @@
     android:orientation="vertical"
     tools:layout_height="wrap_content"
     tools:layout_width="wrap_content"
-    tools:parentTag="RelativeLayout"
+    tools:parentTag="com.stepstone.stepper.internal.widget.StepTab"
     tools:theme="@style/MSDefaultStepperLayoutTheme">
 
     <FrameLayout
@@ -22,7 +22,8 @@
         <TextView
             android:id="@+id/ms_stepNumber"
             style="?attr/ms_stepTabNumberStyle"
-            tools:style="@style/MSStepTabNumber" />
+            tools:style="@style/MSStepTabNumber"
+            tools:text="1" />
 
         <ImageView
             android:id="@+id/ms_stepDoneIndicator"
@@ -33,22 +34,40 @@
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/ms_stepTitle"
-        style="?attr/ms_stepTabTitleStyle"
+    <LinearLayout
+        android:id="@+id/ms_stepTextContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/ms_iconContainer"
         android:layout_toRightOf="@+id/ms_iconContainer"
-        tools:style="@style/MSStepTabTitle" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ms_stepTitle"
+            style="?attr/ms_stepTabTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:style="@style/MSStepTabTitle"
+            tools:text="Step 1" />
+
+        <TextView
+            android:id="@+id/ms_stepSubtitle"
+            style="?attr/ms_stepTabSubtitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:style="@style/MSStepTabSubtitle"
+            tools:text="Optional"
+            tools:visibility="visible" />
+    </LinearLayout>
 
     <View
         android:id="@+id/ms_stepDivider"
         style="?attr/ms_stepTabDividerStyle"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/ms_stepTitle"
-        android:layout_toRightOf="@+id/ms_stepTitle"
+        android:layout_toEndOf="@+id/ms_stepTextContainer"
+        android:layout_toRightOf="@+id/ms_stepTextContainer"
         tools:style="@style/MSStepTabDivider" />
 
 </merge>

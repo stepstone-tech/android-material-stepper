@@ -16,13 +16,15 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.type;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
-import android.util.SparseBooleanArray;
+import android.util.SparseArray;
 import android.view.View;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
+import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.widget.TabsContainer;
 import com.stepstone.stepper.viewmodel.StepViewModel;
@@ -39,8 +41,6 @@ import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 @RestrictTo(LIBRARY)
 public class TabsStepperType extends AbstractStepperType {
 
-    private static final List<CharSequence> EDIT_MODE_STEP_TITLES = Arrays.<CharSequence>asList("Step 1", "Step 2");
-
     private final TabsContainer mTabsContainer;
 
     public TabsStepperType(StepperLayout stepperLayout) {
@@ -53,8 +53,12 @@ public class TabsStepperType extends AbstractStepperType {
         mTabsContainer.setListener(stepperLayout);
 
         if (stepperLayout.isInEditMode()) {
-            mTabsContainer.setSteps(EDIT_MODE_STEP_TITLES);
-            mTabsContainer.updateSteps(0, new SparseBooleanArray());
+            Context context = stepperLayout.getContext();
+            mTabsContainer.setSteps(Arrays.asList(
+                    new StepViewModel.Builder(context).setTitle("Step 1").create(),
+                    new StepViewModel.Builder(context).setTitle("Step 2").setSubtitle("Optional").create())
+            );
+            mTabsContainer.updateSteps(0, new SparseArray<VerificationError>(), false);
             mTabsContainer.setVisibility(View.VISIBLE);
         }
     }
@@ -67,7 +71,8 @@ public class TabsStepperType extends AbstractStepperType {
         if (!mStepperLayout.isShowErrorStateEnabled()) {
             mStepErrors.clear();
         }
-        mTabsContainer.updateSteps(newStepPosition, mStepErrors);
+
+        mTabsContainer.updateSteps(newStepPosition, mStepErrors, mStepperLayout.isShowErrorMessageEnabled());
     }
 
     /**
@@ -76,13 +81,12 @@ public class TabsStepperType extends AbstractStepperType {
     @Override
     public void onNewAdapter(@NonNull StepAdapter stepAdapter) {
         super.onNewAdapter(stepAdapter);
-        List<CharSequence> titles = new ArrayList<>();
+        List<StepViewModel> stepViewModels = new ArrayList<>();
         final int stepCount = stepAdapter.getCount();
         for (int i = 0; i < stepCount; i++) {
-            final StepViewModel stepViewModel = stepAdapter.getViewModel(i);
-            titles.add(stepViewModel.getTitle());
+            stepViewModels.add(stepAdapter.getViewModel(i));
         }
-        mTabsContainer.setSteps(titles);
+        mTabsContainer.setSteps(stepViewModels);
         mTabsContainer.setVisibility(stepCount > 1 ? View.VISIBLE : View.GONE);
     }
 }

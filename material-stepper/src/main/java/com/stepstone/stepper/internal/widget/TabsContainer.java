@@ -20,12 +20,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.RestrictTo;
 import android.support.annotation.UiThread;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.SparseBooleanArray;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -34,6 +33,8 @@ import android.widget.LinearLayout;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
+import com.stepstone.stepper.VerificationError;
+import com.stepstone.stepper.viewmodel.StepViewModel;
 
 import java.util.List;
 
@@ -86,9 +87,7 @@ public class TabsContainer extends FrameLayout {
 
     private TabItemListener mListener = TabItemListener.NULL;
 
-    private List<CharSequence> mStepTitles;
-
-    private boolean mShowErrorStateOnBack;
+    private List<StepViewModel> mStepViewModels;
 
     public TabsContainer(Context context) {
         this(context, null);
@@ -147,14 +146,14 @@ public class TabsContainer extends FrameLayout {
     /**
      * Sets the steps to display in the {@link TabsContainer}.
      *
-     * @param stepTitles a list of tab titles
+     * @param stepViewModels a list of step info holders
      */
-    public void setSteps(List<CharSequence> stepTitles) {
-        this.mStepTitles = stepTitles;
+    public void setSteps(List<StepViewModel> stepViewModels) {
+        this.mStepViewModels = stepViewModels;
 
         mTabsInnerContainer.removeAllViews();
-        for (int i = 0; i < stepTitles.size(); i++) {
-            final View tab = createStepTab(i, stepTitles.get(i));
+        for (int i = 0; i < stepViewModels.size(); i++) {
+            final View tab = createStepTab(i, stepViewModels.get(i));
             mTabsInnerContainer.addView(tab, tab.getLayoutParams());
         }
     }
@@ -163,27 +162,29 @@ public class TabsContainer extends FrameLayout {
      * Changes the position of the current step and updates the UI based on it.
      * @param currentStepPosition new current step
      * @param stepErrors map containing error state for step positions
+     * @param showErrorMessageEnabled true if an error message below step title should appear when an error occurs
      */
-    public void updateSteps(int currentStepPosition, SparseBooleanArray stepErrors) {
-        int size = mStepTitles.size();
+    public void updateSteps(int currentStepPosition, SparseArray<VerificationError> stepErrors, boolean showErrorMessageEnabled) {
+        int size = mStepViewModels.size();
         for (int i = 0; i < size; i++) {
             StepTab childTab = (StepTab) mTabsInnerContainer.getChildAt(i);
             boolean done = i < currentStepPosition;
             final boolean current = i == currentStepPosition;
 
-            boolean hasError = stepErrors.get(i);
-            childTab.updateState(hasError, done, current);
+            VerificationError error = stepErrors.get(i);
+            childTab.updateState(error, done, current, showErrorMessageEnabled);
             if (current) {
                 mTabsScrollView.smoothScrollTo(childTab.getLeft() - mContainerLateralPadding, 0);
             }
         }
     }
 
-    private View createStepTab(final int position, @Nullable CharSequence title) {
+    private View createStepTab(final int position, @NonNull StepViewModel stepViewModel) {
         StepTab view = (StepTab) LayoutInflater.from(getContext()).inflate(R.layout.ms_step_tab_container, mTabsInnerContainer, false);
         view.setStepNumber(String.valueOf(position + 1));
         view.toggleDividerVisibility(!isLastPosition(position));
-        view.setStepTitle(title);
+        view.setStepTitle(stepViewModel.getTitle());
+        view.setStepSubtitle(stepViewModel.getSubtitle());
         view.setSelectedColor(mSelectedColor);
         view.setUnselectedColor(mUnselectedColor);
         view.setErrorColor(mErrorColor);
@@ -200,6 +201,6 @@ public class TabsContainer extends FrameLayout {
     }
 
     private boolean isLastPosition(int position) {
-        return position == mStepTitles.size() - 1;
+        return position == mStepViewModels.size() - 1;
     }
 }

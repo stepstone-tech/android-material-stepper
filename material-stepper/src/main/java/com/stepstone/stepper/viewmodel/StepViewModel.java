@@ -22,11 +22,12 @@ public class StepViewModel {
      */
     public static final int NULL_DRAWABLE = -1;
 
-    private StepViewModel(@Nullable CharSequence title,
+    private StepViewModel(@Nullable CharSequence title, @Nullable CharSequence subtitle,
                           @Nullable CharSequence endButtonLabel, @Nullable CharSequence backButtonLabel,
                           @DrawableRes int nextButtonEndDrawableResId, @DrawableRes int backButtonStartDrawableResId,
                           boolean endButtonVisible, boolean backButtonVisible) {
         mTitle = title;
+        mSubtitle = subtitle;
         mEndButtonLabel = endButtonLabel;
         mBackButtonLabel = backButtonLabel;
         mNextButtonEndDrawableResId = nextButtonEndDrawableResId;
@@ -40,6 +41,12 @@ public class StepViewModel {
      */
     @Nullable
     private final CharSequence mTitle;
+
+    /**
+     * The optional displayable subtitle of the step.
+     */
+    @Nullable
+    private final CharSequence mSubtitle;
 
     /**
      * Allows to override the text on the Complete/Next button for this step.
@@ -93,6 +100,11 @@ public class StepViewModel {
     }
 
     @Nullable
+    public CharSequence getSubtitle() {
+        return mSubtitle;
+    }
+
+    @Nullable
     public CharSequence getEndButtonLabel() {
         return mEndButtonLabel;
     }
@@ -127,6 +139,9 @@ public class StepViewModel {
 
         @Nullable
         private CharSequence mTitle;
+
+        @Nullable
+        private CharSequence mSubtitle;
 
         @Nullable
         private CharSequence mEndButtonLabel;
@@ -172,6 +187,28 @@ public class StepViewModel {
          */
         public Builder setTitle(@Nullable CharSequence title) {
             mTitle = title;
+            return this;
+        }
+
+        /**
+         * Set the subtitle using the given resource id.
+         *
+         * @param subtitleId string resource ID for the subtitle
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder setSubtitle(@StringRes int subtitleId) {
+            mSubtitle = mContext.getString(subtitleId);
+            return this;
+        }
+
+        /**
+         * Set the subtitle using the given characters.
+         *
+         * @param subtitle CharSequence to be used as a subtitle
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder setSubtitle(@Nullable CharSequence subtitle) {
+            mSubtitle = subtitle;
             return this;
         }
 
@@ -269,7 +306,7 @@ public class StepViewModel {
          * @return created StepViewModel
          */
         public StepViewModel create() {
-            return new StepViewModel(mTitle,
+            return new StepViewModel(mTitle, mSubtitle,
                     mEndButtonLabel, mBackButtonLabel,
                     mNextButtonEndDrawableResId, mBackButtonStartDrawableResId,
                     mEndButtonVisible, mBackButtonVisible);

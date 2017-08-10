@@ -250,6 +250,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     private boolean mShowErrorStateOnBackEnabled;
 
+    private boolean mShowErrorMessageEnabled;
+
     private boolean mTabNavigationEnabled;
 
     private boolean mInProgress;
@@ -552,6 +554,21 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     /**
+     * Set whether an error message below step title should appear when an error occurs
+     * @param showErrorMessageEnabled true if an error message below step title should appear when an error occurs
+     */
+    public void setShowErrorMessageEnabled(boolean showErrorMessageEnabled) {
+        this.mShowErrorMessageEnabled = showErrorMessageEnabled;
+    }
+
+    /**
+     * @return true if an error message below step title should appear when an error occurs
+     */
+    public boolean isShowErrorMessageEnabled() {
+        return mShowErrorMessageEnabled;
+    }
+
+    /**
      * @return true if step navigation is possible by clicking on the tabs directly, false otherwise
      */
     public boolean isTabNavigationEnabled() {
@@ -570,11 +587,11 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      * Updates the error state in the UI.
      * It does nothing if showing error state is disabled.
      * This is used internally to show the error on tabs.
-     * @param hasError true if error should be shown, false otherwise
+     * @param error not null if error should be shown, null otherwise
      * @see #setShowErrorStateEnabled(boolean)
      */
-    public void updateErrorState(boolean hasError) {
-        updateErrorFlag(hasError);
+    public void updateErrorState(@Nullable VerificationError error) {
+        updateError(error);
         if (mShowErrorStateEnabled) {
             invalidateCurrentPosition();
         }
@@ -590,10 +607,6 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      */
     public void setOffscreenPageLimit(int limit) {
         mPager.setOffscreenPageLimit(limit);
-    }
-
-    public void updateErrorFlag(boolean hasError) {
-        mStepperType.setErrorFlag(mCurrentStepPosition, hasError);
     }
 
     /**
@@ -827,6 +840,8 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             mShowErrorStateOnBackEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBack, false);
             mShowErrorStateOnBackEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorStateOnBackEnabled, mShowErrorStateOnBackEnabled);
 
+            mShowErrorMessageEnabled = a.getBoolean(R.styleable.StepperLayout_ms_showErrorMessageEnabled, false);
+
             mTabNavigationEnabled = a.getBoolean(R.styleable.StepperLayout_ms_tabNavigationEnabled, true);
 
             mStepperLayoutTheme = a.getResourceId(R.styleable.StepperLayout_ms_stepperLayoutTheme, R.style.MSDefaultStepperLayoutTheme);
@@ -855,7 +870,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     private void updateErrorFlagWhenGoingBack() {
-        updateErrorFlag(mShowErrorStateOnBackEnabled && mStepperType.getErrorAtPosition(mCurrentStepPosition));
+        updateError(mShowErrorStateOnBackEnabled ? mStepperType.getErrorAtPosition(mCurrentStepPosition) : null);
     }
 
     @UiThread
@@ -887,8 +902,12 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
             result = true;
         }
 
-        updateErrorFlag(result);
+        updateError(verificationError);
         return result;
+    }
+
+    private void updateError(@Nullable VerificationError error) {
+        mStepperType.setError(mCurrentStepPosition, error);
     }
 
     private void onError(@NonNull VerificationError verificationError) {

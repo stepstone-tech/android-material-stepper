@@ -17,6 +17,7 @@ limitations under the License.
 package com.stepstone.stepper;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * A base step interface which all {@link StepperLayout} steps must implement.
@@ -30,7 +31,7 @@ public interface Step {
      * he should handle this in {@link #onError(VerificationError)}.
      * @return the cause of the validation failure or <i>null</i> if step was validated successfully
      */
-    VerificationError verifyStep();
+    @Nullable VerificationError verifyStep();
 
     /**
      * Called when this step gets selected in the the stepper layout.

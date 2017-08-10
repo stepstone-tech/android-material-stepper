@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                 SampleItem(getString(R.string.error_tabs), getString(R.string.error_tabs_description), ShowErrorTabActivity::class.java),
                 SampleItem(getString(R.string.error_color_tabs), getString(R.string.error_color_tabs_description), ShowErrorCustomColorTabActivity::class.java),
                 SampleItem(getString(R.string.error_back_tabs), getString(R.string.error_back_tabs_description), ShowErrorOnBackTabActivity::class.java),
+                SampleItem(getString(R.string.error_with_message_tabs), getString(R.string.error_with_message_tabs_description), ShowErrorWithMessageTabActivity::class.java),
                 SampleItem(getString(R.string.combination), getString(R.string.combination_description), CombinationActivity::class.java),
                 SampleItem(getString(R.string.custom_page_transformer), getString(R.string.custom_page_transformer_description), CustomPageTransformerActivity::class.java),
                 SampleItem(getString(R.string.delayed_transition), getString(R.string.delayed_transition_description), DelayedTransitionStepperActivity::class.java),
