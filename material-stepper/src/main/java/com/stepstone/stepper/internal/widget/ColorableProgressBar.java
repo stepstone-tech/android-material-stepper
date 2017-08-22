@@ -18,7 +18,6 @@ package com.stepstone.stepper.internal.widget;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.ColorInt;
@@ -76,20 +75,6 @@ public class ColorableProgressBar extends ProgressBar {
         mProgressColor = ContextCompat.getColor(context, R.color.ms_selectedColor);
         mProgressBackgroundColor = ContextCompat.getColor(context, R.color.ms_unselectedColor);
         super.setProgressDrawable(ContextCompat.getDrawable(context, R.drawable.ms_colorable_progress_bar));
-
-        if (attrs != null) {
-            final TypedArray a = getContext().obtainStyledAttributes(
-                    attrs, R.styleable.ColorableProgressBar, defStyleAttr, 0);
-
-            if (a.hasValue(R.styleable.ColorableProgressBar_ms_progressPrimaryColor)) {
-                mProgressColor = a.getColor(R.styleable.ColorableProgressBar_ms_progressPrimaryColor, mProgressColor);
-            }
-            if (a.hasValue(R.styleable.ColorableProgressBar_ms_progressBackgroundColor)) {
-                mProgressBackgroundColor = a.getColor(R.styleable.ColorableProgressBar_ms_progressBackgroundColor, mProgressBackgroundColor);
-            }
-
-            a.recycle();
-        }
         updateProgressDrawable();
     }
 

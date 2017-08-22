@@ -17,7 +17,6 @@ limitations under the License.
 package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
@@ -104,19 +103,6 @@ public class TabsContainer extends FrameLayout {
         mSelectedColor = ContextCompat.getColor(context, R.color.ms_selectedColor);
         mUnselectedColor = ContextCompat.getColor(context, R.color.ms_unselectedColor);
         mErrorColor = ContextCompat.getColor(context, R.color.ms_errorColor);
-        if (attrs != null) {
-            final TypedArray a = getContext().obtainStyledAttributes(
-                    attrs, R.styleable.TabsContainer, defStyleAttr, 0);
-
-            if (a.hasValue(R.styleable.TabsContainer_ms_activeTabColor)) {
-                mSelectedColor = a.getColor(R.styleable.TabsContainer_ms_activeTabColor, mSelectedColor);
-            }
-            if (a.hasValue(R.styleable.TabsContainer_ms_inactiveTabColor)) {
-                mUnselectedColor = a.getColor(R.styleable.TabsContainer_ms_inactiveTabColor, mUnselectedColor);
-            }
-
-            a.recycle();
-        }
         mContainerLateralPadding = context.getResources().getDimensionPixelOffset(R.dimen.ms_tabs_container_lateral_padding);
 
         mTabsInnerContainer = (LinearLayout) findViewById(R.id.ms_stepTabsInnerContainer);

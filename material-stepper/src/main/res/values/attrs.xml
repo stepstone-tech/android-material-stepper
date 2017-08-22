@@ -106,21 +106,6 @@ limitations under the License.
 
     </declare-styleable>
 
-    <declare-styleable name="DottedProgressBar">
-        <attr name="ms_activeDotColor" format="color|reference" />
-        <attr name="ms_inactiveDotColor" format="color|reference" />
-    </declare-styleable>
-
-    <declare-styleable name="ColorableProgressBar">
-        <attr name="ms_progressPrimaryColor" format="color|reference" />
-        <attr name="ms_progressBackgroundColor" format="color|reference" />
-    </declare-styleable>
-
-    <declare-styleable name="TabsContainer">
-        <attr name="ms_activeTabColor" format="color|reference" />
-        <attr name="ms_inactiveTabColor" format="color|reference" />
-    </declare-styleable>
-
     <declare-styleable name="RightNavigationButton">
         <attr name="state_verification_failed" format="boolean" />
     </declare-styleable>
