@@ -20,6 +20,7 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 - [Advanced usage](#advanced-usage)
   - [Making extra operations before going to the next step](#making-extra-operations-before-going-to-the-next-step)
   - [Changing button labels & compound drawables per step](#changing-button-labels--compound-drawables-per-step)
+  - [Subtitles in tabs](#subtitles-in-tabs)
   - [Custom styling](#custom-styling)
   - [Using same stepper styling across the application](#using-same-stepper-styling-across-the-application)
   - [Showing a Back button on first step](#showing-a-back-button-on-first-step)
@@ -300,6 +301,11 @@ It is also possible to hide Back/Next/Complete buttons on each step if needed.
 To do so you need to call `setBackButtonVisible(false)` and/or `setEndButtonVisible(false)` on
 `StepViewModel.Builder` in your adapter.
 
+### Subtitles in tabs
+You can set a subtitle for each step in stepper with tabs, e.g. to mark a step as optional.
+To do so you need to set the subtitle by calling `StepViewModel.Builder#setSubtitle(int)` or `StepViewModel.Builder#setSubtitle(CharSequence)`
+in your adapter's `getViewModel` method.
+
 ### Custom styling
 Basic styling can be done by choosing the active and inactive step colors. 
 There are some additional properties which can be changed directly from StepperLayout's attributes e.g. the background of bottom navigation buttons (see [StepperLayout attributes](#stepperlayout-attributes))
@@ -352,6 +358,7 @@ To show an error in the tabbed stepper if step verification fails you need to se
 <p><img src ="./gifs/error-on-tabs.gif" width="640" /></p>
 
 If you want to keep the error displayed when going back to the previous step you need to also set `ms_showErrorStateOnBackEnabled` to `true`.
+If you want display an error message below the step title you need to set `ms_showErrorMessageEnabled` to `true`. The message set in `VerificationError` will be then displayed.
 
 ### Stepper feedback
 It is possible to show stepper feedback for ongoing operations (see [Stepper feedback](https://material.io/guidelines/components/steppers.html#steppers-types-of-steppers)).
@@ -510,6 +517,7 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 | *ms_stepTabDoneIndicatorStyle*    | Used by ms_stepDoneIndicator in layout/ms_step_tab            |
 | *ms_stepTabIconBackgroundStyle*   | Used by ms_stepIconBackground in layout/ms_step_tab           |
 | *ms_stepTabTitleStyle*            | Used by ms_stepTitle in layout/ms_step_tab                    |
+| *ms_stepTabSubtitleStyle*         | Used by ms_stepSubtitle in layout/ms_step_tab                    |
 | *ms_stepTabDividerStyle*          | Used by ms_stepDivider in layout/ms_step_tab                  |
 
 ## Changelog

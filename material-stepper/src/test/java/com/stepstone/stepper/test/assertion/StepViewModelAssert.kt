@@ -22,6 +22,11 @@ class StepViewModelAssert constructor(actual: StepViewModel) : AbstractAssert<St
         return this
     }
 
+    fun hasSubtitle(subtitle: CharSequence?): StepViewModelAssert {
+        assertEquals("Incorrect subtitle!", subtitle, actual.subtitle)
+        return this
+    }
+
     fun hasEndButtonLabel(endButtonLabel: CharSequence?): StepViewModelAssert {
         assertEquals("Incorrect label for the Complete/Next button!", endButtonLabel, actual.endButtonLabel)
         return this

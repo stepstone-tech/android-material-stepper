@@ -29,6 +29,7 @@
         <activity android:name=".ShowErrorOnBackTabActivity" />
         <activity android:name=".ShowErrorTabActivity" />
         <activity android:name=".ShowErrorCustomColorTabActivity" />
+        <activity android:name=".ShowErrorWithMessageTabActivity" />
         <activity android:name=".CombinationActivity" />
         <activity android:name=".CustomPageTransformerActivity" />
         <activity android:name=".DelayedTransitionStepperActivity" />

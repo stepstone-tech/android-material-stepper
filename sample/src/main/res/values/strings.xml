@@ -12,6 +12,7 @@
     <string name="error_tabs">Show errors on tabs</string>
     <string name="error_color_tabs">Custom color error tabs</string>
     <string name="error_back_tabs">Keep error back tabs</string>
+    <string name="error_with_message_tabs">Show errors on tabs with a message</string>
     <string name="combination">Dots in portrait, tabs in landscape</string>
     <string name="custom_page_transformer">Custom PageTransformer</string>
     <string name="delayed_transition">Delayed transition</string>
@@ -36,6 +37,7 @@
     <string name="error_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs</string>
     <string name="error_color_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs with a custom error color</string>
     <string name="error_back_tabs_description">Tabbed stepper which also shows an error on a tab when it occurs and keeps it displayed when going to a previous step</string>
+    <string name="error_with_message_tabs_description">Tabbed stepper which also shows an error on a tab with error message below step title when it occurs</string>
     <string name="combination_description">Shows a dotted stepper when the device is in portrait mode and tabs when in landscape</string>
     <string name="custom_page_transformer_description">Shows how to use a custom PageTransformer when switching between steps</string>
     <string name="delayed_transition_description">Shows how to use a BlockingStep for long-running operations when going to next steps.</string>
