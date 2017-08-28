@@ -45,6 +45,7 @@
         <item name="ms_bottomNavigationStyle">@style/DarkBottomNavigationStyle</item>
         <item name="ms_tabsContainerStyle">@style/DarkStepTabsContainerStyle</item>
         <item name="ms_stepTabTitleStyle">@style/DarkStepTabTitleStyle</item>
+        <item name="ms_stepTabSubtitleStyle">@style/DarkStepTabSubtitleStyle</item>
         <item name="ms_backNavigationButtonStyle">@style/CustomBackButtonStyle</item>
         <item name="ms_nextNavigationButtonStyle">@style/CustomNextButtonStyle</item>
         <item name="ms_completeNavigationButtonStyle">@style/CustomCompleteButtonStyle</item>
@@ -87,6 +88,10 @@
         <item name="fontPath">fonts/Oswald-Stencbab.ttf</item>
     </style>
 
+    <style name="DarkStepTabSubtitleStyle" parent="MSStepTabSubtitle">
+        <item name="android:textColor">@color/ms_white_54_opacity</item>
+        <item name="fontPath">fonts/Oswald-Stencbab.ttf</item>
+    </style>
 
     <style name="MainCoordinatorLayoutStyle" />
 

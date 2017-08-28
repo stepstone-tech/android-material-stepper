@@ -14,11 +14,14 @@ task('jacocoTestReport', type: JacocoReport, dependsOn: 'testDebugUnitTest') {
 
     classDirectories = fileTree(
             dir: './build/intermediates/classes/debug',
-            excludes: ['**/R*.class',
-                       '**/*$InjectAdapter.class',
-                       '**/*$ModuleAdapter.class',
-                       '**/*$ViewInjector*.class'
-            ]
+            excludes: ['**/R.class',
+                       '**/R$*.class',
+                       '**/BuildConfig.*',
+                       '**/Manifest*.*',
+                       '**/*IScript*.*',
+                       'android/**/*.*',
+                       '**/**_ViewBinding.*',
+                       '**/**_ViewBinding$*']
     )
 
     def coverageSourceDirs = [

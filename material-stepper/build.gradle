@@ -36,12 +36,15 @@ android {
         minSdkVersion project.androidMinSdkVersion
         targetSdkVersion project.androidTargetSdkVersion
         vectorDrawables.useSupportLibrary = true
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
         }
     }
 
@@ -52,26 +55,29 @@ android {
                 includeNoLocationClasses = true
             }
         }
+        //fixes https://github.com/robolectric/robolectric/issues/3169#issuecomment-312046322
+        unitTests.includeAndroidResources = true
     }
 
     lintOptions {
         warningsAsErrors true
+        disable 'RequiredSize', 'ClickableViewAccessibility'
     }
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$androidSupportLibraryVersion"
+    api "com.android.support:appcompat-v7:$androidSupportLibraryVersion"
 
-    testCompile "junit:junit:$junitVersion"
-    testCompile "org.mockito:mockito-core:$mockitoVersion"
-    testCompile "com.squareup.assertj:assertj-android:$assertjVersion"
-    testCompile("org.robolectric:robolectric:$robolectricVersion") {
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "com.squareup.assertj:assertj-android:$assertjVersion"
+    testImplementation("org.robolectric:robolectric:$robolectricVersion") {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
     }
-    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
-    testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-    testCompile "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    testImplementation "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
 }
 
 gradle.taskGraph.beforeTask { Task task ->
@@ -85,11 +91,13 @@ gradle.taskGraph.beforeTask { Task task ->
 }
 
 // Log out test results to console
-tasks.matching { it instanceof Test }.all {
+tasks.matching { it instanceof Test}.all {
     testLogging.events = ["failed", "passed", "skipped"]
 }
 
-check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'jacocoTestReport'
+task ('checkWithCoverage') {
+    dependsOn 'checkstyle', 'findbugs', 'pmd', 'jacocoTestReport', 'lintDebug'
+}
 
 apply from: '../installv1.gradle'
 apply from: '../bintrayv1.gradle'

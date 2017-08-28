@@ -18,7 +18,7 @@ dependencies {
     checkstyle 'com.puppycrawl.tools:checkstyle:6.11.1'
 }
 
-def qualityConfigDir = "$project.rootDir/config/quality";
+def qualityConfigDir = "$project.rootDir/config/quality"
 def reportsDir = "$project.buildDir/reports"
 
 task checkstyle(type: Checkstyle, group: 'Verification', description: 'Runs code style checks') {
@@ -29,7 +29,7 @@ task checkstyle(type: Checkstyle, group: 'Verification', description: 'Runs code
     reports {
         xml.enabled = true
         xml {
-            destination "$reportsDir/checkstyle/checkstyle.xml"
+            destination file("$reportsDir/checkstyle/checkstyle.xml")
         }
     }
 
@@ -52,10 +52,10 @@ task findbugs(type: FindBugs,
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = true
-        html.enabled = false
+        xml.enabled = false
+        html.enabled = true
         xml {
-            destination "$reportsDir/findbugs/findbugs.xml"
+            destination file("$reportsDir/findbugs/findbugs.xml")
         }
     }
 
@@ -76,10 +76,10 @@ task pmd(type: Pmd, group: 'Verification', description: 'Inspect sourcecode for 
         xml.enabled = true
         html.enabled = true
         xml {
-            destination "$reportsDir/pmd/pmd.xml"
+            destination file("$reportsDir/pmd/pmd.xml")
         }
         html {
-            destination "$reportsDir/pmd/pmd.html"
+            destination file("$reportsDir/pmd/pmd.html")
         }
     }
 }

@@ -1,0 +1,11 @@
+def final String PROPERTY_ADB_INSTALL_OPTIONS = 'test.integration.options.adbInstallOptions'
+
+/**
+ * Returns adbInstallOptions to use. This is needed because different adb install options are supported depending on OS version.
+ * @return
+ */
+ext.getAdbInstallOptions = {
+    def adbInstallOptions = (project.hasProperty(PROPERTY_ADB_INSTALL_OPTIONS) ? project.getProperties().get(PROPERTY_ADB_INSTALL_OPTIONS).split(',') : ['-g', '-r']) as String[]
+    println("Running with adbInstallOptions: $adbInstallOptions")
+    return adbInstallOptions
+}

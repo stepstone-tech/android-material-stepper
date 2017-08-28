@@ -1,0 +1,49 @@
+ext.clearScreenshotsTask = task('clearScreenshots', type: Exec) {
+    executable "${android.getAdbExe().toString()}"
+    args 'shell', 'rm', '-r', '/sdcard/material-stepper-screenshots'
+}
+def screenshotsDirectory = "$buildDir/reports/androidTests/screenshots"
+
+ext.fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reporting') {
+    executable "${android.getAdbExe().toString()}"
+    args 'pull', '/sdcard/material-stepper-screenshots', screenshotsDirectory
+    finalizedBy {
+        clearScreenshotsTask
+    }
+    doFirst {
+        new File(screenshotsDirectory).mkdirs()
+    }
+}
+
+ext.generateScreenshotReportTask = task('generateScreenshotReport') {
+    doLast {
+
+        def reportFile = file("$screenshotsDirectory/report.html")
+        String reportContent = '<html><body>'
+
+        FileCollection collection = files { file("$screenshotsDirectory/material-stepper-screenshots/app_spoon-screenshots/").listFiles() }
+
+        collection.collect { it }
+                .sort()
+                .each { suite ->
+                    println "Found suite: ${suite.name}"
+
+                    reportContent += "<h2>Suite: ${suite.name}</h2>\n"
+
+                    files(file(relativePath(suite)).listFiles())
+                            .sort()
+                            .each {
+                                println "Found screenshot: $it.name"
+                                reportContent += """
+                                                <h3>Screenshot: $it.name</h3>
+                                                <img src="material-stepper-screenshots/app_spoon-screenshots/${suite.name}/${it.name}" width="360"/>
+                                            """
+                            }
+                }
+
+        reportContent += '</body></html>'
+
+        reportFile.text = reportContent
+    }
+    mustRunAfter fetchScreenshotsTask
+}

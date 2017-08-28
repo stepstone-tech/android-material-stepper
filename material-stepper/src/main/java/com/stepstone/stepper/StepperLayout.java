@@ -16,7 +16,6 @@ limitations under the License.
 
 package com.stepstone.stepper;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -682,7 +681,6 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         mPager.setOnTouchListener(new View.OnTouchListener() {
 
-            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;
