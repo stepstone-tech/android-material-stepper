@@ -67,6 +67,9 @@ limitations under the License.
         <!-- Flag indicating whether to keep showing the error state when user moves back. Only applicable for 'tabs' type. False by default. -->
         <attr name="ms_showErrorStateOnBackEnabled" format="boolean" />
 
+        <!-- Flag indicating whether to show the error message below the tab title if specified. Only applicable for 'tabs' type. False by default. -->
+        <attr name="ms_showErrorMessageEnabled" format="boolean" />
+
         <!-- Flag indicating whether step navigation is possible by clicking on the tabs directly. Only applicable for 'tabs' type. True by default. -->
         <attr name="ms_tabNavigationEnabled" format="boolean" />
 
@@ -101,21 +104,6 @@ limitations under the License.
             <enum name="none" value="0x04" />
         </attr>
 
-    </declare-styleable>
-
-    <declare-styleable name="DottedProgressBar">
-        <attr name="ms_activeDotColor" format="color|reference" />
-        <attr name="ms_inactiveDotColor" format="color|reference" />
-    </declare-styleable>
-
-    <declare-styleable name="ColorableProgressBar">
-        <attr name="ms_progressPrimaryColor" format="color|reference" />
-        <attr name="ms_progressBackgroundColor" format="color|reference" />
-    </declare-styleable>
-
-    <declare-styleable name="TabsContainer">
-        <attr name="ms_activeTabColor" format="color|reference" />
-        <attr name="ms_inactiveTabColor" format="color|reference" />
     </declare-styleable>
 
     <declare-styleable name="RightNavigationButton">
@@ -173,6 +161,9 @@ limitations under the License.
 
         <!-- Used by ms_stepTitle in layout/ms_step_tab.xml -->
         <attr name="ms_stepTabTitleStyle" format="reference" />
+
+        <!-- Used by ms_stepSubtitle in layout/ms_step_tab.xml -->
+        <attr name="ms_stepTabSubtitleStyle" format="reference" />
 
         <!-- Used by ms_stepDivider in layout/ms_step_tab.xml -->
         <attr name="ms_stepTabDividerStyle" format="reference" />

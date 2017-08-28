@@ -72,7 +72,7 @@ internal class DelayedTransitionStepFragmentSample : ButterKnifeFragment(), Bloc
                 if (activity != null && isResumed) {
                     Toast.makeText(activity, "Operation failed!", Toast.LENGTH_SHORT).show()
                 }
-                callback.stepperLayout.updateErrorState(true)
+                callback.stepperLayout.updateErrorState(VerificationError("Operation failed!"))
             }
         }, 2000L)
     }

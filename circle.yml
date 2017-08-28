@@ -1,0 +1,59 @@
+machine:
+  environment:
+    PATH: "~/$CIRCLE_PROJECT_REPONAME/gradle-4.1/bin:$PATH"
+    TERM: "dumb"
+    ADB_INSTALL_TIMEOUT: "10"
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+    _JAVA_OPTIONS: "-Xms512m -Xmx1024m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
+
+dependencies:
+  pre:
+    - wget "https://services.gradle.org/distributions/gradle-4.1-bin.zip"; unzip gradle-4.1-bin.zip
+    - if [ ! -e /usr/local/android-sdk-linux/build-tools/25.0.2 ]; then echo y | android update sdk --all --no-ui --filter "build-tools-25.0.2"; fi;
+    - if [ ! -e /usr/local/android-sdk-linux/platforms/android-25 ]; then echo y | android update sdk --all --no-ui --filter "android-25"; fi;
+    - if ! $(grep -q "Revision=47.0.0" /usr/local/android-sdk-linux/extras/android/m2repository/source.properties); then echo y | android update sdk --all --no-ui --filter "extra-android-m2repository"; fi;
+    - echo y | android update sdk --no-ui --all --filter tool,extra-google-google_play_services
+    - printf 'bintray.user=dummy_user\nbintray.apikey=dummy_api_key\nsdk.dir=/usr/local/android-sdk-linux' > local.properties
+
+  cache_directories:
+    - /usr/local/android-sdk-linux/build-tools/25.0.2
+    - /usr/local/android-sdk-linux/platforms/android-25
+    - /usr/local/android-sdk-linux/extras/android/m2repository
+
+test:
+  override:
+    # run static analysis and unit tests with coverage
+    - ./gradlew checkWithCoverage --stacktrace --no-daemon
+
+    # Create SD card (needed for screenshots)
+    - mksdcard -l sdcard 200M sdcard.img
+
+    # start the emulator
+    - emulator -avd circleci-android22 -sdcard sdcard.img -no-audio -no-window:
+        background: true
+        parallel: true
+    # wait for it to have booted
+    - circle-android wait-for-boot
+    - sleep 30
+    # unlock the emulator screen
+    - adb shell input keyevent 82
+
+    # run instrumentation tests with coverage & lint for the sample app
+    - ./gradlew :sample:lintDebug mergedJacocoTestReport --stacktrace --no-daemon -Ptest.integration.options.adbInstallOptions=-r
+    - ./gradlew install --no-daemon
+
+    # upload code coverage reports to Codecov.io
+    - bash <(curl -s https://codecov.io/bash)
+
+  post:
+    # copy the test results to the test results directory
+    - mkdir -p $CIRCLE_TEST_REPORTS/unit
+    - mkdir -p $CIRCLE_TEST_REPORTS/instrumentation
+    - find . -type f -regex ".*/build/test-results/testDebugUnitTest/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/unit/ \;
+    - find . -type f -regex ".*/build/outputs/androidTest-results/connected/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/instrumentation/ \;
+
+    # copy the reports to artifacts directory
+    - mkdir -p $CIRCLE_ARTIFACTS/reports-library
+    - mkdir -p $CIRCLE_ARTIFACTS/reports-sample
+    - cp -r material-stepper/build/reports $CIRCLE_ARTIFACTS/reports-library
+    - cp -r sample/build/reports $CIRCLE_ARTIFACTS/reports-sample

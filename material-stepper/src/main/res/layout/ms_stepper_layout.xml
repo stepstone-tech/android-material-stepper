@@ -4,7 +4,7 @@
     tools:layout_height="match_parent"
     tools:layout_width="match_parent"
     tools:orientation="vertical"
-    tools:parentTag="LinearLayout"
+    tools:parentTag="android.widget.LinearLayout"
     tools:theme="@style/MSDefaultStepperLayoutTheme">
 
     <com.stepstone.stepper.internal.widget.TabsContainer

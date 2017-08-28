@@ -39,7 +39,7 @@ limitations under the License.
     <dimen name="ms_step_tab_counter_size">24dp</dimen>
     <dimen name="ms_step_tab_circle_font_size">12sp</dimen>
     <dimen name="ms_step_tab_title_font_size">14sp</dimen>
-    <dimen name="ms_step_tab_vertical_padding">24dp</dimen>
+    <dimen name="ms_step_tab_subtitle_font_size">12sp</dimen>
     <dimen name="ms_step_tab_text_lateral_padding">8dp</dimen>
 
 </resources>
