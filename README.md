@@ -64,8 +64,11 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 
 ### Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:4.0.0'
+compile 'com.stepstone.stepper:material-stepper:4.1.0'
 ```
+
+*Note:* This adds a transitive dependency to AppCompat `25.4.0`
+which is the minimum Android Support library version compatible with the Stepper library.
 
 ### Create layout in XML
 
