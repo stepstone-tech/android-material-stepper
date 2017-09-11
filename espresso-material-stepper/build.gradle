@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion project.androidCompileSdkVersion
+    buildToolsVersion("$androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion project.androidMinSdkVersion
+        targetSdkVersion project.androidTargetSdkVersion
+    }
+
+    lintOptions {
+        warningsAsErrors true
+    }
+}
+
+dependencies {
+    api project(':material-stepper')
+    api "com.android.support.test.espresso:espresso-core:$espressoVersion"
+}
+
+gradle.taskGraph.beforeTask { Task task ->
+    if (task instanceof Javadoc) {
+        def releaseVariant = android.libraryVariants.find { it.buildType.name == 'release' }
+        Javadoc javadocTask = (Javadoc) task
+        javadocTask.source = android.sourceSets.main.java.srcDirs
+        ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        javadocTask.classpath = files(releaseVariant.javaCompile.classpath.files) + files(ext.androidJar)
+    }
+}
+
+ext {
+    artifact = POM_TEST_ARTIFACT_ID
+}
+
+apply from: '../installv1.gradle'
+apply from: '../bintrayv1.gradle'
