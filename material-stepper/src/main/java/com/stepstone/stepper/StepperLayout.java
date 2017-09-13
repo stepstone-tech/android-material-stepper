@@ -172,6 +172,27 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     }
 
+    private class OnBackClickListener implements OnClickListener {
+        @Override
+        public void onClick(View v) {
+            onBackClicked();
+        }
+    }
+
+    private class OnNextClickListener implements OnClickListener {
+        @Override
+        public void onClick(View v) {
+            onNext();
+        }
+    }
+
+    private class OnCompleteClickListener implements OnClickListener {
+        @Override
+        public void onClick(View v) {
+            onComplete();
+        }
+    }
+
     private ViewPager mPager;
 
     private Button mBackNavigationButton;
@@ -261,27 +282,6 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     @NonNull
     private StepperListener mListener = StepperListener.NULL;
 
-    private OnClickListener mOnBackClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            onBackClicked();
-        }
-    };
-
-    private OnClickListener mOnNextClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            onNext();
-        }
-    };
-
-    private OnClickListener mOnCompleteClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            onComplete();
-        }
-    };
-
     public StepperLayout(Context context) {
         this(context, null);
     }
@@ -309,6 +309,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Getter for mStepAdapter
+     *
      * @return mStepAdapter
      */
     public StepAdapter getAdapter() {
@@ -354,7 +355,6 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      * If you're supporting RTL make sure your {@link android.support.v4.view.ViewPager.PageTransformer} accounts for it.
      *
      * @param pageTransformer new page transformer
-     *
      * @see com.stepstone.stepper.internal.widget.StepViewPager
      * @see com.stepstone.stepper.internal.widget.pagetransformer.StepPageTransformerFactory
      */
@@ -421,6 +421,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     /**
      * Sets the current step to the one at the provided index.
      * This does not verify the current step.
+     *
      * @param currentStepPosition new current step position
      */
     public void setCurrentStepPosition(int currentStepPosition) {
@@ -446,6 +447,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      * Sets whether the Next button in the bottom navigation bar should be in the
      * 'verification failed' state i.e. still clickable but with an option to display it
      * differently to indicate to the user that he cannot go to the next step yet.
+     *
      * @param verificationFailed false if verification failed, true otherwise
      */
     public void setNextButtonVerificationFailed(boolean verificationFailed) {
@@ -456,6 +458,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      * Sets whether the Complete button in the bottom navigation bar should be in the
      * 'verification failed' state i.e. still clickable but with an option to display it
      * differently to indicate to the user that he cannot finish the process yet.
+     *
      * @param verificationFailed false if verification failed, true otherwise
      */
     public void setCompleteButtonVerificationFailed(boolean verificationFailed) {
@@ -465,6 +468,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     /**
      * Sets whether the Next button in the bottom navigation bar should be enabled (clickable).
      * setting this to <i>false</i> will make it unclickable.
+     *
      * @param enabled true if the button should be clickable, false otherwise
      */
     public void setNextButtonEnabled(boolean enabled) {
@@ -474,6 +478,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     /**
      * Sets whether the Complete button in the bottom navigation bar should be enabled (clickable).
      * setting this to <i>false</i> will make it unclickable.
+     *
      * @param enabled true if the button should be clickable, false otherwise
      */
     public void setCompleteButtonEnabled(boolean enabled) {
@@ -483,6 +488,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     /**
      * Sets whether the Back button in the bottom navigation bar should be enabled (clickable).
      * setting this to <i>false</i> will make it unclickable.
+     *
      * @param enabled true if the button should be clickable, false otherwise
      */
     public void setBackButtonEnabled(boolean enabled) {
@@ -492,6 +498,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     /**
      * Set whether the bottom navigation bar (with Back/Next/Complete buttons) should be visible.
      * <i>true</i> by default.
+     *
      * @param showBottomNavigation true if bottom navigation should be visible, false otherwise
      */
     public void setShowBottomNavigation(boolean showBottomNavigation) {
@@ -554,6 +561,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Set whether an error message below step title should appear when an error occurs
+     *
      * @param showErrorMessageEnabled true if an error message below step title should appear when an error occurs
      */
     public void setShowErrorMessageEnabled(boolean showErrorMessageEnabled) {
@@ -576,6 +584,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Sets whether step navigation is possible by clicking on the tabs directly. Only applicable for 'tabs' type.
+     *
      * @param tabNavigationEnabled true if step navigation is possible by clicking on the tabs directly, false otherwise
      */
     public void setTabNavigationEnabled(boolean tabNavigationEnabled) {
@@ -586,6 +595,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
      * Updates the error state in the UI.
      * It does nothing if showing error state is disabled.
      * This is used internally to show the error on tabs.
+     *
      * @param error not null if error should be shown, null otherwise
      * @see #setShowErrorStateEnabled(boolean)
      */
@@ -610,6 +620,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Shows a progress indicator if not already shown. This does not have to be a progress bar and it depends on chosen stepper feedback types.
+     *
      * @param progressMessage optional progress message if supported by the selected types
      */
     public void showProgress(@NonNull String progressMessage) {
@@ -631,6 +642,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Checks if there's an ongoing operation i.e. if {@link #showProgress(String)} was called and not followed by {@link #hideProgress()} yet.
+     *
      * @return true if in progress, false otherwise
      */
     public boolean isInProgress() {
@@ -639,6 +651,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
     /**
      * Sets the mask for the stepper feedback type.
+     *
      * @param feedbackTypeMask step feedback type mask, should contain one or more flags from {@link StepperFeedbackType}
      */
     public void setFeedbackType(int feedbackTypeMask) {
@@ -711,9 +724,9 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         setBackgroundIfPresent(mNextButtonBackground, mNextNavigationButton);
         setBackgroundIfPresent(mCompleteButtonBackground, mCompleteNavigationButton);
 
-        mBackNavigationButton.setOnClickListener(mOnBackClickListener);
-        mNextNavigationButton.setOnClickListener(mOnNextClickListener);
-        mCompleteNavigationButton.setOnClickListener(mOnCompleteClickListener);
+        mBackNavigationButton.setOnClickListener(new OnBackClickListener());
+        mNextNavigationButton.setOnClickListener(new OnNextClickListener());
+        mCompleteNavigationButton.setOnClickListener(new OnCompleteClickListener());
     }
 
     private void setCompoundDrawablesForNavigationButtons(@DrawableRes int backDrawableResId, @DrawableRes int nextDrawableResId) {

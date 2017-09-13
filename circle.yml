@@ -2,7 +2,7 @@ machine:
   environment:
     PATH: "~/$CIRCLE_PROJECT_REPONAME/gradle-4.1/bin:$PATH"
     TERM: "dumb"
-    ADB_INSTALL_TIMEOUT: "10"
+    ADB_INSTALL_TIMEOUT: "20"
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
     _JAVA_OPTIONS: "-Xms512m -Xmx1024m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
 
@@ -23,13 +23,13 @@ dependencies:
 test:
   override:
     # run static analysis and unit tests with coverage
-    - ./gradlew checkWithCoverage --stacktrace --no-daemon
+    - ./gradlew checkWithCoverage  :sample:lintDebug --stacktrace --no-daemon
 
     # Create SD card (needed for screenshots)
     - mksdcard -l sdcard 200M sdcard.img
 
     # start the emulator
-    - emulator -avd circleci-android22 -sdcard sdcard.img -no-audio -no-window:
+    - emulator -avd circleci-android22 -sdcard sdcard.img -memory 2048 -no-audio -no-window:
         background: true
         parallel: true
     # wait for it to have booted
@@ -38,12 +38,16 @@ test:
     # unlock the emulator screen
     - adb shell input keyevent 82
 
-    # run instrumentation tests with coverage & lint for the sample app
-    - ./gradlew :sample:lintDebug mergedJacocoTestReport --stacktrace --no-daemon -Ptest.integration.options.adbInstallOptions=-r
-    - ./gradlew install --no-daemon
+    # run instrumentation tests with coverage
+    - ./gradlew mergedJacocoTestReport --info --stacktrace --no-daemon -Ptest.integration.options.adbInstallOptions=-r
 
-    # upload code coverage reports to Codecov.io
-    - bash <(curl -s https://codecov.io/bash)
+    # Grab the screen from device at the end (useful if tests fail)
+    - adb shell screencap -p /sdcard/after_tests.png && adb pull /sdcard/after_tests.png sample/build/reports
+
+    - ./gradlew install --no-daemon --stacktrace
+
+    # upload merged code coverage report to Codecov.io
+    - bash <(curl -s https://codecov.io/bash) -f sample/build/reports/jacoco/mergedJacocoTestReport/mergedJacocoTestReport.xml
 
   post:
     # copy the test results to the test results directory

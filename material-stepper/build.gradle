@@ -4,30 +4,6 @@ apply plugin: 'maven'
 apply from: '../material-stepper/code_coverage.gradle'
 apply from: '../config/quality/quality.gradle'
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = POM_ARTIFACT_ID
-
-    publishedGroupId = POM_GROUP_ID
-    libraryName = 'Android Material Stepper'
-    artifact = POM_ARTIFACT_ID
-
-    libraryDescription = 'This library allows to use Material steppers inside Android applications.'
-
-    siteUrl = 'https://github.com/stepstone-tech/android-material-stepper'
-    gitUrl = 'https://github.com/stepstone-tech/android-material-stepper.git'
-
-    libraryVersion = POM_VERSION
-
-    developerId = 'zawadz88'
-    developerName = 'Piotr Zawadzki'
-    developerEmail = 'piotr.zawadzki@stepstone.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
 android {
     compileSdkVersion project.androidCompileSdkVersion
     buildToolsVersion("$androidBuildToolsVersion")
@@ -97,6 +73,10 @@ tasks.matching { it instanceof Test}.all {
 
 task ('checkWithCoverage') {
     dependsOn 'checkstyle', 'findbugs', 'pmd', 'jacocoTestReport', 'lintDebug'
+}
+
+ext {
+    artifact = POM_ARTIFACT_ID
 }
 
 apply from: '../installv1.gradle'

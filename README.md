@@ -2,7 +2,7 @@
   <img src ="./art/material-stepper-logo.png" width="256" height="256"/>
 </p>
 
-# Android Material Stepper [![CircleCI](https://circleci.com/gh/stepstone-tech/android-material-stepper.svg?style=svg)](https://circleci.com/gh/stepstone-tech/android-material-stepper) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Material%20Stepper-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5138) [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23243-brightgreen.svg)](http://androidweekly.net/issues/issue-243)
+# Android Material Stepper [![CircleCI](https://circleci.com/gh/stepstone-tech/android-material-stepper.svg?style=svg)](https://circleci.com/gh/stepstone-tech/android-material-stepper) [![codecov](https://codecov.io/gh/stepstone-tech/android-material-stepper/branch/master/graph/badge.svg)](https://codecov.io/gh/stepstone-tech/android-material-stepper) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Material%20Stepper-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5138) [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23243-brightgreen.svg)](http://androidweekly.net/issues/issue-243)
 
 This library allows to use Material steppers inside Android applications.
 
@@ -33,6 +33,8 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 	- [View attributes](#view-attributes)
 	- [StepperLayout style attributes](#stepperlayout-style-attributes)
 - [Changelog](#changelog)
+- [Espresso tests](#espresso-tests)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Supported steppers
@@ -64,10 +66,10 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 
 ### Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:4.1.0'
+compile 'com.stepstone.stepper:material-stepper:4.2.0'
 ```
 
-*Note:* This adds a transitive dependency to AppCompat `25.4.0`
+*Note:* This library adds a transitive dependency to AppCompat `25.4.0`
 which is the minimum Android Support library version compatible with the Stepper library.
 
 ### Create layout in XML
@@ -525,6 +527,36 @@ A list of `ms_stepperLayoutTheme` attributes responsible for styling of StepperL
 
 ## Changelog
 See [changelog](CHANGELOG.md)
+
+## Espresso tests
+If you wish to run Espresso tests on a screen containing a `StepperLayout` you might want to use
+`espresso-material-stepper` which contains useful Espresso actions and matchers such as clicking on
+navigation buttons & tabs.
+To do so add a Gradle dependency:
+
+```groovy
+    androidTestCompile 'com.stepstone.stepper:espresso-material-stepper:X.X.X'
+```
+
+Please see the sample app which uses it in instrumentation tests for more details.
+
+## Contributing
+All contributions are welcome and encouraged!
+
+If you wish to contribute please create an issue first explaining the proposed changes.
+
+Project is built on Circle CI on which we run static code analysis as well as unit & instrumentation tests
+to ensure that the latest changes don't break anything.
+To check if your changes pass execute:
+
+```
+./gradlew checkWithUiTests
+```
+
+Or on a device below Marshmallow:
+```
+./gradlew checkWithUiTests -Ptest.integration.options.adbInstallOptions=-r
+```
 
 ## License
 Copyright 2016 StepStone Services

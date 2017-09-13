@@ -1,8 +1,8 @@
 buildscript {
-    ext.gradleAndroidVersion        = '3.0.0-beta2'
+    ext.gradleAndroidVersion        = '3.0.0-beta4'
     ext.kotlinVersion               = '1.1.3-2'
-    ext.bintrayVersion              = '1.4'
-    ext.mavenGradlePluginVersion    = '1.4.1'
+    ext.bintrayVersion              = '1.7.3'
+    ext.mavenGradlePluginVersion    = '2.0'
 
     repositories {
         jcenter()
@@ -39,8 +39,9 @@ configure(allprojects) {
         robolectricVersion                  = '3.3.1'
         assertjVersion                      = '1.1.1'
 
-        supportTestVersion                  = '1.0.0'
-        espressoVersion                     = '3.0.0'
+        supportTestVersion                  = '1.0.1'
+        espressoVersion                     = '3.0.1'
+        testButlerVersion                   = '1.3.1'
 
         /* Sample only */
         butterknifeVersion                  = '8.5.1'
@@ -51,4 +52,27 @@ configure(allprojects) {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = POM_ARTIFACT_ID
+
+    publishedGroupId = POM_GROUP_ID
+    libraryName = 'Android Material Stepper'
+
+    libraryDescription = 'This library allows to use Material steppers inside Android applications.'
+
+    siteUrl = 'https://github.com/stepstone-tech/android-material-stepper'
+    gitUrl = 'https://github.com/stepstone-tech/android-material-stepper.git'
+
+    libraryVersion = POM_VERSION
+
+    developerId = 'zawadz88'
+    developerName = 'Piotr Zawadzki'
+    developerEmail = 'piotr.zawadzki@stepstone.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
 }
