@@ -18,4 +18,6 @@
 
     <color name="custom_overlay_background">#483f9ab1</color>
 
+    <color name="verification_failed_color">#30BDBDBD</color>
+
 </resources>

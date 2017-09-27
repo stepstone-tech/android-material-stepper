@@ -592,6 +592,63 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     /**
+     * Changes the text and compound drawable color of the Next bottom navigation button.
+     *
+     * @param newButtonColor new color state list
+     */
+    public void setNextButtonColor(@NonNull ColorStateList newButtonColor) {
+        mNextButtonColor = newButtonColor;
+        TintUtil.tintTextView(mNextNavigationButton, mNextButtonColor);
+    }
+
+    /**
+     * Changes the text and compound drawable color of the Complete bottom navigation button.
+     *
+     * @param newButtonColor new color state list
+     */
+    public void setCompleteButtonColor(@NonNull ColorStateList newButtonColor) {
+        mCompleteButtonColor = newButtonColor;
+        TintUtil.tintTextView(mCompleteNavigationButton, mCompleteButtonColor);
+    }
+
+    /**
+     * Changes the text and compound drawable color of the Back bottom navigation button.
+     *
+     * @param newButtonColor new color state list
+     */
+    public void setBackButtonColor(@NonNull ColorStateList newButtonColor) {
+        mBackButtonColor = newButtonColor;
+        TintUtil.tintTextView(mBackNavigationButton, mBackButtonColor);
+    }
+
+    /**
+     * Changes the text and compound drawable color of the Next bottom navigation button.
+     *
+     * @param newButtonColor new color int
+     */
+    public void setNextButtonColor(@ColorInt int newButtonColor) {
+        setNextButtonColor(ColorStateList.valueOf(newButtonColor));
+    }
+
+    /**
+     * Changes the text and compound drawable color of the Complete bottom navigation button.
+     *
+     * @param newButtonColor new color int
+     */
+    public void setCompleteButtonColor(@ColorInt int newButtonColor) {
+        setCompleteButtonColor(ColorStateList.valueOf(newButtonColor));
+    }
+
+    /**
+     * Changes the text and compound drawable color of the Back bottom navigation button.
+     *
+     * @param newButtonColor new color int
+     */
+    public void setBackButtonColor(@ColorInt int newButtonColor) {
+        setBackButtonColor(ColorStateList.valueOf(newButtonColor));
+    }
+
+    /**
      * Updates the error state in the UI.
      * It does nothing if showing error state is disabled.
      * This is used internally to show the error on tabs.

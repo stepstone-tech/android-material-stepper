@@ -25,6 +25,7 @@
     <string name="disabled_tab_navigation">Disabled tab navigation</string>
     <string name="hidden_bottom_navigation">Hidden bottom navigation</string>
     <string name="custom_stepperlayout_theme">Custom StepperLayout theme</string>
+    <string name="set_button_color_programmatically">Set button color programmatically</string>
 
     <string name="default_dots_description">The default implementation of a dotted stepper</string>
     <string name="styled_dots_description">Dotted stepper styled through view attributes in the layout file</string>
@@ -50,6 +51,7 @@
     <string name="disabled_tab_navigation_description">Shows how to disable clicking on tabs in a tabbed stepper</string>
     <string name="hidden_bottom_navigation_description">Shows how to hide bottom navigation</string>
     <string name="custom_stepperlayout_theme_description">Shows a styled stepper layout with custom fonts &amp; colors</string>
+    <string name="set_button_color_programmatically_description">Shows how to set the color of bottom navigation button programmatically (instead of via XML)</string>
 
     <string name="tab_title">Tab title</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, sale viris intellegam usu eu, persius patrioque sea at. Ne salutandi repudiandae mei, cu mollis accusam mediocrem mea. Altera dolorem praesent at vis. Torquatos philosophia ad quo. Omnis adipiscing has ea, mel no hinc iudico percipit.</string>

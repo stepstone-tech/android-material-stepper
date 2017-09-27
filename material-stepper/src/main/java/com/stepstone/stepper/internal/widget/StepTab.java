@@ -17,6 +17,7 @@ limitations under the License.
 package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -295,7 +296,7 @@ public class StepTab extends RelativeLayout {
         protected void changeToWarning(@Nullable CharSequence errorMessage) {
             mStepDoneIndicator.setVisibility(View.GONE);
             mStepNumberTextView.setVisibility(View.GONE);
-            mStepIconBackground.setColorFilter(mErrorColor);
+            mStepIconBackground.setColorFilter(mErrorColor, PorterDuff.Mode.SRC_IN);
             mStepTitleTextView.setTextColor(mErrorColor);
             mStepSubtitleTextView.setTextColor(mErrorColor);
             updateSubtitle(errorMessage);
@@ -330,7 +331,7 @@ public class StepTab extends RelativeLayout {
 
         @Override
         protected void changeToInactiveNumber() {
-            mStepIconBackground.setColorFilter(mUnselectedColor);
+            mStepIconBackground.setColorFilter(mUnselectedColor, PorterDuff.Mode.SRC_IN);
             mStepTitleTextView.setTextColor(mTitleColor);
             mStepTitleTextView.setAlpha(ALPHA_INACTIVE_STEP_TITLE);
             mStepSubtitleTextView.setTextColor(mSubtitleColor);
@@ -339,7 +340,7 @@ public class StepTab extends RelativeLayout {
 
         @Override
         protected void changeToActiveNumber() {
-            mStepIconBackground.setColorFilter(mSelectedColor);
+            mStepIconBackground.setColorFilter(mSelectedColor, PorterDuff.Mode.SRC_IN);
             mStepTitleTextView.setAlpha(ALPHA_ACTIVE_STEP_TITLE);
             super.changeToActiveNumber();
         }
@@ -357,7 +358,7 @@ public class StepTab extends RelativeLayout {
 
         @Override
         protected void changeToInactiveNumber() {
-            mStepIconBackground.setColorFilter(mUnselectedColor);
+            mStepIconBackground.setColorFilter(mUnselectedColor, PorterDuff.Mode.SRC_IN);
             mStepTitleTextView.setAlpha(ALPHA_INACTIVE_STEP_TITLE);
             super.changeToInactiveNumber();
         }
@@ -370,7 +371,7 @@ public class StepTab extends RelativeLayout {
         protected void changeToInactiveNumber() {
             mStepDoneIndicator.setVisibility(GONE);
             mStepNumberTextView.setVisibility(VISIBLE);
-            mStepIconBackground.setColorFilter(mUnselectedColor);
+            mStepIconBackground.setColorFilter(mUnselectedColor, PorterDuff.Mode.SRC_IN);
             mStepTitleTextView.setAlpha(ALPHA_INACTIVE_STEP_TITLE);
             super.changeToInactiveNumber();
         }
@@ -398,7 +399,7 @@ public class StepTab extends RelativeLayout {
         protected void changeToDone() {
             animateViewIn(mStepDoneIndicator);
 
-            mStepIconBackground.setColorFilter(mSelectedColor);
+            mStepIconBackground.setColorFilter(mSelectedColor, PorterDuff.Mode.SRC_IN);
             mStepTitleTextView.setTextColor(mTitleColor);
             mStepSubtitleTextView.setTextColor(mSubtitleColor);
             super.changeToDone();
@@ -408,7 +409,7 @@ public class StepTab extends RelativeLayout {
         protected void changeToInactiveNumber() {
             animateViewIn(mStepNumberTextView);
 
-            mStepIconBackground.setColorFilter(mUnselectedColor);
+            mStepIconBackground.setColorFilter(mUnselectedColor, PorterDuff.Mode.SRC_IN);
             mStepTitleTextView.setTextColor(mTitleColor);
             mStepTitleTextView.setAlpha(ALPHA_INACTIVE_STEP_TITLE);
             mStepSubtitleTextView.setTextColor(mSubtitleColor);
@@ -420,7 +421,7 @@ public class StepTab extends RelativeLayout {
         protected void changeToActiveNumber() {
             animateViewIn(mStepNumberTextView);
 
-            mStepIconBackground.setColorFilter(mSelectedColor);
+            mStepIconBackground.setColorFilter(mSelectedColor, PorterDuff.Mode.SRC_IN);
             mStepTitleTextView.setTextColor(mTitleColor);
             mStepSubtitleTextView.setTextColor(mSubtitleColor);
             super.changeToActiveNumber();

@@ -1,5 +1,6 @@
 package com.stepstone.stepper.sample.test.matcher;
 
+import android.support.annotation.ColorRes;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -11,6 +12,7 @@ import org.hamcrest.Matcher;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasTextColor;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.stepstone.stepper.sample.test.matcher.StepperLayoutTabStateMatcher.tabAtPositionIsInState;
@@ -41,6 +43,18 @@ public final class CommonMatchers {
 
     public static void checkCompleteButtonShown() {
         onView(withId(R.id.ms_stepCompleteButton)).check(matches(isDisplayed()));
+    }
+
+    public static void checkBackButtonColor(@ColorRes int expectedColor) {
+        onView(withId(com.stepstone.stepper.R.id.ms_stepPrevButton)).check(matches(hasTextColor(expectedColor)));
+    }
+
+    public static void checkNextButtonColor(@ColorRes int expectedColor) {
+        onView(withId(com.stepstone.stepper.R.id.ms_stepNextButton)).check(matches(hasTextColor(expectedColor)));
+    }
+
+    public static void checkCompleteButtonColor(@ColorRes int expectedColor) {
+        onView(withId(com.stepstone.stepper.R.id.ms_stepCompleteButton)).check(matches(hasTextColor(expectedColor)));
     }
 
 }
