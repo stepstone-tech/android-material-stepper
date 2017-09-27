@@ -36,9 +36,9 @@ class StepperFeedbackActivity : AppCompatActivity() {
     }
 
     @BindView(R.id.stepperLayout)
-    lateinit var mStepperLayout: StepperLayout
+    lateinit var stepperLayout: StepperLayout
 
-    private var mMenu: Menu? = null
+    private var menu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,20 +47,20 @@ class StepperFeedbackActivity : AppCompatActivity() {
         setContentView(R.layout.activity_stepper_feedback)
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        mStepperLayout.setAdapter(StepperFeedbackFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
+        stepperLayout.setAdapter(StepperFeedbackFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(CURRENT_STEP_POSITION_KEY, mStepperLayout.currentStepPosition)
+        outState.putInt(CURRENT_STEP_POSITION_KEY, stepperLayout.currentStepPosition)
         super.onSaveInstanceState(outState)
     }
 
     override fun onBackPressed() {
-        val currentStepPosition = mStepperLayout.currentStepPosition
+        val currentStepPosition = stepperLayout.currentStepPosition
         if (currentStepPosition > 0) {
             //do nothing when operation is in progress
-            if (!mStepperLayout.isInProgress) {
-                mStepperLayout.onBackClicked()
+            if (!stepperLayout.isInProgress) {
+                stepperLayout.onBackClicked()
             }
         } else {
             finish()
@@ -69,14 +69,14 @@ class StepperFeedbackActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.activity_stepper_feedback, menu)
-        mMenu = menu
+        this.menu = menu
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val itemId = item.itemId
 
-        if (!mStepperLayout.isInProgress
+        if (!stepperLayout.isInProgress
                 && (itemId == R.id.menu_feedback_content_progress
                 || itemId == R.id.menu_feedback_content_fade
                 || itemId == R.id.menu_feedback_content_overlay
@@ -84,12 +84,12 @@ class StepperFeedbackActivity : AppCompatActivity() {
                 || itemId == R.id.menu_feedback_nav
                 || itemId == R.id.menu_feedback_content_interaction)) {
             toggleItem(item)
-            val tabsEnabled = mMenu?.findItem(R.id.menu_feedback_tabs)?.isChecked
-            val contentProgressEnabled = mMenu?.findItem(R.id.menu_feedback_content_progress)?.isChecked
-            val contentFadeEnabled = mMenu?.findItem(R.id.menu_feedback_content_fade)?.isChecked
-            val contentOverlayEnabled = mMenu?.findItem(R.id.menu_feedback_content_overlay)?.isChecked
-            val disablingBottomNavigationEnabled = mMenu?.findItem(R.id.menu_feedback_nav)?.isChecked
-            val disablingContentInteractionEnabled = mMenu?.findItem(R.id.menu_feedback_content_interaction)?.isChecked
+            val tabsEnabled = menu?.findItem(R.id.menu_feedback_tabs)?.isChecked
+            val contentProgressEnabled = menu?.findItem(R.id.menu_feedback_content_progress)?.isChecked
+            val contentFadeEnabled = menu?.findItem(R.id.menu_feedback_content_fade)?.isChecked
+            val contentOverlayEnabled = menu?.findItem(R.id.menu_feedback_content_overlay)?.isChecked
+            val disablingBottomNavigationEnabled = menu?.findItem(R.id.menu_feedback_nav)?.isChecked
+            val disablingContentInteractionEnabled = menu?.findItem(R.id.menu_feedback_content_interaction)?.isChecked
 
             var feedbackMask = 0
             if (tabsEnabled == true) {
@@ -113,7 +113,7 @@ class StepperFeedbackActivity : AppCompatActivity() {
             if (feedbackMask == 0) {
                 feedbackMask = StepperFeedbackType.NONE
             }
-            mStepperLayout.setFeedbackType(feedbackMask)
+            stepperLayout.setFeedbackType(feedbackMask)
             return true
         }
 

@@ -5,12 +5,6 @@
     android:id="@+id/stepperLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:ms_stepperType="tabs"
-    app:ms_activeStepColor="?attr/colorAccent"
-    app:ms_inactiveStepColor="#44000000"
-    app:ms_backButtonColor="#FFFFFF"
-    app:ms_nextButtonColor="#FFFFFF"
-    app:ms_completeButtonColor="#FFFFFF"
-    app:ms_tabStepDividerWidth="138dp"
     app:ms_bottomNavigationBackground="?attr/colorAccent"
+    app:ms_stepperType="dots"
     tools:theme="@style/AppTheme" />

@@ -66,7 +66,7 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 
 ### Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:4.2.0'
+compile 'com.stepstone.stepper:material-stepper:4.3.0'
 ```
 
 *Note:* This library adds a transitive dependency to AppCompat `25.4.0`
@@ -477,9 +477,9 @@ For advanced styling please see [StepperLayout style attributes](#stepperlayout-
 | Attribute name                  | Format                                                              | Description |
 | --------------------------------|---------------------------------------------------------------------|-------------|
 | *ms_stepperType*                | one of `dots`, `progress_bar`, `tabs` or `none`                     | **REQUIRED:** Type of the stepper |
-| *ms_backButtonColor*            | color or reference                                                  | BACK button's text color           |
-| *ms_nextButtonColor*            | color or reference                                                  | NEXT button's text color            |
-| *ms_completeButtonColor*        | color or reference                                                  | COMPLETE button's text color            |
+| *ms_backButtonColor*            | color or reference                                                  | BACK button's text color, can be also set via `StepperLayout#setBackButtonColor(int)`/`StepperLayout#setBackButtonColor(ColorStateList)`           |
+| *ms_nextButtonColor*            | color or reference                                                  | NEXT button's text color, can be also set via `StepperLayout#setNextButtonColor(int)`/`StepperLayout#setNextButtonColor(ColorStateList)`            |
+| *ms_completeButtonColor*        | color or reference                                                  | COMPLETE button's text color, can be also set via `StepperLayout#setCompleteButtonColor(int)`/`StepperLayout#setCompleteButtonColor(ColorStateList)`            |
 | *ms_activeStepColor*            | color or reference                                                  | Active step's color            |
 | *ms_inactiveStepColor*          | color or reference                                                  | Inactive step's color            |
 | *ms_bottomNavigationBackground* | reference                                                           | Background of the bottom navigation            |

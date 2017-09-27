@@ -40,7 +40,7 @@ class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.Stepp
     }
 
     @BindView(R.id.stepperLayout)
-    lateinit var mStepperLayout: StepperLayout
+    lateinit var stepperLayout: StepperLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,19 +49,19 @@ class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.Stepp
         setContentView(R.layout.activity_custom_navigation_buttons)
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        mStepperLayout.setAdapter(CustomButtonsSampleFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
-        mStepperLayout.setListener(this)
+        stepperLayout.setAdapter(CustomButtonsSampleFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
+        stepperLayout.setListener(this)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(CURRENT_STEP_POSITION_KEY, mStepperLayout.currentStepPosition)
+        outState.putInt(CURRENT_STEP_POSITION_KEY, stepperLayout.currentStepPosition)
         super.onSaveInstanceState(outState)
     }
 
     override fun onBackPressed() {
-        val currentStepPosition = mStepperLayout.currentStepPosition
+        val currentStepPosition = stepperLayout.currentStepPosition
         if (currentStepPosition > 0) {
-            mStepperLayout.onBackClicked()
+            stepperLayout.onBackClicked()
         } else {
             finish()
         }
@@ -78,7 +78,7 @@ class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.Stepp
     }
 
     override fun onProceed() {
-        mStepperLayout.proceed()
+        stepperLayout.proceed()
     }
 
 }

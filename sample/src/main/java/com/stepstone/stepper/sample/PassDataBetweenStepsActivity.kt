@@ -36,9 +36,9 @@ class PassDataBetweenStepsActivity : AppCompatActivity(), DataManager {
     }
 
     @BindView(R.id.stepperLayout)
-    lateinit var mStepperLayout: StepperLayout
+    lateinit var stepperLayout: StepperLayout
 
-    private var mData: String? = null
+    private var data: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,30 +47,30 @@ class PassDataBetweenStepsActivity : AppCompatActivity(), DataManager {
         setContentView(R.layout.activity_pass_data_between_steps)
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        mData = savedInstanceState?.getString(DATA)
-        mStepperLayout.setAdapter(PassDataBetweenStepsFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
+        data = savedInstanceState?.getString(DATA)
+        stepperLayout.setAdapter(PassDataBetweenStepsFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(CURRENT_STEP_POSITION_KEY, mStepperLayout.currentStepPosition)
-        outState.putString(DATA, mData)
+        outState.putInt(CURRENT_STEP_POSITION_KEY, stepperLayout.currentStepPosition)
+        outState.putString(DATA, data)
         super.onSaveInstanceState(outState)
     }
 
     override fun onBackPressed() {
-        val currentStepPosition = mStepperLayout.currentStepPosition
+        val currentStepPosition = stepperLayout.currentStepPosition
         if (currentStepPosition > 0) {
-            mStepperLayout.onBackClicked()
+            stepperLayout.onBackClicked()
         } else {
             finish()
         }
     }
 
     override fun saveData(data: String?) {
-        mData = data
+        this.data = data
     }
 
     override fun getData(): String? {
-        return mData
+        return data
     }
 }

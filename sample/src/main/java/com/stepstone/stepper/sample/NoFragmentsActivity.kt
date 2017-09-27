@@ -20,7 +20,7 @@ class NoFragmentsActivity : AppCompatActivity(), StepperLayout.StepperListener, 
     }
 
     @BindView(R.id.stepperLayout)
-    lateinit var mStepperLayout: StepperLayout
+    lateinit var stepperLayout: StepperLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,21 +28,21 @@ class NoFragmentsActivity : AppCompatActivity(), StepperLayout.StepperListener, 
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
         val sampleStepAdapter = SampleStepAdapter(this)
-        mStepperLayout.setAdapter(sampleStepAdapter, startingStepPosition)
-        mStepperLayout.setListener(this)
+        stepperLayout.setAdapter(sampleStepAdapter, startingStepPosition)
+        stepperLayout.setListener(this)
     }
 
     override fun onBackPressed() {
-        val currentStepPosition = mStepperLayout.currentStepPosition
+        val currentStepPosition = stepperLayout.currentStepPosition
         if (currentStepPosition > 0) {
-            mStepperLayout.onBackClicked()
+            stepperLayout.onBackClicked()
         } else {
             finish()
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(CURRENT_STEP_POSITION_KEY, mStepperLayout.currentStepPosition)
+        outState.putInt(CURRENT_STEP_POSITION_KEY, stepperLayout.currentStepPosition)
         super.onSaveInstanceState(outState)
     }
 
@@ -63,8 +63,8 @@ class NoFragmentsActivity : AppCompatActivity(), StepperLayout.StepperListener, 
     }
 
     override fun onChangeEndButtonsEnabled(enabled: Boolean) {
-        mStepperLayout.setNextButtonVerificationFailed(!enabled)
-        mStepperLayout.setCompleteButtonVerificationFailed(!enabled)
+        stepperLayout.setNextButtonVerificationFailed(!enabled)
+        stepperLayout.setCompleteButtonVerificationFailed(!enabled)
     }
 
 }

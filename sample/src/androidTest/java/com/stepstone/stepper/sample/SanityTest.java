@@ -267,6 +267,16 @@ public class SanityTest extends AbstractActivityTest<MainActivity> {
         SpoonScreenshotAction.perform(getScreenshotTag(24, R.string.custom_stepperlayout_theme));
     }
 
+    @Test
+    public void shouldOpenSetButtonColorProgrammaticallyActivity() {
+        //when
+        clickRowWithText(R.string.set_button_color_programmatically);
+
+        //then
+        intended(hasComponent(SetButtonColorProgrammaticallyActivity.class.getName()));
+        SpoonScreenshotAction.perform(getScreenshotTag(25, R.string.set_button_color_programmatically));
+    }
+
     @NonNull
     private String getScreenshotTag(int position, @StringRes int titleResId) {
         return String.format(Locale.ENGLISH,"%02d", position) + ". " + intentsTestRule.getActivity().getString(titleResId);
