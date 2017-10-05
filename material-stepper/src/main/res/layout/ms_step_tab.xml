@@ -4,7 +4,7 @@
     android:orientation="vertical"
     tools:layout_height="wrap_content"
     tools:layout_width="wrap_content"
-    tools:parentTag="com.stepstone.stepper.internal.widget.StepTab"
+    tools:parentTag="android.widget.RelativeLayout"
     tools:theme="@style/MSDefaultStepperLayoutTheme">
 
     <FrameLayout
