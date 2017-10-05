@@ -16,7 +16,6 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.type;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
 import android.util.SparseArray;
@@ -53,10 +52,10 @@ public class TabsStepperType extends AbstractStepperType {
         mTabsContainer.setListener(stepperLayout);
 
         if (stepperLayout.isInEditMode()) {
-            Context context = stepperLayout.getContext();
+            //noinspection ConstantConditions
             mTabsContainer.setSteps(Arrays.asList(
-                    new StepViewModel.Builder(context).setTitle("Step 1").create(),
-                    new StepViewModel.Builder(context).setTitle("Step 2").setSubtitle("Optional").create())
+                    new StepViewModel.Builder(null).setTitle("Step 1").create(),
+                    new StepViewModel.Builder(null).setTitle("Step 2").setSubtitle("Optional").create())
             );
             mTabsContainer.updateSteps(0, new SparseArray<VerificationError>(), false);
             mTabsContainer.setVisibility(View.VISIBLE);

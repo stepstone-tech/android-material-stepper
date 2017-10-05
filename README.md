@@ -66,7 +66,7 @@ Moreover, you can find there other examples, e.g. how to persist state on rotati
 
 ### Download (from JCenter)
 ```groovy
-compile 'com.stepstone.stepper:material-stepper:4.3.0'
+compile 'com.stepstone.stepper:material-stepper:4.3.1'
 ```
 
 *Note:* This library adds a transitive dependency to AppCompat `25.4.0`
