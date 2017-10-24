@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ms_circle_path">M 12,0
+    <string name="ms_circle_path" translatable="false">M 12,0
             C 2.7795742,0.00373968 -2.992,9.9726253 1.5957031,17.970703
             C 3.7552647,21.714092 7.7149163,23.999508 12,24
             c 4.279501,-0.0061 8.231906,-2.290736 10.373047,-5.996094
@@ -9,7 +9,7 @@
             l 0,0 0,0 0,0 0,0 Z
             m 0,-3.790315
             l 0,0 0,0 0,0 0,0 Z</string>
-    <string name="ms_warning_path">M 12,0
+    <string name="ms_warning_path" translatable="false">M 12,0
             C 1.5957031,17.970703 12,0 1.5957031,17.970703
             C 12,17.971 7.7149163,17.970508 12,17.971
             c 4.279501,-0.0061 0,0 10.373047,0.03291
