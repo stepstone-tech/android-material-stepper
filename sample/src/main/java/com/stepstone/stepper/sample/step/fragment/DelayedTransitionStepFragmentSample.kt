@@ -59,7 +59,7 @@ internal class DelayedTransitionStepFragmentSample : ButterKnifeFragment(), Bloc
 
     @UiThread
     override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback) {
-        val builder = AlertDialog.Builder(activity)
+        val builder = AlertDialog.Builder(activity!!)
         builder.setView(R.layout.dialog_loader)
         builder.setCancelable(false)
         dialog = builder.show()

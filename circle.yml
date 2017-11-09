@@ -10,14 +10,14 @@ dependencies:
   pre:
     - wget "https://services.gradle.org/distributions/gradle-4.1-bin.zip"; unzip gradle-4.1-bin.zip
     - if [ ! -e /usr/local/android-sdk-linux/build-tools/26.0.2 ]; then echo y | android update sdk --all --no-ui --filter "build-tools-26.0.2"; fi;
-    - if [ ! -e /usr/local/android-sdk-linux/platforms/android-25 ]; then echo y | android update sdk --all --no-ui --filter "android-25"; fi;
+    - if [ ! -e /usr/local/android-sdk-linux/platforms/android-26 ]; then echo y | android update sdk --all --no-ui --filter "android-26"; fi;
     - if ! $(grep -q "Revision=47.0.0" /usr/local/android-sdk-linux/extras/android/m2repository/source.properties); then echo y | android update sdk --all --no-ui --filter "extra-android-m2repository"; fi;
     - echo y | android update sdk --no-ui --all --filter tool,extra-google-google_play_services
     - printf 'bintray.user=dummy_user\nbintray.apikey=dummy_api_key\nsdk.dir=/usr/local/android-sdk-linux' > local.properties
 
   cache_directories:
     - /usr/local/android-sdk-linux/build-tools/26.0.2
-    - /usr/local/android-sdk-linux/platforms/android-25
+    - /usr/local/android-sdk-linux/platforms/android-26
     - /usr/local/android-sdk-linux/extras/android/m2repository
 
 test:

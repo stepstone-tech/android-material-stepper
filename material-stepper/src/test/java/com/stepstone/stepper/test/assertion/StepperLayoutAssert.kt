@@ -2,10 +2,12 @@ package com.stepstone.stepper.test.assertion
 
 import android.support.annotation.IdRes
 import android.view.View
+import android.widget.HorizontalScrollView
 import android.widget.TextView
 import com.stepstone.stepper.R
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.internal.util.AnimationUtil
+import com.stepstone.stepper.internal.widget.StepViewPager
 import org.assertj.android.api.Assertions
 import org.assertj.android.api.view.ViewAssert
 import org.assertj.android.api.widget.AbstractLinearLayoutAssert
@@ -150,29 +152,20 @@ class StepperLayoutAssert constructor(actual: StepperLayout) : AbstractLinearLay
     }
 
     fun pagerHasAlpha(alpha: Float): StepperLayoutAssert {
-        val pager = actual.findViewById(R.id.ms_stepPager)
+        val pager: StepViewPager = actual.findViewById(R.id.ms_stepPager)
         assertNotNull(pager)
         assertEquals(alpha, pager.alpha, 0.001f)
         return this
     }
 
-    private fun getTabsScrollingContainer(): View? {
-        val scrollView = actual.findViewById(R.id.ms_stepTabsScrollView)
-        return scrollView
-    }
+    private fun getTabsScrollingContainer(): View? = actual.findViewById<HorizontalScrollView?>(R.id.ms_stepTabsScrollView)
 
-    private fun getContentOverlay(): View? {
-        val scrollView = actual.findViewById(R.id.ms_stepPagerOverlay)
-        return scrollView
-    }
+    private fun getContentOverlay(): View? = actual.findViewById<HorizontalScrollView>(R.id.ms_stepPagerOverlay)
 
-    private fun getProgressMessageView(): TextView {
-        val messageView = actual.findViewById(R.id.ms_stepTabsProgressMessage) as TextView
-        return messageView
-    }
+    private fun getProgressMessageView(): TextView = actual.findViewById(R.id.ms_stepTabsProgressMessage)
 
     private fun hasNotNullChildView(@IdRes childId: Int): ViewAssert {
-        val child = actual.findViewById(childId)
+        val child: View = actual.findViewById(childId)
         return Assertions.assertThat(child).isNotNull
     }
 }

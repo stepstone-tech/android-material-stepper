@@ -46,13 +46,11 @@ class StepTabAssert constructor(actual: StepTab) : AbstractRelativeLayoutAssert<
     }
 
     private fun getTitleView(): TextView {
-        val titleView = actual.findViewById(R.id.ms_stepTitle) as TextView
-        return titleView
+        return actual.findViewById(R.id.ms_stepTitle)
     }
 
     private fun getSubtitleView(): TextView {
-        val subtitleView = actual.findViewById(R.id.ms_stepSubtitle) as TextView
-        return subtitleView
+        return actual.findViewById(R.id.ms_stepSubtitle)
     }
 
 }

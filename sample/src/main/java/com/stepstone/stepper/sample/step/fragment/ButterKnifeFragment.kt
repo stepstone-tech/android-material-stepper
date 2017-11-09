@@ -27,8 +27,8 @@ import butterknife.ButterKnife
 
 internal abstract class ButterKnifeFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater!!.inflate(layoutResId, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(layoutResId, container, false)
         ButterKnife.bind(this, view)
         return view
     }

@@ -20,7 +20,7 @@ class DisabledContentInteractionStepperFeedbackTypeTest {
     val mockStepPager: StepViewPager = mock { }
 
     val mockStepperLayout: StepperLayout = mock {
-        on { findViewById(R.id.ms_stepPager) } doReturn mockStepPager
+        on { findViewById<StepViewPager>(R.id.ms_stepPager) } doReturn mockStepPager
     }
 
     val feedbackType: DisabledContentInteractionStepperFeedbackType = DisabledContentInteractionStepperFeedbackType(mockStepperLayout)

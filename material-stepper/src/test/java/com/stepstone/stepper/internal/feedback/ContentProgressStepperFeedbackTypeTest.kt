@@ -21,7 +21,7 @@ class ContentProgressStepperFeedbackTypeTest {
     val mockProgressBar: ProgressBar = mock {  }
 
     val mockStepperLayout: StepperLayout = mock {
-        on { findViewById(R.id.ms_stepPagerProgressBar) } doReturn mockProgressBar
+        on { findViewById<ProgressBar>(R.id.ms_stepPagerProgressBar) } doReturn mockProgressBar
     }
 
     val feedbackType: ContentProgressStepperFeedbackType = ContentProgressStepperFeedbackType(mockStepperLayout)

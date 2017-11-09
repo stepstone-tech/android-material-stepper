@@ -48,11 +48,11 @@ class StepViewSample(context: Context) : FrameLayout(context), Step {
     @Suppress("DEPRECATION")
     private fun init(context: Context) {
         val v = LayoutInflater.from(context).inflate(R.layout.fragment_step, this, true)
-        button = v.findViewById(R.id.button) as Button
+        button = v.findViewById(R.id.button)
 
         updateNavigationBar()
 
-        button = v.findViewById(R.id.button) as Button
+        button = v.findViewById(R.id.button)
         button?.text = Html.fromHtml("Taps: <b>$i</b>")
         button?.setOnClickListener {
             button?.text = Html.fromHtml("Taps: <b>${++i}</b>")

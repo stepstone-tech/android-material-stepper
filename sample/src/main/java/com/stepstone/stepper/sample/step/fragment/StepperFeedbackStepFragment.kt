@@ -16,6 +16,7 @@ limitations under the License.
 
 package com.stepstone.stepper.sample.step.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.UiThread
@@ -47,9 +48,10 @@ internal class StepperFeedbackStepFragment : ButterKnifeFragment(), BlockingStep
     @BindView(R.id.stepContent)
     lateinit var stepContent: TextView
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        stepContent.text = "Step content #${arguments.getInt(STEP_POSITION)} \n ${getString(R.string.lorem_ipsum)}"
+        stepContent.text = "Step content #${arguments!!.getInt(STEP_POSITION)} \n ${getString(R.string.lorem_ipsum)}"
     }
 
     override fun verifyStep(): VerificationError? {

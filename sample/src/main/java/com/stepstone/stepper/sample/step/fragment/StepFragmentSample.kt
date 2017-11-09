@@ -63,7 +63,7 @@ internal class StepFragmentSample : ButterKnifeFragment(), Step {
     }
 
     @Suppress("DEPRECATION")
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState != null) {
             i = savedInstanceState.getInt(CLICKS_KEY)
@@ -79,7 +79,7 @@ internal class StepFragmentSample : ButterKnifeFragment(), Step {
     }
 
     override val layoutResId: Int
-        get() = arguments.getInt(LAYOUT_RESOURCE_ID_ARG_KEY)
+        get() = arguments!!.getInt(LAYOUT_RESOURCE_ID_ARG_KEY)
 
     override fun verifyStep(): VerificationError? {
         return if (isAboveThreshold) null else VerificationError("Click ${TAP_THRESHOLD - i} more times!")
@@ -100,8 +100,8 @@ internal class StepFragmentSample : ButterKnifeFragment(), Step {
         onNavigationBarListener?.onChangeEndButtonsEnabled(isAboveThreshold)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState!!.putInt(CLICKS_KEY, i)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(CLICKS_KEY, i)
         super.onSaveInstanceState(outState)
     }
 

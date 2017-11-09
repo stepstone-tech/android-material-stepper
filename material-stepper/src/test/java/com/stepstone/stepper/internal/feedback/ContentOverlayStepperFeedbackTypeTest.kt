@@ -40,7 +40,7 @@ class ContentOverlayStepperFeedbackTypeTest {
 
     @Test
     fun `Overlay should have visibility = GONE by default when 'content_overlay' is not set`() {
-        val overlay = stepperLayout.findViewById(R.id.ms_stepPagerOverlay)
+        val overlay = stepperLayout.findViewById<View>(R.id.ms_stepPagerOverlay)
         Assertions.assertThat(overlay)
                 .isNotNull
                 .isGone
@@ -50,7 +50,7 @@ class ContentOverlayStepperFeedbackTypeTest {
     fun `Should use default overlay background when a custom background was not set`() {
         //given
         val spyStepperLayout = spy(stepperLayout)
-        doReturn(mockOverlayView).whenever(spyStepperLayout).findViewById(R.id.ms_stepPagerOverlay)
+        doReturn(mockOverlayView).whenever(spyStepperLayout).findViewById<View>(R.id.ms_stepPagerOverlay)
 
         //when
         feedbackType = ContentOverlayStepperFeedbackType(spyStepperLayout)
@@ -63,7 +63,7 @@ class ContentOverlayStepperFeedbackTypeTest {
     fun `Should use custom overlay background when a custom background was set`() {
         //given
         val spyStepperLayout = spy(stepperLayout)
-        doReturn(mockOverlayView).whenever(spyStepperLayout).findViewById(R.id.ms_stepPagerOverlay)
+        doReturn(mockOverlayView).whenever(spyStepperLayout).findViewById<View>(R.id.ms_stepPagerOverlay)
         doReturn(CUSTOM_BACKGROUND_RESOURCE_ID).whenever(spyStepperLayout).contentOverlayBackground
 
         //when

@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- Spanish translations for navigation buttons
+
+### Changed
+- Compilation against Oreo
+- Updated a bunch of dependencies including Android Support Library to 26.1.0
 
 ## [4.3.1]
 ### Fixed
@@ -45,6 +52,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - **Breaking change:** Changed `setNextButtonLabel` methods in `StepViewModel.Builder` to `setEndButtonLabel` so that it works for both Next and Complete buttons (issue #107)
 - **Breaking change:** Split `content` stepper feedback type into `content_progress` and `content_fade`.
 
+[Unreleased]: https://github.com/stepstone-tech/android-material-stepper/compare/v4.3.1...develop
 [4.3.1]: https://github.com/stepstone-tech/android-material-stepper/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/stepstone-tech/android-material-stepper/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/stepstone-tech/android-material-stepper/compare/v4.1.0...v4.2.0

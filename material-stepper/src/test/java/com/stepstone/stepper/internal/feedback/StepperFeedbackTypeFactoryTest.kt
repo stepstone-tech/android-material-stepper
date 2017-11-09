@@ -1,6 +1,7 @@
 package com.stepstone.stepper.internal.feedback
 
 import android.content.res.Resources
+import android.view.View
 import android.widget.TextView
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -19,13 +20,13 @@ class StepperFeedbackTypeFactoryTest {
 
     val mockTextView: TextView = mock {}
 
-    val mockOverlay: TextView = mock {}
+    val mockOverlay: View = mock {}
 
     val mockResources: Resources = mock {}
 
     val mockStepperLayout: StepperLayout = mock {
-        on { findViewById(R.id.ms_stepTabsProgressMessage) } doReturn mockTextView
-        on { findViewById(R.id.ms_stepPagerOverlay) } doReturn mockOverlay
+        on { findViewById<TextView>(R.id.ms_stepTabsProgressMessage) } doReturn mockTextView
+        on { findViewById<View>(R.id.ms_stepPagerOverlay) } doReturn mockOverlay
         on { resources } doReturn mockResources
     }
 

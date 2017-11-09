@@ -1,6 +1,6 @@
 buildscript {
-    ext.gradleAndroidVersion        = '3.0.0-beta7'
-    ext.kotlinVersion               = '1.1.4-3'
+    ext.gradleAndroidVersion        = '3.0.0'
+    ext.kotlinVersion               = '1.1.51'
     ext.bintrayVersion              = '1.7.3'
     ext.mavenGradlePluginVersion    = '2.0'
 
@@ -28,10 +28,10 @@ configure(allprojects) {
     /* Android config and dependency versions */
     ext {
         androidMinSdkVersion 		        = 14
-        androidTargetSdkVersion             = 25
-        androidCompileSdkVersion            = 25
+        androidTargetSdkVersion             = 26
+        androidCompileSdkVersion            = 26
         androidBuildToolsVersion            = '26.0.2'
-        androidSupportLibraryVersion        = '25.4.0'
+        androidSupportLibraryVersion        = '26.1.0'
 
         junitVersion                        = '4.12'
         mockitoVersion                      = '2.7.21'
